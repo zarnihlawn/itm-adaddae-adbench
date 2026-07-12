@@ -5,6 +5,8 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import fcntl
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -24,16 +26,38 @@ def job_key(dataset: str, setting: str, seed: int) -> str:
 
 
 def load_completed(path: Path) -> dict:
-    if path.exists():
-        with open(path, "r", encoding="utf-8") as f:
+    if not path.exists():
+        return {"completed": {}, "failed": {}}
+    with open(path, "r", encoding="utf-8") as f:
+        fcntl.flock(f, fcntl.LOCK_SH)
+        try:
             return json.load(f)
-    return {"completed": {}, "failed": {}}
+        finally:
+            fcntl.flock(f, fcntl.LOCK_UN)
+
+
+@contextmanager
+def _completed_lock(path: Path):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with open(path, "a+", encoding="utf-8") as f:
+        fcntl.flock(f, fcntl.LOCK_EX)
+        try:
+            f.seek(0)
+            raw = f.read()
+            state = json.loads(raw) if raw.strip() else {"completed": {}, "failed": {}}
+            yield state
+            f.seek(0)
+            f.truncate()
+            json.dump(state, f, indent=2)
+            f.flush()
+        finally:
+            fcntl.flock(f, fcntl.LOCK_UN)
 
 
 def save_completed(path: Path, state: dict) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(state, f, indent=2)
+    with _completed_lock(path) as locked:
+        locked.clear()
+        locked.update(state)
 
 
 def run_dataset_job(spec, setting, seed, cfg, logger, adbench):
@@ -76,6 +100,18 @@ def main():
     parser.add_argument("--settings", nargs="+", default=["unsupervised", "semi-supervised"])
     parser.add_argument("--max-jobs", type=int, default=None, help="Optional cap for smoke tests")
     parser.add_argument("--datasets", nargs="*", default=None, help="Optional subset of dataset names")
+    parser.add_argument(
+        "--shard-index",
+        type=int,
+        default=0,
+        help="Run shard K of N parallel workers (0-based). Jobs assigned by global index %% N.",
+    )
+    parser.add_argument(
+        "--num-shards",
+        type=int,
+        default=1,
+        help="Total parallel workers when sharding (e.g. 2 for dual-GPU).",
+    )
     args = parser.parse_args()
 
     cfg = load_config(args.config, hardware=args.hardware)
@@ -85,7 +121,6 @@ def main():
     adbench = Path(cfg["paths"]["adbench_root"])
 
     completed_path = results_dir / "metrics" / "completed.json"
-    state = load_completed(completed_path)
 
     log_path = results_dir / "logs" / f"{run_id}.jsonl"
     logger = RunLogger(log_path, run_id=run_id)
@@ -101,29 +136,34 @@ def main():
             for seed in seeds:
                 jobs.append((spec, setting, seed))
 
+    if args.num_shards > 1:
+        jobs = [job for i, job in enumerate(jobs) if i % args.num_shards == args.shard_index]
+
     if args.max_jobs is not None:
         jobs = jobs[: args.max_jobs]
 
     total = len(jobs)
-    logger.info(f"Protocol start: {total} jobs", n_datasets=len(registry), seeds=seeds)
-    print(f"Total jobs: {total} | Resume file: {completed_path}")
+    shard_note = f" shard={args.shard_index}/{args.num_shards}" if args.num_shards > 1 else ""
+    logger.info(f"Protocol start: {total} jobs{shard_note}", n_datasets=len(registry), seeds=seeds)
+    print(f"Total jobs: {total}{shard_note} | Resume file: {completed_path}")
 
     bar = job_progress(total, desc="protocol")
     for spec, setting, seed in jobs:
         key = job_key(spec.name, setting, seed)
+        state = load_completed(completed_path)
         if key in state["completed"]:
             bar.update(1)
             continue
         try:
             logger.info(f"START {key}")
             summary = run_dataset_job(spec, setting, seed, cfg, logger, adbench)
-            state["completed"][key] = summary
+            with _completed_lock(completed_path) as state:
+                state.setdefault("completed", {})[key] = summary
             # also write per-job json
             out = results_dir / "metrics" / f"{key}.json"
             out.parent.mkdir(parents=True, exist_ok=True)
             with open(out, "w", encoding="utf-8") as f:
                 json.dump(summary, f, indent=2)
-            save_completed(completed_path, state)
             m = summary["metrics_mean"]
             bar.set_postfix(
                 job=key[:40],
@@ -132,13 +172,14 @@ def main():
             )
         except Exception as e:
             logger.log("job_failed", key=key, error=str(e))
-            state.setdefault("failed", {})[key] = str(e)
-            save_completed(completed_path, state)
+            with _completed_lock(completed_path) as state:
+                state.setdefault("failed", {})[key] = str(e)
             print(f"FAILED {key}: {e}")
         bar.update(1)
         cleanup_memory()
 
     bar.close()
+    state = load_completed(completed_path)
     logger.info("Protocol finished", n_completed=len(state["completed"]), n_failed=len(state.get("failed", {})))
     logger.close()
     print(f"Done. Completed={len(state['completed'])} Failed={len(state.get('failed', {}))}")
