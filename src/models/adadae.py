@@ -270,7 +270,8 @@ class AdaDDAE:
 
         batch_w = None
         if self._sample_weights is not None and sample_idx is not None:
-            batch_w = self._sample_weights[sample_idx].to(self.device)
+            # _sample_weights stays on CPU; indices must match indexed tensor device.
+            batch_w = self._sample_weights[sample_idx.cpu()].to(self.device)
 
         with torch.autocast(
             device_type=self.device.type,
@@ -431,7 +432,7 @@ class AdaDDAE:
             for batch in loader:
                 if use_idx:
                     x_0, batch_idx = batch
-                    batch_idx = batch_idx.to(self.device)
+                    # Keep indices on CPU for RDT weight lookup.
                 else:
                     x_0 = batch[0]
                     batch_idx = None
