@@ -1,0 +1,21 @@
+# Hardware profile: RTX 5070 8GB / RTX 5060 8GB (Vast.ai)
+device: cuda
+hardware_profile: gpu
+gpu_tier: 8gb
+num_threads: 8
+dataloader_num_workers: 4
+rss_soft_limit_mb: 16384
+vram_soft_limit_mb: 6800
+rss_check_every_n_batches: 20
+train_batch_size_max: 4096
+score_batch_size_max: 8192
+score_batch_size_large_n: 2048
+large_n_threshold: 100000
+pin_memory: true
+use_amp: true
+amp_dtype: bfloat16
+max_train_samples: 0
+cudnn_benchmark: true
+compile_model: false
+vectorized_scoring: true
+preupload_test_threshold: 50000

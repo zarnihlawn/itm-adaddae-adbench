@@ -1,0 +1,60 @@
+{
+  "dataset": "ALOI",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.03420892298304174,
+    "ROC-AUC": 0.542856352068801,
+    "PR-AUC": 0.03411974499463427
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "ALOI",
+      "split": "Classical/1_ALOI.npz",
+      "setting": "unsupervised",
+      "seed": 111,
+      "metrics": {
+        "AP": 0.03420892298304174,
+        "ROC-AUC": 0.542856352068801,
+        "PR-AUC": 0.03411974499463427
+      },
+      "noise": {
+        "num_timesteps": 5,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03506011683625947,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 27,
+        "pca_components": null,
+        "clip_outliers": true
+      },
+      "best_pr_auc": 0.034375736424342655,
+      "rss_mb": 809.359375,
+      "vram_mb": null,
+      "n_train": 49534,
+      "n_test": 49534,
+      "d": 27,
+      "score_timesteps": 3,
+      "device": "cpu",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "ftp_sec": 0.04088474300078815,
+      "train_sec": 23.728144669001267,
+      "score_sec": 1.1778598460005014,
+      "total_sec": 25.21302706300048
+    }
+  ]
+}

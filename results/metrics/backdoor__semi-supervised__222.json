@@ -1,0 +1,19 @@
+{
+  "dataset": "backdoor",
+  "setting": "semi-supervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.6045533348889335,
+    "ROC-AUC": 0.9468017008545824,
+    "PR-AUC": 0.6042097546981283
+  },
+  "noise": {
+    "num_timesteps": 80,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 8
+  },
+  "time": "2026-07-12T06:06:42.922589+00:00"
+}

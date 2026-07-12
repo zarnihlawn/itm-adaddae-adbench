@@ -1,0 +1,49 @@
+{
+  "dataset": "cardio",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.6086045375363813,
+    "ROC-AUC": 0.9392886569623731,
+    "PR-AUC": 0.607129971914185
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "cardio",
+      "split": "Classical/6_cardio.npz",
+      "setting": "unsupervised",
+      "seed": 111,
+      "metrics": {
+        "AP": 0.6086045375363813,
+        "ROC-AUC": 0.9392886569623731,
+        "PR-AUC": 0.607129971914185
+      },
+      "noise": {
+        "num_timesteps": 200,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03,
+        "time_emb_dim": 8
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 21,
+        "pca_components": null,
+        "clip_outliers": true
+      },
+      "best_pr_auc": 0.607129971914185,
+      "rss_mb": 509.37890625,
+      "n_train": 1831,
+      "n_test": 1831,
+      "d": 21,
+      "score_timesteps": 16
+    }
+  ]
+}

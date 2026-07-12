@@ -1,0 +1,19 @@
+{
+  "dataset": "ALOI",
+  "setting": "unsupervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.036403625273764714,
+    "ROC-AUC": 0.5579368908927647,
+    "PR-AUC": 0.03623725623172133
+  },
+  "noise": {
+    "num_timesteps": 150,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.03,
+    "time_emb_dim": 8
+  },
+  "time": "2026-07-12T04:50:36.127980+00:00"
+}

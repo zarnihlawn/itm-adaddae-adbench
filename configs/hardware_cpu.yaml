@@ -1,0 +1,15 @@
+# Hardware profile: Intel i5-12500H, 15GB RAM, no GPU
+device: cpu
+hardware_profile: cpu
+num_threads: 8
+dataloader_num_workers: 0
+rss_soft_limit_mb: 8192
+rss_check_every_n_batches: 20
+train_batch_size_max: 512
+score_batch_size_max: 1024
+score_batch_size_large_n: 256  # when n > 100_000
+large_n_threshold: 100000
+pin_memory: false
+use_amp: false
+# Cap training set size for huge ADBench tables (eval still uses full test split)
+max_train_samples: 50000

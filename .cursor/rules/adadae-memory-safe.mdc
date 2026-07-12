@@ -1,0 +1,41 @@
+---
+description: Memory-safe CPU/GPU training, logging, and project boundaries for AdaDDAE thesis work
+alwaysApply: true
+---
+
+# AdaDDAE Memory-Safe Rules
+
+## Scope
+- This GitHub repo **is** the AdaDDAE project root (`configs/`, `src/`, `scripts/`, …).
+- **ADBench** is a separate sibling checkout; read datasets only from `../ADBench/adbench/datasets`.
+- Do not modify upstream ADBench; on Vast: `/workspace/ITM/ADBench/adbench/datasets`.
+
+## Hardware profiles
+
+### CPU (`hardware_cpu.yaml`)
+- `device=cpu`, RSS soft limit 8 GiB, `num_workers=0`, no AMP
+- `max_train_samples: 50000` for huge tables
+- DANC uses capped T (80–200 unsup)
+
+### GPU — Vast.ai (tiered profiles)
+- **16 GB** (`hardware_rtx5070ti.yaml`, default in `default_gpu.yaml`): VRAM soft limit **14000 MB**
+- **12 GB** (`hardware_rtx5070_12g.yaml`): VRAM soft limit **10000 MB**; use `--hardware 12gb`
+- **8 GB** (`hardware_rtx5070.yaml`, `default_gpu_8g.yaml`): VRAM soft limit **6800 MB**
+- All GPU tiers: `device=cuda`, AMP bf16, `vectorized_scoring: true`, `max_train_samples: 0`
+- `pin_memory: true`, `dataloader_num_workers: 4`
+- Auto-detect: `python scripts/detect_hardware.py`; override with `--hardware 8gb|12gb|16gb`
+- Log **rss_mb** and **vram_mb** in every train/eval JSONL event
+
+## Memory safety (mandatory)
+- Never allocate full `T × N` score matrices
+- GPU: vectorized scoring with auto-shrink on OOM; fallback reduce K timesteps
+- CPU: sequential scoring, SCS ≤ 32 steps
+- `gc.collect()` + `torch.cuda.empty_cache()` after large datasets
+
+## Logging (mandatory)
+- `tqdm` progress + JSONL: epoch, loss, PR-AUC, ROC-AUC, batch, T, scheduler, rss_mb, vram_mb
+
+## Method defaults (GPU config)
+- DANC: SNR-guided `T*` from target `tau_snr`
+- SCS: `snr_weighted` mode with `alpha_bar`-aligned weights
+- Fusion: `calibrated` on semi-supervised; Eq. 5 reconstruction loss

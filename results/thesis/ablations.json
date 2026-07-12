@@ -1,0 +1,62 @@
+{
+  "ddae_repro": {
+    "setting": "semi-supervised",
+    "seed": 111,
+    "n_datasets": 5,
+    "metrics": {
+      "AP": 0.8372182507259023,
+      "ROC-AUC": 0.9728800270412599,
+      "PR-AUC": 0.835947915134709
+    }
+  },
+  "ftp": {
+    "setting": "semi-supervised",
+    "seed": 111,
+    "n_datasets": 5,
+    "metrics": {
+      "AP": 0.827903236116617,
+      "ROC-AUC": 0.9791356453623241,
+      "PR-AUC": 0.8258372070677339
+    }
+  },
+  "danc": {
+    "setting": "semi-supervised",
+    "seed": 111,
+    "n_datasets": 5,
+    "metrics": {
+      "AP": 0.778157086005766,
+      "ROC-AUC": 0.9718120032429592,
+      "PR-AUC": 0.7762284407153894
+    }
+  },
+  "scs": {
+    "setting": "semi-supervised",
+    "seed": 111,
+    "n_datasets": 5,
+    "metrics": {
+      "AP": 0.8530967178224789,
+      "ROC-AUC": 0.9779283789673642,
+      "PR-AUC": 0.85216923010292
+    }
+  },
+  "contrastive": {
+    "setting": "semi-supervised",
+    "seed": 111,
+    "n_datasets": 5,
+    "metrics": {
+      "AP": 0.8055293977497866,
+      "ROC-AUC": 0.9697918964614741,
+      "PR-AUC": 0.8033056929667419
+    }
+  },
+  "full_adadae": {
+    "setting": "semi-supervised",
+    "seed": 111,
+    "n_datasets": 5,
+    "metrics": {
+      "AP": 0.8036698429445147,
+      "ROC-AUC": 0.9701005029869763,
+      "PR-AUC": 0.8014183065228517
+    }
+  }
+}

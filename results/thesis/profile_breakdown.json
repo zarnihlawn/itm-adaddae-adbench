@@ -1,0 +1,34 @@
+{
+  "jobs": [
+    {
+      "dataset": "cardio",
+      "setting": "semi-supervised",
+      "ftp_sec": 0.0019172510001226328,
+      "train_sec": 2.1666705290008395,
+      "score_sec": 0.024241949000497698,
+      "total_sec": 2.209599171001173,
+      "PR-AUC": 0.7708760512292099,
+      "score_timesteps": 4
+    },
+    {
+      "dataset": "ALOI",
+      "setting": "unsupervised",
+      "ftp_sec": 0.028792611999961082,
+      "train_sec": 11.409835476999433,
+      "score_sec": 1.3234893640001246,
+      "total_sec": 12.96369467400109,
+      "PR-AUC": 0.03515067493002282,
+      "score_timesteps": 3
+    },
+    {
+      "dataset": "thyroid",
+      "setting": "semi-supervised",
+      "ftp_sec": 0.0014453189996856963,
+      "train_sec": 0.5748305840006651,
+      "score_sec": 0.022996917001364636,
+      "total_sec": 0.6107906699999148,
+      "PR-AUC": 0.4352176798666073,
+      "score_timesteps": 4
+    }
+  ]
+}

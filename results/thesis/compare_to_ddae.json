@@ -1,0 +1,74 @@
+{
+  "published": {
+    "unsupervised": {
+      "DAE": {
+        "PR-AUC": 19.85,
+        "ROC-AUC": 63.73
+      },
+      "DDPM": {
+        "PR-AUC": 30.09,
+        "ROC-AUC": 70.01
+      },
+      "DTE-NP": {
+        "PR-AUC": 29.47,
+        "ROC-AUC": 72.15
+      },
+      "DDAE-C": {
+        "PR-AUC": 31.97,
+        "ROC-AUC": 73.72
+      },
+      "DDAE": {
+        "PR-AUC": 32.77,
+        "ROC-AUC": 74.08
+      }
+    },
+    "semi-supervised": {
+      "DAE": {
+        "PR-AUC": 59.6,
+        "ROC-AUC": 81.02
+      },
+      "DDPM": {
+        "PR-AUC": 52.41,
+        "ROC-AUC": 77.92
+      },
+      "DTE-NP": {
+        "PR-AUC": 57.13,
+        "ROC-AUC": 81.49
+      },
+      "DDAE-C": {
+        "PR-AUC": 59.48,
+        "ROC-AUC": 81.54
+      },
+      "DDAE": {
+        "PR-AUC": 61.36,
+        "ROC-AUC": 83.17
+      }
+    }
+  },
+  "adadae": [
+    {
+      "setting": "unsupervised",
+      "AdaDDAE_PR_AUC": 95.20133300209682,
+      "AdaDDAE_PR_std": 0.0,
+      "AdaDDAE_ROC_AUC": 97.66877756417506,
+      "AdaDDAE_ROC_std": 0.0,
+      "DDAE_PR_AUC": 32.77,
+      "DDAE_ROC_AUC": 74.08,
+      "delta_PR": 62.431333002096814,
+      "delta_ROC": 23.58877756417506,
+      "n_datasets": 1
+    },
+    {
+      "setting": "semi-supervised",
+      "AdaDDAE_PR_AUC": 97.03923489709719,
+      "AdaDDAE_PR_std": 0.0,
+      "AdaDDAE_ROC_AUC": 97.54532775453278,
+      "AdaDDAE_ROC_std": 0.0,
+      "DDAE_PR_AUC": 61.36,
+      "DDAE_ROC_AUC": 83.17,
+      "delta_PR": 35.67923489709719,
+      "delta_ROC": 14.375327754532776,
+      "n_datasets": 1
+    }
+  ]
+}
