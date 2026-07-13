@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import sys
 from pathlib import Path
@@ -17,6 +18,16 @@ from src.runlog.logger import RunLogger
 from src.train.experiment import run_single_file
 
 
+def deep_update(base: dict, overrides: dict) -> dict:
+    out = copy.deepcopy(base)
+    for k, v in overrides.items():
+        if isinstance(v, dict) and isinstance(out.get(k), dict):
+            out[k] = deep_update(out[k], v)
+        else:
+            out[k] = copy.deepcopy(v)
+    return out
+
+
 def main():
     parser = argparse.ArgumentParser(description="Run AdaDDAE on one dataset")
     parser.add_argument("--config", type=str, default="configs/default.yaml")
@@ -29,9 +40,17 @@ def main():
     parser.add_argument("--dataset", type=str, required=True, help="Dataset name, e.g. cardio or CIFAR10")
     parser.add_argument("--setting", type=str, default=None, choices=["unsupervised", "semi-supervised"])
     parser.add_argument("--seed", type=int, default=None)
+    parser.add_argument(
+        "--override",
+        type=str,
+        default=None,
+        help='JSON dict merged into config, e.g. \'{"adadae":{"use_danc":false}}\'',
+    )
     args = parser.parse_args()
 
     cfg = load_config(args.config, hardware=args.hardware)
+    if args.override:
+        cfg = deep_update(cfg, json.loads(args.override))
     setting = args.setting or cfg["train"]["setting"]
     seed = args.seed if args.seed is not None else int(cfg.get("seed", 111))
     run_id = cfg["paths"].get("run_id", "adadae")

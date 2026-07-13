@@ -159,6 +159,7 @@ def main():
             summary = run_dataset_job(spec, setting, seed, cfg, logger, adbench)
             with _completed_lock(completed_path) as state:
                 state.setdefault("completed", {})[key] = summary
+                state.get("failed", {}).pop(key, None)
             # also write per-job json
             out = results_dir / "metrics" / f"{key}.json"
             out.parent.mkdir(parents=True, exist_ok=True)
