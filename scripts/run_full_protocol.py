@@ -101,6 +101,13 @@ def main():
     parser.add_argument("--max-jobs", type=int, default=None, help="Optional cap for smoke tests")
     parser.add_argument("--datasets", nargs="*", default=None, help="Optional subset of dataset names")
     parser.add_argument(
+        "--seeds",
+        nargs="+",
+        type=int,
+        default=None,
+        help="Optional seed subset (default: all seeds from config)",
+    )
+    parser.add_argument(
         "--shard-index",
         type=int,
         default=0,
@@ -115,7 +122,7 @@ def main():
     args = parser.parse_args()
 
     cfg = load_config(args.config, hardware=args.hardware)
-    seeds = list(cfg.get("seeds", [111, 222, 333, 444, 555]))
+    seeds = list(args.seeds if args.seeds is not None else cfg.get("seeds", [111, 222, 333, 444, 555]))
     run_id = cfg["paths"].get("run_id", "adadae_full")
     results_dir = Path(cfg["paths"]["results_dir"])
     adbench = Path(cfg["paths"]["adbench_root"])
