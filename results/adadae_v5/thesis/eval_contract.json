@@ -1,0 +1,129 @@
+{
+  "baseline_path": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v41_hybrid/metrics/completed.json",
+  "rel_target": 1.3,
+  "unsupervised": {
+    "T0_current_macro_pr": 37.83460252653727,
+    "T0_macro_pr_ci_95": [
+      30.806142316400432,
+      45.4716955700966
+    ],
+    "T1_routing_leftovers_est": 38.03460252653727,
+    "T2_hard_tail_30pct_rel_scenario": 42.0144779748687,
+    "T3_v5_realistic_range": [
+      42.83460252653727,
+      46.83460252653727
+    ],
+    "T4_full_macro_30pct_rel_target": 49.18498328449845,
+    "T4_infeasible": false,
+    "gap_to_T4_full_macro_pp": 11.350380757961183,
+    "paper_pr": 32.77,
+    "paper_30pct_rel_target": 42.601000000000006,
+    "n_hard": 38,
+    "n_easy": 19,
+    "hard_macro_pr": 20.899377241657117,
+    "easy_macro_pr": 71.70505309629758,
+    "hard_datasets": [
+      "20newsgroups",
+      "ALOI",
+      "Agnews",
+      "Amazon",
+      "CIFAR10",
+      "Cardiotocography",
+      "FashionMNIST",
+      "Hepatitis",
+      "Imdb",
+      "InternetAds",
+      "MNIST-C",
+      "SVHN",
+      "SpamBase",
+      "Stamps",
+      "WPBC",
+      "Waveform",
+      "Wilt",
+      "Yelp",
+      "annthyroid",
+      "campaign",
+      "celeba",
+      "census",
+      "cover",
+      "donors",
+      "fraud",
+      "glass",
+      "http",
+      "landsat",
+      "letter",
+      "mammography",
+      "mnist",
+      "optdigits",
+      "pendigits",
+      "skin",
+      "speech",
+      "vertebral",
+      "wine",
+      "yeast"
+    ]
+  },
+  "semi-supervised": {
+    "T0_current_macro_pr": 62.01472953712738,
+    "T0_macro_pr_ci_95": [
+      54.74421706252099,
+      69.1931730883278
+    ],
+    "T1_routing_leftovers_est": 62.16472953712738,
+    "T2_hard_tail_30pct_rel_scenario": 64.40157200656265,
+    "T3_v5_realistic_range": [
+      64.01472953712738,
+      67.01472953712738
+    ],
+    "T4_full_macro_30pct_rel_target": 80.6191483982656,
+    "T4_infeasible": true,
+    "gap_to_T4_full_macro_pp": 18.604418861138214,
+    "paper_pr": 61.36,
+    "paper_30pct_rel_target": 79.768,
+    "n_hard": 18,
+    "n_easy": 39,
+    "hard_macro_pr": 25.194448288483272,
+    "easy_macro_pr": 79.00870549804003,
+    "hard_datasets": [
+      "20newsgroups",
+      "ALOI",
+      "Agnews",
+      "Amazon",
+      "CIFAR10",
+      "Imdb",
+      "MNIST-C",
+      "SVHN",
+      "WPBC",
+      "Waveform",
+      "Yelp",
+      "celeba",
+      "census",
+      "glass",
+      "mammography",
+      "optdigits",
+      "speech",
+      "vertebral"
+    ]
+  },
+  "combined": {
+    "T0_current_macro_pr": 49.924666031832324,
+    "T2_hard_tail_30pct_rel_scenario": 53.20802499071567,
+    "T4_full_macro_30pct_rel_target": 64.90206584138203
+  },
+  "evaluation_contract": {
+    "primary_metrics": [
+      "full_macro_pr",
+      "hard_tail_macro_pr",
+      "roc_auc"
+    ],
+    "hard_tail_threshold_pct": 50.0,
+    "report_both_full_and_hard_tail": true,
+    "lodo_holdout": [
+      "Agnews",
+      "Wilt",
+      "cardio",
+      "celeba",
+      "speech"
+    ]
+  }
+}

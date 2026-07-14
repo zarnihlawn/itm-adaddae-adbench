@@ -110,6 +110,18 @@ def main():
         help="Second patch layer (v31 semi tail overrides); applied after --patch",
     )
     parser.add_argument(
+        "--patch3",
+        type=str,
+        default=None,
+        help="Third patch layer (v5 MCE reruns)",
+    )
+    parser.add_argument(
+        "--patch4",
+        type=str,
+        default=None,
+        help="Fourth patch layer (v5 SMC/GATE reruns)",
+    )
+    parser.add_argument(
         "--semi-tail-only",
         action="store_true",
         help="With --patch2, only apply semi-supervised jobs for semi_tail_datasets",
@@ -132,6 +144,8 @@ def main():
     patch_path = Path(args.patch) if args.patch else None
     patch_fallback_path = Path(args.patch_fallback) if args.patch_fallback else None
     patch2_path = Path(args.patch2) if args.patch2 else None
+    patch3_path = Path(args.patch3) if args.patch3 else None
+    patch4_path = Path(args.patch4) if args.patch4 else None
     out_path = Path(args.out)
     if not out_path.is_absolute():
         out_path = PROJECT_ROOT / out_path
@@ -210,6 +224,14 @@ def main():
         merged["completed"].update(p2_jobs)
         sources.append(("patch2", patch2_path, p2_jobs))
         print(f"Applied {len(p2_jobs)} patch2 jobs from {patch2_path}")
+
+    for patch_n, patch_p in [("patch3", patch3_path), ("patch4", patch4_path)]:
+        if patch_p and patch_p.exists():
+            pn_state = load_state(patch_p)
+            pn_jobs = pn_state.get("completed", {})
+            merged["completed"].update(pn_jobs)
+            sources.append((patch_n, patch_p, pn_jobs))
+            print(f"Applied {len(pn_jobs)} {patch_n} jobs from {patch_p}")
 
     # Detect key collisions
     total_in = sum(len(j) for _, _, j in sources)

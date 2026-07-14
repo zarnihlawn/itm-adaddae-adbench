@@ -338,18 +338,42 @@ UNSUP_CLASSICAL_PLUS: Dict[str, Any] = {
     },
 }
 
+# Unsupervised with MCE (v5)
+UNSUP_MCE: Dict[str, Any] = {
+    **UNSUP_SSTS,
+    "adadae": {
+        **UNSUP_SSTS["adadae"],
+        "use_mce": True,
+        "mce_modality": "nlp",
+        "mce_block_semi_nlp": True,
+    },
+}
+
+# Semi tail with SMC fusion (v5)
+SEMI_SMC_TAIL: Dict[str, Any] = {
+    **SEMI_RDT_TAIL,
+    "adadae": {
+        **SEMI_RDT_TAIL["adadae"],
+        "use_multiview": True,
+        "use_dte_view": True,
+        "fusion_mode": "smc",
+    },
+}
+
 POLICY_REGISTRY: Dict[str, Dict[str, Any]] = {
     "baseline_ddae": BASELINE_DDAE,
     "unsup_ssts": UNSUP_SSTS,
     "unsup_baseline_fallback": BASELINE_DDAE,
     "unsup_nlp_ssts_light": UNSUP_NLP_SSTS_LIGHT,
     "unsup_classical_plus": UNSUP_CLASSICAL_PLUS,
+    "unsup_mce": UNSUP_MCE,
     "semi_cvnlp_ftp": SEMI_CVNLP_FTP,
     "semi_cvnlp_taps_light": SEMI_CVNLP_TAPS,
     "semi_nlp_baseline": BASELINE_DDAE,
     "semi_nlp_frozen": BASELINE_DDAE,
     "semi_speech_specialist": SEMI_SPEECH_SPECIALIST,
     "semi_rdt_tail": SEMI_RDT_TAIL,
+    "semi_smc_tail": SEMI_SMC_TAIL,
     # Legacy v2 alias
     "semi_cvnlp": SEMI_CVNLP_TAPS,
 }
@@ -437,6 +461,17 @@ def resolve_policy_name(
             and dataset_name in exc.get("unsup_classical_plus", [])
         ):
             return "unsup_classical_plus"
+
+    # DAMP meta-learning (LODO-trained) before static tree overrides
+    if exc.get("use_damp", True):
+        try:
+            from .policy_damp import resolve_damp_policy
+
+            damp_policy = resolve_damp_policy(setting, category, dataset_name, meta)
+            if damp_policy:
+                return damp_policy
+        except Exception:
+            pass
 
     # Meta-routing from bisect-derived rules
     try:

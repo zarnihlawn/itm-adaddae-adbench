@@ -1,0 +1,230 @@
+{
+  "unsupervised": {
+    "PR-AUC": 37.83460252653727,
+    "ROC-AUC": 78.53070906148922,
+    "delta_PR_vs_paper": 5.064602526537264,
+    "delta_ROC_vs_paper": 4.450709061489221,
+    "G_PR_beats_paper": true,
+    "G_ROC_beats_paper": true,
+    "n_datasets": 57,
+    "aggregation": "macro_mean"
+  },
+  "semi-supervised": {
+    "PR-AUC": 62.01472953712738,
+    "ROC-AUC": 85.16103813815559,
+    "delta_PR_vs_paper": 0.6547295371273805,
+    "delta_ROC_vs_paper": 1.991038138155588,
+    "G_PR_beats_paper": true,
+    "G_ROC_beats_paper": true,
+    "n_datasets": 57,
+    "aggregation": "macro_mean"
+  },
+  "G4_backup_regressions": {
+    "unsup_datasets_losing_gt_2pct": 0,
+    "semi_datasets_losing_gt_2pct": 0,
+    "pass": true
+  },
+  "G6_vs_v31_regressions": {
+    "unsupervised": {
+      "n_losing_gt_0_5pct": 0,
+      "datasets": []
+    },
+    "semi-supervised": {
+      "n_losing_gt_0_5pct": 0,
+      "datasets": []
+    },
+    "pass": true,
+    "ref": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v31_hybrid/metrics/completed.json"
+  },
+  "G7_artifact_freshness": {
+    "pass": true,
+    "mismatches": [],
+    "compare_path": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v5_hybrid/thesis/compare_to_ddae.json"
+  },
+  "G5_beat_v41": {
+    "unsup_cur": 37.83460252653727,
+    "unsup_v41": 37.83460252653727,
+    "semi_cur": 62.01472953712738,
+    "semi_v41": 62.01472953712738,
+    "delta_unsup_pp": 0.0,
+    "delta_semi_pp": 0.0,
+    "pass": true,
+    "ref": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v41_hybrid/metrics/completed.json"
+  },
+  "G6_hard_tail_macro": {
+    "unsupervised": {
+      "macro_pr": 20.899377241657117,
+      "ref_macro_pr": 20.899377241657117,
+      "delta_vs_ref_pp": 0.0,
+      "n_datasets": 38,
+      "datasets": [
+        "20newsgroups",
+        "ALOI",
+        "Agnews",
+        "Amazon",
+        "CIFAR10",
+        "Cardiotocography",
+        "FashionMNIST",
+        "Hepatitis",
+        "Imdb",
+        "InternetAds",
+        "MNIST-C",
+        "SVHN",
+        "SpamBase",
+        "Stamps",
+        "WPBC",
+        "Waveform",
+        "Wilt",
+        "Yelp",
+        "annthyroid",
+        "campaign",
+        "celeba",
+        "census",
+        "cover",
+        "donors",
+        "fraud",
+        "glass",
+        "http",
+        "landsat",
+        "letter",
+        "mammography",
+        "mnist",
+        "optdigits",
+        "pendigits",
+        "skin",
+        "speech",
+        "vertebral",
+        "wine",
+        "yeast"
+      ],
+      "pass": true
+    },
+    "semi-supervised": {
+      "macro_pr": 25.194448288483272,
+      "ref_macro_pr": 25.194448288483272,
+      "delta_vs_ref_pp": 0.0,
+      "n_datasets": 18,
+      "datasets": [
+        "20newsgroups",
+        "ALOI",
+        "Agnews",
+        "Amazon",
+        "CIFAR10",
+        "Imdb",
+        "MNIST-C",
+        "SVHN",
+        "WPBC",
+        "Waveform",
+        "Yelp",
+        "celeba",
+        "census",
+        "glass",
+        "mammography",
+        "optdigits",
+        "speech",
+        "vertebral"
+      ],
+      "pass": true
+    },
+    "pass": true,
+    "threshold_pct": 50.0
+  },
+  "G8_lodo_holdout": {
+    "n_pairs": 10,
+    "n_pass": 10,
+    "n_wins": 10,
+    "pass": true,
+    "holdout": [
+      "Agnews",
+      "Wilt",
+      "cardio",
+      "celeba",
+      "speech"
+    ],
+    "details": [
+      {
+        "dataset": "celeba",
+        "setting": "unsupervised",
+        "cur_pr": 6.933728785554176,
+        "ref_pr": 6.933728785554176,
+        "delta_pp": 0.0,
+        "pass": true
+      },
+      {
+        "dataset": "Wilt",
+        "setting": "unsupervised",
+        "cur_pr": 5.132189485552502,
+        "ref_pr": 5.132189485552502,
+        "delta_pp": 0.0,
+        "pass": true
+      },
+      {
+        "dataset": "speech",
+        "setting": "unsupervised",
+        "cur_pr": 3.656209011434062,
+        "ref_pr": 3.656209011434062,
+        "delta_pp": 0.0,
+        "pass": true
+      },
+      {
+        "dataset": "cardio",
+        "setting": "unsupervised",
+        "cur_pr": 53.63204850895769,
+        "ref_pr": 53.63204850895769,
+        "delta_pp": 0.0,
+        "pass": true
+      },
+      {
+        "dataset": "Agnews",
+        "setting": "unsupervised",
+        "cur_pr": 11.140807211739467,
+        "ref_pr": 11.140807211739467,
+        "delta_pp": 0.0,
+        "pass": true
+      },
+      {
+        "dataset": "celeba",
+        "setting": "semi-supervised",
+        "cur_pr": 14.295386753337164,
+        "ref_pr": 14.295386753337164,
+        "delta_pp": 0.0,
+        "pass": true
+      },
+      {
+        "dataset": "Wilt",
+        "setting": "semi-supervised",
+        "cur_pr": 55.27674186855363,
+        "ref_pr": 55.27674186855363,
+        "delta_pp": 0.0,
+        "pass": true
+      },
+      {
+        "dataset": "speech",
+        "setting": "semi-supervised",
+        "cur_pr": 5.064483035647771,
+        "ref_pr": 5.064483035647771,
+        "delta_pp": 0.0,
+        "pass": true
+      },
+      {
+        "dataset": "cardio",
+        "setting": "semi-supervised",
+        "cur_pr": 82.20633487811037,
+        "ref_pr": 82.20633487811037,
+        "delta_pp": 0.0,
+        "pass": true
+      },
+      {
+        "dataset": "Agnews",
+        "setting": "semi-supervised",
+        "cur_pr": 23.54374509108807,
+        "ref_pr": 23.54374509108807,
+        "delta_pp": 0.0,
+        "pass": true
+      }
+    ]
+  },
+  "all_pass": true,
+  "n_jobs": 570,
+  "combined_macro_PR": 49.924666031832324
+}

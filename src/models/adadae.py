@@ -32,6 +32,7 @@ from .dte import (
     knn_dte_score,
     posterior_mean_from_recon,
 )
+from .fusion_smc import collect_train_view_samples, estimate_view_reliability, fuse_smc_views
 
 
 class AdaDDAE:
@@ -129,6 +130,7 @@ class AdaDDAE:
         self.vectorized_scoring = vectorized_scoring and self.device.type == "cuda"
         self.preupload_test_threshold = preupload_test_threshold
         self._calibrated_fusion: Optional[Dict[str, float]] = None
+        self._smc_reliability: Optional[Dict[str, float]] = None
         self._normal_pool: Optional[torch.Tensor] = None
         self._train_z_cache: Optional[torch.Tensor] = None
         self._cached_t_grid: Optional[torch.Tensor] = None
@@ -478,7 +480,7 @@ class AdaDDAE:
                 and eval_fn is not None
                 and (epoch + 1) % self.eval_every == 0
             ):
-                if self.fusion_mode == "calibrated":
+                if self.fusion_mode in ("calibrated", "smc"):
                     self._calibrate_fusion(x_train)
                 scores = self.predict(x_test)
                 metrics = eval_fn(scores.detach().cpu().numpy(), y_test.numpy())
@@ -539,8 +541,24 @@ class AdaDDAE:
         return {"history": history, "best_pr_auc": best_metric, "timing": self.timing}
 
     def _calibrate_fusion(self, x_train: torch.Tensor, n_cal: int = 256) -> None:
-        """Calibrate lambda_v from training data (semi: normals implied by train split)."""
+        """Calibrate fusion from training normals (calibrated or SMC mode)."""
         self.model.eval()
+        if self.fusion_mode == "smc":
+            view_samples = collect_train_view_samples(
+                lambda xb, score_seed=0: self._score_views(xb, vectorized=self.vectorized_scoring, score_seed=score_seed),
+                x_train,
+                n_cal=n_cal,
+                n_draws=max(2, self.uncertainty_draws),
+            )
+            active = {k: v for k, v in view_samples.items() if v is not None}
+            if not self.use_uncertainty_view:
+                active.pop("uncertainty", None)
+            if not self.use_dte_view:
+                active.pop("diffusion_time", None)
+            self._smc_reliability = estimate_view_reliability(active, self.score_weights)
+            self._calibrated_fusion = dict(self._smc_reliability)
+            return
+
         n = min(n_cal, x_train.size(0))
         idx = torch.randperm(x_train.size(0), device=x_train.device)[:n]
         xb = x_train[idx].to(self.device)
@@ -723,20 +741,32 @@ class AdaDDAE:
                 m = v.mean().clamp_min(1e-12)
                 return v / m
 
-            if self._calibrated_fusion is not None:
-                fw = self._calibrated_fusion
+            if self.fusion_mode == "smc" and self._smc_reliability is not None:
+                scores = fuse_smc_views(
+                    rec_acc.float(),
+                    lat_acc.float(),
+                    res_acc.float(),
+                    var_acc.float() if self.use_uncertainty_view else None,
+                    dte_acc.float() if self.use_dte_view else None,
+                    self._smc_reliability,
+                    use_uncertainty=self.use_uncertainty_view,
+                    use_dte=self.use_dte_view,
+                ).double()
             else:
-                fw = self.fusion_weights
+                if self._calibrated_fusion is not None:
+                    fw = self._calibrated_fusion
+                else:
+                    fw = self.fusion_weights
 
-            scores = (
-                fw.get("reconstruction", 0.6) * _norm(rec_acc)
-                + fw.get("latent", 0.3) * _norm(lat_acc)
-                + fw.get("residual", 0.1) * _norm(res_acc)
-            )
-            if self.use_uncertainty_view:
-                scores = scores + fw.get("uncertainty", 0.1) * _norm(var_acc)
-            if self.use_dte_view:
-                scores = scores + fw.get("diffusion_time", 0.1) * _norm(dte_acc)
+                scores = (
+                    fw.get("reconstruction", 0.6) * _norm(rec_acc)
+                    + fw.get("latent", 0.3) * _norm(lat_acc)
+                    + fw.get("residual", 0.1) * _norm(res_acc)
+                )
+                if self.use_uncertainty_view:
+                    scores = scores + fw.get("uncertainty", 0.1) * _norm(var_acc)
+                if self.use_dte_view:
+                    scores = scores + fw.get("diffusion_time", 0.1) * _norm(dte_acc)
 
         self.timing["score_sec"] = time.perf_counter() - t_score_start
         return scores.float()

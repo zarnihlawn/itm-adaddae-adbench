@@ -1,0 +1,74 @@
+{
+  "version": "v2",
+  "unsupervised_default": [
+    "LF-DANC",
+    "MANS",
+    "SSTS",
+    "FTP"
+  ],
+  "unsup_baseline_fallback": [
+    "vowels",
+    "letter",
+    "skin",
+    "fault",
+    "wine",
+    "glass"
+  ],
+  "unsup_nlp_baseline": [
+    "Agnews",
+    "Amazon",
+    "Imdb",
+    "Yelp",
+    "20newsgroups"
+  ],
+  "semi_classical": [
+    "DDAE-faithful baseline (no AdaDDAE extras)"
+  ],
+  "semi_cv": [
+    "FTP",
+    "fixed T=50 linear",
+    "contrastive off"
+  ],
+  "semi_nlp": [
+    "DDAE-faithful baseline (FTP+TAPS regressed on Agnews/20news)"
+  ],
+  "semi_specialists": {
+    "speech": "RobustScaler + FTP + RDT + T=80"
+  },
+  "v4_safe_merge": [
+    "regression_guard",
+    "nlp_semi_freeze",
+    "meta_routing"
+  ],
+  "banned_components": [
+    "VUS on semi",
+    "DTE on semi",
+    "calibrated fusion on semi",
+    "monolithic default_gpu"
+  ],
+  "selective_components": [
+    "unsup_classical_plus: VUS+DTE on large classical unsup only"
+  ],
+  "evidence_files": {
+    "oracle_summary": "/home/zarnihlawn/Desktop/ITM/project/results/thesis/oracle_policy_summary.json",
+    "v3_hard_best": "/home/zarnihlawn/Desktop/ITM/project/results/thesis/v3_hard_dataset_best.csv"
+  },
+  "oracle_ceiling": {
+    "unsupervised": {
+      "oracle_mean_PR": 36.92941043935118,
+      "paper_PR": 32.77,
+      "delta_vs_paper": 4.159410439351177,
+      "beats_paper": true,
+      "n_datasets": 57,
+      "n_beats_paper": 28
+    },
+    "semi-supervised": {
+      "oracle_mean_PR": 60.765907667949236,
+      "paper_PR": 61.36,
+      "delta_vs_paper": -0.5940923320507636,
+      "beats_paper": false,
+      "n_datasets": 57,
+      "n_beats_paper": 33
+    }
+  }
+}

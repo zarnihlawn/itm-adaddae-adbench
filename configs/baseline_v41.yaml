@@ -1,0 +1,11 @@
+# Frozen AdaDDAE v4.1 baseline reference for v5 gates and merges.
+version: v4.1
+frozen_at: "2026-07-14"
+hybrid_dir: results/adadae_v41_hybrid
+completed: results/adadae_v41_hybrid/metrics/completed.json
+gates: results/adadae_v41_hybrid/thesis/gates.json
+compare: results/adadae_v41_hybrid/thesis/compare_to_ddae.json
+macro_pr:
+  unsupervised: 37.83460252653727
+  semi-supervised: 62.01472953712738
+  combined: 49.924666031832324

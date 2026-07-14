@@ -1,0 +1,17 @@
+# AdaDDAE v5 MCE track: modality encoders on NLP/CV tails
+adadae:
+  policy: routed
+  use_mce: true
+  use_danc: true
+  use_scs: true
+  use_ftp: true
+  mce_block_semi_nlp: true
+  exceptions_file: configs/policy_exceptions.yaml
+
+train:
+  epochs: 100
+  eval_every: 10
+
+hardware:
+  device: cuda
+  hardware_profile: gpu

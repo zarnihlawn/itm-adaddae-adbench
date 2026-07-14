@@ -1,0 +1,79 @@
+{
+  "n_train": 38,
+  "n_classes": 11,
+  "classes": [
+    "baseline_ddae",
+    "ftp",
+    "semi_cvnlp_ftp",
+    "semi_cvnlp_taps_004",
+    "semi_nlp_danc",
+    "semi_rdt_tail",
+    "semi_speech_specialist",
+    "ssts",
+    "unsup_baseline",
+    "unsup_classical_plus",
+    "unsup_lfdanc"
+  ],
+  "holdout": {
+    "n_holdout": 7,
+    "wins": 5,
+    "details": [
+      {
+        "dataset": "Agnews",
+        "setting": "semi-supervised",
+        "predicted": "baseline_ddae",
+        "oracle": "baseline_ddae",
+        "match": true
+      },
+      {
+        "dataset": "Agnews",
+        "setting": "unsupervised",
+        "predicted": "unsup_baseline",
+        "oracle": "unsup_baseline",
+        "match": true
+      },
+      {
+        "dataset": "Wilt",
+        "setting": "semi-supervised",
+        "predicted": "baseline_ddae",
+        "oracle": "semi_nlp_danc",
+        "match": false
+      },
+      {
+        "dataset": "Wilt",
+        "setting": "unsupervised",
+        "predicted": "unsup_baseline",
+        "oracle": "unsup_baseline",
+        "match": true
+      },
+      {
+        "dataset": "celeba",
+        "setting": "semi-supervised",
+        "predicted": "baseline_ddae",
+        "oracle": "semi_nlp_danc",
+        "match": false
+      },
+      {
+        "dataset": "speech",
+        "setting": "semi-supervised",
+        "predicted": "baseline_ddae",
+        "oracle": "baseline_ddae",
+        "match": true
+      },
+      {
+        "dataset": "speech",
+        "setting": "unsupervised",
+        "predicted": "unsup_baseline",
+        "oracle": "unsup_baseline",
+        "match": true
+      }
+    ]
+  },
+  "holdout_datasets": [
+    "Agnews",
+    "Wilt",
+    "cardio",
+    "celeba",
+    "speech"
+  ]
+}

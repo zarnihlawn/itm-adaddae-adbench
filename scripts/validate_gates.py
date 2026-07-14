@@ -7,6 +7,7 @@ import json
 import sys
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -63,6 +64,82 @@ def per_dataset_loss_vs_ref(hybrid: dict, ref: dict, setting: str, threshold: fl
     return len(losers), losers
 
 
+def hard_tail_macro_mean(completed: dict, setting: str, ref_completed: dict, threshold: float = 50.0) -> dict:
+    """G6 hard-tail: macro PR on datasets where v4.1 ref PR < threshold."""
+    def agg(completed_in, setting_in):
+        rows = []
+        for j in completed_in.values():
+            if j.get("setting") != setting_in:
+                continue
+            rows.append({"dataset": j["dataset"], "PR": j["metrics_mean"]["PR-AUC"] * 100})
+        if not rows:
+            return pd.Series(dtype=float)
+        return pd.DataFrame(rows).groupby("dataset")["PR"].mean()
+
+    ref_pr = agg(ref_completed, setting)
+    hard_ds = ref_pr[ref_pr < threshold].index.tolist()
+    cur_pr = agg(completed, setting)
+    if not hard_ds:
+        return {"macro_pr": 0.0, "n_datasets": 0, "datasets": [], "pass": True}
+    hard_cur = cur_pr.reindex(hard_ds).dropna()
+    macro = float(hard_cur.mean()) if len(hard_cur) else 0.0
+    ref_hard = ref_pr.reindex(hard_ds).dropna()
+    delta = macro - float(ref_hard.mean()) if len(ref_hard) else 0.0
+    return {
+        "macro_pr": macro,
+        "ref_macro_pr": float(ref_hard.mean()) if len(ref_hard) else 0.0,
+        "delta_vs_ref_pp": delta,
+        "n_datasets": len(hard_ds),
+        "datasets": sorted(hard_ds),
+        "pass": delta >= -0.5,
+    }
+
+
+def lodo_holdout_check(
+    completed: dict,
+    ref_completed: dict,
+    holdout: set[str],
+    threshold_pp: float = 0.0,
+) -> dict:
+    """G7 LODO: holdout datasets must not regress vs v4.1 ref."""
+    details = []
+    wins = 0
+    for setting in ["unsupervised", "semi-supervised"]:
+        for ds in holdout:
+            def ds_pr(comp, s, d):
+                prs = [
+                    j["metrics_mean"]["PR-AUC"] * 100
+                    for j in comp.values()
+                    if j.get("setting") == s and j.get("dataset") == d
+                ]
+                return float(np.mean(prs)) if prs else None
+
+            cur = ds_pr(completed, setting, ds)
+            ref = ds_pr(ref_completed, setting, ds)
+            if cur is None or ref is None:
+                continue
+            delta = cur - ref
+            if delta >= threshold_pp:
+                wins += 1
+            details.append({
+                "dataset": ds,
+                "setting": setting,
+                "cur_pr": cur,
+                "ref_pr": ref,
+                "delta_pp": delta,
+                "pass": delta >= threshold_pp,
+            })
+    n = len(details)
+    return {
+        "n_pairs": n,
+        "n_pass": sum(1 for d in details if d["pass"]),
+        "n_wins": wins,
+        "pass": wins >= max(1, int(0.6 * n)) if n else True,
+        "holdout": sorted(holdout),
+        "details": details,
+    }
+
+
 def per_dataset_backup_loss(hybrid: dict, backup: dict, setting: str, threshold: float = 2.0) -> int:
     n, _ = per_dataset_loss_vs_ref(hybrid, backup, setting, threshold)
     return n
@@ -111,6 +188,22 @@ def main():
         "--v31-ref",
         default="results/adadae_v31_hybrid/metrics/completed.json",
         help="Reference hybrid for G6 no-regression vs v3.1",
+    )
+    parser.add_argument(
+        "--v5",
+        action="store_true",
+        help="Enable v5 gates: G5 beat v4.1, G6 hard-tail, G8 LODO holdout",
+    )
+    parser.add_argument(
+        "--v41-ref",
+        default="results/adadae_v41_hybrid/metrics/completed.json",
+        help="v4.1 baseline for v5 gates",
+    )
+    parser.add_argument(
+        "--hard-tail-threshold",
+        type=float,
+        default=50.0,
+        help="PR threshold (%%) defining hard-tail datasets",
     )
     args = parser.parse_args()
 
@@ -178,6 +271,44 @@ def main():
     gates["G7_artifact_freshness"] = g7
     all_pass = all_pass and g7["pass"]
 
+    if args.v5:
+        v41_path = Path(args.v41_ref)
+        if not v41_path.is_absolute():
+            v41_path = PROJECT_ROOT / v41_path
+        if v41_path.exists():
+            v41 = load_completed(v41_path)
+            v41_unsup = macro_mean_metrics(v41, "unsupervised")["PR-AUC"]
+            v41_semi = macro_mean_metrics(v41, "semi-supervised")["PR-AUC"]
+            cur_unsup = gates["unsupervised"]["PR-AUC"]
+            cur_semi = gates["semi-supervised"]["PR-AUC"]
+            g5_pass = cur_unsup >= v41_unsup - 1e-6 and cur_semi >= v41_semi - 1e-6
+            gates["G5_beat_v41"] = {
+                "unsup_cur": cur_unsup,
+                "unsup_v41": v41_unsup,
+                "semi_cur": cur_semi,
+                "semi_v41": v41_semi,
+                "delta_unsup_pp": cur_unsup - v41_unsup,
+                "delta_semi_pp": cur_semi - v41_semi,
+                "pass": g5_pass,
+                "ref": str(v41_path),
+            }
+            all_pass = all_pass and g5_pass
+
+            ht_detail = {}
+            ht_pass = True
+            for setting in ["unsupervised", "semi-supervised"]:
+                ht = hard_tail_macro_mean(hybrid, setting, v41, threshold=args.hard_tail_threshold)
+                ht_detail[setting] = ht
+                if not ht["pass"]:
+                    ht_pass = False
+            gates["G6_hard_tail_macro"] = {**ht_detail, "pass": ht_pass, "threshold_pct": args.hard_tail_threshold}
+            all_pass = all_pass and ht_pass
+
+            holdout = {"speech", "Agnews", "Wilt", "celeba", "cardio"}
+            g8 = lodo_holdout_check(hybrid, v41, holdout)
+            gates["G8_lodo_holdout"] = g8
+            all_pass = all_pass and g8["pass"]
+
     gates["all_pass"] = all_pass
     gates["n_jobs"] = len(hybrid)
     unsup_m = gates["unsupervised"]["PR-AUC"]
@@ -214,6 +345,22 @@ def main():
     if not g7["pass"] and g7.get("mismatches"):
         for mm in g7["mismatches"]:
             print(f"  stale {mm['setting']}: live {mm['live_PR']:.2f}% vs cached {mm['cached_PR']:.2f}%")
+    if args.v5 and "G5_beat_v41" in gates:
+        g5 = gates["G5_beat_v41"]
+        print(
+            f"G5 beat v4.1: unsup {g5['delta_unsup_pp']:+.2f}pp semi {g5['delta_semi_pp']:+.2f}pp "
+            f"{'PASS' if g5['pass'] else 'FAIL'}"
+        )
+        if "G6_hard_tail_macro" in gates:
+            ht = gates["G6_hard_tail_macro"]
+            print(f"G6 hard-tail macro: {'PASS' if ht['pass'] else 'FAIL'}")
+            for setting in ["unsupervised", "semi-supervised"]:
+                if setting in ht:
+                    h = ht[setting]
+                    print(f"  {setting}: {h['macro_pr']:.2f}% (delta {h['delta_vs_ref_pp']:+.2f}pp, n={h['n_datasets']})")
+        if "G8_lodo_holdout" in gates:
+            g8 = gates["G8_lodo_holdout"]
+            print(f"G8 LODO holdout: {g8['n_pass']}/{g8['n_pairs']} pass {'PASS' if g8['pass'] else 'FAIL'}")
     print(f"Combined macro PR: {gates['combined_macro_PR']:.2f}%")
     print(f"ALL PASS: {all_pass}")
 

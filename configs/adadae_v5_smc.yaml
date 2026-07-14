@@ -1,0 +1,17 @@
+# AdaDDAE v5 SMC track: SNR-calibrated fusion on semi tails
+adadae:
+  policy: routed
+  fusion_mode: smc
+  use_multiview: true
+  use_dte_view: true
+  use_uncertainty_view: false
+  use_rejection_training: true
+  exceptions_file: configs/policy_exceptions.yaml
+
+train:
+  epochs: 100
+  eval_every: 10
+
+hardware:
+  device: cuda
+  hardware_profile: gpu

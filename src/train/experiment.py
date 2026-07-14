@@ -12,6 +12,7 @@ import torch
 from ..data.datasets import load_npz, split_data
 from ..eval.metrics import evaluate_anomaly_detection
 from ..features.pipeline import FeatureTuningPipeline, infer_policy
+from ..features.modality_encoder import ModalityEncoder, setting_blocks_mce
 from ..memory import (
     apply_thread_limits,
     choose_score_batch_size,
@@ -81,11 +82,23 @@ def run_single_file(
     config = apply_routed_config(
         config, setting, category, dataset_name=dataset_name, meta=route_meta
     )
+    config = dict(config)
+    config["_setting"] = setting
     adadae_cfg = config.get("adadae", {})
     feat_cfg = config.get("features", {})
     use_ftp = bool(adadae_cfg.get("use_ftp", True))
+    use_mce = bool(adadae_cfg.get("use_mce", False))
 
     t_ftp_start = time.perf_counter()
+    mce_summary: Dict[str, Any] = {"use_mce": False}
+    if use_mce and not setting_blocks_mce(config, category):
+        mce_modality = str(adadae_cfg.get("mce_modality", category))
+        enc = ModalityEncoder(modality=mce_modality)
+        X_train = enc.fit_transform(X_train, seed=seed)
+        X_test = enc.transform(X_test)
+        mce_summary = enc.summary()
+        mce_summary["use_mce"] = True
+
     if use_ftp:
         policy = infer_policy(
             n_samples=X_train.shape[0],
@@ -169,6 +182,7 @@ def run_single_file(
             batch_size=batch_size,
             noise=noise.__dict__,
             ftp=ftp_summary,
+            mce=mce_summary,
             contamination_mode=contam_mode,
             contamination_est=meta.get("contamination"),
             device=str(device),
@@ -246,6 +260,43 @@ def run_single_file(
     scores = model.predict(x_test_t)
     metrics = evaluate_anomaly_detection(scores.detach().cpu().numpy(), y_test)
 
+    gate_summary: Dict[str, Any] = {"use_gate": False}
+    if adadae_cfg.get("use_gate", False):
+        from ..ensemble.gate import (
+            build_train_normal_scores,
+            fit_isolation_forest,
+            gate_ensemble_predict,
+            isolation_scores,
+            knn_dte_proxy_scores,
+        )
+
+        ad_fn = lambda X: model.predict(torch.tensor(X, dtype=torch.float32)).detach().cpu().numpy()
+        train_scores = build_train_normal_scores(
+            X_train,
+            ad_fn,
+            ad_fn,
+            seed=seed,
+        )
+        if_clf, if_scaler = fit_isolation_forest(X_train, seed=seed)
+        if_test = isolation_scores(if_clf, if_scaler, X_test)
+        knn_test = knn_dte_proxy_scores(X_train, X_test)
+        ada_test = scores.detach().cpu().numpy()
+        fused, decision = gate_ensemble_predict(
+            ada_test,
+            ada_test,
+            if_test,
+            knn_test,
+            train_scores,
+        )
+        metrics = evaluate_anomaly_detection(fused, y_test)
+        gate_summary = {
+            "use_gate": True,
+            "winner": decision.winner,
+            "fallback": decision.fallback,
+            "disagreement": decision.disagreement,
+            "weights": decision.weights,
+        }
+
     mem = guard_memory_mb(guard)
     train_sec = fit_info.get("timing", {}).get("train_sec", 0.0)
     score_sec = model.timing.get("score_sec", 0.0)
@@ -259,6 +310,8 @@ def run_single_file(
         "metrics": metrics,
         "noise": noise.__dict__,
         "ftp": ftp_summary,
+        "mce": mce_summary,
+        "gate": gate_summary,
         "best_pr_auc": fit_info.get("best_pr_auc"),
         "rss_mb": guard.rss_mb() if hasattr(guard, "rss_mb") else None,
         "vram_mb": mem if device.type == "cuda" else None,

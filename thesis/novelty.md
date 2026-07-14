@@ -195,3 +195,53 @@ python scripts/validate_gates.py --completed results/adadae_v3_hybrid/metrics/co
 - Blanket FTP+TAPS on NLP semi: Agnews **−5.7%**, 20newsgroups **−2.4%**
 - SSTS on vowels/letter unsup: **−35% / −25%** vs baseline
 
+---
+
+## AdaDDAE v5 (meta-learned adaptation stack)
+
+v5 closes the routing-saturation gap with four train-only components beyond v4.1 bisect patches.
+
+### DAMP — Dataset-Adaptive Meta-Diffusion Policy
+
+LODO-trained gradient-boosted classifier over bisect matrices maps train-only meta-features \(\phi\) to policy \(\pi^*\):
+
+\[
+\pi^* = \arg\max_\pi \; \mathbb{E}[\text{PR-AUC} \mid \phi_{\text{train}}, \text{setting}]
+\]
+
+Meta-features: \(\log n\), \(\log d\), contamination \(\hat{c}\), intrinsic dimension, tail rate, SNR proxy. Holdout: `speech`, `Agnews`, `Wilt`, `celeba`, `cardio`. Module: [`src/policy_damp.py`](../src/policy_damp.py).
+
+### MCE — Modality-Conditional Encoders
+
+| Modality | Encoder | Output \(d'\) |
+|----------|---------|---------------|
+| NLP | Truncated SVD on standardized features | \(\min(128, d/4)\) |
+| CV | RobustScaler + random projection | 128 |
+| Classical | Optional SVD when \(d > 256\) | auto |
+
+Fit on training normals only. Flag: `adadae.use_mce`. Module: [`src/features/modality_encoder.py`](../src/features/modality_encoder.py).
+
+### SMC — SNR-Calibrated Multi-View Fusion
+
+Per-view reliability from train-normal score variance:
+
+\[
+r_v(t) = \frac{1}{\mathrm{Var}_\epsilon[s_v(t)] + \epsilon}, \quad
+s(x) = \sum_{t,v} w_t \cdot r_v(t) \cdot \tilde{s}_v(x,t)
+\]
+
+Flag: `fusion_mode: smc`. Module: [`src/models/fusion_smc.py`](../src/models/fusion_smc.py).
+
+### GATE — Train-Only Ensemble Gate
+
+Ensemble \(\{\text{AdaDDAE}, \text{DDAE}, \text{IF}, \text{kNN-DTE}\}\) with weights from train-normal rank consistency; conformal fallback to DDAE when disagreement \(> \tau\). Flag: `adadae.use_gate`. Module: [`src/ensemble/gate.py`](../src/ensemble/gate.py).
+
+### v5 protocol
+
+```bash
+bash scripts/run_adadae_v5_protocol.sh local    # CPU: phase0 + DAMP + merge
+bash scripts/run_adadae_v5_protocol.sh all      # Vast: full MCE/SMC/GATE GPU tracks
+python scripts/validate_gates.py --completed results/adadae_v5_hybrid/metrics/completed.json --v5
+python scripts/compute_benchmark_tiers.py --completed results/adadae_v5_hybrid/metrics/completed.json
+```
+

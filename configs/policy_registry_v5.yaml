@@ -1,0 +1,53 @@
+# AdaDDAE v5 policy registry extensions (DAMP, MCE, SMC, GATE)
+version: v5
+base_registry: src/policy.py POLICY_REGISTRY
+components:
+  DAMP:
+    module: src/policy_damp.py
+    model: configs/damp_model.pkl
+    integration: resolve_policy_name after static exceptions
+  MCE:
+    module: src/features/modality_encoder.py
+    flag: adadae.use_mce
+    modalities: [classical, nlp, cv]
+  SMC:
+    module: src/models/fusion_smc.py
+    fusion_mode: smc
+    calibrate_on: train_normals
+  GATE:
+    module: src/ensemble/gate.py
+    models: [adadae, ddae, isolation_forest, knn_dte]
+    fallback: ddae
+
+policies:
+  unsup_mce_nlp:
+    use_mce: true
+    mce_modality: nlp
+    use_ftp: true
+    use_danc: true
+    use_scs: true
+  unsup_mce_cv:
+    use_mce: true
+    mce_modality: cv
+    use_ftp: true
+    use_danc: true
+    use_scs: true
+  semi_smc_tail:
+    fusion_mode: smc
+    use_multiview: true
+    use_rejection_training: true
+  semi_mce_cv:
+    use_mce: true
+    mce_modality: cv
+    mce_block_semi_nlp: true
+    fusion_mode: smc
+
+mce_target_datasets:
+  cv: [ALOI, celeba, CIFAR10, SVHN, speech]
+  nlp: [Imdb, Agnews, Amazon, Yelp, 20newsgroups]
+  classical: [optdigits, cover]
+
+smc_target_datasets:
+  semi: [glass, vertebral, Waveform, speech]
+
+gate_target_datasets: all_backup_losers

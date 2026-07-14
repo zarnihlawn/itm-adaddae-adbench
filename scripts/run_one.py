@@ -46,6 +46,12 @@ def main():
         default=None,
         help='JSON dict merged into config, e.g. \'{"adadae":{"use_danc":false}}\'',
     )
+    parser.add_argument(
+        "--out-dir",
+        type=str,
+        default=None,
+        help="Override metrics output directory (still updates completed.json in parent)",
+    )
     args = parser.parse_args()
 
     cfg = load_config(args.config, hardware=args.hardware)
@@ -89,11 +95,21 @@ def main():
         "splits": split_rows,
     }
 
-    out_dir = results_dir / "metrics"
+    out_dir = Path(args.out_dir) if args.out_dir else results_dir / "metrics"
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / f"{spec.name}__{setting}__{seed}.json"
     with open(out_path, "w", encoding="utf-8") as f:
         json.dump(summary, f, indent=2)
+
+    completed_path = out_dir / "completed.json"
+    completed_state = {"completed": {}, "failed": {}}
+    if completed_path.exists():
+        with open(completed_path, encoding="utf-8") as f:
+            completed_state = json.load(f)
+    key = f"{spec.name}__{setting}__{seed}"
+    completed_state.setdefault("completed", {})[key] = summary
+    with open(completed_path, "w", encoding="utf-8") as f:
+        json.dump(completed_state, f, indent=2)
 
     print("\n=== Summary ===")
     for k, v in summary["metrics_mean"].items():
