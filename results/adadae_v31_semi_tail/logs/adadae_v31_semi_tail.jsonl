@@ -1,2 +1,4 @@
 {"time": "2026-07-14T09:44:49.869440+00:00", "run_id": "adadae_v31_semi_tail", "event": "info", "message": "Protocol start: 85 jobs", "n_datasets": 17, "seeds": [111, 222, 333, 444, 555]}
 {"time": "2026-07-14T09:44:49.898516+00:00", "run_id": "adadae_v31_semi_tail", "event": "info", "message": "Protocol finished", "n_completed": 85, "n_failed": 0}
+{"time": "2026-07-14T12:48:54.157562+00:00", "run_id": "adadae_v31_semi_tail", "event": "info", "message": "Protocol start: 85 jobs", "n_datasets": 17, "seeds": [111, 222, 333, 444, 555]}
+{"time": "2026-07-14T12:48:54.189626+00:00", "run_id": "adadae_v31_semi_tail", "event": "info", "message": "Protocol finished", "n_completed": 85, "n_failed": 0}
