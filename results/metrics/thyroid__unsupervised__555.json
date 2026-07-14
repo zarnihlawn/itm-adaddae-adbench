@@ -1,0 +1,22 @@
+{
+  "dataset": "thyroid",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.4267293649049513,
+    "ROC-AUC": 0.9637728812469494,
+    "PR-AUC": 0.41821427905116754
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T16:55:24.049340+00:00"
+}

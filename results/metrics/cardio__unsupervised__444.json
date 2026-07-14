@@ -1,0 +1,22 @@
+{
+  "dataset": "cardio",
+  "setting": "unsupervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.40781246851614317,
+    "ROC-AUC": 0.7487057127162867,
+    "PR-AUC": 0.4060899764253152
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T14:19:25.646151+00:00"
+}

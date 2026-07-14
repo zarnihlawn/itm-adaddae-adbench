@@ -1,0 +1,22 @@
+{
+  "dataset": "Wilt",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.05173320944578121,
+    "ROC-AUC": 0.5144332218274121,
+    "PR-AUC": 0.05141230068336647
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T16:59:53.783250+00:00"
+}

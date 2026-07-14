@@ -1,0 +1,22 @@
+{
+  "dataset": "census",
+  "setting": "semi-supervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.2269040596540655,
+    "ROC-AUC": 0.7253428112307285,
+    "PR-AUC": 0.22685988304446908
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T14:54:57.232248+00:00"
+}

@@ -1,0 +1,22 @@
+{
+  "dataset": "Agnews",
+  "setting": "semi-supervised",
+  "seed": 333,
+  "n_splits": 4,
+  "metrics_mean": {
+    "AP": 0.23235721423392797,
+    "ROC-AUC": 0.753164,
+    "PR-AUC": 0.23121911578046475
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T18:18:10.684688+00:00"
+}

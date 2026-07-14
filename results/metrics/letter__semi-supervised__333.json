@@ -1,0 +1,22 @@
+{
+  "dataset": "letter",
+  "setting": "semi-supervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.7492844639373681,
+    "ROC-AUC": 0.9572799999999999,
+    "PR-AUC": 0.7474850863265791
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T16:25:48.447820+00:00"
+}

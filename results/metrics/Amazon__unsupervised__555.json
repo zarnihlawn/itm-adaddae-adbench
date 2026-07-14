@@ -1,0 +1,22 @@
+{
+  "dataset": "Amazon",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.06373127393228098,
+    "ROC-AUC": 0.6151055789473684,
+    "PR-AUC": 0.06339608096626416
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T18:20:00.070387+00:00"
+}

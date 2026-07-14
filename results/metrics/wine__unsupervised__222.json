@@ -1,0 +1,22 @@
+{
+  "dataset": "wine",
+  "setting": "unsupervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.2674855188670978,
+    "ROC-AUC": 0.8462184873949581,
+    "PR-AUC": 0.2356865224145459
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T17:00:49.394488+00:00"
+}

@@ -1,0 +1,22 @@
+{
+  "dataset": "MVTec-AD",
+  "setting": "unsupervised",
+  "seed": 444,
+  "n_splits": 15,
+  "metrics_mean": {
+    "AP": 0.5806341782055182,
+    "ROC-AUC": 0.7782348753689939,
+    "PR-AUC": 0.576841304743821
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T17:52:50.561340+00:00"
+}
