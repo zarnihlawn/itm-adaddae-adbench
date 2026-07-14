@@ -256,6 +256,11 @@ UNSUP_CLASSICAL_GAP_DATASETS = [
     "SpamBase", "yeast", "PageBlocks", "campaign", "MNIST-C", "Yelp",
 ]
 
+UNSUP_FALLBACK_BISECT = [
+    "magic.gamma", "landsat", "fraud", "InternetAds", "Ionosphere", "glass",
+    "WPBC", "vertebral", "backdoor", "vowels", "letter", "skin", "fault", "wine",
+]
+
 
 def run_candidate(
     base_cfg: dict,
@@ -328,6 +333,11 @@ def main():
         help="Run unsup classical gap bisect on UNSUP_CLASSICAL_GAP_DATASETS",
     )
     parser.add_argument(
+        "--unsup-fallback-bisect",
+        action="store_true",
+        help="Run unsup bisect on UNSUP_FALLBACK_BISECT (14 classical fallback datasets)",
+    )
+    parser.add_argument(
         "--steps",
         nargs="*",
         default=["ddae_repro", "lfdanc", "ssts", "taps", "oracle_danc"],
@@ -375,6 +385,18 @@ def main():
             "unsup_classical_plus": UNSUP_BISECT_CANDIDATES["unsup_classical_plus"],
         }
         candidate_map = {"unsupervised": gap_cands}
+    elif args.unsup_fallback_bisect:
+        wanted = {d.lower() for d in UNSUP_FALLBACK_BISECT}
+        registry = [s for s in registry if s.name.lower() in wanted]
+        seeds = args.seeds or [111, 222, 333, 444, 555]
+        settings = ["unsupervised"]
+        fallback_cands = {
+            "unsup_baseline": UNSUP_BISECT_CANDIDATES["unsup_baseline"],
+            "unsup_lfdanc": UNSUP_BISECT_CANDIDATES["unsup_lfdanc"],
+            "unsup_ssts": UNSUP_BISECT_CANDIDATES["unsup_ssts"],
+            "unsup_classical_plus": UNSUP_BISECT_CANDIDATES["unsup_classical_plus"],
+        }
+        candidate_map = {"unsupervised": fallback_cands}
     else:
         wanted = {d.lower() for d in args.datasets}
         registry = [s for s in registry if s.name.lower() in wanted]
@@ -392,7 +414,7 @@ def main():
     logger = RunLogger(results_dir / "logs" / "v3_hard_bisect.jsonl", run_id="v3_hard_bisect")
     all_rows: list[dict] = []
 
-    if not args.skip_ablations and not args.full_tail and not args.unsup_nlp and not args.unsup_classical_gap:
+    if not args.skip_ablations and not args.full_tail and not args.unsup_nlp and not args.unsup_classical_gap and not args.unsup_fallback_bisect:
         for setting in settings:
             for step in args.steps:
                 if step not in ABLATIONS:
@@ -438,7 +460,7 @@ def main():
     )
     if args.full_tail:
         best_path = out_path.with_name("v31_semi_tail_best.csv")
-    elif args.unsup_nlp or args.unsup_classical_gap:
+    elif args.unsup_nlp or args.unsup_classical_gap or args.unsup_fallback_bisect:
         best_path = out_path.with_name("v4_unsup_bisect_best.csv")
     else:
         best_path = out_path.with_name("v3_hard_dataset_best.csv")

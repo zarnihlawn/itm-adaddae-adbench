@@ -14,6 +14,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.build_v31_patches import (
     SEMI_NLP_FREEZE,
+    SEMI_ROBUST_DATASETS,
     best_bisect_candidate,
     load_completed,
     pick_best_source,
@@ -46,6 +47,8 @@ CANDIDATE_TO_POLICY_UNSUP = {
     "ssts": "unsup_ssts",
 }
 
+MVTEC_ROBUST_MIN = 85.0
+
 
 def main():
     parser = argparse.ArgumentParser(description="Promote bisect winners to policy_exceptions.yaml")
@@ -55,6 +58,7 @@ def main():
     parser.add_argument("--backup", default="backup/ddae_baseline_570/metrics/completed.json")
     parser.add_argument("--out", default="configs/policy_exceptions.yaml")
     parser.add_argument("--guard-epsilon", type=float, default=0.1)
+    parser.add_argument("--winner-mode", choices=["mean", "robust"], default="robust")
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -76,7 +80,11 @@ def main():
         for ds in sorted(tail):
             if ds in SEMI_NLP_FREEZE:
                 continue
-            cand, bisect_mean = best_bisect_candidate(semi, ds, "semi-supervised", "mean")
+            robust = ds in SEMI_ROBUST_DATASETS
+            mode = "robust" if robust or args.winner_mode == "robust" else "mean"
+            cand, bisect_mean = best_bisect_candidate(
+                semi, ds, "semi-supervised", mode, force_robust=robust
+            )
             if not cand:
                 continue
             _, _, v3_mean = pick_best_source({"v3": v3}, ds, "semi-supervised")
@@ -85,16 +93,22 @@ def main():
                 continue
             policy = CANDIDATE_TO_POLICY_SEMI.get(cand, cand)
             semi_specialists[ds] = policy
-            promotions.append(f"semi {ds}: {cand} -> {policy} (mean PR {bisect_mean:.2f}%)")
+            promotions.append(f"semi {ds}: {cand} -> {policy} ({mode} PR {bisect_mean:.2f}%)")
 
     unsup_fallback = list(exc.get("unsup_baseline_fallback", []))
+    unsup_classical_plus = list(exc.get("unsup_classical_plus", []))
+    unsup_nlp_specialists = dict(exc.get("unsup_nlp_specialists", {}))
+
     unsup_matrix_path = PROJECT_ROOT / args.unsup_matrix
     if unsup_matrix_path.exists():
         matrix = pd.read_csv(unsup_matrix_path)
         unsup = matrix[matrix["setting"] == "unsupervised"]
         for ds in unsup["dataset"].unique():
-            cand, bisect_mean = best_bisect_candidate(unsup, ds, "unsupervised", "mean")
+            cand, bisect_mean = best_bisect_candidate(unsup, ds, "unsupervised", args.winner_mode)
             if not cand:
+                continue
+            if ds == "MVTec-AD" and bisect_mean < MVTEC_ROBUST_MIN:
+                promotions.append(f"unsup {ds}: SKIP MVTec sanity ({bisect_mean:.2f}% < {MVTEC_ROBUST_MIN})")
                 continue
             _, _, v3_mean = pick_best_source({"v3": v3}, ds, "unsupervised")
             _, _, bk_mean = pick_best_source({"backup": backup}, ds, "unsupervised")
@@ -104,9 +118,17 @@ def main():
             if policy == "unsup_baseline_fallback" and ds not in unsup_fallback:
                 unsup_fallback.append(ds)
                 promotions.append(f"unsup {ds}: fallback (mean PR {bisect_mean:.2f}%)")
+            elif policy == "unsup_classical_plus" and ds not in unsup_classical_plus:
+                unsup_classical_plus.append(ds)
+                promotions.append(f"unsup {ds}: classical_plus (mean PR {bisect_mean:.2f}%)")
+            elif policy == "unsup_nlp_ssts_light":
+                unsup_nlp_specialists[ds] = policy
+                promotions.append(f"unsup {ds}: nlp_ssts_light (mean PR {bisect_mean:.2f}%)")
 
     exc["semi_specialists"] = semi_specialists
     exc["unsup_baseline_fallback"] = sorted(set(unsup_fallback))
+    exc["unsup_classical_plus"] = sorted(set(unsup_classical_plus))
+    exc["unsup_nlp_specialists"] = unsup_nlp_specialists
 
     print("=== Promotions ===")
     for p in promotions:

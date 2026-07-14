@@ -877,8 +877,8 @@
       "n_splits": 1,
       "metrics_mean": {
         "AP": 0.41619492263742686,
-        "ROC-AUC": 0.5685890257558791,
-        "PR-AUC": 0.40391764366687355
+        "ROC-AUC": 0.5652295632698768,
+        "PR-AUC": 0.4035847903287806
       },
       "noise": {
         "num_timesteps": 50,
@@ -892,9 +892,8 @@
       },
       "time": "2026-07-13T17:01:48.338620+00:00",
       "v31_source": "v3",
-      "v4_regression_guard": true,
-      "v4_bisect_mean": 39.44870659472785,
-      "v4_baseline_mean": 39.52747702907332
+      "v31_bisect_candidate": "semi_speech_specialist",
+      "v31_bisect_seed_pr": 40.35847903287806
     },
     "WPBC__semi-supervised__222": {
       "dataset": "WPBC",
@@ -903,8 +902,8 @@
       "n_splits": 1,
       "metrics_mean": {
         "AP": 0.3905926100104111,
-        "ROC-AUC": 0.5263157894736842,
-        "PR-AUC": 0.3776670716653508
+        "ROC-AUC": 0.522956326987682,
+        "PR-AUC": 0.36798177974195445
       },
       "noise": {
         "num_timesteps": 50,
@@ -918,9 +917,8 @@
       },
       "time": "2026-07-13T17:01:51.287320+00:00",
       "v31_source": "v3",
-      "v4_regression_guard": true,
-      "v4_bisect_mean": 39.44870659472785,
-      "v4_baseline_mean": 39.52747702907332
+      "v31_bisect_candidate": "semi_speech_specialist",
+      "v31_bisect_seed_pr": 36.79817797419545
     },
     "WPBC__semi-supervised__333": {
       "dataset": "WPBC",
@@ -929,8 +927,8 @@
       "n_splits": 1,
       "metrics_mean": {
         "AP": 0.38303057965794124,
-        "ROC-AUC": 0.5153975363941768,
-        "PR-AUC": 0.37035871919091556
+        "ROC-AUC": 0.5573908174692049,
+        "PR-AUC": 0.39188193352429207
       },
       "noise": {
         "num_timesteps": 50,
@@ -944,9 +942,8 @@
       },
       "time": "2026-07-13T17:01:53.754789+00:00",
       "v31_source": "v3",
-      "v4_regression_guard": true,
-      "v4_bisect_mean": 39.44870659472785,
-      "v4_baseline_mean": 39.52747702907332
+      "v31_bisect_candidate": "semi_speech_specialist",
+      "v31_bisect_seed_pr": 39.18819335242921
     },
     "WPBC__semi-supervised__444": {
       "dataset": "WPBC",
@@ -955,8 +952,8 @@
       "n_splits": 1,
       "metrics_mean": {
         "AP": 0.3866812879869855,
-        "ROC-AUC": 0.5279955207166853,
-        "PR-AUC": 0.3727956439911448
+        "ROC-AUC": 0.5302351623740201,
+        "PR-AUC": 0.38272305505177573
       },
       "noise": {
         "num_timesteps": 50,
@@ -970,9 +967,8 @@
       },
       "time": "2026-07-13T17:01:56.259371+00:00",
       "v31_source": "v3",
-      "v4_regression_guard": true,
-      "v4_bisect_mean": 39.44870659472785,
-      "v4_baseline_mean": 39.52747702907332
+      "v31_bisect_candidate": "semi_speech_specialist",
+      "v31_bisect_seed_pr": 38.27230550517757
     },
     "WPBC__semi-supervised__555": {
       "dataset": "WPBC",
@@ -981,8 +977,8 @@
       "n_splits": 1,
       "metrics_mean": {
         "AP": 0.46693712020796346,
-        "ROC-AUC": 0.5996640537513998,
-        "PR-AUC": 0.451634772939381
+        "ROC-AUC": 0.5949048152295633,
+        "PR-AUC": 0.4262637710895898
       },
       "noise": {
         "num_timesteps": 50,
@@ -996,9 +992,8 @@
       },
       "time": "2026-07-13T17:01:58.891389+00:00",
       "v31_source": "v3",
-      "v4_regression_guard": true,
-      "v4_bisect_mean": 39.44870659472785,
-      "v4_baseline_mean": 39.52747702907332
+      "v31_bisect_candidate": "semi_speech_specialist",
+      "v31_bisect_seed_pr": 42.62637710895898
     },
     "Waveform__semi-supervised__111": {
       "dataset": "Waveform",
@@ -1528,7 +1523,7 @@
       "time": "2026-07-13T14:47:11.185373+00:00",
       "v31_source": "v3",
       "v4_regression_guard": true,
-      "v4_bisect_mean": 21.697985313801066,
+      "v4_bisect_mean": 21.811785311407004,
       "v4_baseline_mean": 22.01424794901742
     },
     "census__semi-supervised__222": {
@@ -1554,7 +1549,7 @@
       "time": "2026-07-13T14:49:11.927100+00:00",
       "v31_source": "v3",
       "v4_regression_guard": true,
-      "v4_bisect_mean": 21.697985313801066,
+      "v4_bisect_mean": 21.811785311407004,
       "v4_baseline_mean": 22.01424794901742
     },
     "census__semi-supervised__333": {
@@ -1580,7 +1575,7 @@
       "time": "2026-07-13T14:51:12.534255+00:00",
       "v31_source": "v3",
       "v4_regression_guard": true,
-      "v4_bisect_mean": 21.697985313801066,
+      "v4_bisect_mean": 21.811785311407004,
       "v4_baseline_mean": 22.01424794901742
     },
     "census__semi-supervised__444": {
@@ -1606,7 +1601,7 @@
       "time": "2026-07-13T14:52:52.632481+00:00",
       "v31_source": "v3",
       "v4_regression_guard": true,
-      "v4_bisect_mean": 21.697985313801066,
+      "v4_bisect_mean": 21.811785311407004,
       "v4_baseline_mean": 22.01424794901742
     },
     "census__semi-supervised__555": {
@@ -1632,7 +1627,7 @@
       "time": "2026-07-13T14:54:57.232248+00:00",
       "v31_source": "v3",
       "v4_regression_guard": true,
-      "v4_bisect_mean": 21.697985313801066,
+      "v4_bisect_mean": 21.811785311407004,
       "v4_baseline_mean": 22.01424794901742
     },
     "glass__semi-supervised__111": {

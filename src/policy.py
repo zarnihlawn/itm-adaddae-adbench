@@ -414,7 +414,31 @@ def resolve_policy_name(
     n = int(meta.get("n", 0))
     d = int(meta.get("d", 0))
 
-    # v4 meta-routing from bisect-derived rules (before static exceptions)
+    # Static exceptions before meta-routing (frozen lists and specialists)
+    if setting == "semi-supervised":
+        if dataset_name in exc.get("semi_nlp_baseline", []) and category == "nlp":
+            return "semi_nlp_frozen"
+        specialists = exc.get("semi_specialists", {})
+        if dataset_name in specialists:
+            return str(specialists[dataset_name])
+
+    if setting == "unsupervised":
+        if dataset_name in exc.get("unsup_baseline_fallback", []):
+            return "unsup_baseline_fallback"
+        if dataset_name in exc.get("unsup_nlp_baseline", []) and category == "nlp":
+            nlp_specialists = exc.get("unsup_nlp_specialists", {})
+            if dataset_name in nlp_specialists:
+                return str(nlp_specialists[dataset_name])
+            return "unsup_baseline_fallback"
+        if (
+            category == "classical"
+            and n > 5000
+            and d < 512
+            and dataset_name in exc.get("unsup_classical_plus", [])
+        ):
+            return "unsup_classical_plus"
+
+    # Meta-routing from bisect-derived rules
     try:
         from .policy_meta import load_routing_rules, resolve_meta_policy
 
@@ -427,40 +451,16 @@ def resolve_policy_name(
         pass
 
     if setting == "unsupervised":
-        # Selective VUS/DTE for large classical only
-        if (
-            category == "classical"
-            and n > 5000
-            and d < 512
-            and dataset_name in exc.get("unsup_classical_plus", [])
-        ):
-            return "unsup_classical_plus"
-        if dataset_name in exc.get("unsup_baseline_fallback", []):
-            return "unsup_baseline_fallback"
-        if dataset_name in exc.get("unsup_nlp_baseline", []) and category == "nlp":
-            nlp_specialists = exc.get("unsup_nlp_specialists", {})
-            if dataset_name in nlp_specialists:
-                return str(nlp_specialists[dataset_name])
-            return "unsup_baseline_fallback"
         if category == "classical" and n > 0 and d > 0 and n < 2000 and d > 10:
             if dataset_name in {"vowels", "letter"}:
                 return "unsup_baseline_fallback"
         return "unsup_ssts"
 
     if setting == "semi-supervised":
-        specialists = exc.get("semi_specialists", {})
-        if dataset_name in specialists:
-            return str(specialists[dataset_name])
-
-        if dataset_name in exc.get("semi_nlp_baseline", []) and category == "nlp":
-            return "semi_nlp_frozen"
-
         if category == "cv":
             return str(exc.get("semi_cv_policy", "semi_cvnlp_ftp"))
-
         if category == "nlp":
             return "semi_nlp_frozen"
-
         return "baseline_ddae"
 
     return "baseline_ddae"

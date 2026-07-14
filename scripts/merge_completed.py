@@ -14,6 +14,11 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from src.data.datasets import build_registry
 from src.policy import load_policy_exceptions
 
+UNSUP_FALLBACK_DATASETS = {
+    "magic.gamma", "landsat", "fraud", "InternetAds", "Ionosphere", "glass",
+    "WPBC", "vertebral", "backdoor", "vowels", "letter", "skin", "fault", "wine",
+}
+
 # CV/NLP display names (matches build_registry)
 CV_NLP_NAMES = {
     "CIFAR10",
@@ -93,6 +98,12 @@ def main():
         help="Optional completed.json whose jobs override same keys (v3/v31 unsup reruns)",
     )
     parser.add_argument(
+        "--patch-fallback",
+        type=str,
+        default=None,
+        help="Unsup fallback layer applied before --patch (UNSUP_FALLBACK datasets only)",
+    )
+    parser.add_argument(
         "--patch2",
         type=str,
         default=None,
@@ -119,6 +130,7 @@ def main():
     semi_cvnlp_path = Path(args.semi_cvnlp)
     unsup_path = Path(args.unsup)
     patch_path = Path(args.patch) if args.patch else None
+    patch_fallback_path = Path(args.patch_fallback) if args.patch_fallback else None
     patch2_path = Path(args.patch2) if args.patch2 else None
     out_path = Path(args.out)
     if not out_path.is_absolute():
@@ -164,6 +176,17 @@ def main():
     u_jobs = filter_completed(u_state, setting="unsupervised")
     merged["completed"].update(u_jobs)
     sources.append(("unsup", unsup_path, u_jobs))
+
+    if patch_fallback_path and patch_fallback_path.exists():
+        pf_state = load_state(patch_fallback_path)
+        pf_jobs = {
+            k: v
+            for k, v in pf_state.get("completed", {}).items()
+            if v.get("setting") == "unsupervised" and v.get("dataset") in UNSUP_FALLBACK_DATASETS
+        }
+        merged["completed"].update(pf_jobs)
+        sources.append(("patch_fallback", patch_fallback_path, pf_jobs))
+        print(f"Applied {len(pf_jobs)} fallback patch jobs from {patch_fallback_path}")
 
     if patch_path and patch_path.exists():
         p_state = load_state(patch_path)

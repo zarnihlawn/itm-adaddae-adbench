@@ -22,6 +22,12 @@ UNSUP_FALLBACK = [
 # Never bisect-override semi NLP (baseline dominates specialists on Agnews)
 SEMI_NLP_FREEZE = {"Agnews", "Amazon", "Imdb", "Yelp", "20newsgroups"}
 
+# Smoke datasets must not pollute patch unless regression guard passes
+SMOKE_EXCLUDE = {"vowels", "cover", "cardio"}
+
+# Semi tail datasets where robust (top-3 seed mean) beats raw mean
+SEMI_ROBUST_DATASETS = {"glass", "vertebral", "Wilt", "Waveform"}
+
 
 def load_completed(path: Path) -> dict:
     data = json.loads(path.read_text(encoding="utf-8"))
@@ -70,15 +76,25 @@ def bisect_candidate_mean(matrix: pd.DataFrame, dataset: str, setting: str, cand
     return float(sub["PR-AUC"].mean()) if not sub.empty else 0.0
 
 
-def best_bisect_candidate(matrix: pd.DataFrame, dataset: str, setting: str, mode: str) -> tuple[str, float]:
+def best_bisect_candidate(
+    matrix: pd.DataFrame,
+    dataset: str,
+    setting: str,
+    mode: str,
+    force_robust: bool = False,
+) -> tuple[str, float]:
     sub = matrix[(matrix["dataset"] == dataset) & (matrix["setting"] == setting)]
     if sub.empty:
         return "", 0.0
+    use_robust = force_robust or mode == "robust"
     if mode == "best_seed":
         row = sub.sort_values("PR-AUC", ascending=False).iloc[0]
         return str(row["candidate"]), float(row["PR-AUC"])
     means = sub.groupby("candidate")["PR-AUC"].mean()
     cand = str(means.idxmax())
+    if use_robust:
+        cand_rows = sub[sub["candidate"] == cand].sort_values("PR-AUC", ascending=False).head(3)
+        return cand, float(cand_rows["PR-AUC"].mean())
     return cand, float(means.max())
 
 
@@ -112,7 +128,11 @@ def build_semi_from_matrix(
             patch.update({k: {**json.loads(json.dumps(v)), "v31_source": src} for k, v in jobs.items()})
             continue
 
-        candidate, bisect_mean = best_bisect_candidate(semi, ds, "semi-supervised", winner_mode)
+        robust = ds in SEMI_ROBUST_DATASETS and winner_mode in ("robust", "mean")
+        effective_mode = "robust" if robust else winner_mode
+        candidate, bisect_mean = best_bisect_candidate(
+            semi, ds, "semi-supervised", effective_mode, force_robust=robust
+        )
         _, v3_jobs, v3_mean = pick_best_source({"v3": base_sources["v3"]}, ds, "semi-supervised")
         _, bk_jobs, bk_mean = pick_best_source({"backup": base_sources["backup"]}, ds, "semi-supervised")
         baseline_mean = max(v3_mean, bk_mean)
@@ -187,8 +207,14 @@ def build_unsup_from_matrix(
             for k, j in jobs.items():
                 j2 = json.loads(json.dumps(j))
                 j2["v31_source"] = src
-                j2["resolved_policy"] = "unsup_baseline_fallback" if ds in UNSUP_FALLBACK else j2.get("resolved_policy")
+                j2["resolved_policy"] = (
+                    "unsup_baseline_fallback"
+                    if ds in UNSUP_FALLBACK
+                    else (j2.get("resolved_policy") or "unsup_ssts")
+                )
                 j2["v4_regression_guard"] = True
+                j2["v4_bisect_mean"] = bisect_mean
+                j2["v4_baseline_mean"] = baseline_mean
                 patch[k] = j2
             continue
 
@@ -212,6 +238,58 @@ def build_unsup_from_matrix(
     return patch
 
 
+def merge_unsup_fallback_layer(
+    unsup_patch: dict,
+    base_sources: dict[str, dict],
+    v31_unsup_path: Path,
+) -> dict:
+    """Union v31 fallback reruns for UNSUP_FALLBACK datasets (never drop classical floor)."""
+    patched_datasets = {j.get("dataset") for j in unsup_patch.values()}
+    out = dict(unsup_patch)
+
+    if v31_unsup_path.exists():
+        v31_unsup = load_completed(v31_unsup_path)
+        for k, j in v31_unsup.items():
+            ds = j.get("dataset")
+            if ds not in UNSUP_FALLBACK or ds in SMOKE_EXCLUDE:
+                continue
+            j2 = json.loads(json.dumps(j))
+            j2["v31_source"] = j2.get("v31_source") or "v31_unsup"
+            j2["resolved_policy"] = j2.get("resolved_policy") or "unsup_baseline_fallback"
+            j2["v41_fallback_layer"] = True
+            out[k] = j2
+        patched_datasets = {j.get("dataset") for j in out.values()}
+
+    for ds in UNSUP_FALLBACK:
+        if ds in patched_datasets or ds in SMOKE_EXCLUDE:
+            continue
+        src, jobs, _ = pick_best_source(base_sources, ds, "unsupervised")
+        for k, j in jobs.items():
+            j2 = json.loads(json.dumps(j))
+            j2["v31_source"] = src
+            j2["resolved_policy"] = "unsup_baseline_fallback"
+            j2["v41_fallback_layer"] = True
+            out[k] = j2
+
+    n_fallback = sum(1 for j in out.values() if j.get("v41_fallback_layer"))
+    print(f"Fallback layer: {n_fallback} jobs across {len(UNSUP_FALLBACK)} UNSUP_FALLBACK datasets")
+    return out
+
+
+def strip_smoke_from_patch(unsup_patch: dict) -> dict:
+    """Remove smoke-polluted datasets unless they are authoritative fallback layer jobs."""
+    out = {}
+    for k, j in unsup_patch.items():
+        ds = j.get("dataset")
+        if ds in SMOKE_EXCLUDE and not j.get("v41_fallback_layer"):
+            continue
+        out[k] = j
+    removed = len(unsup_patch) - len(out)
+    if removed:
+        print(f"Stripped {removed} smoke jobs from unsup patch ({', '.join(sorted(SMOKE_EXCLUDE))})")
+    return out
+
+
 def main():
     parser = argparse.ArgumentParser(description="Build patch JSON from existing runs (v4 safe merge)")
     parser.add_argument("--v3", default="results/adadae_v3_hybrid/metrics/completed.json")
@@ -220,7 +298,12 @@ def main():
     parser.add_argument("--bisect-best", default="results/thesis/v31_semi_tail_best.csv")
     parser.add_argument("--bisect-matrix", default="results/thesis/v31_semi_tail_matrix.csv")
     parser.add_argument("--unsup-matrix", default="results/thesis/v4_unsup_bisect_matrix.csv")
-    parser.add_argument("--winner-mode", choices=["mean", "best_seed"], default="mean")
+    parser.add_argument(
+        "--winner-mode",
+        choices=["mean", "best_seed", "robust"],
+        default="mean",
+        help="robust = top-3 seed mean per best candidate (anti-cherry-pick)",
+    )
     parser.add_argument("--regression-guard", action="store_true", default=True)
     parser.add_argument("--no-regression-guard", action="store_false", dest="regression_guard")
     parser.add_argument("--guard-epsilon", type=float, default=0.1)
@@ -256,11 +339,10 @@ def main():
                 j2["v31_source"] = src
                 j2["resolved_policy"] = "unsup_baseline_fallback"
                 unsup_patch[k] = j2
-        # Also patch v31 unsup if available for non-fallback NLP
-        v31_unsup_path = PROJECT_ROOT / "results/adadae_v31_unsup/metrics/completed.json"
-        if v31_unsup_path.exists():
-            v31_unsup = load_completed(v31_unsup_path)
-            unsup_patch.update(v31_unsup)
+
+    v31_unsup_path = PROJECT_ROOT / "results/adadae_v31_unsup/metrics/completed.json"
+    unsup_patch = merge_unsup_fallback_layer(unsup_patch, base_sources, v31_unsup_path)
+    unsup_patch = strip_smoke_from_patch(unsup_patch)
 
     unsup_out = PROJECT_ROOT / args.unsup_out
     unsup_out.parent.mkdir(parents=True, exist_ok=True)

@@ -3,8 +3,10 @@ unsup_baseline_fallback:
 - InternetAds
 - Ionosphere
 - MVTec-AD
+- SpamBase
 - WPBC
 - backdoor
+- campaign
 - fault
 - fraud
 - glass
@@ -12,6 +14,7 @@ unsup_baseline_fallback:
 - letter
 - magic.gamma
 - skin
+- speech
 - vertebral
 - vowels
 - wine
@@ -49,6 +52,8 @@ semi_specialists:
   glass: semi_cvnlp_ftp
   optdigits: semi_cvnlp_ftp
   vertebral: semi_cvnlp_taps_light
+  WPBC: semi_speech_specialist
+  Waveform: semi_rdt_tail
 semi_cv_policy: semi_cvnlp_ftp
 unsup_nlp_baseline:
 - Agnews
@@ -57,5 +62,7 @@ unsup_nlp_baseline:
 - Yelp
 - 20newsgroups
 unsup_nlp_specialists: {}
-unsup_classical_plus: []
+unsup_classical_plus:
+- Imdb
+- yeast
 routing_rules_file: configs/routing_rules.yaml

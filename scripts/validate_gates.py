@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Validate AdaDDAE v3 Table-1 gates vs DDAE paper and backup."""
+"""Validate AdaDDAE v3/v4 Table-1 gates vs DDAE paper and backup."""
 from __future__ import annotations
 
 import argparse
 import json
 import sys
 from pathlib import Path
+
+import pandas as pd
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
@@ -21,24 +23,30 @@ def load_completed(path: Path) -> dict:
     return data.get("completed", data)
 
 
-def mean_metrics(completed: dict, setting: str) -> dict:
-    prs, rocs = [], []
+def macro_mean_metrics(completed: dict, setting: str) -> dict:
+    """Table-1 macro mean: average per-dataset means over seeds."""
+    rows = []
     for job in completed.values():
         if job.get("setting") != setting:
             continue
         m = job.get("metrics_mean", job.get("metrics", {}))
-        prs.append(m.get("PR-AUC", 0.0) * 100)
-        rocs.append(m.get("ROC-AUC", 0.0) * 100)
+        rows.append({
+            "dataset": job["dataset"],
+            "PR": m.get("PR-AUC", 0.0) * 100,
+            "ROC": m.get("ROC-AUC", 0.0) * 100,
+        })
+    if not rows:
+        return {"PR-AUC": 0.0, "ROC-AUC": 0.0, "n_jobs": 0, "n_datasets": 0}
+    df = pd.DataFrame(rows).groupby("dataset").mean()
     return {
-        "PR-AUC": sum(prs) / len(prs) if prs else 0.0,
-        "ROC-AUC": sum(rocs) / len(rocs) if rocs else 0.0,
-        "n_jobs": len(prs),
+        "PR-AUC": float(df["PR"].mean()),
+        "ROC-AUC": float(df["ROC"].mean()),
+        "n_jobs": len(rows),
+        "n_datasets": int(len(df)),
     }
 
 
 def per_dataset_loss_vs_ref(hybrid: dict, ref: dict, setting: str, threshold: float = 0.5) -> tuple[int, list[str]]:
-    import pandas as pd
-
     def agg(completed):
         rows = []
         for j in completed.values():
@@ -60,14 +68,45 @@ def per_dataset_backup_loss(hybrid: dict, backup: dict, setting: str, threshold:
     return n
 
 
+def check_g7_artifact_freshness(completed_path: Path, compare_path: Path, tol: float = 0.05) -> dict:
+    """G7: thesis compare_to_ddae.json matches completed.json macro PR."""
+    if not compare_path.exists():
+        return {"pass": False, "reason": "compare_to_ddae.json missing"}
+    completed = load_completed(completed_path)
+    compare = json.loads(compare_path.read_text(encoding="utf-8"))
+    adadae_rows = {r["setting"]: r for r in compare.get("adadae", [])}
+    mismatches = []
+    for setting in ["unsupervised", "semi-supervised"]:
+        live = macro_mean_metrics(completed, setting)
+        cached = adadae_rows.get(setting, {})
+        cached_pr = float(cached.get("AdaDDAE_PR_AUC", -1))
+        if abs(live["PR-AUC"] - cached_pr) > tol:
+            mismatches.append({
+                "setting": setting,
+                "live_PR": live["PR-AUC"],
+                "cached_PR": cached_pr,
+                "delta": live["PR-AUC"] - cached_pr,
+            })
+    return {
+        "pass": len(mismatches) == 0,
+        "mismatches": mismatches,
+        "compare_path": str(compare_path),
+    }
+
+
 def main():
-    parser = argparse.ArgumentParser(description="Validate v3 gates")
+    parser = argparse.ArgumentParser(description="Validate v3/v4 gates")
     parser.add_argument("--completed", required=True)
     parser.add_argument(
         "--backup",
         default="backup/ddae_baseline_570/metrics/completed.json",
     )
     parser.add_argument("--out", default=None)
+    parser.add_argument(
+        "--compare",
+        default=None,
+        help="compare_to_ddae.json for G7 freshness check",
+    )
     parser.add_argument(
         "--v31-ref",
         default="results/adadae_v31_hybrid/metrics/completed.json",
@@ -88,7 +127,7 @@ def main():
     gates = {}
     all_pass = True
     for setting in ["unsupervised", "semi-supervised"]:
-        m = mean_metrics(hybrid, setting)
+        m = macro_mean_metrics(hybrid, setting)
         pub = PUBLISHED[setting]
         g1 = m["PR-AUC"] >= pub["PR-AUC"]
         g3 = m["ROC-AUC"] >= pub["ROC-AUC"]
@@ -99,6 +138,8 @@ def main():
             "delta_ROC_vs_paper": m["ROC-AUC"] - pub["ROC-AUC"],
             "G_PR_beats_paper": g1,
             "G_ROC_beats_paper": g3,
+            "n_datasets": m["n_datasets"],
+            "aggregation": "macro_mean",
         }
         all_pass = all_pass and g1 and g3
 
@@ -111,7 +152,6 @@ def main():
     }
     all_pass = all_pass and gates["G4_backup_regressions"]["pass"]
 
-    # G6: no dataset loses >0.5% PR vs v3.1 reference
     v31_path = Path(args.v31_ref)
     if not v31_path.is_absolute():
         v31_path = PROJECT_ROOT / v31_path
@@ -131,10 +171,20 @@ def main():
     }
     all_pass = all_pass and g6_pass
 
+    compare_path = Path(args.compare) if args.compare else completed_path.parent.parent / "thesis" / "compare_to_ddae.json"
+    if not compare_path.is_absolute():
+        compare_path = PROJECT_ROOT / compare_path
+    g7 = check_g7_artifact_freshness(completed_path, compare_path)
+    gates["G7_artifact_freshness"] = g7
+    all_pass = all_pass and g7["pass"]
+
     gates["all_pass"] = all_pass
     gates["n_jobs"] = len(hybrid)
+    unsup_m = gates["unsupervised"]["PR-AUC"]
+    semi_m = gates["semi-supervised"]["PR-AUC"]
+    gates["combined_macro_PR"] = (unsup_m + semi_m) / 2.0
 
-    print("=== Validation gates ===")
+    print("=== Validation gates (macro mean) ===")
     for setting in ["unsupervised", "semi-supervised"]:
         g = gates[setting]
         print(
@@ -160,6 +210,11 @@ def main():
                 if g6[setting]["datasets"]:
                     print(f"  losers: {g6[setting]['datasets']}")
         print(f"G6 overall: {'PASS' if g6['pass'] else 'FAIL'}")
+    print(f"G7 artifact freshness: {'PASS' if g7['pass'] else 'FAIL'}")
+    if not g7["pass"] and g7.get("mismatches"):
+        for mm in g7["mismatches"]:
+            print(f"  stale {mm['setting']}: live {mm['live_PR']:.2f}% vs cached {mm['cached_PR']:.2f}%")
+    print(f"Combined macro PR: {gates['combined_macro_PR']:.2f}%")
     print(f"ALL PASS: {all_pass}")
 
     if args.out:

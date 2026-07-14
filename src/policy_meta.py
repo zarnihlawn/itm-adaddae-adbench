@@ -36,6 +36,21 @@ CANDIDATE_TO_POLICY: Dict[str, str] = {
     "oracle_danc": "unsup_ssts",
 }
 
+HOLDOUT_DEFAULT = {"speech", "Agnews", "Wilt", "celeba", "cardio"}
+
+
+def _is_valid_override(setting: str, category: str, policy: str) -> bool:
+    """Category-safe routing: block cross-setting and NLP classical_plus misroutes."""
+    if setting == "semi-supervised" and policy.startswith("unsup_"):
+        return False
+    if setting == "unsupervised" and policy.startswith("semi_"):
+        return False
+    if category in ("nlp", "cv") and policy == "unsup_classical_plus":
+        return False
+    if category == "nlp" and policy == "unsup_ssts":
+        return False
+    return True
+
 
 def load_routing_rules(path: Optional[str | Path] = None) -> Dict[str, Any]:
     if path is None:
@@ -136,13 +151,23 @@ def export_routing_rules(
 
     clf, feat_df = train_routing_tree(tmp, max_depth=max_depth, holdout_datasets=holdout)
 
-    # Per-dataset overrides from best mean PR
+    # Per-dataset overrides from best mean PR (category-guarded)
     overrides: Dict[str, Dict[str, str]] = {"unsupervised": {}, "semi-supervised": {}}
+    skipped: list[str] = []
+    holdout_set = holdout or HOLDOUT_DEFAULT
     for (ds, setting), grp in combined.groupby(["dataset", "setting"]):
+        if ds in holdout_set:
+            continue
+        category = str(grp["category"].iloc[0]) if "category" in grp.columns else "classical"
         means = grp.groupby("candidate")["PR-AUC"].mean()
         best_cand = str(means.idxmax())
         policy = CANDIDATE_TO_POLICY.get(best_cand, best_cand)
+        if not _is_valid_override(setting, category, policy):
+            skipped.append(f"{ds}/{setting}->{policy}")
+            continue
         overrides.setdefault(setting, {})[ds] = policy
+    if skipped:
+        print(f"Routing export skipped {len(skipped)} invalid overrides")
 
     rules: Dict[str, Any] = {
         "enabled": True,
@@ -179,7 +204,10 @@ def resolve_meta_policy(
     overrides = rules.get("dataset_overrides", {})
     setting_overrides = overrides.get(setting, {})
     if dataset_name in setting_overrides:
-        return setting_overrides[dataset_name]
+        policy = setting_overrides[dataset_name]
+        if _is_valid_override(setting, category, policy):
+            return policy
+        return None
 
     # Meta guards for unsup_classical_plus
     meta = meta or {}

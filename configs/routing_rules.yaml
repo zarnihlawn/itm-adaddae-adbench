@@ -4,36 +4,27 @@ max_depth: 4
 dataset_overrides:
   unsupervised:
     20newsgroups: unsup_baseline_fallback
-    Agnews: unsup_baseline_fallback
     Amazon: unsup_baseline_fallback
-    Imdb: unsup_classical_plus
     MNIST-C: unsup_baseline_fallback
     MVTec-AD: unsup_baseline_fallback
     PageBlocks: unsup_ssts
     Pima: unsup_baseline_fallback
     SpamBase: unsup_baseline_fallback
-    Wilt: unsup_baseline_fallback
     Yelp: unsup_baseline_fallback
     campaign: unsup_baseline_fallback
-    speech: unsup_baseline_fallback
     yeast: unsup_classical_plus
   semi-supervised:
     20newsgroups: baseline_ddae
-    ALOI: unsup_ssts
-    Agnews: baseline_ddae
     Amazon: baseline_ddae
     CIFAR10: baseline_ddae
     Imdb: semi_rdt_tail
     SVHN: semi_cvnlp_ftp
     WPBC: semi_speech_specialist
     Waveform: semi_rdt_tail
-    Wilt: semi_nlp_baseline
     Yelp: semi_cvnlp_ftp
-    celeba: semi_nlp_baseline
     census: baseline_ddae
     glass: semi_cvnlp_ftp
     optdigits: semi_cvnlp_ftp
-    speech: baseline_ddae
     vertebral: semi_cvnlp_taps_light
 candidate_to_policy:
   baseline_ddae: baseline_ddae

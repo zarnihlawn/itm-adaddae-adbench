@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Build AdaDDAE v4 hybrid with safe merge and counterfactual gate."""
+"""Build AdaDDAE v4/v4.1 hybrid with safe layered merge and counterfactual gate."""
 from __future__ import annotations
 
 import argparse
-import json
 import subprocess
 import sys
 from pathlib import Path
@@ -32,6 +31,11 @@ def mean_pr(completed: dict, setting: str) -> float:
 def main():
     parser = argparse.ArgumentParser(description="Build v4 hybrid")
     parser.add_argument("--unsup", default="results/adadae_unsup_ssts/metrics/completed.json")
+    parser.add_argument(
+        "--unsup-fallback-patch",
+        default="results/adadae_v31_unsup/metrics/completed.json",
+        help="v31 fallback reruns applied before bisect patch",
+    )
     parser.add_argument("--unsup-patch", default="results/adadae_v4_unsup/metrics/completed.json")
     parser.add_argument("--semi-tail-patch", default="results/adadae_v4_semi_tail/metrics/completed.json")
     parser.add_argument("--min-semi-pr", type=float, default=61.36)
@@ -55,6 +59,13 @@ def main():
         "--out",
         args.out,
     ]
+
+    fb = Path(args.unsup_fallback_patch)
+    if not fb.is_absolute():
+        fb = PROJECT_ROOT / fb
+    if fb.exists():
+        merge_cmd.extend(["--patch-fallback", str(fb)])
+
     for patch_arg, patch_path in [
         ("--patch", args.unsup_patch),
         ("--patch2", args.semi_tail_patch),
@@ -78,8 +89,10 @@ def main():
 
     unsup_mean = mean_pr(completed, "unsupervised")
     semi_mean = mean_pr(completed, "semi-supervised")
+    combined = (unsup_mean + semi_mean) / 2.0
     print(f"\nUnsup mean PR: {unsup_mean:.2f}% (paper {PUBLISHED['unsupervised']}%, min {args.min_unsup_pr}%)")
     print(f"Semi mean PR:  {semi_mean:.2f}% (paper {PUBLISHED['semi-supervised']}%, min {args.min_semi_pr}%)")
+    print(f"Combined macro PR: {combined:.2f}%")
 
     gate_ok = semi_mean >= args.min_semi_pr - 1e-6 and unsup_mean >= args.min_unsup_pr - 1e-6
     if not gate_ok and not args.force:
