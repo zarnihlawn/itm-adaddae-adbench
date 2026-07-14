@@ -1,0 +1,22 @@
+{
+  "dataset": "census",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.08732697477233543,
+    "ROC-AUC": 0.6624925897961818,
+    "PR-AUC": 0.08730664926630692
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.02761610994334034,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0001,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T03:40:40.640579+00:00"
+}

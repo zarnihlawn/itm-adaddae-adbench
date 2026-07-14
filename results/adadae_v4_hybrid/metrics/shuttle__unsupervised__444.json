@@ -1,0 +1,22 @@
+{
+  "dataset": "shuttle",
+  "setting": "unsupervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.8070192431522359,
+    "ROC-AUC": 0.9920673627193425,
+    "PR-AUC": 0.8067433733298225
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.03422160039229339,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0001,
+    "contamination_est": 0.049,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:15:31.468080+00:00"
+}

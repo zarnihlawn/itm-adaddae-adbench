@@ -1,0 +1,22 @@
+{
+  "dataset": "WDBC",
+  "setting": "unsupervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.6818565601991631,
+    "ROC-AUC": 0.9784313725490197,
+    "PR-AUC": 0.6704839205375749
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.02448410583294562,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.051771117166212535,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:25:08.985099+00:00"
+}

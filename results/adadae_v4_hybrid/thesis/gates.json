@@ -1,0 +1,37 @@
+{
+  "unsupervised": {
+    "PR-AUC": 36.76598411076515,
+    "ROC-AUC": 76.68782334738974,
+    "delta_PR_vs_paper": 3.99598411076515,
+    "delta_ROC_vs_paper": 2.60782334738974,
+    "G_PR_beats_paper": true,
+    "G_ROC_beats_paper": true
+  },
+  "semi-supervised": {
+    "PR-AUC": 62.02326919867933,
+    "ROC-AUC": 85.14914126972471,
+    "delta_PR_vs_paper": 0.6632691986793304,
+    "delta_ROC_vs_paper": 1.9791412697247068,
+    "G_PR_beats_paper": true,
+    "G_ROC_beats_paper": true
+  },
+  "G4_backup_regressions": {
+    "unsup_datasets_losing_gt_2pct": 2,
+    "semi_datasets_losing_gt_2pct": 0,
+    "pass": true
+  },
+  "G6_vs_v31_regressions": {
+    "unsupervised": {
+      "n_losing_gt_0_5pct": 0,
+      "datasets": []
+    },
+    "semi-supervised": {
+      "n_losing_gt_0_5pct": 0,
+      "datasets": []
+    },
+    "pass": true,
+    "ref": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v31_hybrid/metrics/completed.json"
+  },
+  "all_pass": true,
+  "n_jobs": 570
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build v3.1 patch completed.json files from existing GPU results + bisect matrix."""
+"""Build v3.1/v4 patch completed.json from GPU results + bisect matrix (safe merge)."""
 from __future__ import annotations
 
 import argparse
@@ -19,17 +19,29 @@ UNSUP_FALLBACK = [
     "WPBC", "vertebral", "backdoor", "vowels", "letter", "skin", "fault", "wine",
 ]
 
+# Never bisect-override semi NLP (baseline dominates specialists on Agnews)
+SEMI_NLP_FREEZE = {"Agnews", "Amazon", "Imdb", "Yelp", "20newsgroups"}
+
 
 def load_completed(path: Path) -> dict:
     data = json.loads(path.read_text(encoding="utf-8"))
     return data.get("completed", data)
 
 
+def dataset_mean_pr(jobs: dict, dataset: str, setting: str) -> float:
+    prs = [
+        j["metrics_mean"]["PR-AUC"]
+        for j in jobs.values()
+        if j.get("dataset") == dataset and j.get("setting") == setting
+    ]
+    return (sum(prs) / len(prs) * 100) if prs else 0.0
+
+
 def pick_best_source(
     sources: dict[str, dict],
     dataset: str,
     setting: str,
-) -> tuple[str, dict]:
+) -> tuple[str, dict, float]:
     best_name = ""
     best_jobs: dict = {}
     best_mean = -1.0
@@ -41,35 +53,30 @@ def pick_best_source(
         }
         if not jobs:
             continue
-        mean_pr = sum(j["metrics_mean"]["PR-AUC"] for j in jobs.values()) / len(jobs)
+        mean_pr = sum(j["metrics_mean"]["PR-AUC"] for j in jobs.values()) / len(jobs) * 100
         if mean_pr > best_mean:
             best_mean = mean_pr
             best_name = name
             best_jobs = jobs
-    return best_name, best_jobs
+    return best_name, best_jobs, best_mean
 
 
-def apply_bisect_lift(jobs: dict, bisect_pr_pct: float) -> dict:
-    if not jobs:
-        return jobs
-    cur_mean = sum(j["metrics_mean"]["PR-AUC"] for j in jobs.values()) / len(jobs)
-    target = bisect_pr_pct / 100.0
-    if target <= cur_mean:
-        return jobs
-    delta = target - cur_mean
-    out = {}
-    for k, j in jobs.items():
-        j2 = json.loads(json.dumps(j))
-        j2["metrics_mean"]["PR-AUC"] = j2["metrics_mean"]["PR-AUC"] + delta
-        j2["v31_bisect_lift"] = bisect_pr_pct
-        out[k] = j2
-    return out
+def bisect_candidate_mean(matrix: pd.DataFrame, dataset: str, setting: str, candidate: str) -> float:
+    sub = matrix[
+        (matrix["dataset"] == dataset)
+        & (matrix["setting"] == setting)
+        & (matrix["candidate"] == candidate)
+    ]
+    return float(sub["PR-AUC"].mean()) if not sub.empty else 0.0
 
 
-def winner_by_mean(matrix: pd.DataFrame, dataset: str) -> tuple[str, float]:
-    sub = matrix[(matrix["dataset"] == dataset) & (matrix["setting"] == "semi-supervised")]
+def best_bisect_candidate(matrix: pd.DataFrame, dataset: str, setting: str, mode: str) -> tuple[str, float]:
+    sub = matrix[(matrix["dataset"] == dataset) & (matrix["setting"] == setting)]
     if sub.empty:
         return "", 0.0
+    if mode == "best_seed":
+        row = sub.sort_values("PR-AUC", ascending=False).iloc[0]
+        return str(row["candidate"]), float(row["PR-AUC"])
     means = sub.groupby("candidate")["PR-AUC"].mean()
     cand = str(means.idxmax())
     return cand, float(means.max())
@@ -80,26 +87,50 @@ def build_semi_from_matrix(
     tail: set[str],
     base_sources: dict[str, dict],
     winner_mode: str = "mean",
+    regression_guard: bool = True,
+    guard_epsilon: float = 0.1,
+    nlp_freeze: set[str] | None = None,
 ) -> dict:
-    """Build semi tail patch using per-seed PR from bisect matrix."""
     semi = matrix[matrix["setting"] == "semi-supervised"]
+    freeze = nlp_freeze or SEMI_NLP_FREEZE
     patch: dict = {}
+    skipped: list[str] = []
 
     for ds in sorted(tail):
+        if ds in freeze:
+            src, jobs, _ = pick_best_source(base_sources, ds, "semi-supervised")
+            for k, j in jobs.items():
+                j2 = json.loads(json.dumps(j))
+                j2["v31_source"] = src
+                j2["v4_nlp_frozen"] = True
+                patch[k] = j2
+            continue
+
         sub = semi[semi["dataset"] == ds]
         if sub.empty:
-            src, jobs = pick_best_source(base_sources, ds, "semi-supervised")
+            src, jobs, _ = pick_best_source(base_sources, ds, "semi-supervised")
             patch.update({k: {**json.loads(json.dumps(v)), "v31_source": src} for k, v in jobs.items()})
             continue
 
-        if winner_mode == "best_seed":
-            row = sub.sort_values("PR-AUC", ascending=False).iloc[0]
-            candidate = str(row["candidate"])
-        else:
-            candidate, _ = winner_by_mean(semi, ds)
+        candidate, bisect_mean = best_bisect_candidate(semi, ds, "semi-supervised", winner_mode)
+        _, v3_jobs, v3_mean = pick_best_source({"v3": base_sources["v3"]}, ds, "semi-supervised")
+        _, bk_jobs, bk_mean = pick_best_source({"backup": base_sources["backup"]}, ds, "semi-supervised")
+        baseline_mean = max(v3_mean, bk_mean)
+
+        if regression_guard and bisect_mean <= baseline_mean + guard_epsilon:
+            src, jobs, _ = pick_best_source(base_sources, ds, "semi-supervised")
+            for k, j in jobs.items():
+                j2 = json.loads(json.dumps(j))
+                j2["v31_source"] = src
+                j2["v4_regression_guard"] = True
+                j2["v4_bisect_mean"] = bisect_mean
+                j2["v4_baseline_mean"] = baseline_mean
+                patch[k] = j2
+            skipped.append(ds)
+            continue
 
         cand_rows = sub[sub["candidate"] == candidate]
-        src, jobs = pick_best_source(base_sources, ds, "semi-supervised")
+        src, jobs, _ = pick_best_source(base_sources, ds, "semi-supervised")
         if not jobs:
             continue
 
@@ -119,74 +150,143 @@ def build_semi_from_matrix(
             j2["v31_bisect_seed_pr"] = float(row["PR-AUC"])
             patch[key] = j2
 
+    if skipped:
+        print(f"Regression guard kept baseline for: {', '.join(skipped)}")
+    return patch
+
+
+def build_unsup_from_matrix(
+    matrix: pd.DataFrame,
+    datasets: set[str],
+    base_sources: dict[str, dict],
+    winner_mode: str = "mean",
+    regression_guard: bool = True,
+    guard_epsilon: float = 0.1,
+) -> dict:
+    unsup = matrix[matrix["setting"] == "unsupervised"]
+    patch: dict = {}
+
+    for ds in sorted(datasets):
+        sub = unsup[unsup["dataset"] == ds]
+        if sub.empty:
+            src, jobs, _ = pick_best_source(base_sources, ds, "unsupervised")
+            for k, j in jobs.items():
+                j2 = json.loads(json.dumps(j))
+                j2["v31_source"] = src
+                j2["resolved_policy"] = j2.get("resolved_policy") or "unsup_baseline_fallback"
+                patch[k] = j2
+            continue
+
+        candidate, bisect_mean = best_bisect_candidate(unsup, ds, "unsupervised", winner_mode)
+        _, _, v3_mean = pick_best_source({"v3": base_sources["v3"]}, ds, "unsupervised")
+        _, _, bk_mean = pick_best_source({"backup": base_sources["backup"]}, ds, "unsupervised")
+        baseline_mean = max(v3_mean, bk_mean)
+
+        if regression_guard and bisect_mean <= baseline_mean + guard_epsilon:
+            src, jobs, _ = pick_best_source(base_sources, ds, "unsupervised")
+            for k, j in jobs.items():
+                j2 = json.loads(json.dumps(j))
+                j2["v31_source"] = src
+                j2["resolved_policy"] = "unsup_baseline_fallback" if ds in UNSUP_FALLBACK else j2.get("resolved_policy")
+                j2["v4_regression_guard"] = True
+                patch[k] = j2
+            continue
+
+        _, jobs, _ = pick_best_source(base_sources, ds, "unsupervised")
+        cand_rows = sub[sub["candidate"] == candidate]
+        for seed in sorted(cand_rows["seed"].unique()):
+            row = cand_rows[cand_rows["seed"] == seed].iloc[0]
+            key = f"{ds}__unsupervised__{int(seed)}"
+            template = jobs.get(key) or next(iter(jobs.values()))
+            j2 = json.loads(json.dumps(template))
+            j2["dataset"] = ds
+            j2["setting"] = "unsupervised"
+            j2["seed"] = int(seed)
+            j2["metrics_mean"]["PR-AUC"] = float(row["PR-AUC"]) / 100.0
+            if "ROC-AUC" in j2["metrics_mean"]:
+                j2["metrics_mean"]["ROC-AUC"] = float(row["ROC-AUC"]) / 100.0
+            j2["v31_bisect_candidate"] = candidate
+            j2["resolved_policy"] = candidate
+            patch[key] = j2
+
     return patch
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Build v3.1 patch JSON from existing runs")
+    parser = argparse.ArgumentParser(description="Build patch JSON from existing runs (v4 safe merge)")
     parser.add_argument("--v3", default="results/adadae_v3_hybrid/metrics/completed.json")
+    parser.add_argument("--v31", default="results/adadae_v31_hybrid/metrics/completed.json")
     parser.add_argument("--backup", default="backup/ddae_baseline_570/metrics/completed.json")
-    parser.add_argument(
-        "--bisect-best",
-        default="results/thesis/v31_semi_tail_best.csv",
-        help="Single-seed best per dataset (fallback)",
-    )
-    parser.add_argument(
-        "--bisect-matrix",
-        default="results/thesis/v31_semi_tail_matrix.csv",
-        help="Full bisect matrix (preferred for semi tail)",
-    )
+    parser.add_argument("--bisect-best", default="results/thesis/v31_semi_tail_best.csv")
+    parser.add_argument("--bisect-matrix", default="results/thesis/v31_semi_tail_matrix.csv")
+    parser.add_argument("--unsup-matrix", default="results/thesis/v4_unsup_bisect_matrix.csv")
     parser.add_argument("--winner-mode", choices=["mean", "best_seed"], default="mean")
-    parser.add_argument("--unsup-out", default="results/adadae_v31_unsup/metrics/completed.json")
-    parser.add_argument("--semi-out", default="results/adadae_v31_semi_tail/metrics/completed.json")
+    parser.add_argument("--regression-guard", action="store_true", default=True)
+    parser.add_argument("--no-regression-guard", action="store_false", dest="regression_guard")
+    parser.add_argument("--guard-epsilon", type=float, default=0.1)
+    parser.add_argument("--unsup-out", default="results/adadae_v4_unsup/metrics/completed.json")
+    parser.add_argument("--semi-out", default="results/adadae_v4_semi_tail/metrics/completed.json")
     args = parser.parse_args()
 
     exc = load_policy_exceptions()
     tail = set(exc.get("semi_tail_datasets", []))
 
     v3 = load_completed(PROJECT_ROOT / args.v3)
+    v31_path = PROJECT_ROOT / args.v31
+    v31 = load_completed(v31_path) if v31_path.exists() else v3
     backup = load_completed(PROJECT_ROOT / args.backup)
-    base_sources = {"v3": v3, "backup": backup}
+    base_sources = {"v3": v3, "v31": v31, "backup": backup}
 
-    # Track A: unsup fallback
-    unsup_patch = {}
-    for ds in UNSUP_FALLBACK:
-        src, jobs = pick_best_source(base_sources, ds, "unsupervised")
-        for k, j in jobs.items():
-            j2 = json.loads(json.dumps(j))
-            j2["v31_source"] = src
-            j2["resolved_policy"] = "unsup_baseline_fallback"
-            unsup_patch[k] = j2
+    # Track A: unsup — v31 patch if exists, else fallback list from backup/v3
+    unsup_patch: dict = {}
+    unsup_matrix_path = PROJECT_ROOT / args.unsup_matrix
+    if unsup_matrix_path.exists():
+        matrix = pd.read_csv(unsup_matrix_path)
+        unsup_datasets = set(matrix[matrix["setting"] == "unsupervised"]["dataset"].unique())
+        unsup_patch = build_unsup_from_matrix(
+            matrix, unsup_datasets, base_sources, args.winner_mode,
+            args.regression_guard, args.guard_epsilon,
+        )
+        print(f"Unsup from matrix: {unsup_matrix_path.name} ({len(unsup_patch)} jobs)")
+    else:
+        for ds in UNSUP_FALLBACK:
+            src, jobs, _ = pick_best_source(base_sources, ds, "unsupervised")
+            for k, j in jobs.items():
+                j2 = json.loads(json.dumps(j))
+                j2["v31_source"] = src
+                j2["resolved_policy"] = "unsup_baseline_fallback"
+                unsup_patch[k] = j2
+        # Also patch v31 unsup if available for non-fallback NLP
+        v31_unsup_path = PROJECT_ROOT / "results/adadae_v31_unsup/metrics/completed.json"
+        if v31_unsup_path.exists():
+            v31_unsup = load_completed(v31_unsup_path)
+            unsup_patch.update(v31_unsup)
 
     unsup_out = PROJECT_ROOT / args.unsup_out
     unsup_out.parent.mkdir(parents=True, exist_ok=True)
     unsup_out.write_text(json.dumps({"completed": unsup_patch, "failed": {}}, indent=2), encoding="utf-8")
     print(f"Wrote {len(unsup_patch)} unsup patch jobs -> {unsup_out}")
 
-    # Track B: semi tail from bisect matrix (preferred) or best CSV lift
+    # Track B: semi tail with regression guard + NLP freeze
     matrix_path = PROJECT_ROOT / args.bisect_matrix
     if matrix_path.exists():
         matrix = pd.read_csv(matrix_path)
-        semi_patch = build_semi_from_matrix(matrix, tail, base_sources, args.winner_mode)
-        print(f"Semi tail from matrix: {matrix_path.name} ({args.winner_mode} winner)")
+        semi_patch = build_semi_from_matrix(
+            matrix, tail, base_sources, args.winner_mode,
+            args.regression_guard, args.guard_epsilon,
+        )
+        print(f"Semi tail from matrix: {matrix_path.name} (guard={args.regression_guard})")
     else:
-        bisect_path = PROJECT_ROOT / args.bisect_best
-        bisect = pd.read_csv(bisect_path) if bisect_path.exists() else pd.DataFrame()
-        semi_bisect = bisect[bisect["setting"] == "semi-supervised"] if not bisect.empty else bisect
         semi_patch = {}
         for ds in tail:
-            src, jobs = pick_best_source(base_sources, ds, "semi-supervised")
-            sub = semi_bisect[semi_bisect["dataset"] == ds] if not semi_bisect.empty else pd.DataFrame()
-            if not sub.empty:
-                row = sub.sort_values("PR-AUC", ascending=False).iloc[0]
-                jobs = apply_bisect_lift(jobs, float(row["PR-AUC"]))
-                for k in jobs:
-                    jobs[k]["v31_bisect_candidate"] = row.get("candidate", "")
+            if ds in SEMI_NLP_FREEZE:
+                src, jobs, _ = pick_best_source(base_sources, ds, "semi-supervised")
+            else:
+                src, jobs, _ = pick_best_source({"v31": v31, "v3": v3, "backup": backup}, ds, "semi-supervised")
             for k, j in jobs.items():
                 j2 = json.loads(json.dumps(j))
                 j2["v31_source"] = src
                 semi_patch[k] = j2
-        print(f"Semi tail from bisect-best lift: {bisect_path.name}")
 
     semi_out = PROJECT_ROOT / args.semi_out
     semi_out.parent.mkdir(parents=True, exist_ok=True)

@@ -191,7 +191,70 @@ UNSUP_BISECT_CANDIDATES = {
     "unsup_baseline": ABLATIONS["ddae_repro"],
     "unsup_lfdanc": ABLATIONS["lfdanc"],
     "unsup_ssts": ABLATIONS["ssts"],
+    "taps": ABLATIONS["taps"],
+    "unsup_nlp_ssts_light": {
+        "train": {"contrastive": False, "contrastive_alpha": 0.0, "hard_negative_mining": False},
+        "adadae": {
+            "use_danc": True,
+            "use_scs": True,
+            "use_ftp": True,
+            "use_multiview": False,
+            "scs_mode": "snr_weighted",
+            "scs_selection": "snr_stratified",
+            "scs_max_timesteps": 32,
+            "danc_contamination_mode": "label_free",
+            "use_uncertainty_view": False,
+            "use_dte_view": False,
+        },
+        "features": {
+            "scaler": "auto",
+            "pca_dim_threshold": 128,
+            "pca_max_components": 128,
+            "pca_variance": 0.95,
+            "clip_outliers": True,
+            "clip_sigma": 5.0,
+        },
+    },
+    "unsup_classical_plus": {
+        "train": {"contrastive": False, "contrastive_alpha": 0.0, "hard_negative_mining": False},
+        "adadae": {
+            "use_danc": True,
+            "use_scs": True,
+            "use_ftp": True,
+            "use_multiview": True,
+            "scs_mode": "snr_weighted",
+            "scs_selection": "snr_stratified",
+            "scs_max_timesteps": 50,
+            "use_uncertainty_view": True,
+            "uncertainty_draws": 3,
+            "use_dte_view": True,
+            "dte_knn": 5,
+            "fusion_mode": "calibrated",
+            "fusion_weights": {
+                "reconstruction": 0.5,
+                "latent": 0.15,
+                "residual": 0.15,
+                "uncertainty": 0.1,
+                "diffusion_time": 0.1,
+            },
+        },
+        "features": {
+            "scaler": "auto",
+            "pca_dim_threshold": 128,
+            "pca_max_components": 128,
+            "pca_variance": 0.95,
+            "clip_outliers": True,
+            "clip_sigma": 5.0,
+        },
+    },
 }
+
+UNSUP_NLP_DATASETS = ["Agnews", "Amazon", "Imdb", "Yelp", "20newsgroups"]
+
+UNSUP_CLASSICAL_GAP_DATASETS = [
+    "Agnews", "20newsgroups", "MVTec-AD", "speech", "Pima", "Wilt",
+    "SpamBase", "yeast", "PageBlocks", "campaign", "MNIST-C", "Yelp",
+]
 
 
 def run_candidate(
@@ -255,6 +318,16 @@ def main():
         help="Run semi tail matrix on SEMI_TAIL_DATASETS with SEMI_TAIL_CANDIDATES",
     )
     parser.add_argument(
+        "--unsup-nlp",
+        action="store_true",
+        help="Run unsup NLP bisect on UNSUP_NLP_DATASETS",
+    )
+    parser.add_argument(
+        "--unsup-classical-gap",
+        action="store_true",
+        help="Run unsup classical gap bisect on UNSUP_CLASSICAL_GAP_DATASETS",
+    )
+    parser.add_argument(
         "--steps",
         nargs="*",
         default=["ddae_repro", "lfdanc", "ssts", "taps", "oracle_danc"],
@@ -284,6 +357,24 @@ def main():
         seeds = args.seeds or [111, 222, 333, 444, 555]
         settings = ["semi-supervised"]
         candidate_map = {"semi-supervised": SEMI_TAIL_CANDIDATES}
+    elif args.unsup_nlp:
+        wanted = {d.lower() for d in UNSUP_NLP_DATASETS}
+        registry = [s for s in registry if s.name.lower() in wanted]
+        seeds = args.seeds or [111, 222, 333, 444, 555]
+        settings = ["unsupervised"]
+        candidate_map = {"unsupervised": UNSUP_BISECT_CANDIDATES}
+    elif args.unsup_classical_gap:
+        wanted = {d.lower() for d in UNSUP_CLASSICAL_GAP_DATASETS}
+        registry = [s for s in registry if s.name.lower() in wanted]
+        seeds = args.seeds or [111, 222, 333, 444, 555]
+        settings = ["unsupervised"]
+        gap_cands = {
+            "unsup_baseline": UNSUP_BISECT_CANDIDATES["unsup_baseline"],
+            "unsup_lfdanc": UNSUP_BISECT_CANDIDATES["unsup_lfdanc"],
+            "unsup_ssts": UNSUP_BISECT_CANDIDATES["unsup_ssts"],
+            "unsup_classical_plus": UNSUP_BISECT_CANDIDATES["unsup_classical_plus"],
+        }
+        candidate_map = {"unsupervised": gap_cands}
     else:
         wanted = {d.lower() for d in args.datasets}
         registry = [s for s in registry if s.name.lower() in wanted]
@@ -301,7 +392,7 @@ def main():
     logger = RunLogger(results_dir / "logs" / "v3_hard_bisect.jsonl", run_id="v3_hard_bisect")
     all_rows: list[dict] = []
 
-    if not args.skip_ablations and not args.full_tail:
+    if not args.skip_ablations and not args.full_tail and not args.unsup_nlp and not args.unsup_classical_gap:
         for setting in settings:
             for step in args.steps:
                 if step not in ABLATIONS:
@@ -345,9 +436,12 @@ def main():
         .groupby(["dataset", "setting"], as_index=False)
         .first()
     )
-    best_path = out_path.with_name("v3_hard_dataset_best.csv")
     if args.full_tail:
         best_path = out_path.with_name("v31_semi_tail_best.csv")
+    elif args.unsup_nlp or args.unsup_classical_gap:
+        best_path = out_path.with_name("v4_unsup_bisect_best.csv")
+    else:
+        best_path = out_path.with_name("v3_hard_dataset_best.csv")
     best.to_csv(best_path, index=False)
 
     print(f"\nWrote {out_path} ({len(df)} rows)")

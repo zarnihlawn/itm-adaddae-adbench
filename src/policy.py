@@ -260,13 +260,94 @@ SEMI_SPEECH_SPECIALIST: Dict[str, Any] = {
     },
 }
 
+# Unsupervised NLP: light SSTS (reduced K, no VUS)
+UNSUP_NLP_SSTS_LIGHT: Dict[str, Any] = {
+    "train": {
+        "contrastive": False,
+        "contrastive_alpha": 0.0,
+        "hard_negative_mining": False,
+    },
+    "adadae": {
+        "use_danc": True,
+        "use_scs": True,
+        "use_ftp": True,
+        "use_multiview": False,
+        "scs_mode": "snr_weighted",
+        "scs_selection": "snr_stratified",
+        "scs_max_timesteps": 32,
+        "danc_contamination_mode": "label_free",
+        "use_uncertainty_view": False,
+        "use_dte_view": False,
+        "use_rejection_training": False,
+        "fusion_mode": "fixed",
+        "fusion_weights": {
+            "reconstruction": 1.0,
+            "latent": 0.0,
+            "residual": 0.0,
+            "uncertainty": 0.0,
+            "diffusion_time": 0.0,
+        },
+    },
+    "features": {
+        "scaler": "auto",
+        "pca_dim_threshold": 128,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": True,
+        "clip_sigma": 5.0,
+    },
+}
+
+# Unsupervised classical: SSTS + VUS + DTE (selective fusion, large-n only)
+UNSUP_CLASSICAL_PLUS: Dict[str, Any] = {
+    "train": {
+        "contrastive": False,
+        "contrastive_alpha": 0.0,
+        "hard_negative_mining": False,
+    },
+    "adadae": {
+        "use_danc": True,
+        "use_scs": True,
+        "use_ftp": True,
+        "use_multiview": True,
+        "scs_mode": "snr_weighted",
+        "scs_selection": "snr_stratified",
+        "scs_max_timesteps": 50,
+        "danc_contamination_mode": "label_free",
+        "use_uncertainty_view": True,
+        "uncertainty_draws": 3,
+        "use_dte_view": True,
+        "dte_knn": 5,
+        "use_rejection_training": False,
+        "fusion_mode": "calibrated",
+        "fusion_weights": {
+            "reconstruction": 0.5,
+            "latent": 0.15,
+            "residual": 0.15,
+            "uncertainty": 0.1,
+            "diffusion_time": 0.1,
+        },
+    },
+    "features": {
+        "scaler": "auto",
+        "pca_dim_threshold": 128,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": True,
+        "clip_sigma": 5.0,
+    },
+}
+
 POLICY_REGISTRY: Dict[str, Dict[str, Any]] = {
     "baseline_ddae": BASELINE_DDAE,
     "unsup_ssts": UNSUP_SSTS,
     "unsup_baseline_fallback": BASELINE_DDAE,
+    "unsup_nlp_ssts_light": UNSUP_NLP_SSTS_LIGHT,
+    "unsup_classical_plus": UNSUP_CLASSICAL_PLUS,
     "semi_cvnlp_ftp": SEMI_CVNLP_FTP,
     "semi_cvnlp_taps_light": SEMI_CVNLP_TAPS,
     "semi_nlp_baseline": BASELINE_DDAE,
+    "semi_nlp_frozen": BASELINE_DDAE,
     "semi_speech_specialist": SEMI_SPEECH_SPECIALIST,
     "semi_rdt_tail": SEMI_RDT_TAIL,
     # Legacy v2 alias
@@ -333,12 +414,34 @@ def resolve_policy_name(
     n = int(meta.get("n", 0))
     d = int(meta.get("d", 0))
 
+    # v4 meta-routing from bisect-derived rules (before static exceptions)
+    try:
+        from .policy_meta import load_routing_rules, resolve_meta_policy
+
+        rules_path = exc.get("routing_rules_file", "configs/routing_rules.yaml")
+        rules = load_routing_rules(rules_path)
+        meta_policy = resolve_meta_policy(setting, category, dataset_name, meta, rules)
+        if meta_policy:
+            return meta_policy
+    except Exception:
+        pass
+
     if setting == "unsupervised":
+        # Selective VUS/DTE for large classical only
+        if (
+            category == "classical"
+            and n > 5000
+            and d < 512
+            and dataset_name in exc.get("unsup_classical_plus", [])
+        ):
+            return "unsup_classical_plus"
         if dataset_name in exc.get("unsup_baseline_fallback", []):
             return "unsup_baseline_fallback"
         if dataset_name in exc.get("unsup_nlp_baseline", []) and category == "nlp":
+            nlp_specialists = exc.get("unsup_nlp_specialists", {})
+            if dataset_name in nlp_specialists:
+                return str(nlp_specialists[dataset_name])
             return "unsup_baseline_fallback"
-        # Small-n high-d classical: SSTS can collapse (vowels, letter evidence)
         if category == "classical" and n > 0 and d > 0 and n < 2000 and d > 10:
             if dataset_name in {"vowels", "letter"}:
                 return "unsup_baseline_fallback"
@@ -350,13 +453,13 @@ def resolve_policy_name(
             return str(specialists[dataset_name])
 
         if dataset_name in exc.get("semi_nlp_baseline", []) and category == "nlp":
-            return "semi_nlp_baseline"
+            return "semi_nlp_frozen"
 
         if category == "cv":
             return str(exc.get("semi_cv_policy", "semi_cvnlp_ftp"))
 
         if category == "nlp":
-            return "semi_nlp_baseline"
+            return "semi_nlp_frozen"
 
         return "baseline_ddae"
 

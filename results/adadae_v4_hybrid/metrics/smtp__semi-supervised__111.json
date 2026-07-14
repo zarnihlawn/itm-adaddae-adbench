@@ -1,0 +1,22 @@
+{
+  "dataset": "smtp",
+  "setting": "semi-supervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.6679825754920712,
+    "ROC-AUC": 0.9260265332296114,
+    "PR-AUC": 0.6679545539858885
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T16:51:04.437736+00:00"
+}

@@ -1,0 +1,46 @@
+enabled: true
+meta_routing: true
+max_depth: 4
+dataset_overrides:
+  unsupervised: {}
+  semi-supervised:
+    20newsgroups: baseline_ddae
+    ALOI: unsup_ssts
+    Agnews: baseline_ddae
+    Amazon: baseline_ddae
+    CIFAR10: baseline_ddae
+    Imdb: semi_rdt_tail
+    SVHN: semi_cvnlp_ftp
+    WPBC: semi_speech_specialist
+    Waveform: semi_rdt_tail
+    Wilt: semi_nlp_baseline
+    Yelp: semi_cvnlp_ftp
+    celeba: semi_nlp_baseline
+    census: baseline_ddae
+    glass: semi_cvnlp_ftp
+    optdigits: semi_cvnlp_ftp
+    speech: baseline_ddae
+    vertebral: semi_cvnlp_taps_light
+candidate_to_policy:
+  baseline_ddae: baseline_ddae
+  semi_nlp_danc: semi_nlp_baseline
+  semi_speech_specialist: semi_speech_specialist
+  semi_rdt_tail: semi_rdt_tail
+  semi_cvnlp_ftp: semi_cvnlp_ftp
+  semi_cvnlp_taps_004: semi_cvnlp_taps_light
+  semi_cvnlp_taps_006: semi_cvnlp_taps_light
+  ssts: unsup_ssts
+  taps: unsup_ssts
+  lfdanc: unsup_ssts
+  ftp: semi_cvnlp_ftp
+  rdt: semi_rdt_tail
+  unsup_baseline: unsup_baseline_fallback
+  unsup_lfdanc: unsup_ssts
+  unsup_ssts: unsup_ssts
+  unsup_nlp_ssts_light: unsup_nlp_ssts_light
+  unsup_classical_plus: unsup_classical_plus
+  ddae_repro: unsup_baseline_fallback
+  oracle_danc: unsup_ssts
+holdout_datasets: []
+n_training_datasets: 17
+tree_available: true

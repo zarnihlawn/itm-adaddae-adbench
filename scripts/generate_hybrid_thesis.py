@@ -96,7 +96,7 @@ def main():
         json.dump(negative, f, indent=2)
 
     attribution = {
-        "version": "v3" if "v3" in hybrid_root.name else "v2",
+        "version": "v4" if "v4" in hybrid_root.name else ("v3" if "v3" in hybrid_root.name else "v2"),
         "unsupervised_default": ["LF-DANC", "MANS", "SSTS", "FTP"],
         "unsup_baseline_fallback": [
             "vowels",
@@ -111,7 +111,9 @@ def main():
         "semi_cv": ["FTP", "fixed T=50 linear", "contrastive off"],
         "semi_nlp": ["DDAE-faithful baseline (FTP+TAPS regressed on Agnews/20news)"],
         "semi_specialists": {"speech": "RobustScaler + FTP + RDT + T=80"},
-        "banned_components": ["VUS", "DTE-View", "RDT on semi classical", "calibrated fusion"],
+        "v4_safe_merge": ["regression_guard", "nlp_semi_freeze", "meta_routing"],
+        "banned_components": ["VUS on semi", "DTE on semi", "calibrated fusion on semi", "monolithic default_gpu"],
+        "selective_components": ["unsup_classical_plus: VUS+DTE on large classical unsup only"],
         "evidence_files": {
             "oracle_summary": str(ORACLE_SUMMARY),
             "v3_hard_best": str(V3_HARD_BEST),

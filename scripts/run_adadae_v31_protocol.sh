@@ -84,6 +84,7 @@ run_simulate() {
 run_patches() {
   echo "=== Build v3.1 patches (unsup + bisect semi tail) ==="
   "$PYTHON" scripts/build_v31_patches.py \
+    --regression-guard \
     --bisect-matrix results/thesis/v31_semi_tail_matrix.csv \
     --winner-mode mean
 }

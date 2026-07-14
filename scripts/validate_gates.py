@@ -36,7 +36,7 @@ def mean_metrics(completed: dict, setting: str) -> dict:
     }
 
 
-def per_dataset_backup_loss(hybrid: dict, backup: dict, setting: str, threshold: float = 2.0) -> int:
+def per_dataset_loss_vs_ref(hybrid: dict, ref: dict, setting: str, threshold: float = 0.5) -> tuple[int, list[str]]:
     import pandas as pd
 
     def agg(completed):
@@ -44,19 +44,20 @@ def per_dataset_backup_loss(hybrid: dict, backup: dict, setting: str, threshold:
         for j in completed.values():
             if j.get("setting") != setting:
                 continue
-            rows.append(
-                {
-                    "dataset": j["dataset"],
-                    "PR": j["metrics_mean"]["PR-AUC"] * 100,
-                }
-            )
+            rows.append({"dataset": j["dataset"], "PR": j["metrics_mean"]["PR-AUC"] * 100})
         return pd.DataFrame(rows).groupby("dataset")["PR"].mean()
 
     h = agg(hybrid)
-    b = agg(backup)
-    merged = h.to_frame("h").join(b.to_frame("b"), how="inner")
-    merged["delta"] = merged["h"] - merged["b"]
-    return int((merged["delta"] < -threshold).sum())
+    r = agg(ref)
+    merged = h.to_frame("h").join(r.to_frame("r"), how="inner")
+    merged["delta"] = merged["h"] - merged["r"]
+    losers = merged[merged["delta"] < -threshold].index.tolist()
+    return len(losers), losers
+
+
+def per_dataset_backup_loss(hybrid: dict, backup: dict, setting: str, threshold: float = 2.0) -> int:
+    n, _ = per_dataset_loss_vs_ref(hybrid, backup, setting, threshold)
+    return n
 
 
 def main():
@@ -67,6 +68,11 @@ def main():
         default="backup/ddae_baseline_570/metrics/completed.json",
     )
     parser.add_argument("--out", default=None)
+    parser.add_argument(
+        "--v31-ref",
+        default="results/adadae_v31_hybrid/metrics/completed.json",
+        help="Reference hybrid for G6 no-regression vs v3.1",
+    )
     args = parser.parse_args()
 
     completed_path = Path(args.completed)
@@ -105,6 +111,26 @@ def main():
     }
     all_pass = all_pass and gates["G4_backup_regressions"]["pass"]
 
+    # G6: no dataset loses >0.5% PR vs v3.1 reference
+    v31_path = Path(args.v31_ref)
+    if not v31_path.is_absolute():
+        v31_path = PROJECT_ROOT / v31_path
+    g6_pass = True
+    g6_detail: dict = {}
+    if v31_path.exists():
+        v31 = load_completed(v31_path)
+        for setting in ["unsupervised", "semi-supervised"]:
+            n_loss, losers = per_dataset_loss_vs_ref(hybrid, v31, setting, threshold=0.5)
+            g6_detail[setting] = {"n_losing_gt_0_5pct": n_loss, "datasets": losers}
+            if n_loss > 0:
+                g6_pass = False
+    gates["G6_vs_v31_regressions"] = {
+        **g6_detail,
+        "pass": g6_pass,
+        "ref": str(v31_path),
+    }
+    all_pass = all_pass and g6_pass
+
     gates["all_pass"] = all_pass
     gates["n_jobs"] = len(hybrid)
 
@@ -123,6 +149,17 @@ def main():
         f"G4 backup regressions: unsup {g4_unsup}, semi {g4_semi} "
         f"{'PASS' if gates['G4_backup_regressions']['pass'] else 'FAIL'}"
     )
+    if "G6_vs_v31_regressions" in gates:
+        g6 = gates["G6_vs_v31_regressions"]
+        for setting in ["unsupervised", "semi-supervised"]:
+            if setting in g6:
+                print(
+                    f"G6 vs v3.1 {setting}: {g6[setting]['n_losing_gt_0_5pct']} datasets "
+                    f"{'PASS' if g6['pass'] else 'FAIL'}"
+                )
+                if g6[setting]["datasets"]:
+                    print(f"  losers: {g6[setting]['datasets']}")
+        print(f"G6 overall: {'PASS' if g6['pass'] else 'FAIL'}")
     print(f"ALL PASS: {all_pass}")
 
     if args.out:
