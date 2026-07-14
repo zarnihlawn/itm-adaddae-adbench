@@ -176,7 +176,49 @@ SEMI_CVNLP_TAPS: Dict[str, Any] = {
     },
 }
 
-# Speech / hard classical specialist
+# Semi tail: RDT + robust scaler + longer T (speech, ALOI)
+SEMI_RDT_TAIL: Dict[str, Any] = {
+    "train": {
+        "contrastive": False,
+        "contrastive_alpha": 0.0,
+        "hard_negative_mining": False,
+    },
+    "diffusion": {
+        "num_timesteps": 80,
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "scheduler": "linear",
+        "time_emb_dim": 4,
+        "time_emb_type": "sinusoidal",
+    },
+    "adadae": {
+        "use_danc": False,
+        "use_scs": False,
+        "use_ftp": True,
+        "use_multiview": False,
+        "use_uncertainty_view": False,
+        "use_dte_view": False,
+        "use_rejection_training": True,
+        "rejection_quantile": 0.90,
+        "rejection_min_weight": 0.1,
+        "rejection_warmup_epochs": 1,
+        "fusion_mode": "fixed",
+        "fusion_weights": {
+            "reconstruction": 1.0,
+            "latent": 0.0,
+            "residual": 0.0,
+            "uncertainty": 0.0,
+            "diffusion_time": 0.0,
+        },
+    },
+    "features": {
+        "scaler": "robust",
+        "pca_dim_threshold": 99999,
+        "clip_outliers": False,
+    },
+}
+
+# Speech / hard classical specialist (legacy v3)
 SEMI_SPEECH_SPECIALIST: Dict[str, Any] = {
     "train": {
         "contrastive": False,
@@ -226,14 +268,28 @@ POLICY_REGISTRY: Dict[str, Dict[str, Any]] = {
     "semi_cvnlp_taps_light": SEMI_CVNLP_TAPS,
     "semi_nlp_baseline": BASELINE_DDAE,
     "semi_speech_specialist": SEMI_SPEECH_SPECIALIST,
+    "semi_rdt_tail": SEMI_RDT_TAIL,
     # Legacy v2 alias
     "semi_cvnlp": SEMI_CVNLP_TAPS,
 }
 
 DEFAULT_EXCEPTIONS: Dict[str, Any] = {
-    "unsup_baseline_fallback": ["vowels", "letter", "skin", "fault", "wine", "glass"],
+    "unsup_baseline_fallback": [
+        "vowels", "letter", "skin", "fault", "wine", "glass",
+        "magic.gamma", "landsat", "fraud", "InternetAds", "Ionosphere",
+        "WPBC", "vertebral", "backdoor",
+    ],
     "semi_nlp_baseline": ["Agnews", "20newsgroups", "Amazon", "Imdb", "Yelp"],
-    "semi_specialists": {"speech": "semi_speech_specialist"},
+    "semi_tail_datasets": [
+        "speech", "Imdb", "ALOI", "celeba", "Amazon", "Wilt", "SVHN", "Yelp",
+        "20newsgroups", "CIFAR10", "Waveform", "census", "Agnews", "vertebral",
+        "optdigits", "glass", "WPBC",
+    ],
+    "semi_specialists": {
+        "speech": "semi_rdt_tail",
+        "ALOI": "semi_rdt_tail",
+        "celeba": "semi_cvnlp_taps_light",
+    },
     "semi_cv_policy": "semi_cvnlp_ftp",
     "unsup_nlp_baseline": ["Agnews", "Amazon", "Imdb", "Yelp", "20newsgroups"],
 }

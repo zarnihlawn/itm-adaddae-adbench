@@ -155,6 +155,38 @@ SEMI_BISECT_CANDIDATES = {
     },
 }
 
+SEMI_TAIL_DATASETS = [
+    "speech", "Imdb", "ALOI", "celeba", "Amazon", "Wilt", "SVHN", "Yelp",
+    "20newsgroups", "CIFAR10", "Waveform", "census", "Agnews", "vertebral",
+    "optdigits", "glass", "WPBC",
+]
+
+SEMI_TAIL_CANDIDATES = {
+    "baseline_ddae": SEMI_BISECT_CANDIDATES["baseline_ddae"],
+    "semi_nlp_danc": SEMI_BISECT_CANDIDATES["semi_nlp_danc"],
+    "semi_speech_specialist": SEMI_BISECT_CANDIDATES["semi_speech_specialist"],
+    "semi_rdt_tail": {
+        "train": {"contrastive": False, "contrastive_alpha": 0.0, "hard_negative_mining": False},
+        "adadae": {
+            "use_danc": False,
+            "use_scs": False,
+            "use_ftp": True,
+            "use_multiview": False,
+            "use_rejection_training": True,
+            "rejection_quantile": 0.90,
+        },
+        "features": {"scaler": "robust", "pca_dim_threshold": 99999, "clip_outliers": False},
+        "diffusion": {"num_timesteps": 80, "scheduler": "linear", "beta_end": 0.02},
+    },
+    "semi_cvnlp_ftp": SEMI_BISECT_CANDIDATES["semi_cvnlp_ftp"],
+    "semi_cvnlp_taps_004": SEMI_BISECT_CANDIDATES["semi_cvnlp_taps_004"],
+    "ssts": ABLATIONS["ssts"],
+    "taps": ABLATIONS["taps"],
+    "lfdanc": ABLATIONS["lfdanc"],
+    "ftp": ABLATIONS["ftp"],
+    "rdt": ABLATIONS["rdt"],
+}
+
 UNSUP_BISECT_CANDIDATES = {
     "unsup_baseline": ABLATIONS["ddae_repro"],
     "unsup_lfdanc": ABLATIONS["lfdanc"],
@@ -208,8 +240,20 @@ def main():
     parser.add_argument("--config", default="configs/ablation_ladder.yaml")
     parser.add_argument("--hardware", default=None, help="Hardware profile; auto-CPU if no CUDA")
     parser.add_argument("--seed", type=int, default=111)
+    parser.add_argument("--seeds", nargs="*", type=int, default=None)
     parser.add_argument("--epochs", type=int, default=30)
     parser.add_argument("--datasets", nargs="*", default=HARD_DATASETS)
+    parser.add_argument(
+        "--setting",
+        default=None,
+        choices=["unsupervised", "semi-supervised"],
+        help="Run one setting only",
+    )
+    parser.add_argument(
+        "--full-tail",
+        action="store_true",
+        help="Run semi tail matrix on SEMI_TAIL_DATASETS with SEMI_TAIL_CANDIDATES",
+    )
     parser.add_argument(
         "--steps",
         nargs="*",
@@ -233,37 +277,52 @@ def main():
 
     adbench = Path(base["paths"]["adbench_root"])
     registry = build_registry(adbench)
-    wanted = {d.lower() for d in args.datasets}
-    registry = [s for s in registry if s.name.lower() in wanted]
+
+    if args.full_tail:
+        wanted = {d.lower() for d in SEMI_TAIL_DATASETS}
+        registry = [s for s in registry if s.name.lower() in wanted]
+        seeds = args.seeds or [111, 222, 333, 444, 555]
+        settings = ["semi-supervised"]
+        candidate_map = {"semi-supervised": SEMI_TAIL_CANDIDATES}
+    else:
+        wanted = {d.lower() for d in args.datasets}
+        registry = [s for s in registry if s.name.lower() in wanted]
+        seeds = args.seeds or [args.seed]
+        settings = [args.setting] if args.setting else ["unsupervised", "semi-supervised"]
+        candidate_map = {
+            "unsupervised": UNSUP_BISECT_CANDIDATES,
+            "semi-supervised": SEMI_BISECT_CANDIDATES,
+        }
+
     if not registry:
-        raise SystemExit(f"No datasets matched: {args.datasets}")
+        raise SystemExit(f"No datasets matched")
 
     results_dir = Path(base["paths"]["results_dir"])
     logger = RunLogger(results_dir / "logs" / "v3_hard_bisect.jsonl", run_id="v3_hard_bisect")
     all_rows: list[dict] = []
 
-    if not args.skip_ablations:
-        for setting in ["unsupervised", "semi-supervised"]:
+    if not args.skip_ablations and not args.full_tail:
+        for setting in settings:
             for step in args.steps:
                 if step not in ABLATIONS:
                     continue
                 print(f"Ablation {step} / {setting}")
-                all_rows.extend(
-                    run_candidate(
-                        base, step, ABLATIONS[step], registry, setting, args.seed, logger
+                for seed in seeds:
+                    all_rows.extend(
+                        run_candidate(
+                            base, step, ABLATIONS[step], registry, setting, seed, logger
+                        )
                     )
-                )
 
     if not args.skip_bisect:
-        for setting, candidates in [
-            ("unsupervised", UNSUP_BISECT_CANDIDATES),
-            ("semi-supervised", SEMI_BISECT_CANDIDATES),
-        ]:
+        for setting in settings:
+            candidates = candidate_map.get(setting, {})
             for name, overrides in candidates.items():
-                print(f"Bisect {name} / {setting}")
-                all_rows.extend(
-                    run_candidate(base, name, overrides, registry, setting, args.seed, logger)
-                )
+                for seed in seeds:
+                    print(f"Bisect {name} / {setting} / seed {seed}")
+                    all_rows.extend(
+                        run_candidate(base, name, overrides, registry, setting, seed, logger)
+                    )
 
     logger.close()
     df = pd.DataFrame(all_rows)
@@ -287,6 +346,8 @@ def main():
         .first()
     )
     best_path = out_path.with_name("v3_hard_dataset_best.csv")
+    if args.full_tail:
+        best_path = out_path.with_name("v31_semi_tail_best.csv")
     best.to_csv(best_path, index=False)
 
     print(f"\nWrote {out_path} ({len(df)} rows)")

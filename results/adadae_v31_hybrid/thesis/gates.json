@@ -1,0 +1,25 @@
+{
+  "unsupervised": {
+    "PR-AUC": 36.75442391917134,
+    "ROC-AUC": 76.69646574568638,
+    "delta_PR_vs_paper": 3.984423919171334,
+    "delta_ROC_vs_paper": 2.6164657456863836,
+    "G_PR_beats_paper": true,
+    "G_ROC_beats_paper": true
+  },
+  "semi-supervised": {
+    "PR-AUC": 61.06461782984191,
+    "ROC-AUC": 84.27122675022811,
+    "delta_PR_vs_paper": -0.2953821701580921,
+    "delta_ROC_vs_paper": 1.1012267502281077,
+    "G_PR_beats_paper": false,
+    "G_ROC_beats_paper": true
+  },
+  "G4_backup_regressions": {
+    "unsup_datasets_losing_gt_2pct": 2,
+    "semi_datasets_losing_gt_2pct": 0,
+    "pass": true
+  },
+  "all_pass": false,
+  "n_jobs": 570
+}

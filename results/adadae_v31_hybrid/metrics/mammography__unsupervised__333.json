@@ -1,0 +1,22 @@
+{
+  "dataset": "mammography",
+  "setting": "unsupervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.29077642834490725,
+    "ROC-AUC": 0.8830942471425856,
+    "PR-AUC": 0.2897232680367284
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.03578270055125375,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0001,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:12:19.412275+00:00"
+}

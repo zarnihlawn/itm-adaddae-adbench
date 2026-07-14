@@ -1,0 +1,22 @@
+{
+  "dataset": "celeba",
+  "setting": "unsupervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.06796272339829823,
+    "ROC-AUC": 0.7505075257729884,
+    "PR-AUC": 0.06785944018035789
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.034400119560143674,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0001,
+    "contamination_est": 0.0402,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T03:32:07.248732+00:00"
+}

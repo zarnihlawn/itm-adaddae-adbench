@@ -1,0 +1,22 @@
+{
+  "dataset": "cover",
+  "setting": "unsupervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.08659486953707375,
+    "ROC-AUC": 0.9366694423876096,
+    "PR-AUC": 0.08650426060637789
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.030652352541225537,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0001,
+    "contamination_est": 0.0498,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T03:43:43.355290+00:00"
+}

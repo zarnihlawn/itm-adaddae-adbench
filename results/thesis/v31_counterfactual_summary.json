@@ -1,0 +1,6 @@
+{
+  "unsup_mean_PR": 35.961181009187314,
+  "semi_mean_PR": 61.09178477702799,
+  "gate_pass": false,
+  "min_semi_pr": 61.4
+}

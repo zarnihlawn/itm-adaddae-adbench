@@ -12,6 +12,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from src.data.datasets import build_registry
+from src.policy import load_policy_exceptions
 
 # CV/NLP display names (matches build_registry)
 CV_NLP_NAMES = {
@@ -89,7 +90,18 @@ def main():
         "--patch",
         type=str,
         default=None,
-        help="Optional completed.json whose jobs override same keys (v3 selective reruns)",
+        help="Optional completed.json whose jobs override same keys (v3/v31 unsup reruns)",
+    )
+    parser.add_argument(
+        "--patch2",
+        type=str,
+        default=None,
+        help="Second patch layer (v31 semi tail overrides); applied after --patch",
+    )
+    parser.add_argument(
+        "--semi-tail-only",
+        action="store_true",
+        help="With --patch2, only apply semi-supervised jobs for semi_tail_datasets",
     )
     parser.add_argument(
         "--out",
@@ -107,6 +119,7 @@ def main():
     semi_cvnlp_path = Path(args.semi_cvnlp)
     unsup_path = Path(args.unsup)
     patch_path = Path(args.patch) if args.patch else None
+    patch2_path = Path(args.patch2) if args.patch2 else None
     out_path = Path(args.out)
     if not out_path.is_absolute():
         out_path = PROJECT_ROOT / out_path
@@ -158,6 +171,22 @@ def main():
         merged["completed"].update(p_jobs)
         sources.append(("patch", patch_path, p_jobs))
         print(f"Applied {len(p_jobs)} patch jobs from {patch_path}")
+
+    if patch2_path and patch2_path.exists():
+        p2_state = load_state(patch2_path)
+        p2_all = p2_state.get("completed", {})
+        if args.semi_tail_only:
+            tail = set(load_policy_exceptions().get("semi_tail_datasets", []))
+            p2_jobs = {
+                k: v
+                for k, v in p2_all.items()
+                if v.get("setting") == "semi-supervised" and v.get("dataset") in tail
+            }
+        else:
+            p2_jobs = p2_all
+        merged["completed"].update(p2_jobs)
+        sources.append(("patch2", patch2_path, p2_jobs))
+        print(f"Applied {len(p2_jobs)} patch2 jobs from {patch2_path}")
 
     # Detect key collisions
     total_in = sum(len(j) for _, _, j in sources)

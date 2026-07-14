@@ -1,0 +1,22 @@
+{
+  "dataset": "pendigits",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.2519485827163537,
+    "ROC-AUC": 0.9279843877699105,
+    "PR-AUC": 0.24846281367917994
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.028252227636748124,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.01,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:13:52.803978+00:00"
+}

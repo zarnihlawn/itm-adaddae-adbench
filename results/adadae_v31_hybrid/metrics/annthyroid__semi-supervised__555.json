@@ -1,0 +1,19 @@
+{
+  "dataset": "annthyroid",
+  "setting": "semi-supervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.6761908717752945,
+    "ROC-AUC": 0.9059956557453499,
+    "PR-AUC": 0.6756613327722774
+  },
+  "noise": {
+    "num_timesteps": 80,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 8
+  },
+  "time": "2026-07-12T05:19:02.565813+00:00"
+}

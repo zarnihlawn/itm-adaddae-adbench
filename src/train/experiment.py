@@ -50,7 +50,17 @@ def run_single_file(
     apply_thread_limits(hw.get("num_threads", 8))
     set_seed(seed)
 
-    device = torch.device(str(hw.get("device", "cpu")))
+    device_name = str(hw.get("device", "cpu"))
+    if device_name == "cuda" and not torch.cuda.is_available():
+        device_name = "cpu"
+        hw = dict(hw)
+        hw["device"] = "cpu"
+        hw["use_amp"] = False
+        hw["pin_memory"] = False
+        hw["vectorized_scoring"] = False
+        config = dict(config)
+        config["hardware"] = hw
+    device = torch.device(device_name)
     setup_cuda(hw)
 
     X, y = load_npz(npz_path)

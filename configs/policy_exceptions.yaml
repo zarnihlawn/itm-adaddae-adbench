@@ -1,4 +1,4 @@
-# AdaDDAE v3 dataset-level routing exceptions (evidence-backed from oracle + bisect)
+# AdaDDAE v3.1 dataset-level routing exceptions
 unsup_baseline_fallback:
   - vowels
   - letter
@@ -6,8 +6,16 @@ unsup_baseline_fallback:
   - fault
   - wine
   - glass
+  - magic.gamma
+  - landsat
+  - fraud
+  - InternetAds
+  - Ionosphere
+  - WPBC
+  - vertebral
+  - backdoor
 
-# Semi NLP: revert to DDAE baseline until bisect proves a winner
+# Semi NLP: DDAE baseline (bisect winners on NLP semi)
 semi_nlp_baseline:
   - Agnews
   - 20newsgroups
@@ -15,14 +23,36 @@ semi_nlp_baseline:
   - Imdb
   - Yelp
 
-# Per-dataset semi specialists (policy id from policy.py)
+# Semi tail datasets (PR < 40% in v3) — eligible for specialist overrides
+semi_tail_datasets:
+  - speech
+  - Imdb
+  - ALOI
+  - celeba
+  - Amazon
+  - Wilt
+  - SVHN
+  - Yelp
+  - 20newsgroups
+  - CIFAR10
+  - Waveform
+  - census
+  - Agnews
+  - vertebral
+  - optdigits
+  - glass
+  - WPBC
+
+# Per-dataset semi specialists (from bisect; v3.1 uses tail campaign winners)
 semi_specialists:
-  speech: semi_speech_specialist
+  speech: semi_rdt_tail
+  ALOI: semi_rdt_tail
+  celeba: semi_cvnlp_taps_light
 
 # CV datasets use FTP-only semi policy (no TAPS)
 semi_cv_policy: semi_cvnlp_ftp
 
-# Optional: NLP unsup uses baseline until family tuning completes
+# NLP unsup uses baseline until family tuning completes
 unsup_nlp_baseline:
   - Agnews
   - Amazon

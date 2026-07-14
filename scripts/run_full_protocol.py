@@ -84,6 +84,7 @@ def run_dataset_job(spec, setting, seed, cfg, logger, adbench):
         "n_splits": len(split_rows),
         "metrics_mean": {k: v["mean"] for k, v in agg.items()},
         "noise": split_rows[0].get("noise") if split_rows else {},
+        "resolved_policy": split_rows[0].get("resolved_policy") if split_rows else None,
         "time": datetime.now(timezone.utc).isoformat(),
     }
     return summary

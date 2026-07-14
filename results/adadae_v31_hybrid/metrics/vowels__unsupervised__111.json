@@ -1,0 +1,22 @@
+{
+  "dataset": "vowels",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.1535772303816934,
+    "ROC-AUC": 0.7851351351351351,
+    "PR-AUC": 0.1444450252459266
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.029118252305722656,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.05013736263736264,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:23:52.170560+00:00"
+}
