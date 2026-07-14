@@ -304,7 +304,8 @@ def main():
 
     steps = args.steps or LADDER_ORDER
     results_dir = Path(base["paths"]["results_dir"])
-    logger = RunLogger(results_dir / "logs" / "ablations.jsonl", run_id="ablations")
+    setting_slug = args.setting.replace("-", "_")
+    logger = RunLogger(results_dir / "logs" / f"ablations_{setting_slug}.jsonl", run_id="ablations")
     out = {}
 
     for abl_name in steps:
@@ -342,10 +343,25 @@ def main():
         }
         print(abl_name, out[abl_name]["metrics"])
 
-    # Waterfall deltas vs ddae_repro
-    baseline_pr = out.get("ddae_repro", {}).get("metrics", {}).get("PR-AUC", 0.0)
+    out_dir = results_dir / "thesis"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / f"ablation_ladder_{setting_slug}.json"
+    csv_path = out_dir / f"ablation_ladder_{setting_slug}.csv"
+    # Merge with prior partial runs (same setting) so one-step loops do not erase history.
+    if out_path.exists():
+        try:
+            prior = json.loads(out_path.read_text(encoding="utf-8"))
+            if isinstance(prior, dict):
+                prior.update(out)
+                out = prior
+        except json.JSONDecodeError:
+            pass
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(out, f, indent=2)
+
     rows = []
-    for step in steps:
+    baseline_pr = out.get("ddae_repro", {}).get("metrics", {}).get("PR-AUC", 0.0)
+    for step in LADDER_ORDER:
         if step not in out:
             continue
         pr = out[step]["metrics"].get("PR-AUC", 0.0)
@@ -356,13 +372,7 @@ def main():
             "delta_PR_vs_ddae": (pr - baseline_pr) * 100,
         })
     df = pd.DataFrame(rows)
-
-    out_dir = results_dir / "thesis"
-    out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / "ablation_ladder.json"
-    with open(out_path, "w", encoding="utf-8") as f:
-        json.dump(out, f, indent=2)
-    df.to_csv(out_dir / "ablation_ladder.csv", index=False)
+    df.to_csv(csv_path, index=False)
     logger.close()
     print(f"\nWrote {out_path}")
     if not df.empty:
