@@ -13,5 +13,5 @@
 - ROC-AUC: 76.69% vs DDAE paper 74.08% (delta +2.61)
 
 ## semi-supervised (AdaDDAE_v31_hybrid)
-- PR-AUC: 61.06% vs DDAE paper 61.36% (delta -0.30)
-- ROC-AUC: 84.27% vs DDAE paper 83.17% (delta +1.10)
+- PR-AUC: 61.92% vs DDAE paper 61.36% (delta +0.56)
+- ROC-AUC: 85.04% vs DDAE paper 83.17% (delta +1.87)

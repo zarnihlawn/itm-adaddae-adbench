@@ -82,13 +82,24 @@ run_simulate() {
 }
 
 run_patches() {
-  echo "=== Build v3.1 patches from existing GPU results (pre-merge shortcut) ==="
-  "$PYTHON" scripts/build_v31_patches.py
+  echo "=== Build v3.1 patches (unsup + bisect semi tail) ==="
+  "$PYTHON" scripts/build_v31_patches.py \
+    --bisect-matrix results/thesis/v31_semi_tail_matrix.csv \
+    --winner-mode mean
+}
+
+run_bisect_merge() {
+  run_patches
+  run_merge
+  run_gates
 }
 
 run_merge() {
   echo "=== Merge v3.1 hybrid ==="
-  if [[ ! -s results/adadae_v31_unsup/metrics/completed.json ]] || \
+  # Always refresh semi patch when 100-epoch bisect matrix is available
+  if [[ -f results/thesis/v31_semi_tail_matrix.csv ]]; then
+    run_patches
+  elif [[ ! -s results/adadae_v31_unsup/metrics/completed.json ]] || \
      [[ "$("$PYTHON" -c "import json;print(len(json.load(open('results/adadae_v31_unsup/metrics/completed.json')).get('completed',{})))" 2>/dev/null || echo 0)" -lt 10 ]]; then
     run_patches
   fi
@@ -128,6 +139,7 @@ case "$MODE" in
   bisect) run_bisect ;;
   smoke) run_smoke ;;
   simulate) run_simulate ;;
+  bisect-merge) run_bisect_merge ;;
   patches) run_patches ;;
   merge) run_merge; run_gates ;;
   gates) run_gates ;;
@@ -141,12 +153,10 @@ case "$MODE" in
   full)
     run_unsup
     run_bisect
-    run_semi
-    run_merge
-    run_gates
+    run_bisect_merge
     ;;
   *)
-    echo "Usage: $0 [unsup|semi|bisect|smoke|simulate|patches|merge|gates|all|full]"
+    echo "Usage: $0 [unsup|semi|bisect|bisect-merge|smoke|simulate|patches|merge|gates|all|full]"
     exit 1
     ;;
 esac

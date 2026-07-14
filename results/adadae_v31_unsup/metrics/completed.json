@@ -966,22 +966,20 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5648372311881575,
-        "ROC-AUC": 0.922945984939773,
-        "PR-AUC": 0.5647520001551355
+        "AP": 0.5979653351228719,
+        "ROC-AUC": 0.8983151497943185,
+        "PR-AUC": 0.5976985461974917
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 150,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
-        "contamination_mode": "label_free"
+        "beta_end": 0.03,
+        "time_emb_dim": 8
       },
-      "resolved_policy": "unsup_baseline_fallback",
-      "time": "2026-07-14T09:36:16.977677+00:00"
+      "time": "2026-07-12T05:24:49.012240+00:00",
+      "v31_source": "backup",
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "backdoor__unsupervised__222": {
       "dataset": "backdoor",
@@ -1209,7 +1207,7 @@
       },
       "time": "2026-07-14T08:15:38.285619+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "letter__unsupervised__222": {
       "dataset": "letter",
@@ -1233,7 +1231,7 @@
       },
       "time": "2026-07-14T08:15:42.359144+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "letter__unsupervised__333": {
       "dataset": "letter",
@@ -1257,7 +1255,7 @@
       },
       "time": "2026-07-14T08:15:45.736015+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "letter__unsupervised__444": {
       "dataset": "letter",
@@ -1281,7 +1279,7 @@
       },
       "time": "2026-07-14T08:15:49.222283+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "letter__unsupervised__555": {
       "dataset": "letter",
@@ -1305,7 +1303,7 @@
       },
       "time": "2026-07-14T08:15:53.811633+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "skin__unsupervised__111": {
       "dataset": "skin",
@@ -1329,7 +1327,7 @@
       },
       "time": "2026-07-14T08:16:57.369282+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "skin__unsupervised__222": {
       "dataset": "skin",
@@ -1353,7 +1351,7 @@
       },
       "time": "2026-07-14T08:17:51.356789+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "skin__unsupervised__333": {
       "dataset": "skin",
@@ -1377,7 +1375,7 @@
       },
       "time": "2026-07-14T08:19:06.486265+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "skin__unsupervised__444": {
       "dataset": "skin",
@@ -1401,7 +1399,7 @@
       },
       "time": "2026-07-14T08:20:42.345752+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "skin__unsupervised__555": {
       "dataset": "skin",
@@ -1425,7 +1423,7 @@
       },
       "time": "2026-07-14T08:21:36.913058+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "fault__unsupervised__111": {
       "dataset": "fault",
@@ -1569,7 +1567,7 @@
       },
       "time": "2026-07-14T08:22:06.107799+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "wine__unsupervised__222": {
       "dataset": "wine",
@@ -1593,7 +1591,7 @@
       },
       "time": "2026-07-14T08:22:10.246300+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "wine__unsupervised__333": {
       "dataset": "wine",
@@ -1617,7 +1615,7 @@
       },
       "time": "2026-07-14T08:22:13.626395+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "wine__unsupervised__444": {
       "dataset": "wine",
@@ -1641,7 +1639,7 @@
       },
       "time": "2026-07-14T08:22:16.928928+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     },
     "wine__unsupervised__555": {
       "dataset": "wine",
@@ -1665,7 +1663,7 @@
       },
       "time": "2026-07-14T08:22:20.955865+00:00",
       "v31_source": "v3",
-      "resolved_policy": null
+      "resolved_policy": "unsup_baseline_fallback"
     }
   },
   "failed": {}

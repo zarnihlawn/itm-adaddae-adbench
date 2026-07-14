@@ -1,25 +1,25 @@
 {
   "unsupervised": {
-    "PR-AUC": 36.75442391917134,
-    "ROC-AUC": 76.69646574568638,
-    "delta_PR_vs_paper": 3.984423919171334,
-    "delta_ROC_vs_paper": 2.6164657456863836,
+    "PR-AUC": 36.76598411076515,
+    "ROC-AUC": 76.68782334738974,
+    "delta_PR_vs_paper": 3.99598411076515,
+    "delta_ROC_vs_paper": 2.60782334738974,
     "G_PR_beats_paper": true,
     "G_ROC_beats_paper": true
   },
   "semi-supervised": {
-    "PR-AUC": 61.06461782984191,
-    "ROC-AUC": 84.27122675022811,
-    "delta_PR_vs_paper": -0.2953821701580921,
-    "delta_ROC_vs_paper": 1.1012267502281077,
-    "G_PR_beats_paper": false,
+    "PR-AUC": 61.91630662452854,
+    "ROC-AUC": 85.041335541285,
+    "delta_PR_vs_paper": 0.5563066245285384,
+    "delta_ROC_vs_paper": 1.8713355412849921,
+    "G_PR_beats_paper": true,
     "G_ROC_beats_paper": true
   },
   "G4_backup_regressions": {
     "unsup_datasets_losing_gt_2pct": 2,
-    "semi_datasets_losing_gt_2pct": 0,
+    "semi_datasets_losing_gt_2pct": 1,
     "pass": true
   },
-  "all_pass": false,
+  "all_pass": true,
   "n_jobs": 570
 }
