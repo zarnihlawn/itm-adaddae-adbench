@@ -50,8 +50,8 @@
     "unsup_classical_plus: VUS+DTE on large classical unsup only"
   ],
   "evidence_files": {
-    "oracle_summary": "/workspace/ITM/project/results/thesis/oracle_policy_summary.json",
-    "v3_hard_best": "/workspace/ITM/project/results/thesis/v3_hard_dataset_best.csv"
+    "oracle_summary": "/home/zarnihlawn/Desktop/ITM/project/results/thesis/oracle_policy_summary.json",
+    "v3_hard_best": "/home/zarnihlawn/Desktop/ITM/project/results/thesis/v3_hard_dataset_best.csv"
   },
   "oracle_ceiling": {
     "unsupervised": {

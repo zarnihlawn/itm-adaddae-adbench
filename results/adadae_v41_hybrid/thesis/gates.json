@@ -34,12 +34,12 @@
       "datasets": []
     },
     "pass": true,
-    "ref": "/workspace/ITM/project/results/adadae_v31_hybrid/metrics/completed.json"
+    "ref": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v31_hybrid/metrics/completed.json"
   },
   "G7_artifact_freshness": {
     "pass": true,
     "mismatches": [],
-    "compare_path": "/workspace/ITM/project/results/adadae_v41_hybrid/thesis/compare_to_ddae.json"
+    "compare_path": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v41_hybrid/thesis/compare_to_ddae.json"
   },
   "all_pass": true,
   "n_jobs": 570,
