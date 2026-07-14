@@ -268,6 +268,12 @@ def deep_update(base: dict, overrides: dict) -> dict:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="configs/ablation_ladder.yaml")
+    parser.add_argument(
+        "--hardware",
+        type=str,
+        default=None,
+        help="Override hardware profile: 8gb|12gb|16gb|rtx5070ti",
+    )
     parser.add_argument("--setting", default="semi-supervised")
     parser.add_argument("--seed", type=int, default=111)
     parser.add_argument("--full", action="store_true")
@@ -285,7 +291,7 @@ def main():
     )
     args = parser.parse_args()
 
-    base = load_config(args.config)
+    base = load_config(args.config, hardware=args.hardware)
     base["train"]["epochs"] = args.epochs
     base["train"]["eval_every"] = max(5, args.epochs // 5)
     base["paths"]["run_id"] = "ablations"
