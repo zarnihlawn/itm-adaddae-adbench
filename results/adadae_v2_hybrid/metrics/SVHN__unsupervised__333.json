@@ -1,0 +1,22 @@
+{
+  "dataset": "SVHN",
+  "setting": "unsupervised",
+  "seed": 333,
+  "n_splits": 10,
+  "metrics_mean": {
+    "AP": 0.08173556246218891,
+    "ROC-AUC": 0.6057133866060126,
+    "PR-AUC": 0.0807464518153322
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.022948899561258812,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:50:22.427994+00:00"
+}

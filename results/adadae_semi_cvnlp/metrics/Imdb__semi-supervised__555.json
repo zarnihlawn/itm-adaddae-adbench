@@ -1,0 +1,22 @@
+{
+  "dataset": "Imdb",
+  "setting": "semi-supervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.09451810159914213,
+    "ROC-AUC": 0.5169562105263158,
+    "PR-AUC": 0.09365157935257995
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T05:35:04.035871+00:00"
+}

@@ -1,0 +1,22 @@
+{
+  "dataset": "Pima",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.4976102483271634,
+    "ROC-AUC": 0.6798955223880598,
+    "PR-AUC": 0.49553889794002903
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.032397814215466406,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.05078125,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:14:24.907875+00:00"
+}

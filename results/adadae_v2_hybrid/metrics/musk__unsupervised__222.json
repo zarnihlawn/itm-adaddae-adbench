@@ -1,0 +1,22 @@
+{
+  "dataset": "musk",
+  "setting": "unsupervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.9389886877997401,
+    "ROC-AUC": 0.9949409780775716,
+    "PR-AUC": 0.9387897592759707
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.026355557409981047,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.050293925538863485,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:12:57.518829+00:00"
+}

@@ -1,0 +1,22 @@
+{
+  "dataset": "CIFAR10",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 10,
+  "metrics_mean": {
+    "AP": 0.10579959252578157,
+    "ROC-AUC": 0.6632615209125474,
+    "PR-AUC": 0.10403139214889519
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.023430331316547794,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:30:05.325864+00:00"
+}

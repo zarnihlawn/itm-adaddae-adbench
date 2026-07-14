@@ -1,0 +1,22 @@
+{
+  "dataset": "Yelp",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.08144472133046092,
+    "ROC-AUC": 0.6291102105263159,
+    "PR-AUC": 0.08087769375910682
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.022539488293399544,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0001,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:54:33.079023+00:00"
+}

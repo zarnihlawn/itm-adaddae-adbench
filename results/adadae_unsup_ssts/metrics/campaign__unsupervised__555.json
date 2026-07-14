@@ -1,0 +1,22 @@
+{
+  "dataset": "campaign",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.29504141654550037,
+    "ROC-AUC": 0.7599084446811561,
+    "PR-AUC": 0.2948505985900563
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.03174512547125901,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0001,
+    "contamination_est": 0.0426,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T03:29:07.588346+00:00"
+}

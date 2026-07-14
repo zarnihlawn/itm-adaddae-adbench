@@ -1,0 +1,22 @@
+{
+  "dataset": "fraud",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.1377849206447118,
+    "ROC-AUC": 0.9534787148515138,
+    "PR-AUC": 0.13644077814663713
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.033029376263492,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0001,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T03:57:37.103069+00:00"
+}

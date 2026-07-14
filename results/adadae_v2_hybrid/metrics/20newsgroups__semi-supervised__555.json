@@ -1,0 +1,22 @@
+{
+  "dataset": "20newsgroups",
+  "setting": "semi-supervised",
+  "seed": 555,
+  "n_splits": 6,
+  "metrics_mean": {
+    "AP": 0.1668121007297616,
+    "ROC-AUC": 0.6314324074402998,
+    "PR-AUC": 0.16174334854798508
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T05:37:49.496210+00:00"
+}

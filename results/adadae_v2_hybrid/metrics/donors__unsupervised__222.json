@@ -1,0 +1,22 @@
+{
+  "dataset": "donors",
+  "setting": "unsupervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.160420508662332,
+    "ROC-AUC": 0.8056666873619217,
+    "PR-AUC": 0.16039325687646888
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.03630111733501001,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0001,
+    "contamination_est": 0.044,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T03:50:20.458304+00:00"
+}

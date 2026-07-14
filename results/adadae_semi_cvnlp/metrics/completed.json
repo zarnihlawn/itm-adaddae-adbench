@@ -1,0 +1,1105 @@
+{
+  "completed": {
+    "CIFAR10__semi-supervised__111": {
+      "dataset": "CIFAR10",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.21133866719971092,
+        "ROC-AUC": 0.6855644106463878,
+        "PR-AUC": 0.2092097444170966
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T04:57:50.996495+00:00"
+    },
+    "CIFAR10__semi-supervised__222": {
+      "dataset": "CIFAR10",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.20663650358769034,
+        "ROC-AUC": 0.6892195437262358,
+        "PR-AUC": 0.2044352752778848
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T04:58:53.202187+00:00"
+    },
+    "CIFAR10__semi-supervised__333": {
+      "dataset": "CIFAR10",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.20158055812113349,
+        "ROC-AUC": 0.6826530798479087,
+        "PR-AUC": 0.19972343248556296
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:00:01.021951+00:00"
+    },
+    "CIFAR10__semi-supervised__444": {
+      "dataset": "CIFAR10",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.20129029112261657,
+        "ROC-AUC": 0.684892319391635,
+        "PR-AUC": 0.19902662307433455
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:01:07.209657+00:00"
+    },
+    "CIFAR10__semi-supervised__555": {
+      "dataset": "CIFAR10",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.21416304444982162,
+        "ROC-AUC": 0.6895523193916351,
+        "PR-AUC": 0.21199666018541324
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:02:12.525217+00:00"
+    },
+    "FashionMNIST__semi-supervised__111": {
+      "dataset": "FashionMNIST",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.6110832211717971,
+        "ROC-AUC": 0.9012009523809523,
+        "PR-AUC": 0.6097215178885674
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:03:36.789640+00:00"
+    },
+    "FashionMNIST__semi-supervised__222": {
+      "dataset": "FashionMNIST",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.6109332554598741,
+        "ROC-AUC": 0.9038769312169311,
+        "PR-AUC": 0.6093488489143197
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:04:57.177320+00:00"
+    },
+    "FashionMNIST__semi-supervised__333": {
+      "dataset": "FashionMNIST",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.6180828957126798,
+        "ROC-AUC": 0.9040314285714286,
+        "PR-AUC": 0.6166807180844607
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:06:22.628789+00:00"
+    },
+    "FashionMNIST__semi-supervised__444": {
+      "dataset": "FashionMNIST",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.6070058795957257,
+        "ROC-AUC": 0.9017967195767195,
+        "PR-AUC": 0.6053972542298673
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:07:47.165009+00:00"
+    },
+    "FashionMNIST__semi-supervised__555": {
+      "dataset": "FashionMNIST",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.6157003316395835,
+        "ROC-AUC": 0.9030853968253968,
+        "PR-AUC": 0.6142125283671362
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:09:12.225523+00:00"
+    },
+    "MNIST-C__semi-supervised__111": {
+      "dataset": "MNIST-C",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 16,
+      "metrics_mean": {
+        "AP": 0.48687557406591436,
+        "ROC-AUC": 0.8470777631578947,
+        "PR-AUC": 0.4856455222805949
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:11:17.742096+00:00"
+    },
+    "MNIST-C__semi-supervised__222": {
+      "dataset": "MNIST-C",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 16,
+      "metrics_mean": {
+        "AP": 0.49057550671164674,
+        "ROC-AUC": 0.8478149210526316,
+        "PR-AUC": 0.4894679563263893
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:13:22.140003+00:00"
+    },
+    "MNIST-C__semi-supervised__333": {
+      "dataset": "MNIST-C",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 16,
+      "metrics_mean": {
+        "AP": 0.49274197381864465,
+        "ROC-AUC": 0.8479248815789473,
+        "PR-AUC": 0.49169461329088204
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:15:24.871499+00:00"
+    },
+    "MNIST-C__semi-supervised__444": {
+      "dataset": "MNIST-C",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 16,
+      "metrics_mean": {
+        "AP": 0.4819782312420491,
+        "ROC-AUC": 0.8458265131578947,
+        "PR-AUC": 0.48068404841189716
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:17:23.849447+00:00"
+    },
+    "MNIST-C__semi-supervised__555": {
+      "dataset": "MNIST-C",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 16,
+      "metrics_mean": {
+        "AP": 0.49324151814803363,
+        "ROC-AUC": 0.8487491710526316,
+        "PR-AUC": 0.49209848897964564
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:19:29.122603+00:00"
+    },
+    "MVTec-AD__semi-supervised__111": {
+      "dataset": "MVTec-AD",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 15,
+      "metrics_mean": {
+        "AP": 0.7118157077913418,
+        "ROC-AUC": 0.7808788963838869,
+        "PR-AUC": 0.708477875049342
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:20:43.785095+00:00"
+    },
+    "MVTec-AD__semi-supervised__222": {
+      "dataset": "MVTec-AD",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 15,
+      "metrics_mean": {
+        "AP": 0.7059923783959704,
+        "ROC-AUC": 0.7791254521123673,
+        "PR-AUC": 0.7029211866865869
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:21:49.626901+00:00"
+    },
+    "MVTec-AD__semi-supervised__333": {
+      "dataset": "MVTec-AD",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 15,
+      "metrics_mean": {
+        "AP": 0.7187300768025868,
+        "ROC-AUC": 0.785725717176005,
+        "PR-AUC": 0.7159555256621594
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:23:01.001807+00:00"
+    },
+    "MVTec-AD__semi-supervised__444": {
+      "dataset": "MVTec-AD",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 15,
+      "metrics_mean": {
+        "AP": 0.7046502030603161,
+        "ROC-AUC": 0.7800605996628014,
+        "PR-AUC": 0.7006607811533648
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:24:13.115801+00:00"
+    },
+    "MVTec-AD__semi-supervised__555": {
+      "dataset": "MVTec-AD",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 15,
+      "metrics_mean": {
+        "AP": 0.7051425116479106,
+        "ROC-AUC": 0.7874218944676967,
+        "PR-AUC": 0.7018099696613125
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:25:17.334545+00:00"
+    },
+    "SVHN__semi-supervised__111": {
+      "dataset": "SVHN",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.15750074908163278,
+        "ROC-AUC": 0.6244178313122832,
+        "PR-AUC": 0.1557971506269613
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:26:39.194425+00:00"
+    },
+    "SVHN__semi-supervised__222": {
+      "dataset": "SVHN",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.15834807366055245,
+        "ROC-AUC": 0.6235241706143968,
+        "PR-AUC": 0.1567921334471175
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:27:54.903228+00:00"
+    },
+    "SVHN__semi-supervised__333": {
+      "dataset": "SVHN",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.16017935112702256,
+        "ROC-AUC": 0.6241579954965756,
+        "PR-AUC": 0.15832521331956126
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:29:15.563216+00:00"
+    },
+    "SVHN__semi-supervised__444": {
+      "dataset": "SVHN",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.15675442779705412,
+        "ROC-AUC": 0.6210303010788917,
+        "PR-AUC": 0.1550871323541991
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:30:36.361627+00:00"
+    },
+    "SVHN__semi-supervised__555": {
+      "dataset": "SVHN",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 10,
+      "metrics_mean": {
+        "AP": 0.15576906443227284,
+        "ROC-AUC": 0.6223587320383779,
+        "PR-AUC": 0.15414410656148406
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:31:59.316681+00:00"
+    },
+    "Agnews__semi-supervised__111": {
+      "dataset": "Agnews",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 4,
+      "metrics_mean": {
+        "AP": 0.17955715650652143,
+        "ROC-AUC": 0.6950513157894738,
+        "PR-AUC": 0.17857338672847814
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:32:23.749046+00:00"
+    },
+    "Agnews__semi-supervised__222": {
+      "dataset": "Agnews",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 4,
+      "metrics_mean": {
+        "AP": 0.1853697569135611,
+        "ROC-AUC": 0.6990400526315789,
+        "PR-AUC": 0.1842730337404337
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:32:49.795963+00:00"
+    },
+    "Agnews__semi-supervised__333": {
+      "dataset": "Agnews",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 4,
+      "metrics_mean": {
+        "AP": 0.1774665455715976,
+        "ROC-AUC": 0.6928401052631579,
+        "PR-AUC": 0.17640861065728736
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:33:16.327200+00:00"
+    },
+    "Agnews__semi-supervised__444": {
+      "dataset": "Agnews",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 4,
+      "metrics_mean": {
+        "AP": 0.17573601605118847,
+        "ROC-AUC": 0.6963426315789474,
+        "PR-AUC": 0.17468816109959673
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:33:37.691736+00:00"
+    },
+    "Agnews__semi-supervised__555": {
+      "dataset": "Agnews",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 4,
+      "metrics_mean": {
+        "AP": 0.17816106093252515,
+        "ROC-AUC": 0.6944598421052631,
+        "PR-AUC": 0.1770706825320375
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:34:05.370605+00:00"
+    },
+    "Amazon__semi-supervised__111": {
+      "dataset": "Amazon",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.12877694254261504,
+        "ROC-AUC": 0.6335052631578948,
+        "PR-AUC": 0.1280907207031758
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:34:11.078713+00:00"
+    },
+    "Amazon__semi-supervised__222": {
+      "dataset": "Amazon",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.12243264080150412,
+        "ROC-AUC": 0.616516,
+        "PR-AUC": 0.12172826434493111
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:34:15.373690+00:00"
+    },
+    "Amazon__semi-supervised__333": {
+      "dataset": "Amazon",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.12296791288350646,
+        "ROC-AUC": 0.6135774736842106,
+        "PR-AUC": 0.12234587054991593
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:34:20.410960+00:00"
+    },
+    "Amazon__semi-supervised__444": {
+      "dataset": "Amazon",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.12575362559884515,
+        "ROC-AUC": 0.6281101052631579,
+        "PR-AUC": 0.125102078448108
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:34:24.670119+00:00"
+    },
+    "Amazon__semi-supervised__555": {
+      "dataset": "Amazon",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.12111276466165087,
+        "ROC-AUC": 0.6137669473684211,
+        "PR-AUC": 0.12049622463327606
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:34:31.721741+00:00"
+    },
+    "Imdb__semi-supervised__111": {
+      "dataset": "Imdb",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.09952218572020166,
+        "ROC-AUC": 0.5337372631578947,
+        "PR-AUC": 0.09912902780198826
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:34:39.222051+00:00"
+    },
+    "Imdb__semi-supervised__222": {
+      "dataset": "Imdb",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.09582261346897213,
+        "ROC-AUC": 0.5289797894736843,
+        "PR-AUC": 0.09493784689136947
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:34:43.558973+00:00"
+    },
+    "Imdb__semi-supervised__333": {
+      "dataset": "Imdb",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.0935541972006984,
+        "ROC-AUC": 0.5074863157894737,
+        "PR-AUC": 0.09283679353947645
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:34:51.518915+00:00"
+    },
+    "Imdb__semi-supervised__444": {
+      "dataset": "Imdb",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.0955817674655308,
+        "ROC-AUC": 0.5248999999999999,
+        "PR-AUC": 0.09487320474169023
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:34:57.120241+00:00"
+    },
+    "Imdb__semi-supervised__555": {
+      "dataset": "Imdb",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.09451810159914213,
+        "ROC-AUC": 0.5169562105263158,
+        "PR-AUC": 0.09365157935257995
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:35:04.035871+00:00"
+    },
+    "Yelp__semi-supervised__111": {
+      "dataset": "Yelp",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.17732555836819414,
+        "ROC-AUC": 0.6905204210526315,
+        "PR-AUC": 0.17633591085529293
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:35:08.341027+00:00"
+    },
+    "Yelp__semi-supervised__222": {
+      "dataset": "Yelp",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.177196398627909,
+        "ROC-AUC": 0.6934336842105263,
+        "PR-AUC": 0.1761645537414933
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:35:13.277368+00:00"
+    },
+    "Yelp__semi-supervised__333": {
+      "dataset": "Yelp",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.17102723132745995,
+        "ROC-AUC": 0.6817578947368421,
+        "PR-AUC": 0.1699669469623756
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:35:17.400441+00:00"
+    },
+    "Yelp__semi-supervised__444": {
+      "dataset": "Yelp",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.1885558925270447,
+        "ROC-AUC": 0.6998652631578948,
+        "PR-AUC": 0.1875046212336899
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:35:22.807326+00:00"
+    },
+    "Yelp__semi-supervised__555": {
+      "dataset": "Yelp",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.16642240093507368,
+        "ROC-AUC": 0.6736252631578947,
+        "PR-AUC": 0.16549218710061495
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:35:28.387309+00:00"
+    },
+    "20newsgroups__semi-supervised__111": {
+      "dataset": "20newsgroups",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 6,
+      "metrics_mean": {
+        "AP": 0.157736367235377,
+        "ROC-AUC": 0.6219615114813736,
+        "PR-AUC": 0.15241297335008627
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:35:56.205545+00:00"
+    },
+    "20newsgroups__semi-supervised__222": {
+      "dataset": "20newsgroups",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 6,
+      "metrics_mean": {
+        "AP": 0.17112331020569468,
+        "ROC-AUC": 0.6270930460667202,
+        "PR-AUC": 0.16500717188844224
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:36:24.836911+00:00"
+    },
+    "20newsgroups__semi-supervised__333": {
+      "dataset": "20newsgroups",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 6,
+      "metrics_mean": {
+        "AP": 0.16831864881703504,
+        "ROC-AUC": 0.6321610588948239,
+        "PR-AUC": 0.1630567583030422
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:36:54.844170+00:00"
+    },
+    "20newsgroups__semi-supervised__444": {
+      "dataset": "20newsgroups",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 6,
+      "metrics_mean": {
+        "AP": 0.14758595992745968,
+        "ROC-AUC": 0.5981156928248025,
+        "PR-AUC": 0.14215619126117754
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:37:19.245976+00:00"
+    },
+    "20newsgroups__semi-supervised__555": {
+      "dataset": "20newsgroups",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 6,
+      "metrics_mean": {
+        "AP": 0.1668121007297616,
+        "ROC-AUC": 0.6314324074402998,
+        "PR-AUC": 0.16174334854798508
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T05:37:49.496210+00:00"
+    }
+  },
+  "failed": {}
+}

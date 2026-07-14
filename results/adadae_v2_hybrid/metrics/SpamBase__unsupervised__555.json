@@ -1,0 +1,22 @@
+{
+  "dataset": "SpamBase",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.42807844761348657,
+    "ROC-AUC": 0.5644753743186496,
+    "PR-AUC": 0.4273938848136202
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.03139199724115323,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.05015450439743285,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:22:06.292582+00:00"
+}

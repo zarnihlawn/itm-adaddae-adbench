@@ -1,0 +1,22 @@
+{
+  "dataset": "Cardiotocography",
+  "setting": "semi-supervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.7090817588555383,
+    "ROC-AUC": 0.7829154339764157,
+    "PR-AUC": 0.7087529800187141
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T14:20:09.659775+00:00"
+}

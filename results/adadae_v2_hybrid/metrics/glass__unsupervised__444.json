@@ -1,0 +1,22 @@
+{
+  "dataset": "glass",
+  "setting": "unsupervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.19462419005957932,
+    "ROC-AUC": 0.7414634146341463,
+    "PR-AUC": 0.18501588255343934
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.030054283429048815,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.018691588785046728,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:01:26.726168+00:00"
+}

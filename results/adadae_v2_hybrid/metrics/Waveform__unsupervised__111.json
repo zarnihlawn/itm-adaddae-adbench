@@ -1,0 +1,22 @@
+{
+  "dataset": "Waveform",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.0575672853163528,
+    "ROC-AUC": 0.660732874663476,
+    "PR-AUC": 0.05627631833164913
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.028199266850509785,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.05024687772291606,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:24:07.879483+00:00"
+}

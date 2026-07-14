@@ -1,0 +1,22 @@
+{
+  "dataset": "speech",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.018504366510789527,
+    "ROC-AUC": 0.49666930469191634,
+    "PR-AUC": 0.01759696364028591
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.024273639394340844,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.050189907759088444,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:22:14.466017+00:00"
+}
