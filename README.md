@@ -170,6 +170,31 @@ python scripts/generate_hybrid_thesis.py
 
 Configs: `adadae_unsup_ssts.yaml`, `adadae_semi_cvnlp.yaml`, `adadae_v2_hybrid.yaml` (routed full 570).
 
+## AdaDDAE v3 (dataset-aware routing — beat both PR-AUC)
+
+v3 adds per-dataset exceptions (`configs/policy_exceptions.yaml`) on top of v2 family routing.
+
+```bash
+# Local ceiling analysis (no GPU)
+python scripts/oracle_policy_table.py
+python scripts/build_oracle_hybrid.py --out results/adadae_v3_hybrid/metrics/completed.json
+python scripts/validate_gates.py --completed results/adadae_v3_hybrid/metrics/completed.json
+
+# On Vast — hard-dataset bisect then selective ~100-130 jobs
+python scripts/v3_hard_bisect.py --hardware 12gb --epochs 100
+bash scripts/run_adadae_v3_protocol.sh all
+
+# Interim v2.1 (revert bad semi CV/NLP to backup)
+python scripts/merge_completed.py \
+  --semi-classical backup/ddae_baseline_570/metrics/completed.json \
+  --semi-cvnlp results/adadae_semi_cvnlp/metrics/completed.json \
+  --semi-cvnlp-source backup \
+  --unsup results/adadae_unsup_ssts/metrics/completed.json \
+  --out results/adadae_v2_1_hybrid/metrics/completed.json
+```
+
+Config: `adadae_v3_hybrid.yaml` (routed + exceptions). Oracle-best unsup PR **+4.16%** vs paper; semi still needs Vast specialist patch runs (`speech`, `ALOI`).
+
 ## Targets (DDAE, ADBench mean)
 
 | Setting | PR-AUC | ROC-AUC |

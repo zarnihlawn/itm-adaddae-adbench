@@ -148,3 +148,50 @@ python scripts/profile_job.py
 | VUS | Marginal + on noisy / ambiguous anomalies |
 
 Hard datasets (e.g. ALOI unsupervised) may remain difficult — disclose in thesis limitations.
+
+---
+
+## AdaDDAE v3 (dataset-aware routing)
+
+v3 extends v2 family routing with **per-dataset exceptions** backed by oracle ceiling analysis (`scripts/oracle_policy_table.py`).
+
+### v3 policies (`src/policy.py` + `configs/policy_exceptions.yaml`)
+
+| Route | When | Components |
+|-------|------|------------|
+| `unsup_ssts` | Default unsupervised | LF-DANC + MANS + SSTS + FTP |
+| `unsup_baseline_fallback` | vowels, letter, skin, fault, wine, glass | DDAE-faithful (SSTS regressed −35% on vowels) |
+| `baseline_ddae` | Semi classical | Pure DDAE repro |
+| `semi_cvnlp_ftp` | Semi CV | FTP + fixed T=50, contrastive **off** |
+| `semi_nlp_baseline` | Semi NLP | DDAE-faithful (FTP+TAPS hurt Agnews −5.7%) |
+| `semi_speech_specialist` | speech semi | RobustScaler + FTP + RDT + T=80 |
+
+### Table-1 results (57 datasets, 5 seeds)
+
+| Model | Unsup PR | Semi PR | vs DDAE unsup | vs DDAE semi |
+|-------|----------|---------|---------------|--------------|
+| DDAE paper | 32.77% | 61.36% | — | — |
+| DDAE baseline 570 | 32.63% | 60.75% | −0.14% | −0.61% |
+| AdaDDAE v2 hybrid | 34.01% | 60.61% | **+1.24%** | −0.75% |
+| AdaDDAE v2.1 (revert semi CV/NLP) | 34.01% | 60.75% | **+1.24%** | −0.61% |
+| AdaDDAE v3 oracle-best | **36.93%** | 60.77% | **+4.16%** | −0.59% |
+
+**v3 oracle ceiling** proves routing alone can reach **+4.16% unsup PR**; semi still needs **+0.59%** from specialists (speech, ALOI) via GPU patch runs.
+
+### Run v3 on Vast
+
+```bash
+cd /workspace/ITM/project && git pull origin main
+bash scripts/vast_adadae_v2_smoke.sh 12gb   # verify env
+bash scripts/v3_hard_bisect.py --hardware 12gb --epochs 100  # hard-dataset matrix
+bash scripts/run_adadae_v3_protocol.sh all  # ~100-130 selective jobs
+python scripts/validate_gates.py --completed results/adadae_v3_hybrid/metrics/completed.json
+```
+
+### Negative results (document in thesis)
+
+- Monolithic `default_gpu`: semi PR **25%** (vs 61% paper)
+- VUS on semi classical: **−18.7%** PR on ablation subset
+- Blanket FTP+TAPS on NLP semi: Agnews **−5.7%**, 20newsgroups **−2.4%**
+- SSTS on vowels/letter unsup: **−35% / −25%** vs baseline
+

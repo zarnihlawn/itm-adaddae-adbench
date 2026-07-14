@@ -1,0 +1,42 @@
+# AdaDDAE v3 hybrid Table-1 policy (dataset-aware routed entry)
+seed: 111
+seeds: [111, 222, 333, 444, 555]
+
+paths:
+  adbench_root: ../ADBench/adbench/datasets
+  results_dir: results/adadae_v3_routed
+  run_id: adadae_v3_routed
+
+train:
+  setting: semi-supervised
+  lr: 0.001
+  epochs: 100
+  eval_every: 10
+  early_stop_patience: 30
+
+model:
+  hidden_dims: [512, 512]
+  latent_dim: 32
+  activation: lrelu
+
+diffusion:
+  num_timesteps: 50
+  beta_start: 0.0001
+  beta_end: 0.02
+  scheduler: linear
+  time_emb_dim: 4
+  time_emb_type: sinusoidal
+
+adadae:
+  policy: routed
+  exceptions_file: configs/policy_exceptions.yaml
+
+features:
+  scaler: standard
+  pca_dim_threshold: 128
+  pca_max_components: 128
+  pca_variance: 0.95
+  clip_outliers: false
+  clip_sigma: 5.0
+
+hardware: hardware_cpu.yaml

@@ -1,0 +1,7 @@
+dataset,setting,candidate,seed,PR-AUC,ROC-AUC,category
+Agnews,semi-supervised,baseline_ddae,111,18.892865188606795,69.39355789473684,nlp
+Agnews,unsupervised,unsup_baseline,111,8.81450480321617,66.42218947368421,nlp
+speech,semi-supervised,baseline_ddae,111,4.450961934142553,52.57566030399754,classical
+speech,unsupervised,unsup_baseline,111,3.940924287165611,56.80226116449971,classical
+vowels,semi-supervised,baseline_ddae,111,95.29880116929166,99.53627311522048,classical
+vowels,unsupervised,unsup_baseline,111,50.85012131863,95.7126600284495,classical

@@ -1,0 +1,122 @@
+{
+  "config": "/home/zarnihlawn/Desktop/ITM/project/configs/baselines_ddae.yaml",
+  "checks": [
+    {
+      "key": "train.epochs",
+      "expected": 100,
+      "actual": 100,
+      "ok": true
+    },
+    {
+      "key": "train.lr",
+      "expected": 0.001,
+      "actual": 0.001,
+      "ok": true
+    },
+    {
+      "key": "train.eval_every",
+      "expected": 10,
+      "actual": 10,
+      "ok": true
+    },
+    {
+      "key": "train.early_stop_patience",
+      "expected": 30,
+      "actual": 30,
+      "ok": true
+    },
+    {
+      "key": "train.contrastive",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "key": "diffusion.num_timesteps",
+      "expected": 50,
+      "actual": 50,
+      "ok": true
+    },
+    {
+      "key": "diffusion.scheduler",
+      "expected": "linear",
+      "actual": "linear",
+      "ok": true
+    },
+    {
+      "key": "diffusion.beta_end",
+      "expected": 0.02,
+      "actual": 0.02,
+      "ok": true
+    },
+    {
+      "key": "adadae.use_danc",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "key": "adadae.use_scs",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "key": "adadae.use_ftp",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "key": "features.scaler",
+      "expected": "standard",
+      "actual": "standard",
+      "ok": true
+    },
+    {
+      "key": "features.clip_outliers",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    },
+    {
+      "key": "seeds",
+      "expected": [
+        111,
+        222,
+        333,
+        444,
+        555
+      ],
+      "actual": [
+        111,
+        222,
+        333,
+        444,
+        555
+      ],
+      "ok": true
+    }
+  ],
+  "baseline_vs_paper": {
+    "unsupervised": {
+      "our_PR": 32.63469112143496,
+      "paper_PR": 32.77,
+      "delta_PR": -0.1353088785650413,
+      "our_ROC": 75.80758262900368,
+      "paper_ROC": 74.08,
+      "delta_ROC": 1.7275826290036775
+    },
+    "semi-supervised": {
+      "our_PR": 60.74952086717048,
+      "paper_PR": 61.36,
+      "delta_PR": -0.6104791328295249,
+      "our_ROC": 84.28644121628949,
+      "paper_ROC": 83.17,
+      "delta_ROC": 1.1164412162894877
+    }
+  },
+  "all_checks_pass": true,
+  "repro_gap_semi_PR": -0.6104791328295249,
+  "recommendation": "Protocol matches DDAE repro config. Semi PR gap vs paper is likely dataset/method variance, not a config bug. Focus on v3 routing + specialists."
+}

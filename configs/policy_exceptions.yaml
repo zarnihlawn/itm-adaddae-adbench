@@ -1,0 +1,31 @@
+# AdaDDAE v3 dataset-level routing exceptions (evidence-backed from oracle + bisect)
+unsup_baseline_fallback:
+  - vowels
+  - letter
+  - skin
+  - fault
+  - wine
+  - glass
+
+# Semi NLP: revert to DDAE baseline until bisect proves a winner
+semi_nlp_baseline:
+  - Agnews
+  - 20newsgroups
+  - Amazon
+  - Imdb
+  - Yelp
+
+# Per-dataset semi specialists (policy id from policy.py)
+semi_specialists:
+  speech: semi_speech_specialist
+
+# CV datasets use FTP-only semi policy (no TAPS)
+semi_cv_policy: semi_cvnlp_ftp
+
+# Optional: NLP unsup uses baseline until family tuning completes
+unsup_nlp_baseline:
+  - Agnews
+  - Amazon
+  - Imdb
+  - Yelp
+  - 20newsgroups

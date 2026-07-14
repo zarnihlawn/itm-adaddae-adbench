@@ -1,0 +1,5 @@
+setting,policy,n_datasets
+semi-supervised,backup_baseline,52
+semi-supervised,semi_cvnlp,5
+unsupervised,backup_baseline,32
+unsupervised,unsup_ssts,25

@@ -59,7 +59,7 @@ def copy_metrics(src_dir: Path, dst_dir: Path, keys: set[str]) -> int:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Merge hybrid AdaDDAE v2 results")
+    parser = argparse.ArgumentParser(description="Merge hybrid AdaDDAE v2/v3 results")
     parser.add_argument(
         "--semi-classical",
         type=str,
@@ -79,6 +79,19 @@ def main():
         help="completed.json with all unsupervised jobs",
     )
     parser.add_argument(
+        "--semi-cvnlp-source",
+        type=str,
+        choices=["path", "backup"],
+        default="path",
+        help="Use --semi-cvnlp path (path) or --semi-classical backup for CV/NLP semi (backup)",
+    )
+    parser.add_argument(
+        "--patch",
+        type=str,
+        default=None,
+        help="Optional completed.json whose jobs override same keys (v3 selective reruns)",
+    )
+    parser.add_argument(
         "--out",
         type=str,
         default="results/adadae_v2_hybrid/metrics/completed.json",
@@ -93,6 +106,7 @@ def main():
     semi_classical_path = Path(args.semi_classical)
     semi_cvnlp_path = Path(args.semi_cvnlp)
     unsup_path = Path(args.unsup)
+    patch_path = Path(args.patch) if args.patch else None
     out_path = Path(args.out)
     if not out_path.is_absolute():
         out_path = PROJECT_ROOT / out_path
@@ -121,20 +135,34 @@ def main():
     merged["completed"].update(sc_jobs)
     sources.append(("semi_classical", semi_classical_path, sc_jobs))
 
-    cv_state = load_state(semi_cvnlp_path)
+    if args.semi_cvnlp_source == "backup":
+        cv_state = sc_state
+        cv_src_path = semi_classical_path
+        cv_label = "semi_cvnlp_from_backup"
+    else:
+        cv_state = load_state(semi_cvnlp_path)
+        cv_src_path = semi_cvnlp_path
+        cv_label = "semi_cvnlp"
     cv_jobs = filter_completed(cv_state, setting="semi-supervised", datasets=cv_nlp)
     merged["completed"].update(cv_jobs)
-    sources.append(("semi_cvnlp", semi_cvnlp_path, cv_jobs))
+    sources.append((cv_label, cv_src_path, cv_jobs))
 
     u_state = load_state(unsup_path)
     u_jobs = filter_completed(u_state, setting="unsupervised")
     merged["completed"].update(u_jobs)
     sources.append(("unsup", unsup_path, u_jobs))
 
+    if patch_path and patch_path.exists():
+        p_state = load_state(patch_path)
+        p_jobs = p_state.get("completed", {})
+        merged["completed"].update(p_jobs)
+        sources.append(("patch", patch_path, p_jobs))
+        print(f"Applied {len(p_jobs)} patch jobs from {patch_path}")
+
     # Detect key collisions
     total_in = sum(len(j) for _, _, j in sources)
     if len(merged["completed"]) != total_in:
-        print(f"WARNING: key overlap detected ({total_in} input -> {len(merged['completed'])} merged)")
+        print(f"NOTE: patch/overlap merge ({total_in} source rows -> {len(merged['completed'])} unique keys)")
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:

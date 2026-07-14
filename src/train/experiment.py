@@ -46,7 +46,6 @@ def run_single_file(
     category: str = "classical",
 ) -> Dict[str, Any]:
     t_total_start = time.perf_counter()
-    config = apply_routed_config(config, setting, category)
     hw = config["hardware"]
     apply_thread_limits(hw.get("num_threads", 8))
     set_seed(seed)
@@ -64,6 +63,14 @@ def run_single_file(
         X_train = X_train[idx]
         y_train = y_train[idx]
 
+    # v3 routing uses train shape meta before FTP/DANC
+    route_meta = {
+        "n": float(X_train.shape[0]),
+        "d": float(X_train.shape[1]),
+    }
+    config = apply_routed_config(
+        config, setting, category, dataset_name=dataset_name, meta=route_meta
+    )
     adadae_cfg = config.get("adadae", {})
     feat_cfg = config.get("features", {})
     use_ftp = bool(adadae_cfg.get("use_ftp", True))

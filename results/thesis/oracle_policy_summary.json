@@ -1,0 +1,18 @@
+{
+  "unsupervised": {
+    "oracle_mean_PR": 36.92941043935118,
+    "paper_PR": 32.77,
+    "delta_vs_paper": 4.159410439351177,
+    "beats_paper": true,
+    "n_datasets": 57,
+    "n_beats_paper": 28
+  },
+  "semi-supervised": {
+    "oracle_mean_PR": 60.765907667949236,
+    "paper_PR": 61.36,
+    "delta_vs_paper": -0.5940923320507636,
+    "beats_paper": false,
+    "n_datasets": 57,
+    "n_beats_paper": 33
+  }
+}
