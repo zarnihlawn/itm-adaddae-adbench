@@ -1,0 +1,22 @@
+{
+  "dataset": "WPBC",
+  "setting": "semi-supervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.41619492263742686,
+    "ROC-AUC": 0.5685890257558791,
+    "PR-AUC": 0.40391764366687355
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T17:01:48.338620+00:00"
+}

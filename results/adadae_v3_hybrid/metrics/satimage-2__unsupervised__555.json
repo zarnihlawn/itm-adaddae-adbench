@@ -1,0 +1,22 @@
+{
+  "dataset": "satimage-2",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.8638442618278912,
+    "ROC-AUC": 0.9934098660350097,
+    "PR-AUC": 0.8632393884871474
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.02185199733830973,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.0452,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:15:05.502460+00:00"
+}

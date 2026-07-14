@@ -1,0 +1,22 @@
+{
+  "dataset": "Stamps",
+  "setting": "semi-supervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.572057171349259,
+    "ROC-AUC": 0.9294484911550469,
+    "PR-AUC": 0.5548332257464215
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T16:54:47.285877+00:00"
+}

@@ -1,0 +1,22 @@
+{
+  "dataset": "yeast",
+  "setting": "semi-supervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.528369143705512,
+    "ROC-AUC": 0.5216337330542145,
+    "PR-AUC": 0.5266823622116574
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-13T17:02:34.397950+00:00"
+}

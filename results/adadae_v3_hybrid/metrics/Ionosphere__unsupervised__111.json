@@ -1,0 +1,22 @@
+{
+  "dataset": "Ionosphere",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.8849335792453262,
+    "ROC-AUC": 0.9021164021164021,
+    "PR-AUC": 0.8845838602944569
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.0277708335842458,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.05128205128205128,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:10:21.537946+00:00"
+}

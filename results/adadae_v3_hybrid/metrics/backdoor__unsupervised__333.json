@@ -1,0 +1,22 @@
+{
+  "dataset": "backdoor",
+  "setting": "unsupervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.5673748068347737,
+    "ROC-AUC": 0.8997394215986371,
+    "PR-AUC": 0.5671067163107871
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.026774037792766367,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0001,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T03:27:40.071215+00:00"
+}

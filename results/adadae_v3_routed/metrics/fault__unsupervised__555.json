@@ -1,0 +1,22 @@
+{
+  "dataset": "fault",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.5241835601607119,
+    "ROC-AUC": 0.7093104466558232,
+    "PR-AUC": 0.5227615030847483
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T08:15:12.734145+00:00"
+}

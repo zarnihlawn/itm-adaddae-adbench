@@ -1,0 +1,22 @@
+{
+  "dataset": "MNIST-C",
+  "setting": "semi-supervised",
+  "seed": 444,
+  "n_splits": 16,
+  "metrics_mean": {
+    "AP": 0.49662817589427616,
+    "ROC-AUC": 0.8543675789473684,
+    "PR-AUC": 0.4953517283748178
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T08:45:22.047346+00:00"
+}

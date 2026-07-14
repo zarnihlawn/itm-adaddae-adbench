@@ -1,0 +1,22 @@
+{
+  "dataset": "FashionMNIST",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 10,
+  "metrics_mean": {
+    "AP": 0.3309056039939694,
+    "ROC-AUC": 0.8617652645502647,
+    "PR-AUC": 0.3291922255591161
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.023093248670966272,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "time": "2026-07-14T04:31:10.250687+00:00"
+}
