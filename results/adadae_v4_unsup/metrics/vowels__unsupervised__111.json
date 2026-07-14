@@ -1,0 +1,58 @@
+{
+  "dataset": "vowels",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.36338384484188,
+    "ROC-AUC": 0.8937268847795163,
+    "PR-AUC": 0.35874544168367295
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "vowels",
+      "split": "Classical/40_vowels.npz",
+      "setting": "unsupervised",
+      "seed": 111,
+      "metrics": {
+        "AP": 0.36338384484188,
+        "ROC-AUC": 0.8937268847795163,
+        "PR-AUC": 0.35874544168367295
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "best_pr_auc": 0.35874544168367295,
+      "rss_mb": null,
+      "vram_mb": 324.896484375,
+      "n_train": 1456,
+      "n_test": 1456,
+      "d": 12,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05013736263736264,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.005463134963065386,
+      "train_sec": 6.5481975940056145,
+      "score_sec": 0.015323456027545035,
+      "total_sec": 6.835427267942578
+    }
+  ]
+}

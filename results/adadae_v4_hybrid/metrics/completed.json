@@ -6745,20 +6745,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5979653351228719,
-        "ROC-AUC": 0.8983151497943185,
-        "PR-AUC": 0.5976985461974917
+        "AP": 0.5658219261114794,
+        "ROC-AUC": 0.9001660872495926,
+        "PR-AUC": 0.565555937132494
       },
       "noise": {
-        "num_timesteps": 150,
+        "num_timesteps": 5,
         "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.03,
-        "time_emb_dim": 8
+        "beta_end": 0.026763637168387245,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
       },
-      "time": "2026-07-12T05:24:49.012240+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T03:26:53.825148+00:00"
     },
     "backdoor__unsupervised__222": {
       "dataset": "backdoor",
@@ -6766,20 +6767,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.6104850955982507,
-        "ROC-AUC": 0.8997246176078154,
-        "PR-AUC": 0.6103691377701407
+        "AP": 0.5748258514139635,
+        "ROC-AUC": 0.8997725453261125,
+        "PR-AUC": 0.5745424529312124
       },
       "noise": {
-        "num_timesteps": 150,
+        "num_timesteps": 5,
         "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.03,
-        "time_emb_dim": 8
+        "beta_end": 0.026731909350769377,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
       },
-      "time": "2026-07-12T05:36:32.680083+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T03:27:24.082393+00:00"
     },
     "backdoor__unsupervised__333": {
       "dataset": "backdoor",
@@ -6787,20 +6789,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.598189811927586,
-        "ROC-AUC": 0.8951869947413862,
-        "PR-AUC": 0.5979061502045153
+        "AP": 0.5673748068347737,
+        "ROC-AUC": 0.8997394215986371,
+        "PR-AUC": 0.5671067163107871
       },
       "noise": {
-        "num_timesteps": 150,
+        "num_timesteps": 5,
         "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.03,
-        "time_emb_dim": 8
+        "beta_end": 0.026774037792766367,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
       },
-      "time": "2026-07-12T05:43:08.681440+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T03:27:40.071215+00:00"
     },
     "backdoor__unsupervised__444": {
       "dataset": "backdoor",
@@ -6808,20 +6811,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5805954334983233,
-        "ROC-AUC": 0.8915463487490594,
-        "PR-AUC": 0.58027543586542
+        "AP": 0.5659401701103955,
+        "ROC-AUC": 0.8986247408782209,
+        "PR-AUC": 0.5656536948849089
       },
       "noise": {
-        "num_timesteps": 150,
+        "num_timesteps": 5,
         "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.03,
-        "time_emb_dim": 8
+        "beta_end": 0.026715509385315354,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
       },
-      "time": "2026-07-12T05:48:29.179124+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T03:27:56.109506+00:00"
     },
     "backdoor__unsupervised__555": {
       "dataset": "backdoor",
@@ -6829,20 +6833,21 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5673085844198497,
-        "ROC-AUC": 0.8912476211581878,
-        "PR-AUC": 0.5671582733375754
+        "AP": 0.5732645633037715,
+        "ROC-AUC": 0.8987159032673582,
+        "PR-AUC": 0.5729886660284594
       },
       "noise": {
-        "num_timesteps": 150,
+        "num_timesteps": 5,
         "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.03,
-        "time_emb_dim": 8
+        "beta_end": 0.026765059785962667,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
       },
-      "time": "2026-07-12T05:54:51.614405+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T03:28:11.846149+00:00"
     },
     "breastw__unsupervised__111": {
       "dataset": "breastw",
@@ -6960,21 +6965,24 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.30286096193736145,
-        "ROC-AUC": 0.7626466599898858,
-        "PR-AUC": 0.30266389019706325
+        "AP": 0.3157347486644734,
+        "ROC-AUC": 0.7670899016126173,
+        "PR-AUC": 0.3154983523044489
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03174512547125901,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.0426,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T03:28:38.037304+00:00"
+      "time": "2026-07-13T14:16:39.201961+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "campaign__unsupervised__222": {
       "dataset": "campaign",
@@ -6982,21 +6990,24 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.2961509800417292,
-        "ROC-AUC": 0.7526130315635932,
-        "PR-AUC": 0.2959460228532364
+        "AP": 0.30245372976122104,
+        "ROC-AUC": 0.7722749906358383,
+        "PR-AUC": 0.30222514301902065
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03174512547125901,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.0426,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T03:28:46.345366+00:00"
+      "time": "2026-07-13T14:17:04.461846+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "campaign__unsupervised__333": {
       "dataset": "campaign",
@@ -7004,21 +7015,24 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.2954092943775858,
-        "ROC-AUC": 0.7550627387035659,
-        "PR-AUC": 0.295208898173039
+        "AP": 0.3121883839685411,
+        "ROC-AUC": 0.7668960964890762,
+        "PR-AUC": 0.3119688168529453
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03174512547125901,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.0426,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T03:28:52.262069+00:00"
+      "time": "2026-07-13T14:17:23.137609+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "campaign__unsupervised__444": {
       "dataset": "campaign",
@@ -7026,21 +7040,24 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.30056763484304794,
-        "ROC-AUC": 0.7597509728585554,
-        "PR-AUC": 0.3003742089509574
+        "AP": 0.3089174948216451,
+        "ROC-AUC": 0.7651418523066501,
+        "PR-AUC": 0.3086943174093884
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03174512547125901,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.0426,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T03:29:01.869416+00:00"
+      "time": "2026-07-13T14:17:43.935093+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "campaign__unsupervised__555": {
       "dataset": "campaign",
@@ -7048,21 +7065,24 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.29504141654550037,
-        "ROC-AUC": 0.7599084446811561,
-        "PR-AUC": 0.2948505985900563
+        "AP": 0.3019870652436122,
+        "ROC-AUC": 0.7704142792378846,
+        "PR-AUC": 0.30179288370038676
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03174512547125901,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.0426,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T03:29:07.588346+00:00"
+      "time": "2026-07-13T14:18:02.819436+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "cardio__unsupervised__111": {
       "dataset": "cardio",
@@ -7730,23 +7750,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5531223615915625,
-        "ROC-AUC": 0.7321729062861804,
-        "PR-AUC": 0.5517329277880355
+        "AP": 0.4254423609355787,
+        "ROC-AUC": 0.583641915993644,
+        "PR-AUC": 0.42396110196420567
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.025924431641310246,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.01,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:44:25.529638+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T03:56:32.054693+00:00"
     },
     "fault__unsupervised__222": {
       "dataset": "fault",
@@ -7754,23 +7772,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5584510370656875,
-        "ROC-AUC": 0.7389648497007139,
-        "PR-AUC": 0.557055096145724
+        "AP": 0.42159111751036915,
+        "ROC-AUC": 0.5848125770480124,
+        "PR-AUC": 0.420095574619631
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.025924431641310246,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.01,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:44:28.870805+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T03:56:34.267841+00:00"
     },
     "fault__unsupervised__333": {
       "dataset": "fault",
@@ -7778,23 +7794,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5554412322024799,
-        "ROC-AUC": 0.7384539305618705,
-        "PR-AUC": 0.5540616398535286
+        "AP": 0.41957491074965036,
+        "ROC-AUC": 0.5802025864695487,
+        "PR-AUC": 0.4180490966855763
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.025924431641310246,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.01,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:44:32.479474+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T03:56:36.400900+00:00"
     },
     "fault__unsupervised__444": {
       "dataset": "fault",
@@ -7802,23 +7816,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5463615476847823,
-        "ROC-AUC": 0.7309401380887874,
-        "PR-AUC": 0.5449602797366775
+        "AP": 0.41822569164905216,
+        "ROC-AUC": 0.5753734631411683,
+        "PR-AUC": 0.41673700231019306
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.025924431641310246,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.01,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:44:36.080187+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T03:56:38.636694+00:00"
     },
     "fault__unsupervised__555": {
       "dataset": "fault",
@@ -7826,23 +7838,21 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5346220178953389,
-        "ROC-AUC": 0.7064125039256401,
-        "PR-AUC": 0.5332344502998276
+        "AP": 0.4252696985058557,
+        "ROC-AUC": 0.5851524085853166,
+        "PR-AUC": 0.4237577576295215
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.025924431641310246,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.01,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:44:39.449399+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T03:56:43.057952+00:00"
     },
     "fraud__unsupervised__111": {
       "dataset": "fraud",
@@ -7850,23 +7860,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.2059391143809028,
-        "ROC-AUC": 0.9530509144143198,
-        "PR-AUC": 0.2048467356667787
+        "AP": 0.1377849206447118,
+        "ROC-AUC": 0.9534787148515138,
+        "PR-AUC": 0.13644077814663713
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.033029376263492,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:46:09.495910+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T03:57:37.103069+00:00"
     },
     "fraud__unsupervised__222": {
       "dataset": "fraud",
@@ -7874,23 +7882,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.3261124185282491,
-        "ROC-AUC": 0.9533090730552066,
-        "PR-AUC": 0.32422294247022293
+        "AP": 0.17567397441628252,
+        "ROC-AUC": 0.9540896183366983,
+        "PR-AUC": 0.1742070213824785
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.033029376263492,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:48:20.284900+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T03:58:21.240191+00:00"
     },
     "fraud__unsupervised__333": {
       "dataset": "fraud",
@@ -7898,23 +7904,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.18899859834365576,
-        "ROC-AUC": 0.9496978152738811,
-        "PR-AUC": 0.1879417633733239
+        "AP": 0.2710830972348331,
+        "ROC-AUC": 0.9542521970864505,
+        "PR-AUC": 0.2694204141213214
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.033029376263492,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:50:14.662456+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T03:59:05.438520+00:00"
     },
     "fraud__unsupervised__444": {
       "dataset": "fraud",
@@ -7922,23 +7926,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.3909732715651222,
-        "ROC-AUC": 0.9557273837031495,
-        "PR-AUC": 0.3902352890666839
+        "AP": 0.1579166460849339,
+        "ROC-AUC": 0.9531019713763604,
+        "PR-AUC": 0.15664552177416358
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.033029376263492,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:52:09.800561+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:00:19.922228+00:00"
     },
     "fraud__unsupervised__555": {
       "dataset": "fraud",
@@ -7946,23 +7948,21 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.1776203459658903,
-        "ROC-AUC": 0.9486991019207626,
-        "PR-AUC": 0.17678132675244065
+        "AP": 0.20299506437836012,
+        "ROC-AUC": 0.9533695664762074,
+        "PR-AUC": 0.2020929656826427
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.033029376263492,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:53:18.308771+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:01:14.026058+00:00"
     },
     "glass__unsupervised__111": {
       "dataset": "glass",
@@ -7970,23 +7970,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.3209970654730872,
-        "ROC-AUC": 0.924119241192412,
-        "PR-AUC": 0.3015779779826555
+        "AP": 0.1552831090221814,
+        "ROC-AUC": 0.7761517615176152,
+        "PR-AUC": 0.115506515849747
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.030054283429048815,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.018691588785046728,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:59:04.072329+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:01:16.877204+00:00"
     },
     "glass__unsupervised__222": {
       "dataset": "glass",
@@ -7994,23 +7992,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.232992510709902,
-        "ROC-AUC": 0.8991869918699187,
-        "PR-AUC": 0.1871945013329765
+        "AP": 0.19180220310051654,
+        "ROC-AUC": 0.7138211382113822,
+        "PR-AUC": 0.18238180985301314
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.030054283429048815,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.018691588785046728,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:59:09.798350+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:01:20.948081+00:00"
     },
     "glass__unsupervised__333": {
       "dataset": "glass",
@@ -8018,23 +8014,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.338057294171178,
-        "ROC-AUC": 0.9029810298102982,
-        "PR-AUC": 0.3152401951733788
+        "AP": 0.18268092842438857,
+        "ROC-AUC": 0.6964769647696477,
+        "PR-AUC": 0.1744251759096454
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.030054283429048815,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.018691588785046728,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:59:15.688758+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:01:23.813086+00:00"
     },
     "glass__unsupervised__444": {
       "dataset": "glass",
@@ -8042,23 +8036,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.2891161511502549,
-        "ROC-AUC": 0.9084010840108401,
-        "PR-AUC": 0.2733238468408987
+        "AP": 0.19462419005957932,
+        "ROC-AUC": 0.7414634146341463,
+        "PR-AUC": 0.18501588255343934
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.030054283429048815,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.018691588785046728,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:59:21.565422+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:01:26.726168+00:00"
     },
     "glass__unsupervised__555": {
       "dataset": "glass",
@@ -8066,23 +8058,21 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.26136635630683247,
-        "ROC-AUC": 0.8878048780487805,
-        "PR-AUC": 0.24756082334174676
+        "AP": 0.20451891950799186,
+        "ROC-AUC": 0.7528455284552846,
+        "PR-AUC": 0.1932212334508002
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.030054283429048815,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.018691588785046728,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T15:59:24.778224+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:01:32.934153+00:00"
     },
     "Hepatitis__unsupervised__111": {
       "dataset": "Hepatitis",
@@ -8310,23 +8300,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.3296724108818041,
-        "ROC-AUC": 0.7201188986232792,
-        "PR-AUC": 0.3283868728342877
+        "AP": 0.27081947729705413,
+        "ROC-AUC": 0.5745616123415138,
+        "PR-AUC": 0.26915394578552254
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.027873317328790368,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05035605289928789,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:22:08.557073+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:09:59.050063+00:00"
     },
     "InternetAds__unsupervised__222": {
       "dataset": "InternetAds",
@@ -8334,23 +8322,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.3345084374161731,
-        "ROC-AUC": 0.724995918811558,
-        "PR-AUC": 0.3331908963325243
+        "AP": 0.2685786827764533,
+        "ROC-AUC": 0.584337759155466,
+        "PR-AUC": 0.2670405495639703
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.027873317328790368,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05035605289928789,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:22:15.093022+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:04.089502+00:00"
     },
     "InternetAds__unsupervised__333": {
       "dataset": "InternetAds",
@@ -8358,23 +8344,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.32705034079555273,
-        "ROC-AUC": 0.7200423763399902,
-        "PR-AUC": 0.3257678379399057
+        "AP": 0.28758073567262366,
+        "ROC-AUC": 0.5794777439190293,
+        "PR-AUC": 0.28572542796397843
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.027873317328790368,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05035605289928789,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:22:21.681088+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:09.405087+00:00"
     },
     "InternetAds__unsupervised__444": {
       "dataset": "InternetAds",
@@ -8382,23 +8366,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.32803874674134825,
-        "ROC-AUC": 0.7220846710562114,
-        "PR-AUC": 0.3267715284484635
+        "AP": 0.270470937858241,
+        "ROC-AUC": 0.5772092833433096,
+        "PR-AUC": 0.26873612925072804
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.027873317328790368,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05035605289928789,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:22:28.255133+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:14.168857+00:00"
     },
     "InternetAds__unsupervised__555": {
       "dataset": "InternetAds",
@@ -8406,23 +8388,21 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.3300477362043354,
-        "ROC-AUC": 0.7244313544104043,
-        "PR-AUC": 0.3287764962950176
+        "AP": 0.27273070862670395,
+        "ROC-AUC": 0.5754815802361648,
+        "PR-AUC": 0.2711221081638281
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.027873318160648794,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05035605289928789,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:22:34.833462+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:19.119248+00:00"
     },
     "Ionosphere__unsupervised__111": {
       "dataset": "Ionosphere",
@@ -8430,23 +8410,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.9242059550465701,
-        "ROC-AUC": 0.9578130511463845,
-        "PR-AUC": 0.92383013344734
+        "AP": 0.8849335792453262,
+        "ROC-AUC": 0.9021164021164021,
+        "PR-AUC": 0.8845838602944569
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.0277708335842458,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05128205128205128,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:23:19.425668+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:21.537946+00:00"
     },
     "Ionosphere__unsupervised__222": {
       "dataset": "Ionosphere",
@@ -8454,23 +8432,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.9430060465827551,
-        "ROC-AUC": 0.9618694885361553,
-        "PR-AUC": 0.9427894188420286
+        "AP": 0.8805128351962164,
+        "ROC-AUC": 0.8972134038800704,
+        "PR-AUC": 0.8801533510819142
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.0277708335842458,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05128205128205128,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:23:22.085091+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:24.089913+00:00"
     },
     "Ionosphere__unsupervised__333": {
       "dataset": "Ionosphere",
@@ -8478,23 +8454,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.933722281553928,
-        "ROC-AUC": 0.9616931216931217,
-        "PR-AUC": 0.9333968318832503
+        "AP": 0.8728983169915696,
+        "ROC-AUC": 0.891604938271605,
+        "PR-AUC": 0.8725047165583006
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.0277708335842458,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05128205128205128,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:23:24.750079+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:26.983328+00:00"
     },
     "Ionosphere__unsupervised__444": {
       "dataset": "Ionosphere",
@@ -8502,23 +8476,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.9204424277979949,
-        "ROC-AUC": 0.9508994708994709,
-        "PR-AUC": 0.9201100971186017
+        "AP": 0.8847774264721981,
+        "ROC-AUC": 0.90663139329806,
+        "PR-AUC": 0.8844148654596613
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.0277708335842458,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05128205128205128,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:23:28.457442+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:29.981783+00:00"
     },
     "Ionosphere__unsupervised__555": {
       "dataset": "Ionosphere",
@@ -8526,23 +8498,21 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.9337283994730187,
-        "ROC-AUC": 0.9574955908289241,
-        "PR-AUC": 0.9334593022511329
+        "AP": 0.8759187669267482,
+        "ROC-AUC": 0.8980246913580247,
+        "PR-AUC": 0.8755377980604262
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.0277708335842458,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05128205128205128,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:23:31.175975+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:33.006817+00:00"
     },
     "landsat__unsupervised__111": {
       "dataset": "landsat",
@@ -8550,23 +8520,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.26099503332915674,
-        "ROC-AUC": 0.6095113547104926,
-        "PR-AUC": 0.26055194760739275
+        "AP": 0.18679801287772435,
+        "ROC-AUC": 0.44509052096422774,
+        "PR-AUC": 0.1865873558475998
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.022023771198237348,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:24:04.453127+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:36.652446+00:00"
     },
     "landsat__unsupervised__222": {
       "dataset": "landsat",
@@ -8574,23 +8542,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.2613540499196712,
-        "ROC-AUC": 0.6180538176488457,
-        "PR-AUC": 0.26096302805069793
+        "AP": 0.1850508359849981,
+        "ROC-AUC": 0.44274416310859366,
+        "PR-AUC": 0.18483159197878665
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.022023771198237348,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:24:12.804372+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:41.474618+00:00"
     },
     "landsat__unsupervised__333": {
       "dataset": "landsat",
@@ -8598,23 +8564,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.26122561743553974,
-        "ROC-AUC": 0.617564769475395,
-        "PR-AUC": 0.2608511611905332
+        "AP": 0.19421255058838993,
+        "ROC-AUC": 0.46031291731204066,
+        "PR-AUC": 0.19399322205005798
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.022023771198237348,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:24:21.191281+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:45.260302+00:00"
     },
     "landsat__unsupervised__444": {
       "dataset": "landsat",
@@ -8622,23 +8586,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.2660476782722998,
-        "ROC-AUC": 0.6192548970249225,
-        "PR-AUC": 0.2656484634618096
+        "AP": 0.1964378890897725,
+        "ROC-AUC": 0.46490983780833495,
+        "PR-AUC": 0.1961726826865172
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.022023771198237348,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:24:26.515384+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:50.701194+00:00"
     },
     "landsat__unsupervised__555": {
       "dataset": "landsat",
@@ -8646,23 +8608,21 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.2654632675378401,
-        "ROC-AUC": 0.6186668188019172,
-        "PR-AUC": 0.26508044280426685
+        "AP": 0.2032417635239379,
+        "ROC-AUC": 0.47516441046757185,
+        "PR-AUC": 0.20288490493151023
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.022023771198237348,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:24:34.688531+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:54.358069+00:00"
     },
     "letter__unsupervised__111": {
       "dataset": "letter",
@@ -8670,23 +8630,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.4334179878818815,
-        "ROC-AUC": 0.8898,
-        "PR-AUC": 0.4307654684320492
+        "AP": 0.18632384397539153,
+        "ROC-AUC": 0.7186733333333333,
+        "PR-AUC": 0.18359122802051064
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.027469769318185844,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.039375,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:15:38.285619+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:10:57.297000+00:00"
     },
     "letter__unsupervised__222": {
       "dataset": "letter",
@@ -8694,23 +8652,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.46678811188522956,
-        "ROC-AUC": 0.9127333333333334,
-        "PR-AUC": 0.46182845208266904
+        "AP": 0.18962894552330276,
+        "ROC-AUC": 0.7249666666666665,
+        "PR-AUC": 0.18614899413461242
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.027469769318185844,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.039375,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:15:42.359144+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:11:01.242892+00:00"
     },
     "letter__unsupervised__333": {
       "dataset": "letter",
@@ -8718,23 +8674,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.48733577694809666,
-        "ROC-AUC": 0.9153933333333333,
-        "PR-AUC": 0.48450423055685776
+        "AP": 0.16896691304173794,
+        "ROC-AUC": 0.7106400000000002,
+        "PR-AUC": 0.1649572967560296
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.027469769318185844,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.039375,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:15:45.736015+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:11:05.185188+00:00"
     },
     "letter__unsupervised__444": {
       "dataset": "letter",
@@ -8742,23 +8696,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.43214733919064835,
-        "ROC-AUC": 0.88996,
-        "PR-AUC": 0.4288868244268351
+        "AP": 0.17658690667234933,
+        "ROC-AUC": 0.7284999999999999,
+        "PR-AUC": 0.17233184440518784
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.027469769318185844,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.039375,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:15:49.222283+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:11:11.570369+00:00"
     },
     "letter__unsupervised__555": {
       "dataset": "letter",
@@ -8766,23 +8718,21 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.49494378392321353,
-        "ROC-AUC": 0.8928599999999999,
-        "PR-AUC": 0.4924176256319904
+        "AP": 0.1807858248984119,
+        "ROC-AUC": 0.7246733333333334,
+        "PR-AUC": 0.17647552008719952
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.027469769318185844,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.039375,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:15:53.811633+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:11:17.653950+00:00"
     },
     "Lymphography__unsupervised__111": {
       "dataset": "Lymphography",
@@ -8900,23 +8850,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.7091598747611978,
-        "ROC-AUC": 0.7795787464867534,
-        "PR-AUC": 0.7091283686289238
+        "AP": 0.6228826972938586,
+        "ROC-AUC": 0.6943669751605114,
+        "PR-AUC": 0.6228479262504976
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029191830915616494,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:26:43.841289+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:11:39.475259+00:00"
     },
     "magic.gamma__unsupervised__222": {
       "dataset": "magic.gamma",
@@ -8924,23 +8872,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.7059706975607952,
-        "ROC-AUC": 0.7716366943005866,
-        "PR-AUC": 0.7059406933155501
+        "AP": 0.6243903388169638,
+        "ROC-AUC": 0.6939716621536998,
+        "PR-AUC": 0.6243555814363886
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029191830915616494,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:26:52.398911+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:11:47.565679+00:00"
     },
     "magic.gamma__unsupervised__333": {
       "dataset": "magic.gamma",
@@ -8948,23 +8894,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.7174011173047723,
-        "ROC-AUC": 0.7843027757171213,
-        "PR-AUC": 0.7173707664248337
+        "AP": 0.6224627637828457,
+        "ROC-AUC": 0.6928362406048293,
+        "PR-AUC": 0.6224298441733167
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029191830915616494,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:27:02.035392+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:11:55.850849+00:00"
     },
     "magic.gamma__unsupervised__444": {
       "dataset": "magic.gamma",
@@ -8972,23 +8916,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.706215165674807,
-        "ROC-AUC": 0.7772823203180894,
-        "PR-AUC": 0.7061772647994229
+        "AP": 0.6251101949090367,
+        "ROC-AUC": 0.6943525346688197,
+        "PR-AUC": 0.6250771798465069
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029191830915616494,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:27:11.748241+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:12:03.225996+00:00"
     },
     "magic.gamma__unsupervised__555": {
       "dataset": "magic.gamma",
@@ -8996,23 +8938,21 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.7075905667340201,
-        "ROC-AUC": 0.773175091652867,
-        "PR-AUC": 0.7075562837066793
+        "AP": 0.6200493552336388,
+        "ROC-AUC": 0.694326302927615,
+        "PR-AUC": 0.6200144840392682
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029191830915616494,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:27:19.139919+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:12:07.818280+00:00"
     },
     "mammography__unsupervised__111": {
       "dataset": "mammography",
@@ -9460,21 +9400,23 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5501998591556676,
-        "ROC-AUC": 0.9219019166134608,
-        "PR-AUC": 0.5495532313818176
+        "AP": 0.5458449855023733,
+        "ROC-AUC": 0.9207346014383636,
+        "PR-AUC": 0.5490738289902758
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.031788187379957644,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:13:34.106463+00:00"
+      "time": "2026-07-13T16:31:54.719902+00:00",
+      "v31_bisect_candidate": "unsup_lfdanc",
+      "resolved_policy": "unsup_lfdanc"
     },
     "PageBlocks__unsupervised__222": {
       "dataset": "PageBlocks",
@@ -9482,21 +9424,23 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5232264233287561,
-        "ROC-AUC": 0.9188713945541354,
-        "PR-AUC": 0.5224795384477657
+        "AP": 0.5415183752575617,
+        "ROC-AUC": 0.9208827745720446,
+        "PR-AUC": 0.5536940865468338
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.031788187379957644,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:13:36.776726+00:00"
+      "time": "2026-07-13T16:31:58.645311+00:00",
+      "v31_bisect_candidate": "unsup_lfdanc",
+      "resolved_policy": "unsup_lfdanc"
     },
     "PageBlocks__unsupervised__333": {
       "dataset": "PageBlocks",
@@ -9504,21 +9448,23 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5260391930098571,
-        "ROC-AUC": 0.9200077901322316,
-        "PR-AUC": 0.5252787547202694
+        "AP": 0.5274854700649907,
+        "ROC-AUC": 0.922012745298816,
+        "PR-AUC": 0.555011435574581
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.031788187379957644,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:13:39.986204+00:00"
+      "time": "2026-07-13T16:32:03.737765+00:00",
+      "v31_bisect_candidate": "unsup_lfdanc",
+      "resolved_policy": "unsup_lfdanc"
     },
     "PageBlocks__unsupervised__444": {
       "dataset": "PageBlocks",
@@ -9526,21 +9472,23 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.526187801713054,
-        "ROC-AUC": 0.9204302241068454,
-        "PR-AUC": 0.5253439098442393
+        "AP": 0.5593988222032161,
+        "ROC-AUC": 0.9243176607116323,
+        "PR-AUC": 0.5641345155757499
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.031788187379957644,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:13:43.622474+00:00"
+      "time": "2026-07-13T16:32:07.587321+00:00",
+      "v31_bisect_candidate": "unsup_lfdanc",
+      "resolved_policy": "unsup_lfdanc"
     },
     "PageBlocks__unsupervised__555": {
       "dataset": "PageBlocks",
@@ -9548,21 +9496,23 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5370346512985249,
-        "ROC-AUC": 0.9193938152774934,
-        "PR-AUC": 0.5362967436794338
+        "AP": 0.540170117906482,
+        "ROC-AUC": 0.9217890801620667,
+        "PR-AUC": 0.5636565289035087
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.031788187379957644,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:13:46.364827+00:00"
+      "time": "2026-07-13T16:32:12.790901+00:00",
+      "v31_bisect_candidate": "unsup_lfdanc",
+      "resolved_policy": "unsup_lfdanc"
     },
     "pendigits__unsupervised__111": {
       "dataset": "pendigits",
@@ -9680,21 +9630,24 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5012027492550728,
-        "ROC-AUC": 0.6743283582089552,
-        "PR-AUC": 0.4992877505441508
+        "AP": 0.5074209278564539,
+        "ROC-AUC": 0.6969552238805969,
+        "PR-AUC": 0.5049328902792587
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.032397814215466406,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05078125,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:14:10.898778+00:00"
+      "time": "2026-07-13T16:33:43.135628+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Pima__unsupervised__222": {
       "dataset": "Pima",
@@ -9702,21 +9655,24 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5056556887985879,
-        "ROC-AUC": 0.6767313432835821,
-        "PR-AUC": 0.5035638275889989
+        "AP": 0.5135637068638308,
+        "ROC-AUC": 0.6982835820895522,
+        "PR-AUC": 0.511592157851827
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.032397814215466406,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05078125,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:14:14.464076+00:00"
+      "time": "2026-07-13T16:33:47.249518+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Pima__unsupervised__333": {
       "dataset": "Pima",
@@ -9724,21 +9680,24 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5063883193180776,
-        "ROC-AUC": 0.679410447761194,
-        "PR-AUC": 0.5039929908114089
+        "AP": 0.5158956852139549,
+        "ROC-AUC": 0.7079701492537313,
+        "PR-AUC": 0.5125211599652878
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.032397814215466406,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05078125,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:14:19.179664+00:00"
+      "time": "2026-07-13T16:33:51.309358+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Pima__unsupervised__444": {
       "dataset": "Pima",
@@ -9746,21 +9705,24 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.49668668957119577,
-        "ROC-AUC": 0.6796567164179104,
-        "PR-AUC": 0.4946501020238988
+        "AP": 0.5361621321109045,
+        "ROC-AUC": 0.7000223880597014,
+        "PR-AUC": 0.5338873198524745
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.032397814215466406,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05078125,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:14:22.293808+00:00"
+      "time": "2026-07-13T16:33:55.470214+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Pima__unsupervised__555": {
       "dataset": "Pima",
@@ -9768,21 +9730,24 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.4976102483271634,
-        "ROC-AUC": 0.6798955223880598,
-        "PR-AUC": 0.49553889794002903
+        "AP": 0.51141318481601,
+        "ROC-AUC": 0.6878582089552239,
+        "PR-AUC": 0.509007598909186
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.032397814215466406,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05078125,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:14:24.907875+00:00"
+      "time": "2026-07-13T16:33:59.058515+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "satellite__unsupervised__111": {
       "dataset": "satellite",
@@ -10120,23 +10085,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.3659789874232643,
-        "ROC-AUC": 0.8068670674885154,
-        "PR-AUC": 0.36597140454180643
+        "AP": 0.22094584671752612,
+        "ROC-AUC": 0.5992703169616129,
+        "PR-AUC": 0.22094057271286574
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029433265475554218,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.0482,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:16:57.369282+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:16:31.277792+00:00"
     },
     "skin__unsupervised__222": {
       "dataset": "skin",
@@ -10144,23 +10107,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.3441070018576011,
-        "ROC-AUC": 0.7857123998575624,
-        "PR-AUC": 0.34409970911179394
+        "AP": 0.22287637142705444,
+        "ROC-AUC": 0.6037009829478258,
+        "PR-AUC": 0.2228711561515682
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029433265475554218,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.0482,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:17:51.356789+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:17:08.311593+00:00"
     },
     "skin__unsupervised__333": {
       "dataset": "skin",
@@ -10168,23 +10129,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.3406302010762028,
-        "ROC-AUC": 0.7807544536542446,
-        "PR-AUC": 0.3406229068160046
+        "AP": 0.225071305217736,
+        "ROC-AUC": 0.6087224001464417,
+        "PR-AUC": 0.2250660346754687
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029433265475554218,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.0482,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:19:06.486265+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:18:02.163773+00:00"
     },
     "skin__unsupervised__444": {
       "dataset": "skin",
@@ -10192,23 +10151,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.3700820798189866,
-        "ROC-AUC": 0.8088649215663462,
-        "PR-AUC": 0.3700743039126062
+        "AP": 0.22508559421003924,
+        "ROC-AUC": 0.6084491391781611,
+        "PR-AUC": 0.22508025212497162
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029433265475554218,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.0482,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:20:42.345752+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:19:31.131726+00:00"
     },
     "skin__unsupervised__555": {
       "dataset": "skin",
@@ -10216,23 +10173,21 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.35683993651074936,
-        "ROC-AUC": 0.7982877969297084,
-        "PR-AUC": 0.35683227771628784
+        "AP": 0.2252489880590619,
+        "ROC-AUC": 0.608952901203787,
+        "PR-AUC": 0.22524382549624478
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029433265475554218,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0001,
+        "contamination_est": 0.0482,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:21:36.913058+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:20:17.012226+00:00"
     },
     "smtp__unsupervised__111": {
       "dataset": "smtp",
@@ -10350,21 +10305,24 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.4157877440225322,
-        "ROC-AUC": 0.55230412824843,
-        "PR-AUC": 0.415270598554496
+        "AP": 0.43058105818111936,
+        "ROC-AUC": 0.582489812727588,
+        "PR-AUC": 0.4300556316561653
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03139199724115323,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05015450439743285,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:21:50.383335+00:00"
+      "time": "2026-07-13T16:52:01.717404+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "SpamBase__unsupervised__222": {
       "dataset": "SpamBase",
@@ -10372,21 +10330,24 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.4140545146949136,
-        "ROC-AUC": 0.5431460672039565,
-        "PR-AUC": 0.413700851614688
+        "AP": 0.42697176456081065,
+        "ROC-AUC": 0.5794839312505183,
+        "PR-AUC": 0.4263000703131805
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03139199724115323,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05015450439743285,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:21:52.842767+00:00"
+      "time": "2026-07-13T16:52:06.322593+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "SpamBase__unsupervised__333": {
       "dataset": "SpamBase",
@@ -10394,21 +10355,24 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.4258935029240437,
-        "ROC-AUC": 0.5572803186797446,
-        "PR-AUC": 0.4254945038774884
+        "AP": 0.4336608195853113,
+        "ROC-AUC": 0.5879816101356292,
+        "PR-AUC": 0.4331862095543111
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03139199724115323,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05015450439743285,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:21:58.199360+00:00"
+      "time": "2026-07-13T16:52:12.620796+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "SpamBase__unsupervised__444": {
       "dataset": "SpamBase",
@@ -10416,21 +10380,24 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.41252630774912274,
-        "ROC-AUC": 0.5464922704895168,
-        "PR-AUC": 0.41203403456994814
+        "AP": 0.4458323333293246,
+        "ROC-AUC": 0.5909404897429905,
+        "PR-AUC": 0.44534625894798524
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03139199724115323,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05015450439743285,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:22:00.939202+00:00"
+      "time": "2026-07-13T16:52:18.895915+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "SpamBase__unsupervised__555": {
       "dataset": "SpamBase",
@@ -10438,21 +10405,24 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.42807844761348657,
-        "ROC-AUC": 0.5644753743186496,
-        "PR-AUC": 0.4273938848136202
+        "AP": 0.4175277764960402,
+        "ROC-AUC": 0.5652544980435914,
+        "PR-AUC": 0.4169067627350995
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03139199724115323,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05015450439743285,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:22:06.292582+00:00"
+      "time": "2026-07-13T16:52:24.125720+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "speech__unsupervised__111": {
       "dataset": "speech",
@@ -10460,21 +10430,24 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.018504366510789527,
-        "ROC-AUC": 0.49666930469191634,
-        "PR-AUC": 0.01759696364028591
+        "AP": 0.04957891788260656,
+        "ROC-AUC": 0.6378066704352742,
+        "PR-AUC": 0.04824661065797786
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.024273639394340844,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.050189907759088444,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:22:14.466017+00:00"
+      "time": "2026-07-13T16:53:02.098883+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "speech__unsupervised__222": {
       "dataset": "speech",
@@ -10482,21 +10455,24 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.02020165236774462,
-        "ROC-AUC": 0.49649745618993774,
-        "PR-AUC": 0.019045962719884693
+        "AP": 0.03226412326380447,
+        "ROC-AUC": 0.6538292820802712,
+        "PR-AUC": 0.030363687575743165
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.024273542879382274,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.050189907759088444,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:22:22.566107+00:00"
+      "time": "2026-07-13T16:53:12.575046+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "speech__unsupervised__333": {
       "dataset": "speech",
@@ -10504,21 +10480,24 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.01845093011397405,
-        "ROC-AUC": 0.4915500282645563,
-        "PR-AUC": 0.01744423289628203
+        "AP": 0.03596190639704692,
+        "ROC-AUC": 0.6807348784624081,
+        "PR-AUC": 0.03386866974928066
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.02427192468017391,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.050189907759088444,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:22:30.835587+00:00"
+      "time": "2026-07-13T16:53:23.062641+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "speech__unsupervised__444": {
       "dataset": "speech",
@@ -10526,21 +10505,24 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.020744322903995107,
-        "ROC-AUC": 0.4952809496890899,
-        "PR-AUC": 0.019267941899083447
+        "AP": 0.03706010862437305,
+        "ROC-AUC": 0.6751113623516111,
+        "PR-AUC": 0.03475534422775743
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.024271537862312797,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.050189907759088444,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:22:38.908881+00:00"
+      "time": "2026-07-13T16:53:33.553311+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "speech__unsupervised__555": {
       "dataset": "speech",
@@ -10548,21 +10530,24 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.02209794009365318,
-        "ROC-AUC": 0.4945211984171848,
-        "PR-AUC": 0.02015307459309925
+        "AP": 0.037179005897400585,
+        "ROC-AUC": 0.6861368004522329,
+        "PR-AUC": 0.03569427327164214
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.02427177351639939,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.050189907759088444,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:22:46.957797+00:00"
+      "time": "2026-07-13T16:53:44.126071+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Stamps__unsupervised__111": {
       "dataset": "Stamps",
@@ -10790,23 +10775,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.1469031387859933,
-        "ROC-AUC": 0.5853968253968254,
-        "PR-AUC": 0.13804537858074453
+        "AP": 0.10010061499544368,
+        "ROC-AUC": 0.40380952380952384,
+        "PR-AUC": 0.09595564445594604
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029339382839354944,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:55:57.862779+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:23:32.409052+00:00"
     },
     "vertebral__unsupervised__222": {
       "dataset": "vertebral",
@@ -10814,23 +10797,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.11561160716568716,
-        "ROC-AUC": 0.4699999999999999,
-        "PR-AUC": 0.10987193846007533
+        "AP": 0.09674391098971041,
+        "ROC-AUC": 0.3828571428571429,
+        "PR-AUC": 0.09272361970168803
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029339382839354944,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:56:01.315398+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:23:35.793670+00:00"
     },
     "vertebral__unsupervised__333": {
       "dataset": "vertebral",
@@ -10838,23 +10819,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.12418372482850107,
-        "ROC-AUC": 0.46682539682539687,
-        "PR-AUC": 0.11585954791370243
+        "AP": 0.09906391565965482,
+        "ROC-AUC": 0.4,
+        "PR-AUC": 0.09496674282604123
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029339382839354944,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:56:08.776136+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:23:40.164122+00:00"
     },
     "vertebral__unsupervised__444": {
       "dataset": "vertebral",
@@ -10862,23 +10841,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.11701410227657295,
-        "ROC-AUC": 0.47277777777777774,
-        "PR-AUC": 0.11009409474967058
+        "AP": 0.10366628627500313,
+        "ROC-AUC": 0.41777777777777775,
+        "PR-AUC": 0.09875060179275327
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029339382839354944,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:56:14.224234+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:23:43.236922+00:00"
     },
     "vertebral__unsupervised__555": {
       "dataset": "vertebral",
@@ -10886,23 +10863,21 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.11697314908912332,
-        "ROC-AUC": 0.47301587301587306,
-        "PR-AUC": 0.11032913843005013
+        "AP": 0.0977003651805365,
+        "ROC-AUC": 0.3890476190476191,
+        "PR-AUC": 0.09363123810521473
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029339382839354944,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:56:17.683041+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:23:46.427463+00:00"
     },
     "vowels__unsupervised__111": {
       "dataset": "vowels",
@@ -10910,23 +10885,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5823867102647576,
-        "ROC-AUC": 0.9673684210526317,
-        "PR-AUC": 0.5784418277979936
+        "AP": 0.1535772303816934,
+        "ROC-AUC": 0.7851351351351351,
+        "PR-AUC": 0.1444450252459266
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029118252305722656,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05013736263736264,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:56:41.155137+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:23:52.170560+00:00"
     },
     "vowels__unsupervised__222": {
       "dataset": "vowels",
@@ -10934,23 +10907,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5794006485301033,
-        "ROC-AUC": 0.9689189189189189,
-        "PR-AUC": 0.574224499526809
+        "AP": 0.18782259717874739,
+        "ROC-AUC": 0.7950640113798009,
+        "PR-AUC": 0.1826021442030524
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029118252305722656,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05013736263736264,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:56:45.882086+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:23:55.880709+00:00"
     },
     "vowels__unsupervised__333": {
       "dataset": "vowels",
@@ -10958,23 +10929,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.4450323726420353,
-        "ROC-AUC": 0.9538264580369843,
-        "PR-AUC": 0.44064098351440173
+        "AP": 0.15657718450429822,
+        "ROC-AUC": 0.7760739687055477,
+        "PR-AUC": 0.1448173782679255
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029118252305722656,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05013736263736264,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:56:51.367993+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:23:58.775923+00:00"
     },
     "vowels__unsupervised__444": {
       "dataset": "vowels",
@@ -10982,23 +10951,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.5125202288996275,
-        "ROC-AUC": 0.947524893314367,
-        "PR-AUC": 0.5084761701189282
+        "AP": 0.15889776021282698,
+        "ROC-AUC": 0.762176386913229,
+        "PR-AUC": 0.14853560075060185
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029118252305722656,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05013736263736264,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:56:55.613376+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:24:01.437340+00:00"
     },
     "vowels__unsupervised__555": {
       "dataset": "vowels",
@@ -11006,23 +10973,21 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.4600609543792915,
-        "ROC-AUC": 0.9653200568990042,
-        "PR-AUC": 0.4465191250432592
+        "AP": 0.18859950678839335,
+        "ROC-AUC": 0.7925604551920342,
+        "PR-AUC": 0.17617887170743407
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029118252305722656,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05013736263736264,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T16:57:00.559883+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:24:04.654186+00:00"
     },
     "Waveform__unsupervised__111": {
       "dataset": "Waveform",
@@ -11360,21 +11325,24 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.03742896945789369,
-        "ROC-AUC": 0.3524061908815337,
-        "PR-AUC": 0.03720752732482341
+        "AP": 0.05173320944578121,
+        "ROC-AUC": 0.5144332218274121,
+        "PR-AUC": 0.05141230068336647
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03130376168227945,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.0500103755965968,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:25:16.962014+00:00"
+      "time": "2026-07-13T16:59:53.783250+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Wilt__unsupervised__222": {
       "dataset": "Wilt",
@@ -11382,21 +11350,24 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.03714936477498004,
-        "ROC-AUC": 0.3464860282113961,
-        "PR-AUC": 0.036926591445160556
+        "AP": 0.04939763678696134,
+        "ROC-AUC": 0.4936329038564218,
+        "PR-AUC": 0.04907817159916984
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03130376168227945,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.0500103755965968,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:25:20.835342+00:00"
+      "time": "2026-07-13T16:59:56.885304+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Wilt__unsupervised__333": {
       "dataset": "Wilt",
@@ -11404,21 +11375,24 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.037520961527134446,
-        "ROC-AUC": 0.3544907431889557,
-        "PR-AUC": 0.037303241578035044
+        "AP": 0.05344339515657977,
+        "ROC-AUC": 0.5260099928865932,
+        "PR-AUC": 0.053086173562398704
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03130376168227945,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.0500103755965968,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:25:25.784191+00:00"
+      "time": "2026-07-13T17:00:00.002134+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Wilt__unsupervised__444": {
       "dataset": "Wilt",
@@ -11426,21 +11400,24 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.03706006527359377,
-        "ROC-AUC": 0.34596744891396874,
-        "PR-AUC": 0.03683960288734054
+        "AP": 0.052567348804234706,
+        "ROC-AUC": 0.5206177917051195,
+        "PR-AUC": 0.052234550699476454
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03130376168227945,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.0500103755965968,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:25:28.351607+00:00"
+      "time": "2026-07-13T17:00:03.303856+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Wilt__unsupervised__555": {
       "dataset": "Wilt",
@@ -11448,21 +11425,24 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.03726910562557031,
-        "ROC-AUC": 0.34941071309770955,
-        "PR-AUC": 0.03704848219369026
+        "AP": 0.05110578640576241,
+        "ROC-AUC": 0.5132966972980995,
+        "PR-AUC": 0.05079827773321363
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.03130376168227945,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.0500103755965968,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:25:30.859198+00:00"
+      "time": "2026-07-13T17:00:06.396416+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "wine__unsupervised__111": {
       "dataset": "wine",
@@ -11470,23 +11450,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.7336247086247086,
-        "ROC-AUC": 0.9747899159663865,
-        "PR-AUC": 0.7095918574179444
+        "AP": 0.12583227118118193,
+        "ROC-AUC": 0.6983193277310924,
+        "PR-AUC": 0.110699447089328
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029462813140396293,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05426356589147287,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:22:06.107799+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:25:34.495090+00:00"
     },
     "wine__unsupervised__222": {
       "dataset": "wine",
@@ -11494,23 +11472,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.42757748158551956,
-        "ROC-AUC": 0.892436974789916,
-        "PR-AUC": 0.4026641015431205
+        "AP": 0.16970460713285535,
+        "ROC-AUC": 0.76890756302521,
+        "PR-AUC": 0.14761410257525026
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029462813140396293,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05426356589147287,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:22:10.246300+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:25:38.558790+00:00"
     },
     "wine__unsupervised__333": {
       "dataset": "wine",
@@ -11518,23 +11494,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.05872623029122119,
-        "ROC-AUC": 0.31176470588235294,
-        "PR-AUC": 0.05161497679463446
+        "AP": 0.18932514959936456,
+        "ROC-AUC": 0.8109243697478992,
+        "PR-AUC": 0.1669116965969423
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029462813140396293,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05426356589147287,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:22:13.626395+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:25:41.985338+00:00"
     },
     "wine__unsupervised__444": {
       "dataset": "wine",
@@ -11542,23 +11516,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.4060770975056689,
-        "ROC-AUC": 0.8294117647058823,
-        "PR-AUC": 0.35472595355879594
+        "AP": 0.20044458116853525,
+        "ROC-AUC": 0.7932773109243698,
+        "PR-AUC": 0.1734080385280801
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029462813140396293,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05426356589147287,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:22:16.928928+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:25:46.104884+00:00"
     },
     "wine__unsupervised__555": {
       "dataset": "wine",
@@ -11566,23 +11538,21 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.07160103850095911,
-        "ROC-AUC": 0.38655462184873945,
-        "PR-AUC": 0.06315553653286465
+        "AP": 0.18145470453905144,
+        "ROC-AUC": 0.7949579831932773,
+        "PR-AUC": 0.15752218618103253
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.029462813140396293,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05426356589147287,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T08:22:20.955865+00:00",
-      "v31_source": "v3",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:25:50.175351+00:00"
     },
     "WPBC__unsupervised__111": {
       "dataset": "WPBC",
@@ -11590,23 +11560,21 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.27063333182100036,
-        "ROC-AUC": 0.5130336762012118,
-        "PR-AUC": 0.25761928438905046
+        "AP": 0.24023212940600058,
+        "ROC-AUC": 0.49260250810201495,
+        "PR-AUC": 0.2292635103774232
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.024791307984772252,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.045454545454545456,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T17:01:25.900959+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:25:53.913840+00:00"
     },
     "WPBC__unsupervised__222": {
       "dataset": "WPBC",
@@ -11614,23 +11582,21 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.3222789835861832,
-        "ROC-AUC": 0.5816542200929972,
-        "PR-AUC": 0.3141390631119815
+        "AP": 0.23543699421038292,
+        "ROC-AUC": 0.48414823164717485,
+        "PR-AUC": 0.223196470082716
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.024791307984772252,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.045454545454545456,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T17:01:32.637305+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:26:00.110581+00:00"
     },
     "WPBC__unsupervised__333": {
       "dataset": "WPBC",
@@ -11638,23 +11604,21 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.2696920507419196,
-        "ROC-AUC": 0.5496688741721854,
-        "PR-AUC": 0.26076301049945894
+        "AP": 0.23974015955605504,
+        "ROC-AUC": 0.5102155840495984,
+        "PR-AUC": 0.2296068039892301
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.024791307984772252,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.045454545454545456,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T17:01:36.944448+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:26:05.458132+00:00"
     },
     "WPBC__unsupervised__444": {
       "dataset": "WPBC",
@@ -11662,23 +11626,21 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.2637715477913882,
-        "ROC-AUC": 0.5734817528533183,
-        "PR-AUC": 0.25481692937810296
+        "AP": 0.24281470942671218,
+        "ROC-AUC": 0.5000704523037903,
+        "PR-AUC": 0.2318256118897904
       },
       "noise": {
-        "num_timesteps": 50,
-        "scheduler": "linear",
+        "num_timesteps": 5,
+        "scheduler": "cosine",
         "beta_start": 0.0001,
-        "beta_end": 0.02,
-        "time_emb_dim": 4,
-        "tau_snr": null,
-        "contamination_est": null,
+        "beta_end": 0.024791307984772252,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.045454545454545456,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T17:01:40.124930+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
+      "time": "2026-07-14T04:26:08.340425+00:00"
     },
     "WPBC__unsupervised__555": {
       "dataset": "WPBC",
@@ -11686,9 +11648,31 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.2567327965933146,
-        "ROC-AUC": 0.53374665351557,
-        "PR-AUC": 0.24884508661542531
+        "AP": 0.2316050963577902,
+        "ROC-AUC": 0.4778075243060448,
+        "PR-AUC": 0.22107018106088427
+      },
+      "noise": {
+        "num_timesteps": 5,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.024791307984772252,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.045454545454545456,
+        "contamination_mode": "label_free"
+      },
+      "time": "2026-07-14T04:26:11.666853+00:00"
+    },
+    "yeast__unsupervised__111": {
+      "dataset": "yeast",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.3077351117601544,
+        "ROC-AUC": 0.4727489658597445,
+        "PR-AUC": 0.322648486658214
       },
       "noise": {
         "num_timesteps": 50,
@@ -11700,31 +11684,9 @@
         "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-13T17:01:44.803694+00:00",
-      "v31_source": "backup",
-      "resolved_policy": "unsup_baseline_fallback"
-    },
-    "yeast__unsupervised__111": {
-      "dataset": "yeast",
-      "setting": "unsupervised",
-      "seed": 111,
-      "n_splits": 1,
-      "metrics_mean": {
-        "AP": 0.29821514776272406,
-        "ROC-AUC": 0.41122948122396985,
-        "PR-AUC": 0.29674785914060137
-      },
-      "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
-        "beta_start": 0.0001,
-        "beta_end": 0.0381267032047101,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.04986522911051213,
-        "contamination_mode": "label_free"
-      },
-      "time": "2026-07-14T04:26:15.401517+00:00"
+      "time": "2026-07-13T17:02:01.904112+00:00",
+      "v31_bisect_candidate": "unsup_classical_plus",
+      "resolved_policy": "unsup_classical_plus"
     },
     "yeast__unsupervised__222": {
       "dataset": "yeast",
@@ -11732,21 +11694,23 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.2983777662349437,
-        "ROC-AUC": 0.40367304007962224,
-        "PR-AUC": 0.2973024019966126
+        "AP": 0.30745507316632226,
+        "ROC-AUC": 0.4670881961646468,
+        "PR-AUC": 0.3179044303011056
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.0381267032047101,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.04986522911051213,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:26:19.145787+00:00"
+      "time": "2026-07-13T17:02:07.324235+00:00",
+      "v31_bisect_candidate": "unsup_classical_plus",
+      "resolved_policy": "unsup_classical_plus"
     },
     "yeast__unsupervised__333": {
       "dataset": "yeast",
@@ -11754,21 +11718,23 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.2971337575979661,
-        "ROC-AUC": 0.4007518083575087,
-        "PR-AUC": 0.29554611914297724
+        "AP": 0.30664860006735534,
+        "ROC-AUC": 0.4673789061632539,
+        "PR-AUC": 0.3186519369161254
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.0381267032047101,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.04986522911051213,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:26:21.951649+00:00"
+      "time": "2026-07-13T17:02:10.475164+00:00",
+      "v31_bisect_candidate": "unsup_classical_plus",
+      "resolved_policy": "unsup_classical_plus"
     },
     "yeast__unsupervised__444": {
       "dataset": "yeast",
@@ -11776,21 +11742,23 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.2988077886423462,
-        "ROC-AUC": 0.4083940493278341,
-        "PR-AUC": 0.2973378860875046
+        "AP": 0.31942875306435525,
+        "ROC-AUC": 0.467782670050208,
+        "PR-AUC": 0.3209132791795748
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.0381267032047101,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.04986522911051213,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:26:26.671949+00:00"
+      "time": "2026-07-13T17:02:13.500718+00:00",
+      "v31_bisect_candidate": "unsup_classical_plus",
+      "resolved_policy": "unsup_classical_plus"
     },
     "yeast__unsupervised__555": {
       "dataset": "yeast",
@@ -11798,21 +11766,23 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.29786189897020565,
-        "ROC-AUC": 0.4052053240306134,
-        "PR-AUC": 0.29634216589759105
+        "AP": 0.3061175010970195,
+        "ROC-AUC": 0.4651057154797018,
+        "PR-AUC": 0.31451478971689173
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.0381267032047101,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.04986522911051213,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:26:29.377179+00:00"
+      "time": "2026-07-13T17:02:17.842699+00:00",
+      "v31_bisect_candidate": "unsup_classical_plus",
+      "resolved_policy": "unsup_classical_plus"
     },
     "CIFAR10__unsupervised__111": {
       "dataset": "CIFAR10",
@@ -12040,21 +12010,24 @@
       "seed": 111,
       "n_splits": 16,
       "metrics_mean": {
-        "AP": 0.18813100795906004,
-        "ROC-AUC": 0.7636775263157896,
-        "PR-AUC": 0.18707875797218093
+        "AP": 0.19364354940778855,
+        "ROC-AUC": 0.7976228355263157,
+        "PR-AUC": 0.19254886104887678
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.02288637510807182,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:36:55.144084+00:00"
+      "time": "2026-07-13T17:27:54.674666+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "MNIST-C__unsupervised__222": {
       "dataset": "MNIST-C",
@@ -12062,21 +12035,24 @@
       "seed": 222,
       "n_splits": 16,
       "metrics_mean": {
-        "AP": 0.18758452664595757,
-        "ROC-AUC": 0.7650570460526316,
-        "PR-AUC": 0.18650161425148837
+        "AP": 0.19334342375490107,
+        "ROC-AUC": 0.7963541842105263,
+        "PR-AUC": 0.19231221313282998
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022885155893277248,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:38:32.617865+00:00"
+      "time": "2026-07-13T17:30:45.107257+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "MNIST-C__unsupervised__333": {
       "dataset": "MNIST-C",
@@ -12084,21 +12060,24 @@
       "seed": 333,
       "n_splits": 16,
       "metrics_mean": {
-        "AP": 0.18886066897494122,
-        "ROC-AUC": 0.7640568552631579,
-        "PR-AUC": 0.18764046957902708
+        "AP": 0.19336085649387005,
+        "ROC-AUC": 0.7959542039473684,
+        "PR-AUC": 0.19226805764864036
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.02288590223904507,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:40:07.080834+00:00"
+      "time": "2026-07-13T17:33:29.926541+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "MNIST-C__unsupervised__444": {
       "dataset": "MNIST-C",
@@ -12106,21 +12085,24 @@
       "seed": 444,
       "n_splits": 16,
       "metrics_mean": {
-        "AP": 0.18046310475708535,
-        "ROC-AUC": 0.7610338157894737,
-        "PR-AUC": 0.17931713064329893
+        "AP": 0.19441039342450428,
+        "ROC-AUC": 0.798009144736842,
+        "PR-AUC": 0.19328211693464242
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022885096297927735,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:41:49.890454+00:00"
+      "time": "2026-07-13T17:36:20.695834+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "MNIST-C__unsupervised__555": {
       "dataset": "MNIST-C",
@@ -12128,21 +12110,24 @@
       "seed": 555,
       "n_splits": 16,
       "metrics_mean": {
-        "AP": 0.18888217274473335,
-        "ROC-AUC": 0.7663112631578947,
-        "PR-AUC": 0.1877518095484335
+        "AP": 0.1937783835482516,
+        "ROC-AUC": 0.7978394078947368,
+        "PR-AUC": 0.19265250339165851
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022885701014791555,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:43:26.642926+00:00"
+      "time": "2026-07-13T17:39:13.083929+00:00",
+      "v31_source": "backup",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "MVTec-AD__unsupervised__111": {
       "dataset": "MVTec-AD",
@@ -12150,21 +12135,23 @@
       "seed": 111,
       "n_splits": 15,
       "metrics_mean": {
-        "AP": 0.5608681544172743,
-        "ROC-AUC": 0.7539108895969855,
-        "PR-AUC": 0.5572425195068647
+        "AP": 0.5859396379114182,
+        "ROC-AUC": 0.9667290496984821,
+        "PR-AUC": 0.9400669145698041
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.02614599851081056,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05136986301369863,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:44:20.604247+00:00"
+      "time": "2026-07-13T17:50:15.024941+00:00",
+      "v31_bisect_candidate": "unsup_baseline",
+      "resolved_policy": "unsup_baseline"
     },
     "MVTec-AD__unsupervised__222": {
       "dataset": "MVTec-AD",
@@ -12172,21 +12159,23 @@
       "seed": 222,
       "n_splits": 15,
       "metrics_mean": {
-        "AP": 0.5658357324412375,
-        "ROC-AUC": 0.7538443894494417,
-        "PR-AUC": 0.5628380762841487
+        "AP": 0.5853538492236642,
+        "ROC-AUC": 0.9669369931378664,
+        "PR-AUC": 0.9140956899234324
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.02614599851081056,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05136986301369863,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:45:16.538533+00:00"
+      "time": "2026-07-13T17:51:03.106868+00:00",
+      "v31_bisect_candidate": "unsup_baseline",
+      "resolved_policy": "unsup_baseline"
     },
     "MVTec-AD__unsupervised__333": {
       "dataset": "MVTec-AD",
@@ -12194,21 +12183,23 @@
       "seed": 333,
       "n_splits": 15,
       "metrics_mean": {
-        "AP": 0.5629085068425582,
-        "ROC-AUC": 0.750464901778089,
-        "PR-AUC": 0.5598039381542426
+        "AP": 0.584417975181202,
+        "ROC-AUC": 0.9726207804810426,
+        "PR-AUC": 0.9371172297414876
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.02614599851081056,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05136986301369863,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:46:10.938433+00:00"
+      "time": "2026-07-13T17:51:57.330574+00:00",
+      "v31_bisect_candidate": "unsup_baseline",
+      "resolved_policy": "unsup_baseline"
     },
     "MVTec-AD__unsupervised__444": {
       "dataset": "MVTec-AD",
@@ -12216,21 +12207,23 @@
       "seed": 444,
       "n_splits": 15,
       "metrics_mean": {
-        "AP": 0.5735694269991037,
-        "ROC-AUC": 0.7592759700257214,
-        "PR-AUC": 0.5704722633545273
+        "AP": 0.5806341782055182,
+        "ROC-AUC": 0.9631940112289457,
+        "PR-AUC": 0.9425270421703569
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.026145996352777534,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05136986301369863,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:46:56.872707+00:00"
+      "time": "2026-07-13T17:52:50.561340+00:00",
+      "v31_bisect_candidate": "unsup_baseline",
+      "resolved_policy": "unsup_baseline"
     },
     "MVTec-AD__unsupervised__555": {
       "dataset": "MVTec-AD",
@@ -12238,21 +12231,23 @@
       "seed": 555,
       "n_splits": 15,
       "metrics_mean": {
-        "AP": 0.5657176034008624,
-        "ROC-AUC": 0.7528206106224851,
-        "PR-AUC": 0.5625935474281956
+        "AP": 0.5840958463567839,
+        "ROC-AUC": 0.968323282733763,
+        "PR-AUC": 0.935643492562873
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.02614600120835152,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05136986301369863,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:47:45.773273+00:00"
+      "time": "2026-07-13T17:53:47.746108+00:00",
+      "v31_bisect_candidate": "unsup_baseline",
+      "resolved_policy": "unsup_baseline"
     },
     "SVHN__unsupervised__111": {
       "dataset": "SVHN",
@@ -12370,21 +12365,24 @@
       "seed": 111,
       "n_splits": 4,
       "metrics_mean": {
-        "AP": 0.07647422017680142,
-        "ROC-AUC": 0.6216551842105262,
-        "PR-AUC": 0.07592825783060815
+        "AP": 0.11247728050128383,
+        "ROC-AUC": 0.7121302631578947,
+        "PR-AUC": 0.1115623995556159
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022010131013310636,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:52:26.639302+00:00"
+      "time": "2026-07-14T08:22:54.940862+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Agnews__unsupervised__222": {
       "dataset": "Agnews",
@@ -12392,21 +12390,24 @@
       "seed": 222,
       "n_splits": 4,
       "metrics_mean": {
-        "AP": 0.07470290510453167,
-        "ROC-AUC": 0.6248223684210527,
-        "PR-AUC": 0.07420708767444086
+        "AP": 0.11184606660873858,
+        "ROC-AUC": 0.7131073157894736,
+        "PR-AUC": 0.11111245087486958
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.02201014236177063,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:52:44.331372+00:00"
+      "time": "2026-07-14T08:23:33.283117+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Agnews__unsupervised__333": {
       "dataset": "Agnews",
@@ -12414,21 +12415,24 @@
       "seed": 333,
       "n_splits": 4,
       "metrics_mean": {
-        "AP": 0.07720791489707794,
-        "ROC-AUC": 0.6349919473684211,
-        "PR-AUC": 0.07669367328671792
+        "AP": 0.11244826816711244,
+        "ROC-AUC": 0.7131551052631578,
+        "PR-AUC": 0.11158905367717224
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.02201011936221835,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:53:00.858077+00:00"
+      "time": "2026-07-14T08:24:11.016393+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Agnews__unsupervised__444": {
       "dataset": "Agnews",
@@ -12436,21 +12440,24 @@
       "seed": 444,
       "n_splits": 4,
       "metrics_mean": {
-        "AP": 0.0768732885423121,
-        "ROC-AUC": 0.6260330789473684,
-        "PR-AUC": 0.07635196192677773
+        "AP": 0.11288286803006527,
+        "ROC-AUC": 0.7147410789473685,
+        "PR-AUC": 0.11209560511376468
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022010100145466886,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:53:18.324902+00:00"
+      "time": "2026-07-14T08:24:45.027551+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Agnews__unsupervised__555": {
       "dataset": "Agnews",
@@ -12458,21 +12465,24 @@
       "seed": 555,
       "n_splits": 4,
       "metrics_mean": {
-        "AP": 0.07707427951452527,
-        "ROC-AUC": 0.6306524210526316,
-        "PR-AUC": 0.07648603491254567
+        "AP": 0.11166920128025654,
+        "ROC-AUC": 0.7151839736842105,
+        "PR-AUC": 0.11068085136555093
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022010131467249165,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:53:35.865636+00:00"
+      "time": "2026-07-14T08:25:17.671227+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Amazon__unsupervised__111": {
       "dataset": "Amazon",
@@ -12480,21 +12490,24 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.06267579151042307,
-        "ROC-AUC": 0.5969534736842105,
-        "PR-AUC": 0.06229494743854096
+        "AP": 0.06450839550688411,
+        "ROC-AUC": 0.6165977894736843,
+        "PR-AUC": 0.06413851487441022
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.0222099936596747,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:53:40.233247+00:00"
+      "time": "2026-07-14T08:25:24.214396+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Amazon__unsupervised__222": {
       "dataset": "Amazon",
@@ -12502,21 +12515,24 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.06351075331184948,
-        "ROC-AUC": 0.6050776842105263,
-        "PR-AUC": 0.06313126190053422
+        "AP": 0.06443260065969122,
+        "ROC-AUC": 0.6138401052631578,
+        "PR-AUC": 0.06406093814456575
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022209973858917837,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:53:44.749755+00:00"
+      "time": "2026-07-14T08:25:30.510815+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Amazon__unsupervised__333": {
       "dataset": "Amazon",
@@ -12524,21 +12540,24 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.06116983550747034,
-        "ROC-AUC": 0.5820333684210527,
-        "PR-AUC": 0.060768195412140236
+        "AP": 0.06455819302534224,
+        "ROC-AUC": 0.6171730526315791,
+        "PR-AUC": 0.06418943550675417
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022209957523278666,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:53:50.470349+00:00"
+      "time": "2026-07-14T08:25:36.845391+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Amazon__unsupervised__444": {
       "dataset": "Amazon",
@@ -12546,21 +12565,24 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.05976572373567175,
-        "ROC-AUC": 0.5828765263157895,
-        "PR-AUC": 0.05942204700930031
+        "AP": 0.06499392216775221,
+        "ROC-AUC": 0.6167447368421053,
+        "PR-AUC": 0.06462051630985281
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022209957770788446,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:53:55.538393+00:00"
+      "time": "2026-07-14T08:25:43.322674+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Amazon__unsupervised__555": {
       "dataset": "Amazon",
@@ -12568,21 +12590,24 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.0632644653842548,
-        "ROC-AUC": 0.5988612631578947,
-        "PR-AUC": 0.06287760239224918
+        "AP": 0.06494180250307305,
+        "ROC-AUC": 0.6189341052631578,
+        "PR-AUC": 0.06457503673417128
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022209956780749295,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:53:59.912335+00:00"
+      "time": "2026-07-14T08:25:49.739718+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Imdb__unsupervised__111": {
       "dataset": "Imdb",
@@ -12591,8 +12616,8 @@
       "n_splits": 1,
       "metrics_mean": {
         "AP": 0.0486755413240821,
-        "ROC-AUC": 0.5077966315789473,
-        "PR-AUC": 0.048156352048265016
+        "ROC-AUC": 0.5150208421052631,
+        "PR-AUC": 0.05362399325572139
       },
       "noise": {
         "num_timesteps": 5,
@@ -12604,7 +12629,9 @@
         "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:54:05.619009+00:00"
+      "time": "2026-07-14T04:54:05.619009+00:00",
+      "v31_bisect_candidate": "unsup_classical_plus",
+      "resolved_policy": "unsup_classical_plus"
     },
     "Imdb__unsupervised__222": {
       "dataset": "Imdb",
@@ -12613,8 +12640,8 @@
       "n_splits": 1,
       "metrics_mean": {
         "AP": 0.04738046395020416,
-        "ROC-AUC": 0.495484,
-        "PR-AUC": 0.04686037918857379
+        "ROC-AUC": 0.5186762105263159,
+        "PR-AUC": 0.05393867051694736
       },
       "noise": {
         "num_timesteps": 5,
@@ -12626,7 +12653,9 @@
         "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:54:10.040864+00:00"
+      "time": "2026-07-14T04:54:10.040864+00:00",
+      "v31_bisect_candidate": "unsup_classical_plus",
+      "resolved_policy": "unsup_classical_plus"
     },
     "Imdb__unsupervised__333": {
       "dataset": "Imdb",
@@ -12635,8 +12664,8 @@
       "n_splits": 1,
       "metrics_mean": {
         "AP": 0.0480794250812286,
-        "ROC-AUC": 0.49930231578947365,
-        "PR-AUC": 0.04755575101185347
+        "ROC-AUC": 0.5034294736842105,
+        "PR-AUC": 0.05245754675762277
       },
       "noise": {
         "num_timesteps": 5,
@@ -12648,7 +12677,9 @@
         "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:54:15.678426+00:00"
+      "time": "2026-07-14T04:54:15.678426+00:00",
+      "v31_bisect_candidate": "unsup_classical_plus",
+      "resolved_policy": "unsup_classical_plus"
     },
     "Imdb__unsupervised__444": {
       "dataset": "Imdb",
@@ -12657,8 +12688,8 @@
       "n_splits": 1,
       "metrics_mean": {
         "AP": 0.04906120485012652,
-        "ROC-AUC": 0.49589452631578945,
-        "PR-AUC": 0.04885240999176891
+        "ROC-AUC": 0.5238994736842104,
+        "PR-AUC": 0.0538650781652234
       },
       "noise": {
         "num_timesteps": 5,
@@ -12670,7 +12701,9 @@
         "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:54:23.731771+00:00"
+      "time": "2026-07-14T04:54:23.731771+00:00",
+      "v31_bisect_candidate": "unsup_classical_plus",
+      "resolved_policy": "unsup_classical_plus"
     },
     "Imdb__unsupervised__555": {
       "dataset": "Imdb",
@@ -12679,8 +12712,8 @@
       "n_splits": 1,
       "metrics_mean": {
         "AP": 0.04855889912618368,
-        "ROC-AUC": 0.5030127368421053,
-        "PR-AUC": 0.048031293126007714
+        "ROC-AUC": 0.5188051578947368,
+        "PR-AUC": 0.05599614298473539
       },
       "noise": {
         "num_timesteps": 5,
@@ -12692,7 +12725,9 @@
         "contamination_est": 0.05,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:54:28.759380+00:00"
+      "time": "2026-07-14T04:54:28.759380+00:00",
+      "v31_bisect_candidate": "unsup_classical_plus",
+      "resolved_policy": "unsup_classical_plus"
     },
     "Yelp__unsupervised__111": {
       "dataset": "Yelp",
@@ -12700,21 +12735,24 @@
       "seed": 111,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.08144472133046092,
-        "ROC-AUC": 0.6291102105263159,
-        "PR-AUC": 0.08087769375910682
+        "AP": 0.09128457647900506,
+        "ROC-AUC": 0.6856232631578948,
+        "PR-AUC": 0.09070793061243465
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022539488293399544,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:54:33.079023+00:00"
+      "time": "2026-07-14T08:26:38.746672+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Yelp__unsupervised__222": {
       "dataset": "Yelp",
@@ -12722,21 +12760,24 @@
       "seed": 222,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.08038342336751349,
-        "ROC-AUC": 0.6437868421052632,
-        "PR-AUC": 0.07987624114213238
+        "AP": 0.09338233284772124,
+        "ROC-AUC": 0.6895987368421053,
+        "PR-AUC": 0.0927756181267249
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022539496848490593,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:54:37.264758+00:00"
+      "time": "2026-07-14T08:26:46.105014+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Yelp__unsupervised__333": {
       "dataset": "Yelp",
@@ -12744,21 +12785,24 @@
       "seed": 333,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.0800581249762739,
-        "ROC-AUC": 0.6397150526315789,
-        "PR-AUC": 0.07952628241014134
+        "AP": 0.09079352363205007,
+        "ROC-AUC": 0.6811184210526315,
+        "PR-AUC": 0.09017606047233367
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022539505559124987,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:54:43.110085+00:00"
+      "time": "2026-07-14T08:26:52.452855+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Yelp__unsupervised__444": {
       "dataset": "Yelp",
@@ -12766,21 +12810,24 @@
       "seed": 444,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.08218139267406754,
-        "ROC-AUC": 0.6330903157894737,
-        "PR-AUC": 0.08157457704794205
+        "AP": 0.09178551804827118,
+        "ROC-AUC": 0.6821722105263158,
+        "PR-AUC": 0.09119286202489628
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.0225394881378524,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:54:49.987820+00:00"
+      "time": "2026-07-14T08:26:58.009622+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "Yelp__unsupervised__555": {
       "dataset": "Yelp",
@@ -12788,21 +12835,24 @@
       "seed": 555,
       "n_splits": 1,
       "metrics_mean": {
-        "AP": 0.08386928967529991,
-        "ROC-AUC": 0.6552003157894737,
-        "PR-AUC": 0.08333949022836531
+        "AP": 0.09228888803573829,
+        "ROC-AUC": 0.6842930526315789,
+        "PR-AUC": 0.09168162581754001
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022539462005915067,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0001,
-        "contamination_est": 0.05,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:54:55.044185+00:00"
+      "time": "2026-07-14T08:27:04.444028+00:00",
+      "v31_source": "v3",
+      "resolved_policy": null,
+      "v4_regression_guard": true
     },
     "20newsgroups__unsupervised__111": {
       "dataset": "20newsgroups",
@@ -12810,21 +12860,23 @@
       "seed": 111,
       "n_splits": 6,
       "metrics_mean": {
-        "AP": 0.08093609997766411,
-        "ROC-AUC": 0.601442776260911,
-        "PR-AUC": 0.07732192724879376
+        "AP": 0.10449390932768199,
+        "ROC-AUC": 0.7794640645458084,
+        "PR-AUC": 0.14220128948241784
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.0229788587692162,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05016181229773463,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:55:14.952893+00:00"
+      "time": "2026-07-14T08:27:30.426578+00:00",
+      "v31_bisect_candidate": "unsup_baseline",
+      "resolved_policy": "unsup_baseline"
     },
     "20newsgroups__unsupervised__222": {
       "dataset": "20newsgroups",
@@ -12832,21 +12884,23 @@
       "seed": 222,
       "n_splits": 6,
       "metrics_mean": {
-        "AP": 0.0774572194967726,
-        "ROC-AUC": 0.5920312046865792,
-        "PR-AUC": 0.07379793829484746
+        "AP": 0.10319421231391768,
+        "ROC-AUC": 0.7864629410099436,
+        "PR-AUC": 0.14983498176010288
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.02297887042593294,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05016181229773463,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:55:36.081192+00:00"
+      "time": "2026-07-14T08:27:58.137601+00:00",
+      "v31_bisect_candidate": "unsup_baseline",
+      "resolved_policy": "unsup_baseline"
     },
     "20newsgroups__unsupervised__333": {
       "dataset": "20newsgroups",
@@ -12854,21 +12908,23 @@
       "seed": 333,
       "n_splits": 6,
       "metrics_mean": {
-        "AP": 0.07883738079719808,
-        "ROC-AUC": 0.6070206561602496,
-        "PR-AUC": 0.07523627354070923
+        "AP": 0.10122136034239466,
+        "ROC-AUC": 0.7811692735057858,
+        "PR-AUC": 0.14166514527833995
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022978864310934842,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05016181229773463,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:55:57.148737+00:00"
+      "time": "2026-07-14T08:28:29.888580+00:00",
+      "v31_bisect_candidate": "unsup_baseline",
+      "resolved_policy": "unsup_baseline"
     },
     "20newsgroups__unsupervised__444": {
       "dataset": "20newsgroups",
@@ -12876,21 +12932,23 @@
       "seed": 444,
       "n_splits": 6,
       "metrics_mean": {
-        "AP": 0.07912751241035605,
-        "ROC-AUC": 0.5978162184399533,
-        "PR-AUC": 0.0755487986406208
+        "AP": 0.10401574377829421,
+        "ROC-AUC": 0.7778981917265297,
+        "PR-AUC": 0.14008078624536344
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022978860106872567,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05016181229773463,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:56:15.694234+00:00"
+      "time": "2026-07-14T08:28:58.126122+00:00",
+      "v31_bisect_candidate": "unsup_baseline",
+      "resolved_policy": "unsup_baseline"
     },
     "20newsgroups__unsupervised__555": {
       "dataset": "20newsgroups",
@@ -12898,21 +12956,23 @@
       "seed": 555,
       "n_splits": 6,
       "metrics_mean": {
-        "AP": 0.07776199433974117,
-        "ROC-AUC": 0.5913155902582382,
-        "PR-AUC": 0.0732758898354381
+        "AP": 0.10019403153362459,
+        "ROC-AUC": 0.7933943610885028,
+        "PR-AUC": 0.1446562376236159
       },
       "noise": {
-        "num_timesteps": 5,
-        "scheduler": "cosine",
+        "num_timesteps": 50,
+        "scheduler": "linear",
         "beta_start": 0.0001,
-        "beta_end": 0.022978853227496022,
-        "time_emb_dim": 8,
-        "tau_snr": 0.0005,
-        "contamination_est": 0.05016181229773463,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
         "contamination_mode": "label_free"
       },
-      "time": "2026-07-14T04:56:36.905972+00:00"
+      "time": "2026-07-14T08:29:23.596851+00:00",
+      "v31_bisect_candidate": "unsup_baseline",
+      "resolved_policy": "unsup_baseline"
     }
   },
   "failed": {}

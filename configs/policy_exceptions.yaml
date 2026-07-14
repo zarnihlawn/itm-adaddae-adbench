@@ -1,6 +1,8 @@
 unsup_baseline_fallback:
+- 20newsgroups
 - InternetAds
 - Ionosphere
+- MVTec-AD
 - WPBC
 - backdoor
 - fault

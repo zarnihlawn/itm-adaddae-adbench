@@ -1,0 +1,15 @@
+dataset,setting,candidate,seed,PR-AUC,ROC-AUC,category
+20newsgroups,unsupervised,unsup_baseline,222,14.983498176010288,78.64629410099437,nlp
+Agnews,unsupervised,unsup_baseline,111,8.947410649482649,66.49796842105263,nlp
+Amazon,unsupervised,unsup_baseline,444,6.386668883997154,61.41460000000001,nlp
+Imdb,unsupervised,unsup_classical_plus,555,5.599614298473539,51.88051578947368,nlp
+MNIST-C,unsupervised,unsup_baseline,444,11.720149383783614,76.11513684210527,cv
+MVTec-AD,unsupervised,unsup_baseline,444,94.25270421703567,96.31940112289456,cv
+PageBlocks,unsupervised,unsup_lfdanc,444,56.41345155757499,92.43176607116325,classical
+Pima,unsupervised,unsup_baseline,555,50.9007598909186,68.78582089552239,classical
+SpamBase,unsupervised,unsup_baseline,444,44.53462589479852,59.09404897429905,classical
+Wilt,unsupervised,unsup_baseline,111,5.001130274538766,50.631421470206426,classical
+Yelp,unsupervised,unsup_baseline,555,8.754913189110681,68.37572631578948,nlp
+campaign,unsupervised,unsup_baseline,111,31.549835230444888,76.70899016126172,classical
+speech,unsupervised,unsup_baseline,111,4.824661065797786,63.780667043527416,classical
+yeast,unsupervised,unsup_classical_plus,111,32.2648486658214,47.27489658597445,classical

@@ -1,0 +1,61 @@
+{
+  "dataset": "cardio",
+  "setting": "unsupervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.5471513237189596,
+    "ROC-AUC": 0.9028048613018401,
+    "PR-AUC": 0.5457255565606132
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "cardio",
+      "split": "Classical/6_cardio.npz",
+      "setting": "unsupervised",
+      "seed": 333,
+      "metrics": {
+        "AP": 0.5471513237189596,
+        "ROC-AUC": 0.9028048613018401,
+        "PR-AUC": 0.5457255565606132
+      },
+      "noise": {
+        "num_timesteps": 5,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03276470908465972,
+        "time_emb_dim": 8,
+        "tau_snr": 0.0005,
+        "contamination_est": 0.05024576734025123,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 21,
+        "pca_components": null,
+        "clip_outliers": true
+      },
+      "best_pr_auc": 0.5457255565606132,
+      "rss_mb": null,
+      "vram_mb": 49.34619140625,
+      "n_train": 1831,
+      "n_test": 1831,
+      "d": 21,
+      "score_timesteps": 3,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05024576734025123,
+      "resolved_policy": "unsup_ssts",
+      "ftp_sec": 0.006206662976182997,
+      "train_sec": 6.283849703031592,
+      "score_sec": 0.003188685979694128,
+      "total_sec": 6.542755811940879
+    }
+  ]
+}

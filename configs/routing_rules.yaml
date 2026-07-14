@@ -2,7 +2,21 @@ enabled: true
 meta_routing: true
 max_depth: 4
 dataset_overrides:
-  unsupervised: {}
+  unsupervised:
+    20newsgroups: unsup_baseline_fallback
+    Agnews: unsup_baseline_fallback
+    Amazon: unsup_baseline_fallback
+    Imdb: unsup_classical_plus
+    MNIST-C: unsup_baseline_fallback
+    MVTec-AD: unsup_baseline_fallback
+    PageBlocks: unsup_ssts
+    Pima: unsup_baseline_fallback
+    SpamBase: unsup_baseline_fallback
+    Wilt: unsup_baseline_fallback
+    Yelp: unsup_baseline_fallback
+    campaign: unsup_baseline_fallback
+    speech: unsup_baseline_fallback
+    yeast: unsup_classical_plus
   semi-supervised:
     20newsgroups: baseline_ddae
     ALOI: unsup_ssts
@@ -41,6 +55,11 @@ candidate_to_policy:
   unsup_classical_plus: unsup_classical_plus
   ddae_repro: unsup_baseline_fallback
   oracle_danc: unsup_ssts
-holdout_datasets: []
-n_training_datasets: 17
+holdout_datasets:
+- Agnews
+- Wilt
+- cardio
+- celeba
+- speech
+n_training_datasets: 31
 tree_available: true
