@@ -23,6 +23,7 @@ from ..memory import (
 )
 from ..models.adadae import AdaDDAE
 from ..models.danc import NoiseConfig, danc_policy, estimate_meta_features
+from ..policy import apply_routed_config
 from ..runlog.logger import RunLogger
 
 
@@ -42,8 +43,10 @@ def run_single_file(
     logger: Optional[RunLogger] = None,
     dataset_name: str = "",
     split_name: str = "",
+    category: str = "classical",
 ) -> Dict[str, Any]:
     t_total_start = time.perf_counter()
+    config = apply_routed_config(config, setting, category)
     hw = config["hardware"]
     apply_thread_limits(hw.get("num_threads", 8))
     set_seed(seed)
@@ -249,6 +252,7 @@ def run_single_file(
         "device": str(device),
         "contamination_mode": contam_mode,
         "contamination_est": meta.get("contamination"),
+        "resolved_policy": adadae_cfg.get("resolved_policy"),
         "ftp_sec": ftp_sec,
         "train_sec": train_sec,
         "score_sec": score_sec,

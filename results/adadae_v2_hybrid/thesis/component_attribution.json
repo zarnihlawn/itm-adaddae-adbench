@@ -1,0 +1,22 @@
+{
+  "unsupervised": [
+    "LF-DANC",
+    "MANS",
+    "SSTS",
+    "FTP"
+  ],
+  "semi_classical": [
+    "DDAE-faithful baseline (no AdaDDAE extras)"
+  ],
+  "semi_cv_nlp": [
+    "FTP",
+    "TAPS (contrastive_alpha=0.06)",
+    "fixed T=50 linear"
+  ],
+  "banned_components": [
+    "VUS",
+    "DTE-View",
+    "RDT",
+    "calibrated fusion"
+  ]
+}

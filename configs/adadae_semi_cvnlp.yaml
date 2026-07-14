@@ -1,0 +1,62 @@
+# AdaDDAE v2 semi CV/NLP: FTP + fixed T=50 + light TAPS (no DANC on high-d)
+seed: 111
+seeds: [111, 222, 333, 444, 555]
+
+paths:
+  adbench_root: ../ADBench/adbench/datasets
+  results_dir: results/adadae_semi_cvnlp
+  run_id: adadae_semi_cvnlp
+
+train:
+  setting: semi-supervised
+  lr: 0.001
+  epochs: 100
+  eval_every: 10
+  early_stop_patience: 30
+  contrastive: true
+  contrastive_alpha: 0.06
+  contrastive_alpha_unsupervised: 0.05
+  hard_negative_mining: true
+  contrastive_gamma: 1.0
+  contrastive_adaptive_alpha: true
+
+model:
+  hidden_dims: [512, 512]
+  latent_dim: 32
+  activation: lrelu
+
+diffusion:
+  num_timesteps: 50
+  beta_start: 0.0001
+  beta_end: 0.02
+  scheduler: linear
+  time_emb_dim: 4
+  time_emb_type: sinusoidal
+
+adadae:
+  policy: static
+  use_danc: false
+  use_scs: false
+  use_ftp: true
+  use_multiview: false
+  use_uncertainty_view: false
+  use_dte_view: false
+  use_rejection_training: false
+  contrastive_pairing: taps
+  fusion_mode: fixed
+  fusion_weights:
+    reconstruction: 1.0
+    latent: 0.0
+    residual: 0.0
+    uncertainty: 0.0
+    diffusion_time: 0.0
+
+features:
+  scaler: auto
+  pca_dim_threshold: 128
+  pca_max_components: 128
+  pca_variance: 0.95
+  clip_outliers: true
+  clip_sigma: 5.0
+
+hardware: hardware_cpu.yaml

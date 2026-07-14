@@ -139,6 +139,37 @@ python scripts/compare_to_ddae.py
 ```
 
 Large datasets (`http`, `donors`, `census`, …) subsample **training** to 50k rows on CPU (`hardware_cpu.yaml: max_train_samples`) while keeping full evaluation; disclose this in the thesis. GPU runs use the full training split.
+
+## AdaDDAE v2 hybrid (beat DDAE PR-AUC)
+
+Frozen DDAE baseline: `backup/ddae_baseline_570/` (570/570, Table-1 reproduction).
+
+**Policy routing** (`src/policy.py`): unsup → LF-DANC+MANS+SSTS; semi classical → `baselines_ddae`; semi CV/NLP → FTP+light TAPS.
+
+```bash
+# On Vast RTX 3060 12GB — smoke gates first
+bash scripts/vast_adadae_v2_smoke.sh 12gb
+
+# Production (tmux): unsup 285 + semi CV/NLP 50
+bash scripts/run_adadae_v2_protocol.sh unsup   # or: semi | merge | all
+
+# After GPU runs — merge hybrid Table 1
+python scripts/merge_completed.py \
+  --semi-classical backup/ddae_baseline_570/metrics/completed.json \
+  --semi-cvnlp results/adadae_semi_cvnlp/metrics/completed.json \
+  --unsup results/adadae_unsup_ssts/metrics/completed.json \
+  --out results/adadae_v2_hybrid/metrics/completed.json \
+  --copy-metrics
+
+python scripts/compare_to_ddae.py \
+  --completed results/adadae_v2_hybrid/metrics/completed.json \
+  --out-dir results/adadae_v2_hybrid/thesis
+
+python scripts/generate_hybrid_thesis.py
+```
+
+Configs: `adadae_unsup_ssts.yaml`, `adadae_semi_cvnlp.yaml`, `adadae_v2_hybrid.yaml` (routed full 570).
+
 ## Targets (DDAE, ADBench mean)
 
 | Setting | PR-AUC | ROC-AUC |

@@ -1,0 +1,63 @@
+# AdaDDAE v2 unsupervised: LF-DANC + MANS + SSTS (ablation winner)
+seed: 111
+seeds: [111, 222, 333, 444, 555]
+
+paths:
+  adbench_root: ../ADBench/adbench/datasets
+  results_dir: results/adadae_unsup_ssts
+  run_id: adadae_unsup_ssts
+
+train:
+  setting: unsupervised
+  lr: 0.001
+  epochs: 100
+  eval_every: 10
+  early_stop_patience: 30
+  contrastive: false
+  contrastive_alpha: 0.0
+  hard_negative_mining: false
+
+model:
+  hidden_dims: [512, 512]
+  latent_dim: 32
+  activation: lrelu
+
+diffusion:
+  num_timesteps: 50
+  beta_start: 0.0001
+  beta_end: 0.02
+  scheduler: linear
+  time_emb_dim: 8
+  time_emb_type: sinusoidal
+
+adadae:
+  policy: static
+  use_danc: true
+  use_scs: true
+  use_ftp: true
+  use_multiview: false
+  scs_max_timesteps: 50
+  scs_mode: snr_weighted
+  scs_selection: snr_stratified
+  danc_contamination_mode: label_free
+  use_uncertainty_view: false
+  use_dte_view: false
+  use_rejection_training: false
+  contrastive_pairing: random
+  fusion_mode: fixed
+  fusion_weights:
+    reconstruction: 1.0
+    latent: 0.0
+    residual: 0.0
+    uncertainty: 0.0
+    diffusion_time: 0.0
+
+features:
+  scaler: auto
+  pca_dim_threshold: 128
+  pca_max_components: 128
+  pca_variance: 0.95
+  clip_outliers: true
+  clip_sigma: 5.0
+
+hardware: hardware_cpu.yaml

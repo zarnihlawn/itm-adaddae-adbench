@@ -329,6 +329,7 @@ def main():
                     logger=logger,
                     dataset_name=spec.name,
                     split_name=rel,
+                    category=spec.category,
                 )
                 split_rows.append(row)
                 cleanup_memory()
