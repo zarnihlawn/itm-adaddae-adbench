@@ -1,6 +1,6 @@
 {
   "finding": "Monolithic default_gpu / vus stack regresses on GPU",
   "evidence_semi_vus_pr_delta": -18.7,
-  "evidence_file": "/home/zarnihlawn/Desktop/ITM/project/results/thesis/ablation_ladder_semi_supervised.csv",
+  "evidence_file": "/workspace/ITM/project/results/thesis/ablation_ladder_semi_supervised.csv",
   "recommendation": "Use v3 dataset-aware routing; ban VUS on semi; revert NLP semi to baseline"
 }

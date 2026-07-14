@@ -1,0 +1,61 @@
+{
+  "dataset": "vertebral",
+  "setting": "semi-supervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.2497461343403392,
+    "ROC-AUC": 0.5380952380952381,
+    "PR-AUC": 0.23571844748514045
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "vertebral",
+      "split": "Classical/39_vertebral.npz",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.2497461343403392,
+        "ROC-AUC": 0.5380952380952381,
+        "PR-AUC": 0.23571844748514045
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 6,
+        "pca_components": null,
+        "clip_outliers": true
+      },
+      "best_pr_auc": 0.23571844748514045,
+      "rss_mb": null,
+      "vram_mb": 51.9580078125,
+      "n_train": 105,
+      "n_test": 135,
+      "d": 6,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05714285714285714,
+      "resolved_policy": "semi_cvnlp_taps_light",
+      "ftp_sec": 0.004041875945404172,
+      "train_sec": 4.908515463001095,
+      "score_sec": 0.0031770250061526895,
+      "total_sec": 5.157244186033495
+    }
+  ]
+}
