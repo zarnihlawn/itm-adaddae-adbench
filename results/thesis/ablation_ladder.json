@@ -1,0 +1,12 @@
+{
+  "vus": {
+    "setting": "semi-supervised",
+    "seed": 111,
+    "n_datasets": 10,
+    "metrics": {
+      "AP": 0.1071827371802424,
+      "ROC-AUC": 0.5582034123676384,
+      "PR-AUC": 0.10576678523598237
+    }
+  }
+}
