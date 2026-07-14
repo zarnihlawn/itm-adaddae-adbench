@@ -1,4 +1,5 @@
-# AdaDDAE: Adaptive Diffusion-Scheduled Denoising Autoencoder
+# AdaDDAE: Adaptive Diffusion-Scheduled Denoising Autoencoder 
+
 
 Master's thesis implementation for tabular anomaly detection on **ADBench** (57 datasets), designed to outperform **DDAE** (KDD 2025, [arXiv:2508.00758](https://arxiv.org/abs/2508.00758)).
 
