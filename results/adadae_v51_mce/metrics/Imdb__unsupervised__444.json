@@ -1,0 +1,74 @@
+{
+  "dataset": "Imdb",
+  "setting": "unsupervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.04887458204236546,
+    "ROC-AUC": 0.4951974736842105,
+    "PR-AUC": 0.04821892951499866
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "Imdb",
+      "split": "NLP_by_BERT/imdb.npz",
+      "setting": "unsupervised",
+      "seed": 444,
+      "metrics": {
+        "AP": 0.04887458204236546,
+        "ROC-AUC": 0.4951974736842105,
+        "PR-AUC": 0.04821892951499866
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "nlp",
+        "n_features_out": 128,
+        "use_svd": true,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "nlp",
+          "output_dim": 128,
+          "use_svd": true,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.04821892951499866,
+      "rss_mb": null,
+      "vram_mb": 2209.30322265625,
+      "n_train": 10000,
+      "n_test": 10000,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.6303489189594984,
+      "train_sec": 8.298195883980952,
+      "score_sec": 0.11145004804711789,
+      "total_sec": 9.591585771995597
+    }
+  ]
+}

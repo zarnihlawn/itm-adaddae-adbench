@@ -1,0 +1,74 @@
+{
+  "dataset": "Yelp",
+  "setting": "unsupervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.08807875225928266,
+    "ROC-AUC": 0.6746257894736842,
+    "PR-AUC": 0.0875933955869217
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "Yelp",
+      "split": "NLP_by_BERT/yelp.npz",
+      "setting": "unsupervised",
+      "seed": 333,
+      "metrics": {
+        "AP": 0.08807875225928266,
+        "ROC-AUC": 0.6746257894736842,
+        "PR-AUC": 0.0875933955869217
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "nlp",
+        "n_features_out": 128,
+        "use_svd": true,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "nlp",
+          "output_dim": 128,
+          "use_svd": true,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.0875933955869217,
+      "rss_mb": null,
+      "vram_mb": 2209.30322265625,
+      "n_train": 10000,
+      "n_test": 10000,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.7272667209617794,
+      "train_sec": 3.906314127962105,
+      "score_sec": 0.11153202701825649,
+      "total_sec": 5.366764608072117
+    }
+  ]
+}

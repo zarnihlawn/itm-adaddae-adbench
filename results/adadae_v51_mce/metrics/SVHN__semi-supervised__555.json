@@ -1,0 +1,608 @@
+{
+  "dataset": "SVHN",
+  "setting": "semi-supervised",
+  "seed": 555,
+  "n_splits": 10,
+  "metrics_mean": {
+    "AP": 0.1696954974205865,
+    "ROC-AUC": 0.6202828962422754,
+    "PR-AUC": 0.16779055048809619
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.03855383480193665,
+    "ROC-AUC": 0.03503958271021927,
+    "PR-AUC": 0.03868309050433834
+  },
+  "splits": [
+    {
+      "dataset": "SVHN",
+      "split": "CV_by_ResNet18/SVHN_0.npz",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "metrics": {
+        "AP": 0.15164726254284733,
+        "ROC-AUC": 0.6193722405323052,
+        "PR-AUC": 0.1491307363293347
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 128,
+        "pca_components": null,
+        "clip_outliers": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.1491307363293347,
+      "rss_mb": null,
+      "vram_mb": 757.10498046875,
+      "n_train": 2474,
+      "n_test": 2734,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.050121261115602264,
+      "resolved_policy": "semi_cvnlp_ftp",
+      "ftp_sec": 0.1173349260352552,
+      "train_sec": 3.6953999779652804,
+      "score_sec": 0.032920534955337644,
+      "total_sec": 4.247656958992593
+    },
+    {
+      "dataset": "SVHN",
+      "split": "CV_by_ResNet18/SVHN_1.npz",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "metrics": {
+        "AP": 0.16834784033012457,
+        "ROC-AUC": 0.6725734736842105,
+        "PR-AUC": 0.1667738296258607
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 128,
+        "pca_components": null,
+        "clip_outliers": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.1667738296258607,
+      "rss_mb": null,
+      "vram_mb": 1425.57080078125,
+      "n_train": 4750,
+      "n_test": 5250,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.050105263157894736,
+      "resolved_policy": "semi_cvnlp_ftp",
+      "ftp_sec": 0.20304612896870822,
+      "train_sec": 4.445953696966171,
+      "score_sec": 0.05764428910333663,
+      "total_sec": 4.978555754991248
+    },
+    {
+      "dataset": "SVHN",
+      "split": "CV_by_ResNet18/SVHN_2.npz",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "metrics": {
+        "AP": 0.2032700176709309,
+        "ROC-AUC": 0.6523391578947368,
+        "PR-AUC": 0.2014518765637248
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 128,
+        "pca_components": null,
+        "clip_outliers": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.2014518765637248,
+      "rss_mb": null,
+      "vram_mb": 1425.57080078125,
+      "n_train": 4750,
+      "n_test": 5250,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.050105263157894736,
+      "resolved_policy": "semi_cvnlp_ftp",
+      "ftp_sec": 0.16349005897063762,
+      "train_sec": 3.4083702149800956,
+      "score_sec": 0.05761076288763434,
+      "total_sec": 3.873711530934088
+    },
+    {
+      "dataset": "SVHN",
+      "split": "CV_by_ResNet18/SVHN_3.npz",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "metrics": {
+        "AP": 0.12839742975731042,
+        "ROC-AUC": 0.5810642114502005,
+        "PR-AUC": 0.12729811909082278
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 128,
+        "pca_components": null,
+        "clip_outliers": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.12729811909082278,
+      "rss_mb": null,
+      "vram_mb": 1278.15673828125,
+      "n_train": 4248,
+      "n_test": 4696,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05014124293785311,
+      "resolved_policy": "semi_cvnlp_ftp",
+      "ftp_sec": 0.20751404797192663,
+      "train_sec": 2.081650075968355,
+      "score_sec": 0.05432367406319827,
+      "total_sec": 2.620920493034646
+    },
+    {
+      "dataset": "SVHN",
+      "split": "CV_by_ResNet18/SVHN_4.npz",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "metrics": {
+        "AP": 0.13310426389866128,
+        "ROC-AUC": 0.5920823277017968,
+        "PR-AUC": 0.13130962392538004
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 128,
+        "pca_components": null,
+        "clip_outliers": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.13130962392538004,
+      "rss_mb": null,
+      "vram_mb": 1124.33056640625,
+      "n_train": 3729,
+      "n_test": 4121,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05014749262536873,
+      "resolved_policy": "semi_cvnlp_ftp",
+      "ftp_sec": 0.17143242398742586,
+      "train_sec": 7.27110111201182,
+      "score_sec": 0.04787762102205306,
+      "total_sec": 7.775739238015376
+    },
+    {
+      "dataset": "SVHN",
+      "split": "CV_by_ResNet18/SVHN_5.npz",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "metrics": {
+        "AP": 0.20926931526103698,
+        "ROC-AUC": 0.6545122916536212,
+        "PR-AUC": 0.2082532673541514
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 128,
+        "pca_components": null,
+        "clip_outliers": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.2082532673541514,
+      "rss_mb": null,
+      "vram_mb": 1039.43603515625,
+      "n_train": 3441,
+      "n_test": 3803,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.04998546934030805,
+      "resolved_policy": "semi_cvnlp_ftp",
+      "ftp_sec": 0.16526169597636908,
+      "train_sec": 6.995996101060882,
+      "score_sec": 0.044343734974972904,
+      "total_sec": 7.435797851998359
+    },
+    {
+      "dataset": "SVHN",
+      "split": "CV_by_ResNet18/SVHN_6.npz",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "metrics": {
+        "AP": 0.13884474956297999,
+        "ROC-AUC": 0.5802365021622524,
+        "PR-AUC": 0.1365152399260486
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 128,
+        "pca_components": null,
+        "clip_outliers": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.1365152399260486,
+      "rss_mb": null,
+      "vram_mb": 870.5068359375,
+      "n_train": 2863,
+      "n_test": 3165,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.050296891372685996,
+      "resolved_policy": "semi_cvnlp_ftp",
+      "ftp_sec": 0.13694703194778413,
+      "train_sec": 2.523928535054438,
+      "score_sec": 0.03694790601730347,
+      "total_sec": 2.964795158011839
+    },
+    {
+      "dataset": "SVHN",
+      "split": "CV_by_ResNet18/SVHN_7.npz",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "metrics": {
+        "AP": 0.25546241011768733,
+        "ROC-AUC": 0.6636701142215286,
+        "PR-AUC": 0.2535799055966037
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 128,
+        "pca_components": null,
+        "clip_outliers": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.2535799055966037,
+      "rss_mb": null,
+      "vram_mb": 850.90576171875,
+      "n_train": 2797,
+      "n_test": 3092,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.050053628888094386,
+      "resolved_policy": "semi_cvnlp_ftp",
+      "ftp_sec": 0.12011607398744673,
+      "train_sec": 2.342025212943554,
+      "score_sec": 0.036135889939032495,
+      "total_sec": 2.7180534260114655
+    },
+    {
+      "dataset": "SVHN",
+      "split": "CV_by_ResNet18/SVHN_8.npz",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "metrics": {
+        "AP": 0.15724077638929168,
+        "ROC-AUC": 0.5868560189651434,
+        "PR-AUC": 0.15527498716618848
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 128,
+        "pca_components": null,
+        "clip_outliers": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.15527498716618848,
+      "rss_mb": null,
+      "vram_mb": 769.2841796875,
+      "n_train": 2522,
+      "n_test": 2788,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05035685963521015,
+      "resolved_policy": "semi_cvnlp_ftp",
+      "ftp_sec": 0.11018345097545534,
+      "train_sec": 2.1033527300460264,
+      "score_sec": 0.03279443993233144,
+      "total_sec": 2.525460861972533
+    },
+    {
+      "dataset": "SVHN",
+      "split": "CV_by_ResNet18/SVHN_9.npz",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "metrics": {
+        "AP": 0.15137090867499492,
+        "ROC-AUC": 0.6001226241569588,
+        "PR-AUC": 0.14831791930284666
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 128,
+        "pca_components": null,
+        "clip_outliers": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.14831791930284666,
+      "rss_mb": null,
+      "vram_mb": 713.49072265625,
+      "n_train": 2329,
+      "n_test": 2575,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.0502361528553027,
+      "resolved_policy": "semi_cvnlp_ftp",
+      "ftp_sec": 0.11084565601777285,
+      "train_sec": 2.725332251051441,
+      "score_sec": 0.030350257991813123,
+      "total_sec": 3.1092371630948037
+    }
+  ]
+}

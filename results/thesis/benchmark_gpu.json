@@ -1,0 +1,91 @@
+{
+  "n_jobs": 10,
+  "total_seconds": 36.080018043518066,
+  "mean_seconds_per_job": 3.6080018043518067,
+  "jobs_per_hour_estimate": 997.7822061113841,
+  "peak_vram_mb": 192.7197265625,
+  "cuda_available": true,
+  "device": "NVIDIA GeForce RTX 3060",
+  "jobs": [
+    {
+      "dataset": "cardio",
+      "setting": "semi-supervised",
+      "seconds": 4.823973894119263,
+      "vram_mb": 43.82177734375,
+      "pr_auc": 0.20310461028901328,
+      "roc_auc": 0.5473965195432587
+    },
+    {
+      "dataset": "cardio",
+      "setting": "unsupervised",
+      "seconds": 3.244835615158081,
+      "vram_mb": 51.2060546875,
+      "pr_auc": 0.5262597987709422,
+      "roc_auc": 0.8526641032683329
+    },
+    {
+      "dataset": "ALOI",
+      "setting": "unsupervised",
+      "seconds": 7.559874534606934,
+      "vram_mb": 192.7197265625,
+      "pr_auc": 0.033785414827707694,
+      "roc_auc": 0.5434737715567639
+    },
+    {
+      "dataset": "thyroid",
+      "setting": "semi-supervised",
+      "seconds": 3.2748279571533203,
+      "vram_mb": 59.65087890625,
+      "pr_auc": 0.16271667280970686,
+      "roc_auc": 0.6647381954184197
+    },
+    {
+      "dataset": "breastw",
+      "setting": "semi-supervised",
+      "seconds": 2.9373300075531006,
+      "vram_mb": 33.099609375,
+      "pr_auc": 0.6993251679228284,
+      "roc_auc": 0.7090165479286819
+    },
+    {
+      "dataset": "pendigits",
+      "setting": "semi-supervised",
+      "seconds": 3.2659780979156494,
+      "vram_mb": 90.75634765625,
+      "pr_auc": 0.08874143407352195,
+      "roc_auc": 0.67824790143825
+    },
+    {
+      "dataset": "vowels",
+      "setting": "unsupervised",
+      "seconds": 2.691352367401123,
+      "vram_mb": 44.80224609375,
+      "pr_auc": 0.025460682721634237,
+      "roc_auc": 0.38920341394025604
+    },
+    {
+      "dataset": "musk",
+      "setting": "semi-supervised",
+      "seconds": 2.8707754611968994,
+      "vram_mb": 56.04541015625,
+      "pr_auc": 0.046860694973360845,
+      "roc_auc": 0.3901397974292845
+    },
+    {
+      "dataset": "satellite",
+      "setting": "semi-supervised",
+      "seconds": 2.3238039016723633,
+      "vram_mb": 111.7626953125,
+      "pr_auc": 0.5912812301845664,
+      "roc_auc": 0.592163779246294
+    },
+    {
+      "dataset": "annthyroid",
+      "setting": "semi-supervised",
+      "seconds": 3.087266206741333,
+      "vram_mb": 92.73193359375,
+      "pr_auc": 0.24499408269268622,
+      "roc_auc": 0.6722486855427116
+    }
+  ]
+}

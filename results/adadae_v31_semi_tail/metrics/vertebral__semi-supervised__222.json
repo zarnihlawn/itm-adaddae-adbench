@@ -58,10 +58,10 @@
       "contamination_mode": "label_free",
       "contamination_est": 0.05714285714285714,
       "resolved_policy": "semi_cvnlp_taps_light",
-      "ftp_sec": 0.006310492986813188,
-      "train_sec": 5.080969572998583,
-      "score_sec": 0.003149803029373288,
-      "total_sec": 5.349255566019565
+      "ftp_sec": 0.005679429043084383,
+      "train_sec": 4.923994932090864,
+      "score_sec": 0.003140648943372071,
+      "total_sec": 5.185920286923647
     }
   ]
 }

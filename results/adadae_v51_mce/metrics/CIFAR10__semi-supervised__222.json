@@ -1,0 +1,578 @@
+{
+  "dataset": "CIFAR10",
+  "setting": "semi-supervised",
+  "seed": 222,
+  "n_splits": 10,
+  "metrics_mean": {
+    "AP": 0.1741712899554346,
+    "ROC-AUC": 0.6544493536121674,
+    "PR-AUC": 0.17223189506078596
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.042931731617454685,
+    "ROC-AUC": 0.06410654447622231,
+    "PR-AUC": 0.04268547698998296
+  },
+  "splits": [
+    {
+      "dataset": "CIFAR10",
+      "split": "CV_by_ResNet18/CIFAR10_0.npz",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.20381674629748575,
+        "ROC-AUC": 0.7113733840304183,
+        "PR-AUC": 0.20178978160095887
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.20178978160095887,
+      "rss_mb": null,
+      "vram_mb": 763.45263671875,
+      "n_train": 2500,
+      "n_test": 2763,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "baseline_ddae",
+      "ftp_sec": 0.11827713099773973,
+      "train_sec": 3.2732763710664585,
+      "score_sec": 0.03325363399926573,
+      "total_sec": 3.8726693940116093
+    },
+    {
+      "dataset": "CIFAR10",
+      "split": "CV_by_ResNet18/CIFAR10_1.npz",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.16754827393496424,
+        "ROC-AUC": 0.6585916349809887,
+        "PR-AUC": 0.16580210289610442
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.16580210289610442,
+      "rss_mb": null,
+      "vram_mb": 763.45263671875,
+      "n_train": 2500,
+      "n_test": 2763,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "baseline_ddae",
+      "ftp_sec": 0.1205865329829976,
+      "train_sec": 2.5381507609272376,
+      "score_sec": 0.03249699401203543,
+      "total_sec": 2.9451869489857927
+    },
+    {
+      "dataset": "CIFAR10",
+      "split": "CV_by_ResNet18/CIFAR10_2.npz",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.11959467587782263,
+        "ROC-AUC": 0.5812395437262358,
+        "PR-AUC": 0.11808183602874331
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.11808183602874331,
+      "rss_mb": null,
+      "vram_mb": 763.45263671875,
+      "n_train": 2500,
+      "n_test": 2763,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "baseline_ddae",
+      "ftp_sec": 0.12190162495244294,
+      "train_sec": 2.538419823977165,
+      "score_sec": 0.032691919011995196,
+      "total_sec": 2.9030137530062348
+    },
+    {
+      "dataset": "CIFAR10",
+      "split": "CV_by_ResNet18/CIFAR10_3.npz",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.13128885998345335,
+        "ROC-AUC": 0.6025034220532319,
+        "PR-AUC": 0.12912398386060675
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.12912398386060675,
+      "rss_mb": null,
+      "vram_mb": 763.45263671875,
+      "n_train": 2500,
+      "n_test": 2763,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "baseline_ddae",
+      "ftp_sec": 0.13027596508618444,
+      "train_sec": 1.67844032892026,
+      "score_sec": 0.03249445906840265,
+      "total_sec": 2.047374727902934
+    },
+    {
+      "dataset": "CIFAR10",
+      "split": "CV_by_ResNet18/CIFAR10_4.npz",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.2604309100855933,
+        "ROC-AUC": 0.7507817490494296,
+        "PR-AUC": 0.2585618846432981
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.2585618846432981,
+      "rss_mb": null,
+      "vram_mb": 763.45263671875,
+      "n_train": 2500,
+      "n_test": 2763,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "baseline_ddae",
+      "ftp_sec": 0.10807554598432034,
+      "train_sec": 1.6242615759838372,
+      "score_sec": 0.0325903850607574,
+      "total_sec": 1.9418847470078617
+    },
+    {
+      "dataset": "CIFAR10",
+      "split": "CV_by_ResNet18/CIFAR10_5.npz",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.11759039132162785,
+        "ROC-AUC": 0.5259026615969581,
+        "PR-AUC": 0.11636442389285954
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.11636442389285954,
+      "rss_mb": null,
+      "vram_mb": 763.45263671875,
+      "n_train": 2500,
+      "n_test": 2763,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "baseline_ddae",
+      "ftp_sec": 0.11360912106465548,
+      "train_sec": 2.6987029700540006,
+      "score_sec": 0.03255749691743404,
+      "total_sec": 3.054087706026621
+    },
+    {
+      "dataset": "CIFAR10",
+      "split": "CV_by_ResNet18/CIFAR10_6.npz",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.17472481988931873,
+        "ROC-AUC": 0.6958965779467681,
+        "PR-AUC": 0.17324517557210037
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.17324517557210037,
+      "rss_mb": null,
+      "vram_mb": 763.45263671875,
+      "n_train": 2500,
+      "n_test": 2763,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "baseline_ddae",
+      "ftp_sec": 0.11172449903097004,
+      "train_sec": 1.602212933008559,
+      "score_sec": 0.03254002192988992,
+      "total_sec": 1.978089259006083
+    },
+    {
+      "dataset": "CIFAR10",
+      "split": "CV_by_ResNet18/CIFAR10_7.npz",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.21895581429980956,
+        "ROC-AUC": 0.6591482889733842,
+        "PR-AUC": 0.21576693099588173
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.21576693099588173,
+      "rss_mb": null,
+      "vram_mb": 763.45263671875,
+      "n_train": 2500,
+      "n_test": 2763,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "baseline_ddae",
+      "ftp_sec": 0.1094316050875932,
+      "train_sec": 3.048803360085003,
+      "score_sec": 0.03263886005152017,
+      "total_sec": 3.436474481015466
+    },
+    {
+      "dataset": "CIFAR10",
+      "split": "CV_by_ResNet18/CIFAR10_8.npz",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.17851047483409166,
+        "ROC-AUC": 0.701651711026616,
+        "PR-AUC": 0.1764931227879815
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.1764931227879815,
+      "rss_mb": null,
+      "vram_mb": 763.45263671875,
+      "n_train": 2500,
+      "n_test": 2763,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "baseline_ddae",
+      "ftp_sec": 0.10928431199863553,
+      "train_sec": 3.529066902003251,
+      "score_sec": 0.03254471602849662,
+      "total_sec": 3.8838886519661173
+    },
+    {
+      "dataset": "CIFAR10",
+      "split": "CV_by_ResNet18/CIFAR10_9.npz",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.16925193303017871,
+        "ROC-AUC": 0.6574045627376426,
+        "PR-AUC": 0.1670897083293249
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 128,
+        "use_svd": false,
+        "use_random_projection": true,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 128,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.1670897083293249,
+      "rss_mb": null,
+      "vram_mb": 763.45263671875,
+      "n_train": 2500,
+      "n_test": 2763,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "baseline_ddae",
+      "ftp_sec": 0.11568432801868767,
+      "train_sec": 1.633652487071231,
+      "score_sec": 0.03256955510005355,
+      "total_sec": 1.995879500056617
+    }
+  ]
+}

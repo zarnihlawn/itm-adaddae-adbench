@@ -1045,10 +1045,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.05026929982046679,
           "resolved_policy": "semi_rdt_tail",
-          "ftp_sec": 0.00811827601864934,
-          "train_sec": 6.500608899979852,
-          "score_sec": 0.02838692895602435,
-          "total_sec": 7.025352612021379
+          "ftp_sec": 0.006630507996305823,
+          "train_sec": 6.595402464969084,
+          "score_sec": 0.02832072600722313,
+          "total_sec": 6.878370653954335
         }
       ]
     },
@@ -1112,10 +1112,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.05026929982046679,
           "resolved_policy": "semi_rdt_tail",
-          "ftp_sec": 0.007383267977274954,
-          "train_sec": 5.918803073000163,
-          "score_sec": 0.028208598028868437,
-          "total_sec": 6.24178404500708
+          "ftp_sec": 0.006858396925963461,
+          "train_sec": 5.9571433189557865,
+          "score_sec": 0.028295309050008655,
+          "total_sec": 6.257844918058254
         }
       ]
     },
@@ -1179,10 +1179,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.05026929982046679,
           "resolved_policy": "semi_rdt_tail",
-          "ftp_sec": 0.007533375988714397,
-          "train_sec": 6.439874203060754,
-          "score_sec": 0.028416648972779512,
-          "total_sec": 6.747833180008456
+          "ftp_sec": 0.007167294970713556,
+          "train_sec": 6.614469608059153,
+          "score_sec": 0.028439766028895974,
+          "total_sec": 6.899951140047051
         }
       ]
     },
@@ -1246,10 +1246,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.05026929982046679,
           "resolved_policy": "semi_rdt_tail",
-          "ftp_sec": 0.0074781839502975345,
-          "train_sec": 5.8683656910434365,
-          "score_sec": 0.028263531043194234,
-          "total_sec": 6.15377045806963
+          "ftp_sec": 0.006815265049226582,
+          "train_sec": 5.860370342968963,
+          "score_sec": 0.028343652025796473,
+          "total_sec": 6.179229629924521
         }
       ]
     },
@@ -1313,10 +1313,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.05026929982046679,
           "resolved_policy": "semi_rdt_tail",
-          "ftp_sec": 0.007369926082901657,
-          "train_sec": 8.688922806992196,
-          "score_sec": 0.028243085951544344,
-          "total_sec": 8.974783640005626
+          "ftp_sec": 0.007307691965252161,
+          "train_sec": 8.693550637923181,
+          "score_sec": 0.028345463098958135,
+          "total_sec": 8.98603475606069
         }
       ]
     },
@@ -1377,10 +1377,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.04997807978956598,
           "resolved_policy": "semi_nlp_baseline",
-          "ftp_sec": 0.005957085988484323,
-          "train_sec": 4.6652477730531245,
-          "score_sec": 0.024812748073600233,
-          "total_sec": 4.939802060020156
+          "ftp_sec": 0.0059595860075205564,
+          "train_sec": 4.7821073540253565,
+          "score_sec": 0.02475818304810673,
+          "total_sec": 5.08465107192751
         }
       ]
     },
@@ -1441,10 +1441,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.04997807978956598,
           "resolved_policy": "semi_nlp_baseline",
-          "ftp_sec": 0.0061400620033964515,
-          "train_sec": 4.610597000923008,
-          "score_sec": 0.024750376003794372,
-          "total_sec": 4.885145773994736
+          "ftp_sec": 0.004835472092963755,
+          "train_sec": 4.797589996014722,
+          "score_sec": 0.024715231964364648,
+          "total_sec": 5.072083887993358
         }
       ]
     },
@@ -1505,10 +1505,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.04997807978956598,
           "resolved_policy": "semi_nlp_baseline",
-          "ftp_sec": 0.004571273922920227,
-          "train_sec": 5.060554272029549,
-          "score_sec": 0.024939464055933058,
-          "total_sec": 5.330294833984226
+          "ftp_sec": 0.005945215001702309,
+          "train_sec": 5.183769311057404,
+          "score_sec": 0.024649993050843477,
+          "total_sec": 5.456557695986703
         }
       ]
     },
@@ -1569,10 +1569,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.04997807978956598,
           "resolved_policy": "semi_nlp_baseline",
-          "ftp_sec": 0.004209707956761122,
-          "train_sec": 5.900781649979763,
-          "score_sec": 0.024874998023733497,
-          "total_sec": 6.172356992959976
+          "ftp_sec": 0.004239598056301475,
+          "train_sec": 5.985923315049149,
+          "score_sec": 0.024788566050119698,
+          "total_sec": 6.257267173030414
         }
       ]
     },
@@ -1633,10 +1633,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.04997807978956598,
           "resolved_policy": "semi_nlp_baseline",
-          "ftp_sec": 0.005967597011476755,
-          "train_sec": 5.034766450989991,
-          "score_sec": 0.02462669590022415,
-          "total_sec": 5.30695062992163
+          "ftp_sec": 0.0042647619266062975,
+          "train_sec": 5.327355528017506,
+          "score_sec": 0.02480901696253568,
+          "total_sec": 5.6033856879221275
         }
       ]
     },
@@ -2075,10 +2075,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.0196078431372549,
           "resolved_policy": "semi_cvnlp_ftp",
-          "ftp_sec": 0.004457526956684887,
-          "train_sec": 7.444925891933963,
-          "score_sec": 0.002960772952064872,
-          "total_sec": 7.724265823024325
+          "ftp_sec": 0.005855771014466882,
+          "train_sec": 7.2293341510230675,
+          "score_sec": 0.0030480260029435158,
+          "total_sec": 7.498980768024921
         }
       ]
     },
@@ -2142,10 +2142,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.0196078431372549,
           "resolved_policy": "semi_cvnlp_ftp",
-          "ftp_sec": 0.005768547998741269,
-          "train_sec": 7.522556971991435,
-          "score_sec": 0.0029193670488893986,
-          "total_sec": 7.802187309018336
+          "ftp_sec": 0.004261597990989685,
+          "train_sec": 7.132343085017055,
+          "score_sec": 0.003773033036850393,
+          "total_sec": 7.387349650030956
         }
       ]
     },
@@ -2209,10 +2209,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.0196078431372549,
           "resolved_policy": "semi_cvnlp_ftp",
-          "ftp_sec": 0.0063719230238348246,
-          "train_sec": 5.7503461870364845,
-          "score_sec": 0.002999508986249566,
-          "total_sec": 6.029152775066905
+          "ftp_sec": 0.005782342981547117,
+          "train_sec": 5.011395534966141,
+          "score_sec": 0.003437753999605775,
+          "total_sec": 5.260677746962756
         }
       ]
     },
@@ -2276,10 +2276,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.0196078431372549,
           "resolved_policy": "semi_cvnlp_ftp",
-          "ftp_sec": 0.005482160951942205,
-          "train_sec": 6.663527827942744,
-          "score_sec": 0.0029827929101884365,
-          "total_sec": 6.951026031048968
+          "ftp_sec": 0.006337277009151876,
+          "train_sec": 5.4784652220550925,
+          "score_sec": 0.0030051340581849217,
+          "total_sec": 5.725749613018706
         }
       ]
     },
@@ -2343,10 +2343,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.01,
           "resolved_policy": "semi_cvnlp_ftp",
-          "ftp_sec": 0.0058838180266320705,
-          "train_sec": 4.1754857279593125,
-          "score_sec": 0.00297213695012033,
-          "total_sec": 4.452328811050393
+          "ftp_sec": 0.0057216540444642305,
+          "train_sec": 4.057984474929981,
+          "score_sec": 0.003073028987273574,
+          "total_sec": 4.328300358960405
         }
       ]
     },
@@ -2660,10 +2660,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.05714285714285714,
           "resolved_policy": "semi_cvnlp_taps_light",
-          "ftp_sec": 0.005952599109150469,
-          "train_sec": 5.832869870006107,
-          "score_sec": 0.0030900411074981093,
-          "total_sec": 6.120387085014954
+          "ftp_sec": 0.004976999945938587,
+          "train_sec": 5.64199295907747,
+          "score_sec": 0.003187886904925108,
+          "total_sec": 5.922276051947847
         }
       ]
     },
@@ -2727,10 +2727,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.05714285714285714,
           "resolved_policy": "semi_cvnlp_taps_light",
-          "ftp_sec": 0.006310492986813188,
-          "train_sec": 5.080969572998583,
-          "score_sec": 0.003149803029373288,
-          "total_sec": 5.349255566019565
+          "ftp_sec": 0.005679429043084383,
+          "train_sec": 4.923994932090864,
+          "score_sec": 0.003140648943372071,
+          "total_sec": 5.185920286923647
         }
       ]
     },
@@ -2794,10 +2794,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.05714285714285714,
           "resolved_policy": "semi_cvnlp_taps_light",
-          "ftp_sec": 0.007503561908379197,
-          "train_sec": 8.086209345958196,
-          "score_sec": 0.003294768976047635,
-          "total_sec": 8.380131577025168
+          "ftp_sec": 0.004455602029338479,
+          "train_sec": 7.903196992003359,
+          "score_sec": 0.003177831065841019,
+          "total_sec": 8.149307109066285
         }
       ]
     },
@@ -2861,10 +2861,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.05714285714285714,
           "resolved_policy": "semi_cvnlp_taps_light",
-          "ftp_sec": 0.005814742995426059,
-          "train_sec": 5.045657186070457,
-          "score_sec": 0.003223430016078055,
-          "total_sec": 5.31946918705944
+          "ftp_sec": 0.006279054912738502,
+          "train_sec": 4.975672494038008,
+          "score_sec": 0.0032579180551692843,
+          "total_sec": 5.232745382003486
         }
       ]
     },
@@ -2928,10 +2928,10 @@
           "contamination_mode": "label_free",
           "contamination_est": 0.05714285714285714,
           "resolved_policy": "semi_cvnlp_taps_light",
-          "ftp_sec": 0.004486910067498684,
-          "train_sec": 5.065192328998819,
-          "score_sec": 0.003098921966738999,
-          "total_sec": 5.347466157050803
+          "ftp_sec": 0.004346434026956558,
+          "train_sec": 5.023336804006249,
+          "score_sec": 0.0031525769736617804,
+          "total_sec": 5.278134083026089
         }
       ]
     }

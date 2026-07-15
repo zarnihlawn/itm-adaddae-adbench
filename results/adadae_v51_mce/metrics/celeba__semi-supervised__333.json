@@ -1,0 +1,74 @@
+{
+  "dataset": "celeba",
+  "setting": "semi-supervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.11127150753829923,
+    "ROC-AUC": 0.7474686379135285,
+    "PR-AUC": 0.1111467950803472
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "celeba",
+      "split": "Classical/8_celeba.npz",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "metrics": {
+        "AP": 0.11127150753829923,
+        "ROC-AUC": 0.7474686379135285,
+        "PR-AUC": 0.1111467950803472
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "cv",
+        "n_features_out": 39,
+        "use_svd": false,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "cv",
+          "output_dim": 39,
+          "use_svd": false,
+          "use_random_projection": true
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.1111467950803472,
+      "rss_mb": null,
+      "vram_mb": 443.7529296875,
+      "n_train": 99026,
+      "n_test": 103573,
+      "d": 39,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.0396,
+      "resolved_policy": "semi_nlp_baseline",
+      "ftp_sec": 0.21980915300082415,
+      "train_sec": 12.657939422060736,
+      "score_sec": 1.4010964239714667,
+      "total_sec": 14.952132921898738
+    }
+  ]
+}

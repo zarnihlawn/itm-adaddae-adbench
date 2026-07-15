@@ -1,0 +1,77 @@
+{
+  "dataset": "optdigits",
+  "setting": "semi-supervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.41118716464218896,
+    "ROC-AUC": 0.9610422424003159,
+    "PR-AUC": 0.408313441139636
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "optdigits",
+      "split": "Classical/26_optdigits.npz",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "metrics": {
+        "AP": 0.41118716464218896,
+        "ROC-AUC": 0.9610422424003159,
+        "PR-AUC": 0.408313441139636
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false,
+        "n_features_out": 64,
+        "pca_components": null,
+        "clip_outliers": true
+      },
+      "mce": {
+        "modality": "classical",
+        "n_features_out": 64,
+        "use_svd": false,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "classical",
+          "output_dim": 64,
+          "use_svd": false,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.408313441139636,
+      "rss_mb": null,
+      "vram_mb": 643.33349609375,
+      "n_train": 2533,
+      "n_test": 2683,
+      "d": 64,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.048164232135807346,
+      "resolved_policy": "semi_cvnlp_ftp",
+      "ftp_sec": 0.011645201011560857,
+      "train_sec": 6.0597743360558525,
+      "score_sec": 0.027874824008904397,
+      "total_sec": 6.4669809360057116
+    }
+  ]
+}

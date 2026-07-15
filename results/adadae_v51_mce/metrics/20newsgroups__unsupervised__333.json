@@ -1,0 +1,354 @@
+{
+  "dataset": "20newsgroups",
+  "setting": "unsupervised",
+  "seed": 333,
+  "n_splits": 6,
+  "metrics_mean": {
+    "AP": 0.10412796499099514,
+    "ROC-AUC": 0.6256889649788372,
+    "PR-AUC": 0.09865568571076194
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.04696084273167705,
+    "ROC-AUC": 0.08290091818297066,
+    "PR-AUC": 0.044875668497829056
+  },
+  "splits": [
+    {
+      "dataset": "20newsgroups",
+      "split": "NLP_by_BERT/20news_0.npz",
+      "setting": "unsupervised",
+      "seed": 333,
+      "metrics": {
+        "AP": 0.1902563919929389,
+        "ROC-AUC": 0.7779313669981244,
+        "PR-AUC": 0.18583402918684935
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "nlp",
+        "n_features_out": 128,
+        "use_svd": true,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "nlp",
+          "output_dim": 128,
+          "use_svd": true,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.18583402918684935,
+      "rss_mb": null,
+      "vram_mb": 850.7470703125,
+      "n_train": 3090,
+      "n_test": 3090,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05016181229773463,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.30197854503057897,
+      "train_sec": 4.545146407093853,
+      "score_sec": 0.03699975390918553,
+      "total_sec": 5.3800312409875914
+    },
+    {
+      "dataset": "20newsgroups",
+      "split": "NLP_by_BERT/20news_1.npz",
+      "setting": "unsupervised",
+      "seed": 333,
+      "metrics": {
+        "AP": 0.06690085096372295,
+        "ROC-AUC": 0.562866471326915,
+        "PR-AUC": 0.06498238642085719
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "nlp",
+        "n_features_out": 128,
+        "use_svd": true,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "nlp",
+          "output_dim": 128,
+          "use_svd": true,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.06498238642085719,
+      "rss_mb": null,
+      "vram_mb": 696.09521484375,
+      "n_train": 2514,
+      "n_test": 2514,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.050119331742243436,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.31042842206079513,
+      "train_sec": 1.752795564942062,
+      "score_sec": 0.029919944936409593,
+      "total_sec": 2.2401053780922666
+    },
+    {
+      "dataset": "20newsgroups",
+      "split": "NLP_by_BERT/20news_2.npz",
+      "setting": "unsupervised",
+      "seed": 333,
+      "metrics": {
+        "AP": 0.062129800982280686,
+        "ROC-AUC": 0.5506538613161508,
+        "PR-AUC": 0.05986010169597702
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "nlp",
+        "n_features_out": 128,
+        "use_svd": true,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "nlp",
+          "output_dim": 128,
+          "use_svd": true,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.05986010169597702,
+      "rss_mb": null,
+      "vram_mb": 692.46728515625,
+      "n_train": 2497,
+      "n_test": 2497,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.0500600720865038,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.2522660359973088,
+      "train_sec": 1.7300995740806684,
+      "score_sec": 0.029709888971410692,
+      "total_sec": 2.21949540800415
+    },
+    {
+      "dataset": "20newsgroups",
+      "split": "NLP_by_BERT/20news_3.npz",
+      "setting": "unsupervised",
+      "seed": 333,
+      "metrics": {
+        "AP": 0.1437781024578861,
+        "ROC-AUC": 0.6941880341880342,
+        "PR-AUC": 0.12812032751766364
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "nlp",
+        "n_features_out": 128,
+        "use_svd": true,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "nlp",
+          "output_dim": 128,
+          "use_svd": true,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.12812032751766364,
+      "rss_mb": null,
+      "vram_mb": 191.3642578125,
+      "n_train": 615,
+      "n_test": 615,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05040650406504065,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.046996307908557355,
+      "train_sec": 2.078032789984718,
+      "score_sec": 0.008539313916116953,
+      "total_sec": 2.3160846409155056
+    },
+    {
+      "dataset": "20newsgroups",
+      "split": "NLP_by_BERT/20news_4.npz",
+      "setting": "unsupervised",
+      "seed": 333,
+      "metrics": {
+        "AP": 0.07880472414783571,
+        "ROC-AUC": 0.5709485094850948,
+        "PR-AUC": 0.07639401540959934
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "nlp",
+        "n_features_out": 128,
+        "use_svd": true,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "nlp",
+          "output_dim": 128,
+          "use_svd": true,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.07639401540959934,
+      "rss_mb": null,
+      "vram_mb": 468.646484375,
+      "n_train": 1657,
+      "n_test": 1657,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05009052504526252,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.22458898404147476,
+      "train_sec": 2.8070600560167804,
+      "score_sec": 0.02006639796309173,
+      "total_sec": 3.2569595659151673
+    },
+    {
+      "dataset": "20newsgroups",
+      "split": "NLP_by_BERT/20news_5.npz",
+      "setting": "unsupervised",
+      "seed": 333,
+      "metrics": {
+        "AP": 0.0828979194013064,
+        "ROC-AUC": 0.5975455465587045,
+        "PR-AUC": 0.07674325403362511
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "nlp",
+        "n_features_out": 128,
+        "use_svd": true,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "nlp",
+          "output_dim": 128,
+          "use_svd": true,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.07674325403362511,
+      "rss_mb": null,
+      "vram_mb": 435.06494140625,
+      "n_train": 1532,
+      "n_test": 1532,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05026109660574413,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.14372638997156173,
+      "train_sec": 2.4973379329312593,
+      "score_sec": 0.018904677010141313,
+      "total_sec": 2.9335644739912823
+    }
+  ]
+}

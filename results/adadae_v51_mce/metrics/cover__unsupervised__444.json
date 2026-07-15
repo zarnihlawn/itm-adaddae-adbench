@@ -1,0 +1,74 @@
+{
+  "dataset": "cover",
+  "setting": "unsupervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.01983725706769444,
+    "ROC-AUC": 0.6097139999926011,
+    "PR-AUC": 0.019760133762735884
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "cover",
+      "split": "Classical/10_cover.npz",
+      "setting": "unsupervised",
+      "seed": 444,
+      "metrics": {
+        "AP": 0.01983725706769444,
+        "ROC-AUC": 0.6097139999926011,
+        "PR-AUC": 0.019760133762735884
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "classical",
+        "n_features_out": 10,
+        "use_svd": false,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "classical",
+          "output_dim": 10,
+          "use_svd": false,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.019760133762735884,
+      "rss_mb": null,
+      "vram_mb": 77.62158203125,
+      "n_train": 286048,
+      "n_test": 286048,
+      "d": 10,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.0498,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.08080201491247863,
+      "train_sec": 40.63574497401714,
+      "score_sec": 3.9947050439659506,
+      "total_sec": 45.48423554003239
+    }
+  ]
+}

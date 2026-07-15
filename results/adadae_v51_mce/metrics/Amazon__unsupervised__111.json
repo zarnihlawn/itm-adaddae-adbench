@@ -1,0 +1,74 @@
+{
+  "dataset": "Amazon",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.06494624564138415,
+    "ROC-AUC": 0.6160037894736843,
+    "PR-AUC": 0.06451308317105584
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "Amazon",
+      "split": "NLP_by_BERT/amazon.npz",
+      "setting": "unsupervised",
+      "seed": 111,
+      "metrics": {
+        "AP": 0.06494624564138415,
+        "ROC-AUC": 0.6160037894736843,
+        "PR-AUC": 0.06451308317105584
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "nlp",
+        "n_features_out": 128,
+        "use_svd": true,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "nlp",
+          "output_dim": 128,
+          "use_svd": true,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.06451308317105584,
+      "rss_mb": null,
+      "vram_mb": 2209.30322265625,
+      "n_train": 10000,
+      "n_test": 10000,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.923315366031602,
+      "train_sec": 4.623653290909715,
+      "score_sec": 0.11098199500702322,
+      "total_sec": 6.200802964973263
+    }
+  ]
+}

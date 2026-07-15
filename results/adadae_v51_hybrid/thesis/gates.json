@@ -1,19 +1,19 @@
 {
   "unsupervised": {
-    "PR-AUC": 37.86200507587249,
-    "ROC-AUC": 78.48232283814464,
-    "delta_PR_vs_paper": 5.0920050758724855,
-    "delta_ROC_vs_paper": 4.4023228381446415,
+    "PR-AUC": 37.889521172134856,
+    "ROC-AUC": 78.57116316023806,
+    "delta_PR_vs_paper": 5.119521172134853,
+    "delta_ROC_vs_paper": 4.4911631602380595,
     "G_PR_beats_paper": true,
     "G_ROC_beats_paper": true,
     "n_datasets": 57,
     "aggregation": "macro_mean"
   },
   "semi-supervised": {
-    "PR-AUC": 62.0674550093695,
-    "ROC-AUC": 85.16052346188539,
-    "delta_PR_vs_paper": 0.7074550093695038,
-    "delta_ROC_vs_paper": 1.9905234618853882,
+    "PR-AUC": 62.344407193609854,
+    "ROC-AUC": 85.19417428629158,
+    "delta_PR_vs_paper": 0.9844071936098544,
+    "delta_ROC_vs_paper": 2.024174286291583,
     "G_PR_beats_paper": true,
     "G_ROC_beats_paper": true,
     "n_datasets": 57,
@@ -34,32 +34,32 @@
       "datasets": []
     },
     "pass": true,
-    "ref": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v31_hybrid/metrics/completed.json"
+    "ref": "/workspace/ITM/project/results/adadae_v31_hybrid/metrics/completed.json"
   },
   "G7_artifact_freshness": {
     "pass": true,
     "mismatches": [],
-    "compare_path": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v51_hybrid/thesis/compare_to_ddae.json"
+    "compare_path": "/workspace/ITM/project/results/adadae_v51_hybrid/thesis/compare_to_ddae.json"
   },
   "G5_beat_v41": {
-    "unsup_cur": 37.86200507587249,
+    "unsup_cur": 37.889521172134856,
     "unsup_v41": 37.83460252653727,
-    "semi_cur": 62.0674550093695,
+    "semi_cur": 62.344407193609854,
     "semi_v41": 62.01472953712738,
-    "combined_cur": 49.964730042621,
+    "combined_cur": 50.11696418287235,
     "combined_v41": 49.924666031832324,
-    "delta_unsup_pp": 0.027402549335221238,
-    "delta_semi_pp": 0.05272547224212332,
-    "delta_combined_pp": 0.04006401078867583,
+    "delta_unsup_pp": 0.05491864559758852,
+    "delta_semi_pp": 0.32967765648247394,
+    "delta_combined_pp": 0.19229815104002768,
     "strict": true,
     "pass": true,
-    "ref": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v41_hybrid/metrics/completed.json"
+    "ref": "/workspace/ITM/project/results/adadae_v41_hybrid/metrics/completed.json"
   },
   "G6_hard_tail_macro": {
     "unsupervised": {
-      "macro_pr": 20.94048106565995,
+      "macro_pr": 20.981755210053493,
       "ref_macro_pr": 20.899377241657117,
-      "delta_vs_ref_pp": 0.04110382400283186,
+      "delta_vs_ref_pp": 0.08237796839637568,
       "n_datasets": 38,
       "datasets": [
         "20newsgroups",
@@ -104,9 +104,9 @@
       "pass": true
     },
     "semi-supervised": {
-      "macro_pr": 25.245561861194073,
+      "macro_pr": 25.622883445843236,
       "ref_macro_pr": 25.194448288483272,
-      "delta_vs_ref_pp": 0.051113572710800526,
+      "delta_vs_ref_pp": 0.4284351573599636,
       "n_datasets": 18,
       "datasets": [
         "20newsgroups",
@@ -147,10 +147,10 @@
     ],
     "details": [
       {
-        "dataset": "Agnews",
+        "dataset": "cardio",
         "setting": "unsupervised",
-        "cur_pr": 11.140807211739467,
-        "ref_pr": 11.140807211739467,
+        "cur_pr": 53.63204850895769,
+        "ref_pr": 53.63204850895769,
         "delta_pp": 0.0,
         "pass": true
       },
@@ -163,19 +163,11 @@
         "pass": true
       },
       {
-        "dataset": "speech",
+        "dataset": "Agnews",
         "setting": "unsupervised",
-        "cur_pr": 4.402198234469518,
-        "ref_pr": 3.656209011434062,
-        "delta_pp": 0.7459892230354557,
-        "pass": true
-      },
-      {
-        "dataset": "cardio",
-        "setting": "unsupervised",
-        "cur_pr": 53.63204850895769,
-        "ref_pr": 53.63204850895769,
-        "delta_pp": 0.0,
+        "cur_pr": 11.143973564416246,
+        "ref_pr": 11.140807211739467,
+        "delta_pp": 0.003166352676778672,
         "pass": true
       },
       {
@@ -187,10 +179,18 @@
         "pass": true
       },
       {
-        "dataset": "Agnews",
+        "dataset": "speech",
+        "setting": "unsupervised",
+        "cur_pr": 5.22226986387641,
+        "ref_pr": 3.656209011434062,
+        "delta_pp": 1.566060852442348,
+        "pass": true
+      },
+      {
+        "dataset": "cardio",
         "setting": "semi-supervised",
-        "cur_pr": 23.54374509108807,
-        "ref_pr": 23.54374509108807,
+        "cur_pr": 82.20633487811037,
+        "ref_pr": 82.20633487811037,
         "delta_pp": 0.0,
         "pass": true
       },
@@ -203,18 +203,10 @@
         "pass": true
       },
       {
-        "dataset": "speech",
+        "dataset": "Agnews",
         "setting": "semi-supervised",
-        "cur_pr": 5.2968169072532545,
-        "ref_pr": 5.064483035647771,
-        "delta_pp": 0.23233387160548347,
-        "pass": true
-      },
-      {
-        "dataset": "cardio",
-        "setting": "semi-supervised",
-        "cur_pr": 82.20633487811037,
-        "ref_pr": 82.20633487811037,
+        "cur_pr": 23.54374509108807,
+        "ref_pr": 23.54374509108807,
         "delta_pp": 0.0,
         "pass": true
       },
@@ -225,6 +217,14 @@
         "ref_pr": 55.27674186855363,
         "delta_pp": 0.0,
         "pass": true
+      },
+      {
+        "dataset": "speech",
+        "setting": "semi-supervised",
+        "cur_pr": 5.316388616987878,
+        "ref_pr": 5.064483035647771,
+        "delta_pp": 0.25190558134010654,
+        "pass": true
       }
     ]
   },
@@ -232,9 +232,9 @@
     "pass": true,
     "n_bad_accepts_lt_0_5pp": 0,
     "bad_accepts": [],
-    "audit_path": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v51_hybrid/thesis/merge_audit.json"
+    "audit_path": "/workspace/ITM/project/results/adadae_v51_hybrid/thesis/merge_audit.json"
   },
   "all_pass": true,
   "n_jobs": 570,
-  "combined_macro_PR": 49.964730042621
+  "combined_macro_PR": 50.11696418287235
 }

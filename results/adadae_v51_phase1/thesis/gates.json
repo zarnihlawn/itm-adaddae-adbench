@@ -1,0 +1,47 @@
+{
+  "unsupervised": {
+    "PR-AUC": 37.83460252653727,
+    "ROC-AUC": 78.53070906148922,
+    "delta_PR_vs_paper": 5.064602526537264,
+    "delta_ROC_vs_paper": 4.450709061489221,
+    "G_PR_beats_paper": true,
+    "G_ROC_beats_paper": true,
+    "n_datasets": 57,
+    "aggregation": "macro_mean"
+  },
+  "semi-supervised": {
+    "PR-AUC": 62.01472953712738,
+    "ROC-AUC": 85.16103813815559,
+    "delta_PR_vs_paper": 0.6547295371273805,
+    "delta_ROC_vs_paper": 1.991038138155588,
+    "G_PR_beats_paper": true,
+    "G_ROC_beats_paper": true,
+    "n_datasets": 57,
+    "aggregation": "macro_mean"
+  },
+  "G4_backup_regressions": {
+    "unsup_datasets_losing_gt_2pct": 0,
+    "semi_datasets_losing_gt_2pct": 0,
+    "pass": true
+  },
+  "G6_vs_v31_regressions": {
+    "unsupervised": {
+      "n_losing_gt_0_5pct": 0,
+      "datasets": []
+    },
+    "semi-supervised": {
+      "n_losing_gt_0_5pct": 0,
+      "datasets": []
+    },
+    "pass": true,
+    "ref": "/workspace/ITM/project/results/adadae_v31_hybrid/metrics/completed.json"
+  },
+  "G7_artifact_freshness": {
+    "pass": true,
+    "mismatches": [],
+    "compare_path": "/workspace/ITM/project/results/adadae_v51_phase1/thesis/compare_to_ddae.json"
+  },
+  "all_pass": true,
+  "n_jobs": 570,
+  "combined_macro_PR": 49.924666031832324
+}

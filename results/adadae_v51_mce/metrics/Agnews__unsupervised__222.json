@@ -1,0 +1,242 @@
+{
+  "dataset": "Agnews",
+  "setting": "unsupervised",
+  "seed": 222,
+  "n_splits": 4,
+  "metrics_mean": {
+    "AP": 0.10860940215215664,
+    "ROC-AUC": 0.6934976578947369,
+    "PR-AUC": 0.10758272843739758
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.02507316103202157,
+    "ROC-AUC": 0.04578308196940258,
+    "PR-AUC": 0.025004368573058704
+  },
+  "splits": [
+    {
+      "dataset": "Agnews",
+      "split": "NLP_by_BERT/agnews_0.npz",
+      "setting": "unsupervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.08829361349407333,
+        "ROC-AUC": 0.6438393684210527,
+        "PR-AUC": 0.08705742490648527
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "nlp",
+        "n_features_out": 128,
+        "use_svd": true,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "nlp",
+          "output_dim": 128,
+          "use_svd": true,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.08705742490648527,
+      "rss_mb": null,
+      "vram_mb": 2209.30322265625,
+      "n_train": 10000,
+      "n_test": 10000,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.6639646789990366,
+      "train_sec": 3.660025120014325,
+      "score_sec": 0.11065026896540076,
+      "total_sec": 4.987373681971803
+    },
+    {
+      "dataset": "Agnews",
+      "split": "NLP_by_BERT/agnews_1.npz",
+      "setting": "unsupervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.0913019524997248,
+        "ROC-AUC": 0.6847614736842105,
+        "PR-AUC": 0.09074463342780656
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "nlp",
+        "n_features_out": 128,
+        "use_svd": true,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "nlp",
+          "output_dim": 128,
+          "use_svd": true,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.09074463342780656,
+      "rss_mb": null,
+      "vram_mb": 2209.30322265625,
+      "n_train": 10000,
+      "n_test": 10000,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.6917822340037674,
+      "train_sec": 2.1620048170443624,
+      "score_sec": 0.10957446601241827,
+      "total_sec": 3.4170329649932683
+    },
+    {
+      "dataset": "Agnews",
+      "split": "NLP_by_BERT/agnews_2.npz",
+      "setting": "unsupervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.15081568420084424,
+        "ROC-AUC": 0.7681764210526316,
+        "PR-AUC": 0.14969573675252684
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "nlp",
+        "n_features_out": 128,
+        "use_svd": true,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "nlp",
+          "output_dim": 128,
+          "use_svd": true,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.14969573675252684,
+      "rss_mb": null,
+      "vram_mb": 2209.30322265625,
+      "n_train": 10000,
+      "n_test": 10000,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 1.188832430052571,
+      "train_sec": 2.3382674800232053,
+      "score_sec": 0.10898462100885808,
+      "total_sec": 4.044715496012941
+    },
+    {
+      "dataset": "Agnews",
+      "split": "NLP_by_BERT/agnews_3.npz",
+      "setting": "unsupervised",
+      "seed": 222,
+      "metrics": {
+        "AP": 0.10402635841398424,
+        "ROC-AUC": 0.6772133684210526,
+        "PR-AUC": 0.1028331186627717
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "modality": "nlp",
+        "n_features_out": 128,
+        "use_svd": true,
+        "use_random_projection": false,
+        "policy": {
+          "modality": "nlp",
+          "output_dim": 128,
+          "use_svd": true,
+          "use_random_projection": false
+        },
+        "use_mce": true
+      },
+      "gate": {
+        "use_gate": false
+      },
+      "best_pr_auc": 0.1028331186627717,
+      "rss_mb": null,
+      "vram_mb": 2209.30322265625,
+      "n_train": 10000,
+      "n_test": 10000,
+      "d": 128,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.7289322220021859,
+      "train_sec": 3.6717969139572233,
+      "score_sec": 0.10891562700271606,
+      "total_sec": 4.9073176549281925
+    }
+  ]
+}

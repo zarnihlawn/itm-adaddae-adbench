@@ -48,26 +48,26 @@
   "adadae": [
     {
       "setting": "unsupervised",
-      "AdaDDAE_PR_AUC": 37.86200507587248,
-      "AdaDDAE_PR_std": 28.033015604405993,
-      "AdaDDAE_ROC_AUC": 78.48232283814465,
-      "AdaDDAE_ROC_std": 15.726639170533746,
+      "AdaDDAE_PR_AUC": 37.88952117213485,
+      "AdaDDAE_PR_std": 28.000105437123306,
+      "AdaDDAE_ROC_AUC": 78.57116316023804,
+      "AdaDDAE_ROC_std": 15.613811615059111,
       "DDAE_PR_AUC": 32.77,
       "DDAE_ROC_AUC": 74.08,
-      "delta_PR": 5.092005075872478,
-      "delta_ROC": 4.402322838144656,
+      "delta_PR": 5.119521172134846,
+      "delta_ROC": 4.491163160238045,
       "n_datasets": 57
     },
     {
       "setting": "semi-supervised",
-      "AdaDDAE_PR_AUC": 62.06745500936951,
-      "AdaDDAE_PR_std": 28.64813346851189,
-      "AdaDDAE_ROC_AUC": 85.16052346188538,
-      "AdaDDAE_ROC_std": 14.22210375231294,
+      "AdaDDAE_PR_AUC": 62.34440719360985,
+      "AdaDDAE_PR_std": 28.639581400021374,
+      "AdaDDAE_ROC_AUC": 85.19417428629158,
+      "AdaDDAE_ROC_std": 14.201646381377872,
       "DDAE_PR_AUC": 61.36,
       "DDAE_ROC_AUC": 83.17,
-      "delta_PR": 0.7074550093695109,
-      "delta_ROC": 1.990523461885374,
+      "delta_PR": 0.9844071936098473,
+      "delta_ROC": 2.024174286291583,
       "n_datasets": 57
     }
   ]
