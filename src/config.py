@@ -117,12 +117,13 @@ def load_config(config_path: str | Path, hardware: str | None = None) -> Dict[st
         hw = load_yaml(hw_path)
         cfg["hardware"] = hw
 
-    adbench = cfg.get("paths", {}).get("adbench_root")
-    cfg["paths"]["adbench_root"] = str(resolve_adbench_root(adbench))
+    paths = cfg.setdefault("paths", {})
+    adbench = paths.get("adbench_root")
+    paths["adbench_root"] = str(resolve_adbench_root(adbench))
 
-    results = cfg.get("paths", {}).get("results_dir", "results")
+    results = paths.get("results_dir", "results")
     results_path = Path(results)
     if not results_path.is_absolute():
         results_path = PROJECT_ROOT / results_path
-    cfg["paths"]["results_dir"] = str(results_path)
+    paths["results_dir"] = str(results_path)
     return cfg

@@ -1,4 +1,36 @@
-# AdaDDAE v5 MCE track: modality encoders on NLP/CV tails
+# AdaDDAE v5 MCE track: modality encoders on NLP/CV/classical tails
+seed: 111
+seeds: [111, 222, 333, 444, 555]
+
+paths:
+  adbench_root: ../ADBench/adbench/datasets
+  results_dir: results/adadae_v51_mce
+  run_id: adadae_v51_mce
+
+train:
+  setting: semi-supervised
+  lr: 0.001
+  epochs: 100
+  eval_every: 10
+  early_stop_patience: 20
+  contrastive: true
+  contrastive_alpha: 0.15
+  contrastive_alpha_unsupervised: 0.05
+  hard_negative_mining: true
+
+model:
+  hidden_dims: [512, 512]
+  latent_dim: 32
+  activation: lrelu
+
+diffusion:
+  num_timesteps: 50
+  beta_start: 0.0001
+  beta_end: 0.02
+  scheduler: linear
+  time_emb_dim: 8
+  time_emb_type: sinusoidal
+
 adadae:
   policy: routed
   use_mce: true
@@ -8,10 +40,12 @@ adadae:
   mce_block_semi_nlp: true
   exceptions_file: configs/policy_exceptions.yaml
 
-train:
-  epochs: 100
-  eval_every: 10
+features:
+  scaler: auto
+  pca_dim_threshold: 128
+  pca_max_components: 128
+  pca_variance: 0.95
+  clip_outliers: true
+  clip_sigma: 5.0
 
-hardware:
-  device: cuda
-  hardware_profile: gpu
+hardware: hardware_rtx5070_12g.yaml
