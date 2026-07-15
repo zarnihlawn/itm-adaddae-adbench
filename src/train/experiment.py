@@ -1,6 +1,7 @@
 """Single experiment runner: one dataset file × setting × seed."""
 from __future__ import annotations
 
+import copy
 import random
 import time
 from pathlib import Path
@@ -24,8 +25,92 @@ from ..memory import (
 )
 from ..models.adadae import AdaDDAE
 from ..models.danc import NoiseConfig, danc_policy, estimate_meta_features
-from ..policy import apply_routed_config
+from ..policy import apply_routed_config, policy_overrides
 from ..runlog.logger import RunLogger
+
+
+def _deep_update(base: Dict[str, Any], overrides: Dict[str, Any]) -> Dict[str, Any]:
+    out = copy.deepcopy(base)
+    for key, val in overrides.items():
+        if isinstance(val, dict) and isinstance(out.get(key), dict):
+            out[key] = _deep_update(out[key], val)
+        else:
+            out[key] = copy.deepcopy(val)
+    return out
+
+
+def _fit_baseline_ddae(
+    X_train: np.ndarray,
+    X_test: np.ndarray,
+    y_test: np.ndarray,
+    config: Dict[str, Any],
+    setting: str,
+    seed: int,
+    device: torch.device,
+    guard,
+) -> AdaDDAE:
+    """Train DDAE-faithful baseline for GATE comparison."""
+    cfg = _deep_update(config, policy_overrides("baseline_ddae"))
+    cfg.setdefault("adadae", {})["use_gate"] = False
+    cfg.setdefault("adadae", {})["use_mce"] = False
+    train_cfg = cfg.get("train", {})
+    model_cfg = cfg.get("model", {})
+    diff_cfg = cfg.get("diffusion", {})
+    hw = cfg.get("hardware", {})
+    noise = NoiseConfig(
+        num_timesteps=int(diff_cfg.get("num_timesteps", 50)),
+        scheduler=str(diff_cfg.get("scheduler", "linear")),
+        beta_start=float(diff_cfg.get("beta_start", 1e-4)),
+        beta_end=float(diff_cfg.get("beta_end", 0.02)),
+        time_emb_dim=int(diff_cfg.get("time_emb_dim", 4)),
+    )
+    n = X_train.shape[0]
+    batch_size = choose_train_batch_size(
+        n,
+        max_batch=int(hw.get("train_batch_size_max", 512)),
+        large_n_threshold=int(hw.get("large_n_threshold", 100_000)),
+    )
+    score_bs = choose_score_batch_size(
+        X_test.shape[0],
+        max_batch=int(hw.get("score_batch_size_max", 1024)),
+        large_n_threshold=int(hw.get("large_n_threshold", 100_000)),
+        large_batch=int(hw.get("score_batch_size_large_n", 256)),
+    )
+    model = AdaDDAE(
+        input_dim=X_train.shape[1],
+        hidden_dims=list(model_cfg.get("hidden_dims", [512, 512])),
+        latent_dim=int(model_cfg.get("latent_dim", 32)),
+        activation=str(model_cfg.get("activation", "lrelu")),
+        noise_config=noise,
+        time_emb_type=str(diff_cfg.get("time_emb_type", "sinusoidal")),
+        epochs=int(train_cfg.get("epochs", 100)),
+        batch_size=batch_size,
+        learning_rate=float(train_cfg.get("lr", 1e-3)),
+        device=device,
+        eval_every=int(train_cfg.get("eval_every", 10)),
+        contrastive=False,
+        use_scs=False,
+        use_multiview=False,
+        use_uncertainty_view=False,
+        use_dte_view=False,
+        use_rejection_training=False,
+        fusion_mode="fixed",
+        setting=setting,
+        score_batch_size=score_bs,
+        memory_guard=guard,
+        early_stop_patience=int(train_cfg.get("early_stop_patience", 20)),
+        use_amp=bool(hw.get("use_amp", False)),
+        amp_dtype=str(hw.get("amp_dtype", "bfloat16")),
+        pin_memory=bool(hw.get("pin_memory", False)),
+        num_workers=int(hw.get("dataloader_num_workers", 0)),
+        vectorized_scoring=bool(hw.get("vectorized_scoring", False)),
+        preupload_test_threshold=int(hw.get("preupload_test_threshold", 50000)),
+    )
+    x_train_t = torch.tensor(X_train, dtype=torch.float32)
+    x_test_t = torch.tensor(X_test, dtype=torch.float32)
+    y_test_t = torch.tensor(y_test, dtype=torch.float32)
+    model.fit(x_train_t, x_test_t, y_test_t, eval_fn=evaluate_anomaly_detection)
+    return model
 
 
 def set_seed(seed: int) -> None:
@@ -265,37 +350,50 @@ def run_single_file(
         from ..ensemble.gate import (
             build_train_normal_scores,
             fit_isolation_forest,
-            gate_ensemble_predict,
+            gate_winner_predict,
             isolation_scores,
             knn_dte_proxy_scores,
         )
 
-        ad_fn = lambda X: model.predict(torch.tensor(X, dtype=torch.float32)).detach().cpu().numpy()
-        train_scores = build_train_normal_scores(
-            X_train,
-            ad_fn,
-            ad_fn,
-            seed=seed,
+        baseline_model = _fit_baseline_ddae(
+            X_train, X_test, y_test, config, setting, seed, device, guard
         )
+
+        def ad_fn(X: np.ndarray) -> np.ndarray:
+            t = torch.tensor(X, dtype=torch.float32)
+            return model.predict(t).detach().cpu().numpy()
+
+        def ddae_fn(X: np.ndarray) -> np.ndarray:
+            t = torch.tensor(X, dtype=torch.float32)
+            return baseline_model.predict(t).detach().cpu().numpy()
+
+        train_scores = build_train_normal_scores(X_train, ad_fn, ddae_fn, seed=seed)
         if_clf, if_scaler = fit_isolation_forest(X_train, seed=seed)
         if_test = isolation_scores(if_clf, if_scaler, X_test)
         knn_test = knn_dte_proxy_scores(X_train, X_test)
         ada_test = scores.detach().cpu().numpy()
-        fused, decision = gate_ensemble_predict(
-            ada_test,
-            ada_test,
-            if_test,
-            knn_test,
+        ddae_test = ddae_fn(X_test)
+        test_scores = {
+            "adadae": ada_test,
+            "ddae": ddae_test,
+            "iforest": if_test,
+            "knn_dte": knn_test,
+        }
+        fused, decision = gate_winner_predict(
+            test_scores,
             train_scores,
         )
         metrics = evaluate_anomaly_detection(fused, y_test)
         gate_summary = {
             "use_gate": True,
+            "mode": "winner_take_all",
             "winner": decision.winner,
             "fallback": decision.fallback,
             "disagreement": decision.disagreement,
             "weights": decision.weights,
         }
+        del baseline_model
+        cleanup_memory(device)
 
     mem = guard_memory_mb(guard)
     train_sec = fit_info.get("timing", {}).get("train_sec", 0.0)

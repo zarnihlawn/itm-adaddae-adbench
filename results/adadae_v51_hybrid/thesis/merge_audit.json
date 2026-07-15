@@ -1,0 +1,5209 @@
+{
+  "guard_epsilon_pp": 0.1,
+  "n_accepted": 600,
+  "n_rejected": 50,
+  "n_bad_accepts_lt_0_5pp": 0,
+  "bad_accepts": [],
+  "entries": [
+    {
+      "key": "ALOI__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 10.999718383005227,
+      "patch_pr": 10.999718383005227,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "ALOI__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 11.617884282644075,
+      "patch_pr": 11.617884282644075,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "ALOI__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 11.041987016097554,
+      "patch_pr": 11.041987016097554,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "ALOI__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 10.908969596691618,
+      "patch_pr": 10.908969596691618,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "ALOI__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 10.71297470443047,
+      "patch_pr": 10.71297470443047,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "annthyroid__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 72.18950088397149,
+      "patch_pr": 72.18950088397149,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "annthyroid__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 71.52877168433959,
+      "patch_pr": 71.52877168433959,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "annthyroid__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 70.4901146754457,
+      "patch_pr": 70.4901146754457,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "annthyroid__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 86.50826948847711,
+      "patch_pr": 86.50826948847711,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "annthyroid__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 67.56613327722773,
+      "patch_pr": 67.56613327722773,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "backdoor__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 53.720832518647754,
+      "patch_pr": 53.720832518647754,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "backdoor__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 60.42097546981283,
+      "patch_pr": 60.42097546981283,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "backdoor__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 71.88285423618258,
+      "patch_pr": 71.88285423618258,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "backdoor__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 72.80756265076322,
+      "patch_pr": 72.80756265076322,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "backdoor__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 71.51234554306656,
+      "patch_pr": 71.51234554306656,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "breastw__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 98.85600676372172,
+      "patch_pr": 98.85600676372172,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "breastw__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 98.31218417353828,
+      "patch_pr": 98.31218417353828,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "breastw__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.59091981745196,
+      "patch_pr": 99.59091981745196,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "breastw__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.1458340178352,
+      "patch_pr": 99.1458340178352,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "breastw__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.13607614934044,
+      "patch_pr": 99.13607614934044,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "campaign__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 52.338956218225064,
+      "patch_pr": 52.338956218225064,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "campaign__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 51.08599796762737,
+      "patch_pr": 51.08599796762737,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "campaign__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 51.36185658963274,
+      "patch_pr": 51.36185658963274,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "campaign__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 50.95091288357339,
+      "patch_pr": 50.95091288357339,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "campaign__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 50.644567658729734,
+      "patch_pr": 50.644567658729734,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cardio__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 78.85254876979153,
+      "patch_pr": 78.85254876979153,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cardio__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 81.66254502965403,
+      "patch_pr": 81.66254502965403,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cardio__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 86.04630202611065,
+      "patch_pr": 86.04630202611065,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cardio__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 83.15096770390579,
+      "patch_pr": 83.15096770390579,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cardio__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 81.31931086108989,
+      "patch_pr": 81.31931086108989,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Cardiotocography__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 70.87529800187141,
+      "patch_pr": 70.87529800187141,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Cardiotocography__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 68.57459559911479,
+      "patch_pr": 68.57459559911479,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Cardiotocography__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 71.82607611149072,
+      "patch_pr": 71.82607611149072,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Cardiotocography__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 67.18478268835104,
+      "patch_pr": 67.18478268835104,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Cardiotocography__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 69.59009307395706,
+      "patch_pr": 69.59009307395706,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "celeba__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 13.782028929099122,
+      "patch_pr": 13.782028929099122,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "celeba__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 13.403382881387971,
+      "patch_pr": 13.403382881387971,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "celeba__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 14.397987317166178,
+      "patch_pr": 14.397987317166178,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "celeba__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 14.460135233158653,
+      "patch_pr": 14.460135233158653,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "celeba__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 15.433399405873896,
+      "patch_pr": 15.433399405873896,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "census__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 21.89914077334936,
+      "patch_pr": 21.89914077334936,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "census__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 22.021877634129815,
+      "patch_pr": 22.021877634129815,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "census__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 21.86941837889362,
+      "patch_pr": 21.86941837889362,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "census__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 21.594814654267395,
+      "patch_pr": 21.594814654267395,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "census__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 22.68598830444691,
+      "patch_pr": 22.68598830444691,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cover__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 79.02328802060217,
+      "patch_pr": 79.02328802060217,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cover__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 78.9037767327703,
+      "patch_pr": 78.9037767327703,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cover__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 75.37193351970602,
+      "patch_pr": 75.37193351970602,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cover__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 78.12154301689421,
+      "patch_pr": 78.12154301689421,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cover__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 76.95473009401175,
+      "patch_pr": 76.95473009401175,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "donors__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 98.53345920680316,
+      "patch_pr": 98.53345920680316,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "donors__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 95.43869744159106,
+      "patch_pr": 95.43869744159106,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "donors__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 95.83920802793436,
+      "patch_pr": 95.83920802793436,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "donors__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 96.02832633359513,
+      "patch_pr": 96.02832633359513,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "donors__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 95.76090677452672,
+      "patch_pr": 95.76090677452672,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fault__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 77.32410170759835,
+      "patch_pr": 77.32410170759835,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fault__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 78.92127861390819,
+      "patch_pr": 78.92127861390819,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fault__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 77.29193183737677,
+      "patch_pr": 77.29193183737677,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fault__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 78.42921436788772,
+      "patch_pr": 78.42921436788772,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fault__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 77.34652263679934,
+      "patch_pr": 77.34652263679934,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fraud__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 73.05403545737082,
+      "patch_pr": 73.05403545737082,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fraud__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 62.134880352168764,
+      "patch_pr": 62.134880352168764,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fraud__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 66.24579169937562,
+      "patch_pr": 66.24579169937562,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fraud__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 69.34000803956405,
+      "patch_pr": 69.34000803956405,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fraud__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 67.16912726442337,
+      "patch_pr": 67.16912726442337,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "glass__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 36.59050034511814,
+      "patch_pr": 36.59050034511814,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "glass__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 35.73357997829102,
+      "patch_pr": 35.73357997829102,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "glass__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 35.702802829294725,
+      "patch_pr": 35.702802829294725,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "glass__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 42.09932367330694,
+      "patch_pr": 42.09932367330694,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "glass__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 39.33623212465699,
+      "patch_pr": 39.33623212465699,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Hepatitis__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 61.63559956512212,
+      "patch_pr": 61.63559956512212,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Hepatitis__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 52.58623599551693,
+      "patch_pr": 52.58623599551693,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Hepatitis__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 62.27627885044764,
+      "patch_pr": 62.27627885044764,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Hepatitis__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 72.83769744844015,
+      "patch_pr": 72.83769744844015,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Hepatitis__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 69.47049393542606,
+      "patch_pr": 69.47049393542606,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "http__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.60291668148675,
+      "patch_pr": 99.60291668148675,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "http__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.5837842527939,
+      "patch_pr": 99.5837842527939,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "http__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.76528036897912,
+      "patch_pr": 99.76528036897912,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "http__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.66741866951402,
+      "patch_pr": 99.66741866951402,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "http__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.23646018380697,
+      "patch_pr": 99.23646018380697,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "InternetAds__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 80.7511475805003,
+      "patch_pr": 80.7511475805003,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "InternetAds__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 78.70220563744057,
+      "patch_pr": 78.70220563744057,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "InternetAds__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 80.85943325490096,
+      "patch_pr": 80.85943325490096,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "InternetAds__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 83.08001431642462,
+      "patch_pr": 83.08001431642462,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "InternetAds__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 78.55320842378187,
+      "patch_pr": 78.55320842378187,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Ionosphere__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 97.9687998658224,
+      "patch_pr": 97.9687998658224,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Ionosphere__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 96.60247656660829,
+      "patch_pr": 96.60247656660829,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Ionosphere__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 97.57393657229022,
+      "patch_pr": 97.57393657229022,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Ionosphere__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 97.43563298107641,
+      "patch_pr": 97.43563298107641,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Ionosphere__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 97.79932903479293,
+      "patch_pr": 97.79932903479293,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "landsat__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 56.618635546564036,
+      "patch_pr": 56.618635546564036,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "landsat__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 54.42932200100938,
+      "patch_pr": 54.42932200100938,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "landsat__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 51.809908653137946,
+      "patch_pr": 51.809908653137946,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "landsat__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 54.94569120176208,
+      "patch_pr": 54.94569120176208,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "landsat__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 56.789205415605615,
+      "patch_pr": 56.789205415605615,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "letter__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 79.90231951370184,
+      "patch_pr": 79.90231951370184,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "letter__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 69.00572754207062,
+      "patch_pr": 69.00572754207062,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "letter__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 74.7485086326579,
+      "patch_pr": 74.7485086326579,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "letter__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 69.32280348649542,
+      "patch_pr": 69.32280348649542,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "letter__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 70.61034655029374,
+      "patch_pr": 70.61034655029374,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Lymphography__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 97.42063492063491,
+      "patch_pr": 97.42063492063491,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Lymphography__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 85.75396825396825,
+      "patch_pr": 85.75396825396825,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Lymphography__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 76.92460317460318,
+      "patch_pr": 76.92460317460318,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Lymphography__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 97.42063492063491,
+      "patch_pr": 97.42063492063491,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Lymphography__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 81.29629629629629,
+      "patch_pr": 81.29629629629629,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "magic.gamma__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 88.94753916266554,
+      "patch_pr": 88.94753916266554,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "magic.gamma__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 89.07617572711221,
+      "patch_pr": 89.07617572711221,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "magic.gamma__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 88.94273205689464,
+      "patch_pr": 88.94273205689464,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "magic.gamma__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 88.83445017613138,
+      "patch_pr": 88.83445017613138,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "magic.gamma__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 89.22947237255178,
+      "patch_pr": 89.22947237255178,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mammography__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 40.65757101457173,
+      "patch_pr": 40.65757101457173,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mammography__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 52.880295536727274,
+      "patch_pr": 52.880295536727274,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mammography__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 40.467314327561596,
+      "patch_pr": 40.467314327561596,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mammography__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 51.466835423307366,
+      "patch_pr": 51.466835423307366,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mammography__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 57.795450395881375,
+      "patch_pr": 57.795450395881375,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mnist__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 78.05126399406387,
+      "patch_pr": 78.05126399406387,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mnist__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 79.94274094376127,
+      "patch_pr": 79.94274094376127,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mnist__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 76.22363109822687,
+      "patch_pr": 76.22363109822687,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mnist__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 79.15021948898175,
+      "patch_pr": 79.15021948898175,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mnist__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 78.78078620301264,
+      "patch_pr": 78.78078620301264,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "musk__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.99999999999999,
+      "patch_pr": 99.99999999999999,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "musk__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.99999999999999,
+      "patch_pr": 99.99999999999999,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "musk__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.99999999999999,
+      "patch_pr": 99.99999999999999,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "musk__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.99999999999999,
+      "patch_pr": 99.99999999999999,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "musk__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.99999999999999,
+      "patch_pr": 99.99999999999999,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "optdigits__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 38.065460690381705,
+      "patch_pr": 38.065460690381705,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "optdigits__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 42.58188037912626,
+      "patch_pr": 42.58188037912626,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "optdigits__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 41.91013822820239,
+      "patch_pr": 41.91013822820239,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "optdigits__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 40.26086217744627,
+      "patch_pr": 40.26086217744627,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "optdigits__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 37.74356479242591,
+      "patch_pr": 37.74356479242591,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "PageBlocks__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 87.99497036415947,
+      "patch_pr": 87.99497036415947,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "PageBlocks__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 87.598697895315,
+      "patch_pr": 87.598697895315,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "PageBlocks__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 86.2142105661465,
+      "patch_pr": 86.2142105661465,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "PageBlocks__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 86.14931330685755,
+      "patch_pr": 86.14931330685755,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "PageBlocks__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 86.64046954863704,
+      "patch_pr": 86.64046954863704,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "pendigits__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 86.48195620335669,
+      "patch_pr": 86.48195620335669,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "pendigits__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 84.36871559105201,
+      "patch_pr": 84.36871559105201,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "pendigits__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 87.4387941655177,
+      "patch_pr": 87.4387941655177,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "pendigits__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 90.5349234078459,
+      "patch_pr": 90.5349234078459,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "pendigits__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 90.60938644632853,
+      "patch_pr": 90.60938644632853,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Pima__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 72.23576034897476,
+      "patch_pr": 72.23576034897476,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Pima__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 68.91884517416126,
+      "patch_pr": 68.91884517416126,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Pima__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 75.67138978532974,
+      "patch_pr": 75.67138978532974,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Pima__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 69.29419618035716,
+      "patch_pr": 69.29419618035716,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Pima__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 71.14407231316213,
+      "patch_pr": 71.14407231316213,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satellite__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 87.62188175965541,
+      "patch_pr": 87.62188175965541,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satellite__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 88.17628304420016,
+      "patch_pr": 88.17628304420016,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satellite__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 88.21866750166217,
+      "patch_pr": 88.21866750166217,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satellite__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 88.30774678511439,
+      "patch_pr": 88.30774678511439,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satellite__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 88.06097580525795,
+      "patch_pr": 88.06097580525795,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satimage-2__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 96.80244373579102,
+      "patch_pr": 96.80244373579102,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satimage-2__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 96.77641078069648,
+      "patch_pr": 96.77641078069648,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satimage-2__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 96.65388734654475,
+      "patch_pr": 96.65388734654475,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satimage-2__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 95.47498858751553,
+      "patch_pr": 95.47498858751553,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satimage-2__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 95.95570208191343,
+      "patch_pr": 95.95570208191343,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "shuttle__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 98.81791857317236,
+      "patch_pr": 98.81791857317236,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "shuttle__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 97.99509640548926,
+      "patch_pr": 97.99509640548926,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "shuttle__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 98.5494448525168,
+      "patch_pr": 98.5494448525168,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "shuttle__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.16902614422604,
+      "patch_pr": 99.16902614422604,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "shuttle__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 98.9806912904872,
+      "patch_pr": 98.9806912904872,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "skin__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 81.7751663446195,
+      "patch_pr": 81.7751663446195,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "skin__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 78.86510182178613,
+      "patch_pr": 78.86510182178613,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "skin__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 80.72647881072217,
+      "patch_pr": 80.72647881072217,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "skin__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 83.0812809997815,
+      "patch_pr": 83.0812809997815,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "skin__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 79.01318590529273,
+      "patch_pr": 79.01318590529273,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "smtp__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 66.79545539858886,
+      "patch_pr": 66.79545539858886,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "smtp__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 66.82255008337381,
+      "patch_pr": 66.82255008337381,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "smtp__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 66.785786514602,
+      "patch_pr": 66.785786514602,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "smtp__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 61.63624838544911,
+      "patch_pr": 61.63624838544911,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "smtp__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 51.01159090087196,
+      "patch_pr": 51.01159090087196,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SpamBase__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 90.11652382831042,
+      "patch_pr": 90.11652382831042,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SpamBase__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 89.90153779066229,
+      "patch_pr": 89.90153779066229,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SpamBase__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 89.49641522607858,
+      "patch_pr": 89.49641522607858,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SpamBase__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 89.49063194441828,
+      "patch_pr": 89.49063194441828,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SpamBase__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 88.94618198407966,
+      "patch_pr": 88.94618198407966,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "speech__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 4.528475567420945,
+      "patch_pr": 4.528475567420945,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "speech__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 6.132306417549959,
+      "patch_pr": 6.132306417549959,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "speech__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 4.35690489723989,
+      "patch_pr": 4.35690489723989,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "speech__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 4.552672404845945,
+      "patch_pr": 4.552672404845945,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "speech__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.752055891182115,
+      "patch_pr": 5.752055891182115,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Stamps__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 55.483322574642145,
+      "patch_pr": 55.483322574642145,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Stamps__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 63.1308563846817,
+      "patch_pr": 63.1308563846817,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Stamps__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 52.81659244821043,
+      "patch_pr": 52.81659244821043,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Stamps__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 51.819051619072376,
+      "patch_pr": 51.819051619072376,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Stamps__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 67.29008947497756,
+      "patch_pr": 67.29008947497756,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "thyroid__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 81.07582152016346,
+      "patch_pr": 81.07582152016346,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "thyroid__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 85.49849732756928,
+      "patch_pr": 85.49849732756928,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "thyroid__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 87.26405297254799,
+      "patch_pr": 87.26405297254799,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "thyroid__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 84.08273844450397,
+      "patch_pr": 84.08273844450397,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "thyroid__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 82.37686204194603,
+      "patch_pr": 82.37686204194603,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vertebral__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 41.80308131826338,
+      "patch_pr": 41.80308131826338,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vertebral__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 38.11781494069621,
+      "patch_pr": 38.11781494069621,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vertebral__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 22.45882762611557,
+      "patch_pr": 22.45882762611557,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vertebral__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 27.36759699114892,
+      "patch_pr": 27.36759699114892,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vertebral__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 31.111502348055364,
+      "patch_pr": 31.111502348055364,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vowels__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 92.47080223032475,
+      "patch_pr": 92.47080223032475,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vowels__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 92.09218796631411,
+      "patch_pr": 92.09218796631411,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vowels__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 91.38138254826782,
+      "patch_pr": 91.38138254826782,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vowels__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 89.27175159140558,
+      "patch_pr": 89.27175159140558,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vowels__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 86.92928260496048,
+      "patch_pr": 86.92928260496048,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Waveform__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 25.154673845064064,
+      "patch_pr": 25.154673845064064,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Waveform__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 20.91309704008401,
+      "patch_pr": 20.91309704008401,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Waveform__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 18.73960887611521,
+      "patch_pr": 18.73960887611521,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Waveform__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 16.193337197653186,
+      "patch_pr": 16.193337197653186,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Waveform__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 20.434297376887013,
+      "patch_pr": 20.434297376887013,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WBC__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 90.1436735778841,
+      "patch_pr": 90.1436735778841,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WBC__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 93.51136363636364,
+      "patch_pr": 93.51136363636364,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WBC__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 90.80876068376068,
+      "patch_pr": 90.80876068376068,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WBC__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 94.07602339181285,
+      "patch_pr": 94.07602339181285,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WBC__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 97.2020202020202,
+      "patch_pr": 97.2020202020202,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WDBC__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 90.63980463980464,
+      "patch_pr": 90.63980463980464,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WDBC__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 80.18380230880231,
+      "patch_pr": 80.18380230880231,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WDBC__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 76.22602397602395,
+      "patch_pr": 76.22602397602395,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WDBC__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 57.28625541125542,
+      "patch_pr": 57.28625541125542,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WDBC__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 95.47005772005771,
+      "patch_pr": 95.47005772005771,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Wilt__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 52.796796679489624,
+      "patch_pr": 52.796796679489624,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Wilt__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 55.64475829602294,
+      "patch_pr": 55.64475829602294,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Wilt__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 47.20437653082541,
+      "patch_pr": 47.20437653082541,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Wilt__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 61.73857156010156,
+      "patch_pr": 61.73857156010156,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Wilt__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 58.99920627632862,
+      "patch_pr": 58.99920627632862,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "wine__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 91.35046897546898,
+      "patch_pr": 91.35046897546898,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "wine__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 85.55717893217893,
+      "patch_pr": 85.55717893217893,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "wine__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 88.23119690766748,
+      "patch_pr": 88.23119690766748,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "wine__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 84.45063025210084,
+      "patch_pr": 84.45063025210084,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "wine__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 93.57595182595183,
+      "patch_pr": 93.57595182595183,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WPBC__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 40.35847903287806,
+      "patch_pr": 40.35847903287806,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WPBC__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 36.79817797419545,
+      "patch_pr": 36.79817797419545,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WPBC__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 39.18819335242921,
+      "patch_pr": 39.18819335242921,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WPBC__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 38.27230550517757,
+      "patch_pr": 38.27230550517757,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WPBC__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 42.62637710895898,
+      "patch_pr": 42.62637710895898,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "yeast__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 50.685692959482864,
+      "patch_pr": 50.685692959482864,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "yeast__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 51.95768529098041,
+      "patch_pr": 51.95768529098041,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "yeast__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 52.66823622116574,
+      "patch_pr": 52.66823622116574,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "yeast__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 51.344787591617255,
+      "patch_pr": 51.344787591617255,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "yeast__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 52.5212229785619,
+      "patch_pr": 52.5212229785619,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "CIFAR10__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 26.175705657437163,
+      "patch_pr": 26.175705657437163,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "CIFAR10__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 25.06287485330514,
+      "patch_pr": 25.06287485330514,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "CIFAR10__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 22.80030231261544,
+      "patch_pr": 22.80030231261544,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "CIFAR10__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 25.607354292585804,
+      "patch_pr": 25.607354292585804,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "CIFAR10__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 26.352141989958504,
+      "patch_pr": 26.352141989958504,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "FashionMNIST__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 60.81505475282687,
+      "patch_pr": 60.81505475282687,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "FashionMNIST__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 60.70662683955397,
+      "patch_pr": 60.70662683955397,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "FashionMNIST__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 61.14131891411231,
+      "patch_pr": 61.14131891411231,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "FashionMNIST__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 60.84950686001827,
+      "patch_pr": 60.84950686001827,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "FashionMNIST__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 61.41845192728784,
+      "patch_pr": 61.41845192728784,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MNIST-C__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 48.81415526287984,
+      "patch_pr": 48.81415526287984,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MNIST-C__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 48.86477123709534,
+      "patch_pr": 48.86477123709534,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MNIST-C__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 49.12572198226428,
+      "patch_pr": 49.12572198226428,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MNIST-C__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 48.08475993666404,
+      "patch_pr": 48.08475993666404,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MNIST-C__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 48.9860283059124,
+      "patch_pr": 48.9860283059124,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MVTec-AD__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 71.39731625587385,
+      "patch_pr": 71.39731625587385,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MVTec-AD__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 71.1539264441803,
+      "patch_pr": 71.1539264441803,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MVTec-AD__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 72.23570581436162,
+      "patch_pr": 72.23570581436162,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MVTec-AD__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 71.09623306925334,
+      "patch_pr": 71.09623306925334,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MVTec-AD__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 70.77266953907557,
+      "patch_pr": 70.77266953907557,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SVHN__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 16.074053285731114,
+      "patch_pr": 16.074053285731114,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SVHN__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 15.89352333942525,
+      "patch_pr": 15.89352333942525,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SVHN__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 17.236815032018892,
+      "patch_pr": 17.236815032018892,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SVHN__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 15.013126025534994,
+      "patch_pr": 15.013126025534994,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SVHN__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 16.660452703634704,
+      "patch_pr": 16.660452703634704,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Agnews__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 23.523979566522712,
+      "patch_pr": 23.523979566522712,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Agnews__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 23.37838451346429,
+      "patch_pr": 23.37838451346429,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Agnews__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 23.121911578046475,
+      "patch_pr": 23.121911578046475,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Agnews__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 24.053600064597287,
+      "patch_pr": 24.053600064597287,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Agnews__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 23.64084973280959,
+      "patch_pr": 23.64084973280959,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Amazon__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 12.583215626454743,
+      "patch_pr": 12.583215626454743,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Amazon__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 12.529742760982842,
+      "patch_pr": 12.529742760982842,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Amazon__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 12.787490812046729,
+      "patch_pr": 12.787490812046729,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Amazon__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 12.545272383401592,
+      "patch_pr": 12.545272383401592,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Amazon__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 12.517821089773884,
+      "patch_pr": 12.517821089773884,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Imdb__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 10.456153329194882,
+      "patch_pr": 10.456153329194882,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Imdb__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 9.294444878358004,
+      "patch_pr": 9.294444878358004,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Imdb__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 9.921134301408149,
+      "patch_pr": 9.921134301408149,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Imdb__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 9.838748922766918,
+      "patch_pr": 9.838748922766918,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Imdb__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 9.714529477219426,
+      "patch_pr": 9.714529477219426,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Yelp__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 17.793191890130284,
+      "patch_pr": 17.793191890130284,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Yelp__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 16.79533608936903,
+      "patch_pr": 16.79533608936903,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Yelp__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 20.28596444238612,
+      "patch_pr": 20.28596444238612,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Yelp__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 16.516745601629935,
+      "patch_pr": 16.516745601629935,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Yelp__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 16.930688886094707,
+      "patch_pr": 16.930688886094707,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "20newsgroups__semi-supervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 29.705682549270023,
+      "patch_pr": 29.705682549270023,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "20newsgroups__semi-supervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 28.52733036358425,
+      "patch_pr": 28.52733036358425,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "20newsgroups__semi-supervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 30.421382703371446,
+      "patch_pr": 30.421382703371446,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "20newsgroups__semi-supervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 26.2259722354242,
+      "patch_pr": 26.2259722354242,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "20newsgroups__semi-supervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 28.657680825221583,
+      "patch_pr": 28.657680825221583,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "ALOI__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 3.553713508893382,
+      "patch_pr": 3.553713508893382,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "ALOI__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 3.5657770508572453,
+      "patch_pr": 3.5657770508572453,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "ALOI__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 3.5547482928261203,
+      "patch_pr": 3.5547482928261203,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "ALOI__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 3.5505267543525925,
+      "patch_pr": 3.5505267543525925,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "ALOI__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 3.551293795860678,
+      "patch_pr": 3.551293795860678,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "annthyroid__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 27.671197333572678,
+      "patch_pr": 27.671197333572678,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "annthyroid__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 29.39924997130448,
+      "patch_pr": 29.39924997130448,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "annthyroid__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 27.63707921012975,
+      "patch_pr": 27.63707921012975,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "annthyroid__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 25.629925079849052,
+      "patch_pr": 25.629925079849052,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "annthyroid__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 29.78637421406817,
+      "patch_pr": 29.78637421406817,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "backdoor__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 59.769854619749175,
+      "patch_pr": 59.769854619749175,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "backdoor__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 61.03691377701407,
+      "patch_pr": 61.03691377701407,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "backdoor__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 59.79061502045153,
+      "patch_pr": 59.79061502045153,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "backdoor__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 58.027543586541995,
+      "patch_pr": 58.027543586541995,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "backdoor__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 56.71582733375754,
+      "patch_pr": 56.71582733375754,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "breastw__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 95.4862688627061,
+      "patch_pr": 95.4862688627061,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "breastw__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 95.60917377473822,
+      "patch_pr": 95.60917377473822,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "breastw__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 95.80452810773755,
+      "patch_pr": 95.80452810773755,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "breastw__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 95.15165841517377,
+      "patch_pr": 95.15165841517377,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "breastw__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 95.80327524294516,
+      "patch_pr": 95.80327524294516,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "campaign__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 31.549835230444888,
+      "patch_pr": 31.549835230444888,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "campaign__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 29.95755388438824,
+      "patch_pr": 29.95755388438824,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "campaign__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 31.19688168529453,
+      "patch_pr": 31.19688168529453,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "campaign__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 29.9231281407251,
+      "patch_pr": 29.9231281407251,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "campaign__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 30.17928837003868,
+      "patch_pr": 30.17928837003868,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cardio__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 54.850983834744504,
+      "patch_pr": 54.850983834744504,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cardio__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 53.18929838061287,
+      "patch_pr": 53.18929838061287,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cardio__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 54.57255565606132,
+      "patch_pr": 54.57255565606132,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cardio__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 52.38230496851166,
+      "patch_pr": 52.38230496851166,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cardio__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 53.16509970485813,
+      "patch_pr": 53.16509970485813,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Cardiotocography__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 40.84720854231061,
+      "patch_pr": 40.84720854231061,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Cardiotocography__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 41.00848524637416,
+      "patch_pr": 41.00848524637416,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Cardiotocography__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 42.4160863002613,
+      "patch_pr": 42.4160863002613,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Cardiotocography__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 39.55711971347065,
+      "patch_pr": 39.55711971347065,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Cardiotocography__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 41.44800063689499,
+      "patch_pr": 41.44800063689499,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "celeba__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 7.165103885600287,
+      "patch_pr": 7.165103885600287,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "celeba__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 6.673590667962315,
+      "patch_pr": 6.673590667962315,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "celeba__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 7.097951714204475,
+      "patch_pr": 7.097951714204475,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "celeba__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 6.785944018035789,
+      "patch_pr": 6.785944018035789,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "celeba__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 6.946053641968019,
+      "patch_pr": 6.946053641968019,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "census__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 8.776202779478508,
+      "patch_pr": 8.776202779478508,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "census__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 8.58774237080225,
+      "patch_pr": 8.58774237080225,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "census__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 8.786962125174385,
+      "patch_pr": 8.786962125174385,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "census__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 8.70352514249976,
+      "patch_pr": 8.70352514249976,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "census__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 8.730664926630691,
+      "patch_pr": 8.730664926630691,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cover__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 9.5703889178387,
+      "patch_pr": 9.5703889178387,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cover__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 8.847449470075135,
+      "patch_pr": 8.847449470075135,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cover__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 8.43846279390252,
+      "patch_pr": 8.43846279390252,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cover__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 8.65042606063779,
+      "patch_pr": 8.65042606063779,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "cover__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 9.067542577248298,
+      "patch_pr": 9.067542577248298,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "donors__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 15.995637644344349,
+      "patch_pr": 15.995637644344349,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "donors__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 16.039325687646887,
+      "patch_pr": 16.039325687646887,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "donors__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 15.517921916025559,
+      "patch_pr": 15.517921916025559,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "donors__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 15.643905935546243,
+      "patch_pr": 15.643905935546243,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "donors__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 16.382854680002477,
+      "patch_pr": 16.382854680002477,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fault__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 55.17329277880355,
+      "patch_pr": 55.17329277880355,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fault__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 55.7055096145724,
+      "patch_pr": 55.7055096145724,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fault__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 55.40616398535286,
+      "patch_pr": 55.40616398535286,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fault__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 54.49602797366775,
+      "patch_pr": 54.49602797366775,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fault__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 53.323445029982764,
+      "patch_pr": 53.323445029982764,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fraud__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 20.48467356667787,
+      "patch_pr": 20.48467356667787,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fraud__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 32.42229424702229,
+      "patch_pr": 32.42229424702229,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fraud__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 18.79417633733239,
+      "patch_pr": 18.79417633733239,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fraud__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 39.02352890666839,
+      "patch_pr": 39.02352890666839,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "fraud__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 17.678132675244065,
+      "patch_pr": 17.678132675244065,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "glass__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 30.157797798265552,
+      "patch_pr": 30.157797798265552,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "glass__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 18.71945013329765,
+      "patch_pr": 18.71945013329765,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "glass__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 31.52401951733788,
+      "patch_pr": 31.52401951733788,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "glass__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 27.332384684089874,
+      "patch_pr": 27.332384684089874,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "glass__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 24.756082334174675,
+      "patch_pr": 24.756082334174675,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Hepatitis__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 38.187324328579344,
+      "patch_pr": 38.187324328579344,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Hepatitis__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 31.662713174455448,
+      "patch_pr": 31.662713174455448,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Hepatitis__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 34.70897479571324,
+      "patch_pr": 34.70897479571324,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Hepatitis__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 33.065544595730245,
+      "patch_pr": 33.065544595730245,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Hepatitis__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 30.063801203370637,
+      "patch_pr": 30.063801203370637,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "http__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 23.520867411179445,
+      "patch_pr": 23.520867411179445,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "http__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 23.50271852192013,
+      "patch_pr": 23.50271852192013,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "http__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 22.85720951599399,
+      "patch_pr": 22.85720951599399,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "http__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 23.87843992727537,
+      "patch_pr": 23.87843992727537,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "http__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 24.85733745565042,
+      "patch_pr": 24.85733745565042,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "InternetAds__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 32.83868728342877,
+      "patch_pr": 32.83868728342877,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "InternetAds__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 33.31908963325243,
+      "patch_pr": 33.31908963325243,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "InternetAds__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 32.57678379399057,
+      "patch_pr": 32.57678379399057,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "InternetAds__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 32.677152844846354,
+      "patch_pr": 32.677152844846354,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "InternetAds__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 32.87764962950176,
+      "patch_pr": 32.87764962950176,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Ionosphere__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 92.383013344734,
+      "patch_pr": 92.383013344734,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Ionosphere__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 94.27894188420287,
+      "patch_pr": 94.27894188420287,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Ionosphere__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 93.33968318832503,
+      "patch_pr": 93.33968318832503,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Ionosphere__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 92.01100971186017,
+      "patch_pr": 92.01100971186017,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Ionosphere__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 93.34593022511329,
+      "patch_pr": 93.34593022511329,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "landsat__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 26.055194760739276,
+      "patch_pr": 26.055194760739276,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "landsat__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 26.096302805069794,
+      "patch_pr": 26.096302805069794,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "landsat__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 26.08511611905332,
+      "patch_pr": 26.08511611905332,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "landsat__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 26.56484634618096,
+      "patch_pr": 26.56484634618096,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "landsat__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 26.508044280426684,
+      "patch_pr": 26.508044280426684,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "letter__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 43.07654684320492,
+      "patch_pr": 43.07654684320492,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "letter__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 46.182845208266905,
+      "patch_pr": 46.182845208266905,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "letter__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 48.450423055685775,
+      "patch_pr": 48.450423055685775,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "letter__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 42.88868244268351,
+      "patch_pr": 42.88868244268351,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "letter__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 49.24176256319904,
+      "patch_pr": 49.24176256319904,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Lymphography__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 94.36507936507937,
+      "patch_pr": 94.36507936507937,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Lymphography__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 81.76587301587301,
+      "patch_pr": 81.76587301587301,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Lymphography__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 90.37698412698411,
+      "patch_pr": 90.37698412698411,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Lymphography__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 92.96296296296296,
+      "patch_pr": 92.96296296296296,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Lymphography__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 100.0,
+      "patch_pr": 100.0,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "magic.gamma__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 70.91283686289238,
+      "patch_pr": 70.91283686289238,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "magic.gamma__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 70.594069331555,
+      "patch_pr": 70.594069331555,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "magic.gamma__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 71.73707664248337,
+      "patch_pr": 71.73707664248337,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "magic.gamma__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 70.61772647994229,
+      "patch_pr": 70.61772647994229,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "magic.gamma__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 70.75562837066794,
+      "patch_pr": 70.75562837066794,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mammography__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 22.22927311150017,
+      "patch_pr": 22.22927311150017,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mammography__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 22.185093008975425,
+      "patch_pr": 22.185093008975425,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mammography__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 28.97232680367284,
+      "patch_pr": 28.97232680367284,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mammography__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 21.72881683393894,
+      "patch_pr": 21.72881683393894,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mammography__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 22.105214322387702,
+      "patch_pr": 22.105214322387702,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mnist__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 40.41042861524809,
+      "patch_pr": 40.41042861524809,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mnist__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 40.662392182669976,
+      "patch_pr": 40.662392182669976,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mnist__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 40.07113676501087,
+      "patch_pr": 40.07113676501087,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mnist__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 39.87539845169139,
+      "patch_pr": 39.87539845169139,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "mnist__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 40.6201706636381,
+      "patch_pr": 40.6201706636381,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "musk__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.65197951750093,
+      "patch_pr": 99.65197951750093,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "musk__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 93.87897592759707,
+      "patch_pr": 93.87897592759707,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "musk__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 98.61540213905323,
+      "patch_pr": 98.61540213905323,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "musk__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 99.79902542399168,
+      "patch_pr": 99.79902542399168,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "musk__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 97.73766652845094,
+      "patch_pr": 97.73766652845094,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "optdigits__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 2.8803348369411004,
+      "patch_pr": 2.8803348369411004,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "optdigits__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 2.888882035789502,
+      "patch_pr": 2.888882035789502,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "optdigits__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 2.9673940025045473,
+      "patch_pr": 2.9673940025045473,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "optdigits__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 2.8720642708089263,
+      "patch_pr": 2.8720642708089263,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "optdigits__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 2.8170841839646497,
+      "patch_pr": 2.8170841839646497,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "PageBlocks__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 54.90738289902758,
+      "patch_pr": 54.90738289902758,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "PageBlocks__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 55.36940865468338,
+      "patch_pr": 55.36940865468338,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "PageBlocks__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 55.5011435574581,
+      "patch_pr": 55.5011435574581,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "PageBlocks__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 56.41345155757499,
+      "patch_pr": 56.41345155757499,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "PageBlocks__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 56.36565289035087,
+      "patch_pr": 56.36565289035087,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "pendigits__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 24.846281367917992,
+      "patch_pr": 24.846281367917992,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "pendigits__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 25.806040727007044,
+      "patch_pr": 25.806040727007044,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "pendigits__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 20.201483016440232,
+      "patch_pr": 20.201483016440232,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "pendigits__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 26.904449195107993,
+      "patch_pr": 26.904449195107993,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "pendigits__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 20.351170520617636,
+      "patch_pr": 20.351170520617636,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Pima__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 50.49328902792587,
+      "patch_pr": 50.49328902792587,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Pima__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 51.159215785182695,
+      "patch_pr": 51.159215785182695,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Pima__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 51.25211599652878,
+      "patch_pr": 51.25211599652878,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Pima__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 53.38873198524745,
+      "patch_pr": 53.38873198524745,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Pima__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 50.9007598909186,
+      "patch_pr": 50.9007598909186,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satellite__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 67.26128414473578,
+      "patch_pr": 67.26128414473578,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satellite__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 66.6620705978358,
+      "patch_pr": 66.6620705978358,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satellite__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 68.11446778561324,
+      "patch_pr": 68.11446778561324,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satellite__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 66.56470022432578,
+      "patch_pr": 66.56470022432578,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satellite__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 68.38423656050765,
+      "patch_pr": 68.38423656050765,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satimage-2__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 91.39238803044753,
+      "patch_pr": 91.39238803044753,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satimage-2__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 87.60257274968514,
+      "patch_pr": 87.60257274968514,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satimage-2__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 86.94087025724527,
+      "patch_pr": 86.94087025724527,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satimage-2__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 84.98440147601279,
+      "patch_pr": 84.98440147601279,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "satimage-2__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 86.32393884871475,
+      "patch_pr": 86.32393884871475,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "shuttle__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 79.30204458582541,
+      "patch_pr": 79.30204458582541,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "shuttle__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 80.90726394941709,
+      "patch_pr": 80.90726394941709,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "shuttle__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 78.62562882217283,
+      "patch_pr": 78.62562882217283,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "shuttle__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 80.67433733298225,
+      "patch_pr": 80.67433733298225,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "shuttle__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 80.38304244004539,
+      "patch_pr": 80.38304244004539,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "skin__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 36.597140454180646,
+      "patch_pr": 36.597140454180646,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "skin__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 34.40997091117939,
+      "patch_pr": 34.40997091117939,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "skin__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 34.06229068160046,
+      "patch_pr": 34.06229068160046,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "skin__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 37.00743039126062,
+      "patch_pr": 37.00743039126062,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "skin__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 35.683227771628786,
+      "patch_pr": 35.683227771628786,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "smtp__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 57.922647945526165,
+      "patch_pr": 57.922647945526165,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "smtp__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 55.723547743688826,
+      "patch_pr": 55.723547743688826,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "smtp__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 56.20741705103289,
+      "patch_pr": 56.20741705103289,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "smtp__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 54.20878500842324,
+      "patch_pr": 54.20878500842324,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "smtp__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 59.25041429654959,
+      "patch_pr": 59.25041429654959,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SpamBase__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 42.26457543620944,
+      "patch_pr": 42.26457543620944,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SpamBase__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 42.63000703131805,
+      "patch_pr": 42.63000703131805,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SpamBase__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 41.04414325307109,
+      "patch_pr": 41.04414325307109,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SpamBase__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 44.53462589479852,
+      "patch_pr": 44.53462589479852,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SpamBase__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 41.54706198524903,
+      "patch_pr": 41.54706198524903,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "speech__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 4.824661065797786,
+      "patch_pr": 4.824661065797786,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "speech__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 3.036368757574317,
+      "patch_pr": 3.036368757574317,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "speech__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 3.3750534838582493,
+      "patch_pr": 3.3750534838582493,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "speech__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 3.475534422775743,
+      "patch_pr": 3.475534422775743,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "speech__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 3.5694273271642136,
+      "patch_pr": 3.5694273271642136,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Stamps__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 32.97625131761514,
+      "patch_pr": 32.97625131761514,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Stamps__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 34.83341000129684,
+      "patch_pr": 34.83341000129684,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Stamps__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 33.371960501411394,
+      "patch_pr": 33.371960501411394,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Stamps__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 33.65640981806668,
+      "patch_pr": 33.65640981806668,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Stamps__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 33.71296977606187,
+      "patch_pr": 33.71296977606187,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "thyroid__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 47.755663187066666,
+      "patch_pr": 47.755663187066666,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "thyroid__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 55.71379132532602,
+      "patch_pr": 55.71379132532602,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "thyroid__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 54.057439414035876,
+      "patch_pr": 54.057439414035876,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "thyroid__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 53.8491301628472,
+      "patch_pr": 53.8491301628472,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "thyroid__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 56.425682658667675,
+      "patch_pr": 56.425682658667675,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vertebral__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 13.804537858074454,
+      "patch_pr": 13.804537858074454,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vertebral__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 10.987193846007532,
+      "patch_pr": 10.987193846007532,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vertebral__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 11.585954791370243,
+      "patch_pr": 11.585954791370243,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vertebral__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 11.009409474967057,
+      "patch_pr": 11.009409474967057,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vertebral__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 11.032913843005012,
+      "patch_pr": 11.032913843005012,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vowels__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 57.84418277979936,
+      "patch_pr": 57.84418277979936,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vowels__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 57.4224499526809,
+      "patch_pr": 57.4224499526809,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vowels__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 44.06409835144017,
+      "patch_pr": 44.06409835144017,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vowels__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 50.84761701189282,
+      "patch_pr": 50.84761701189282,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "vowels__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 44.65191250432592,
+      "patch_pr": 44.65191250432592,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Waveform__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.627631833164913,
+      "patch_pr": 5.627631833164913,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Waveform__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.716044339641682,
+      "patch_pr": 5.716044339641682,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Waveform__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.894691418354387,
+      "patch_pr": 5.894691418354387,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Waveform__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 6.410686140657669,
+      "patch_pr": 6.410686140657669,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Waveform__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 6.259242342907252,
+      "patch_pr": 6.259242342907252,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WBC__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 93.82783882783882,
+      "patch_pr": 93.82783882783882,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WBC__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 92.5064935064935,
+      "patch_pr": 92.5064935064935,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WBC__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 91.96590909090908,
+      "patch_pr": 91.96590909090908,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WBC__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 89.52623765123765,
+      "patch_pr": 89.52623765123765,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WBC__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 92.63230994152046,
+      "patch_pr": 92.63230994152046,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WDBC__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 37.07237824184285,
+      "patch_pr": 37.07237824184285,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WDBC__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 67.08384630075807,
+      "patch_pr": 67.08384630075807,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WDBC__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 61.99024801539033,
+      "patch_pr": 61.99024801539033,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WDBC__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 67.04839205375748,
+      "patch_pr": 67.04839205375748,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WDBC__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 50.97196846070552,
+      "patch_pr": 50.97196846070552,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Wilt__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.141230068336647,
+      "patch_pr": 5.141230068336647,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Wilt__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 4.907817159916984,
+      "patch_pr": 4.907817159916984,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Wilt__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.30861735623987,
+      "patch_pr": 5.30861735623987,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Wilt__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.223455069947645,
+      "patch_pr": 5.223455069947645,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Wilt__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.079827773321363,
+      "patch_pr": 5.079827773321363,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "wine__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 70.95918574179444,
+      "patch_pr": 70.95918574179444,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "wine__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 40.26641015431205,
+      "patch_pr": 40.26641015431205,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "wine__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.161497679463446,
+      "patch_pr": 5.161497679463446,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "wine__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 35.47259535587959,
+      "patch_pr": 35.47259535587959,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "wine__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 6.315553653286465,
+      "patch_pr": 6.315553653286465,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WPBC__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 25.761928438905045,
+      "patch_pr": 25.761928438905045,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WPBC__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 31.413906311198147,
+      "patch_pr": 31.413906311198147,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WPBC__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 26.076301049945894,
+      "patch_pr": 26.076301049945894,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WPBC__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 25.481692937810298,
+      "patch_pr": 25.481692937810298,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "WPBC__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 24.884508661542533,
+      "patch_pr": 24.884508661542533,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "yeast__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 32.2648486658214,
+      "patch_pr": 32.2648486658214,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "yeast__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 31.79044303011056,
+      "patch_pr": 31.79044303011056,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "yeast__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 31.865193691612543,
+      "patch_pr": 31.865193691612543,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "yeast__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 32.09132791795748,
+      "patch_pr": 32.09132791795748,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "yeast__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 31.451478971689173,
+      "patch_pr": 31.451478971689173,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "CIFAR10__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 10.569646195913414,
+      "patch_pr": 10.569646195913414,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "CIFAR10__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 10.53942434311573,
+      "patch_pr": 10.53942434311573,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "CIFAR10__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 10.42181034820779,
+      "patch_pr": 10.42181034820779,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "CIFAR10__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 10.597777747215083,
+      "patch_pr": 10.597777747215083,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "CIFAR10__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 10.403139214889519,
+      "patch_pr": 10.403139214889519,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "FashionMNIST__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 32.91922255591161,
+      "patch_pr": 32.91922255591161,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "FashionMNIST__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 32.520768459371084,
+      "patch_pr": 32.520768459371084,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "FashionMNIST__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 32.76046774778699,
+      "patch_pr": 32.76046774778699,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "FashionMNIST__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 33.208787114900986,
+      "patch_pr": 33.208787114900986,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "FashionMNIST__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 33.831007780803276,
+      "patch_pr": 33.831007780803276,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MNIST-C__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 19.254886104887678,
+      "patch_pr": 19.254886104887678,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MNIST-C__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 19.231221313282997,
+      "patch_pr": 19.231221313282997,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MNIST-C__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 19.226805764864036,
+      "patch_pr": 19.226805764864036,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MNIST-C__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 19.328211693464244,
+      "patch_pr": 19.328211693464244,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MNIST-C__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 19.265250339165853,
+      "patch_pr": 19.265250339165853,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MVTec-AD__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 94.0066914569804,
+      "patch_pr": 94.0066914569804,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MVTec-AD__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 91.40956899234324,
+      "patch_pr": 91.40956899234324,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MVTec-AD__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 93.71172297414876,
+      "patch_pr": 93.71172297414876,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MVTec-AD__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 94.25270421703569,
+      "patch_pr": 94.25270421703569,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "MVTec-AD__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 93.5643492562873,
+      "patch_pr": 93.5643492562873,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SVHN__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 8.055345588274442,
+      "patch_pr": 8.055345588274442,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SVHN__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 8.046010350961605,
+      "patch_pr": 8.046010350961605,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SVHN__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 8.07464518153322,
+      "patch_pr": 8.07464518153322,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SVHN__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 8.011818873713999,
+      "patch_pr": 8.011818873713999,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "SVHN__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 7.9857426362695065,
+      "patch_pr": 7.9857426362695065,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Agnews__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 11.15623995556159,
+      "patch_pr": 11.15623995556159,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Agnews__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 11.111245087486958,
+      "patch_pr": 11.111245087486958,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Agnews__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 11.158905367717225,
+      "patch_pr": 11.158905367717225,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Agnews__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 11.209560511376468,
+      "patch_pr": 11.209560511376468,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Agnews__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 11.068085136555093,
+      "patch_pr": 11.068085136555093,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Amazon__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 6.413851487441022,
+      "patch_pr": 6.413851487441022,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Amazon__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 6.406093814456574,
+      "patch_pr": 6.406093814456574,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Amazon__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 6.418943550675417,
+      "patch_pr": 6.418943550675417,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Amazon__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 6.462051630985282,
+      "patch_pr": 6.462051630985282,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Amazon__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 6.457503673417128,
+      "patch_pr": 6.457503673417128,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Imdb__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.362399325572139,
+      "patch_pr": 5.362399325572139,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Imdb__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.393867051694736,
+      "patch_pr": 5.393867051694736,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Imdb__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.245754675762277,
+      "patch_pr": 5.245754675762277,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Imdb__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.38650781652234,
+      "patch_pr": 5.38650781652234,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Imdb__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 5.599614298473539,
+      "patch_pr": 5.599614298473539,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Yelp__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 9.070793061243466,
+      "patch_pr": 9.070793061243466,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Yelp__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 9.27756181267249,
+      "patch_pr": 9.27756181267249,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Yelp__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 9.017606047233368,
+      "patch_pr": 9.017606047233368,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Yelp__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 9.119286202489628,
+      "patch_pr": 9.119286202489628,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "Yelp__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 9.168162581754,
+      "patch_pr": 9.168162581754,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "20newsgroups__unsupervised__111",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 14.220128948241783,
+      "patch_pr": 14.220128948241783,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "20newsgroups__unsupervised__222",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 14.983498176010288,
+      "patch_pr": 14.983498176010288,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "20newsgroups__unsupervised__333",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 14.166514527833996,
+      "patch_pr": 14.166514527833996,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "20newsgroups__unsupervised__444",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 14.008078624536344,
+      "patch_pr": 14.008078624536344,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "20newsgroups__unsupervised__555",
+      "layer": "phase1",
+      "action": "accept",
+      "base_pr": 14.46562376236159,
+      "patch_pr": 14.46562376236159,
+      "delta_pp": 0.0
+    },
+    {
+      "key": "optdigits__unsupervised__111",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 2.8803348369411004,
+      "patch_pr": 2.898222931271903,
+      "delta_pp": 0.017888094330802407
+    },
+    {
+      "key": "optdigits__unsupervised__222",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 2.888882035789502,
+      "patch_pr": 3.040207743113633,
+      "delta_pp": 0.15132570732413075
+    },
+    {
+      "key": "optdigits__unsupervised__333",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 2.9673940025045473,
+      "patch_pr": 3.0735789062895007,
+      "delta_pp": 0.10618490378495338
+    },
+    {
+      "key": "optdigits__unsupervised__444",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 2.8720642708089263,
+      "patch_pr": 3.101752581122862,
+      "delta_pp": 0.22968831031393577
+    },
+    {
+      "key": "optdigits__unsupervised__555",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 2.8170841839646497,
+      "patch_pr": 3.118616185619421,
+      "delta_pp": 0.30153200165477134
+    },
+    {
+      "key": "optdigits__semi-supervised__111",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 38.065460690381705,
+      "patch_pr": 32.94776055122976,
+      "delta_pp": -5.1177001391519426
+    },
+    {
+      "key": "optdigits__semi-supervised__222",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 42.58188037912626,
+      "patch_pr": 31.450086903132167,
+      "delta_pp": -11.131793475994094
+    },
+    {
+      "key": "optdigits__semi-supervised__333",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 41.91013822820239,
+      "patch_pr": 45.03934267345364,
+      "delta_pp": 3.129204445251247
+    },
+    {
+      "key": "optdigits__semi-supervised__444",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 40.26086217744627,
+      "patch_pr": 34.884366779855505,
+      "delta_pp": -5.376495397590766
+    },
+    {
+      "key": "optdigits__semi-supervised__555",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 37.74356479242591,
+      "patch_pr": 37.287912062307775,
+      "delta_pp": -0.4556527301181319
+    },
+    {
+      "key": "ALOI__unsupervised__111",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 3.553713508893382,
+      "patch_pr": 4.023862485329226,
+      "delta_pp": 0.4701489764358442
+    },
+    {
+      "key": "ALOI__unsupervised__222",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 3.5657770508572453,
+      "patch_pr": 3.945740000183813,
+      "delta_pp": 0.37996294932656793
+    },
+    {
+      "key": "ALOI__unsupervised__333",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 3.5547482928261203,
+      "patch_pr": 4.274719139686862,
+      "delta_pp": 0.719970846860742
+    },
+    {
+      "key": "ALOI__unsupervised__444",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 3.5505267543525925,
+      "patch_pr": 4.08472608038947,
+      "delta_pp": 0.5341993260368776
+    },
+    {
+      "key": "ALOI__unsupervised__555",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 3.551293795860678,
+      "patch_pr": 4.290931087259405,
+      "delta_pp": 0.7396372913987266
+    },
+    {
+      "key": "ALOI__semi-supervised__111",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 10.999718383005227,
+      "patch_pr": 8.244638968739725,
+      "delta_pp": -2.755079414265502
+    },
+    {
+      "key": "ALOI__semi-supervised__222",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 11.617884282644075,
+      "patch_pr": 8.582515910775706,
+      "delta_pp": -3.035368371868369
+    },
+    {
+      "key": "ALOI__semi-supervised__333",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 11.041987016097554,
+      "patch_pr": 8.286153054561044,
+      "delta_pp": -2.75583396153651
+    },
+    {
+      "key": "ALOI__semi-supervised__444",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 10.908969596691618,
+      "patch_pr": 8.472881334711229,
+      "delta_pp": -2.436088261980389
+    },
+    {
+      "key": "ALOI__semi-supervised__555",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 10.71297470443047,
+      "patch_pr": 8.437162476636157,
+      "delta_pp": -2.2758122277943134
+    },
+    {
+      "key": "speech__unsupervised__111",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 4.824661065797786,
+      "patch_pr": 4.380064753390197,
+      "delta_pp": -0.44459631240758846
+    },
+    {
+      "key": "speech__unsupervised__222",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 3.036368757574317,
+      "patch_pr": 3.5960644316589003,
+      "delta_pp": 0.5596956740845833
+    },
+    {
+      "key": "speech__unsupervised__333",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 3.3750534838582493,
+      "patch_pr": 5.001785537591175,
+      "delta_pp": 1.6267320537329257
+    },
+    {
+      "key": "speech__unsupervised__444",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 3.475534422775743,
+      "patch_pr": 3.437681987297085,
+      "delta_pp": -0.03785243547865802
+    },
+    {
+      "key": "speech__unsupervised__555",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 3.5694273271642136,
+      "patch_pr": 5.150798150002643,
+      "delta_pp": 1.5813708228384296
+    },
+    {
+      "key": "speech__semi-supervised__111",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 4.528475567420945,
+      "patch_pr": 5.401076483709573,
+      "delta_pp": 0.8726009162886275
+    },
+    {
+      "key": "speech__semi-supervised__222",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 6.132306417549959,
+      "patch_pr": 4.526983421656743,
+      "delta_pp": -1.605322995893216
+    },
+    {
+      "key": "speech__semi-supervised__333",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 4.35690489723989,
+      "patch_pr": 4.56137399368795,
+      "delta_pp": 0.20446909644806066
+    },
+    {
+      "key": "speech__semi-supervised__444",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 4.552672404845945,
+      "patch_pr": 4.637271750136675,
+      "delta_pp": 0.0845993452907301
+    },
+    {
+      "key": "speech__semi-supervised__555",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 5.752055891182115,
+      "patch_pr": 5.625916342672856,
+      "delta_pp": -0.12613954850925957
+    },
+    {
+      "key": "Imdb__unsupervised__111",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 5.362399325572139,
+      "patch_pr": 4.572375108245086,
+      "delta_pp": -0.7900242173270531
+    },
+    {
+      "key": "Imdb__unsupervised__222",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 5.393867051694736,
+      "patch_pr": 4.561261585329484,
+      "delta_pp": -0.8326054663652522
+    },
+    {
+      "key": "Imdb__unsupervised__333",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 5.245754675762277,
+      "patch_pr": 4.5687740946605855,
+      "delta_pp": -0.6769805811016916
+    },
+    {
+      "key": "Imdb__unsupervised__444",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 5.38650781652234,
+      "patch_pr": 4.653445559671837,
+      "delta_pp": -0.733062256850503
+    },
+    {
+      "key": "Imdb__unsupervised__555",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 5.599614298473539,
+      "patch_pr": 4.578703670889709,
+      "delta_pp": -1.02091062758383
+    },
+    {
+      "key": "Imdb__semi-supervised__111",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 10.456153329194882,
+      "patch_pr": 9.252021223800043,
+      "delta_pp": -1.204132105394839
+    },
+    {
+      "key": "Imdb__semi-supervised__222",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 9.294444878358004,
+      "patch_pr": 9.158684739918804,
+      "delta_pp": -0.1357601384391991
+    },
+    {
+      "key": "Imdb__semi-supervised__333",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 9.921134301408149,
+      "patch_pr": 9.067342998891085,
+      "delta_pp": -0.8537913025170631
+    },
+    {
+      "key": "Imdb__semi-supervised__444",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 9.838748922766918,
+      "patch_pr": 9.390589108583796,
+      "delta_pp": -0.44815981418312134
+    },
+    {
+      "key": "Imdb__semi-supervised__555",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 9.714529477219426,
+      "patch_pr": 8.870723231894,
+      "delta_pp": -0.8438062453254247
+    },
+    {
+      "key": "celeba__unsupervised__111",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 7.165103885600287,
+      "patch_pr": 5.626832705870664,
+      "delta_pp": -1.5382711797296222
+    },
+    {
+      "key": "celeba__unsupervised__222",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 6.673590667962315,
+      "patch_pr": 5.790023410649338,
+      "delta_pp": -0.8835672573129765
+    },
+    {
+      "key": "celeba__unsupervised__333",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 7.097951714204475,
+      "patch_pr": 5.4113044384803315,
+      "delta_pp": -1.6866472757241437
+    },
+    {
+      "key": "celeba__unsupervised__444",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 6.785944018035789,
+      "patch_pr": 5.454432338534972,
+      "delta_pp": -1.3315116795008164
+    },
+    {
+      "key": "celeba__unsupervised__555",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 6.946053641968019,
+      "patch_pr": 4.905806636059589,
+      "delta_pp": -2.04024700590843
+    },
+    {
+      "key": "celeba__semi-supervised__111",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 13.782028929099122,
+      "patch_pr": 13.111643656332975,
+      "delta_pp": -0.670385272766147
+    },
+    {
+      "key": "celeba__semi-supervised__222",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 13.403382881387971,
+      "patch_pr": 13.47043931538264,
+      "delta_pp": 0.06705643399466865
+    },
+    {
+      "key": "celeba__semi-supervised__333",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 14.397987317166178,
+      "patch_pr": 12.997618150411155,
+      "delta_pp": -1.4003691667550235
+    },
+    {
+      "key": "celeba__semi-supervised__444",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 14.460135233158653,
+      "patch_pr": 13.157897617341515,
+      "delta_pp": -1.3022376158171376
+    },
+    {
+      "key": "celeba__semi-supervised__555",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 15.433399405873896,
+      "patch_pr": 13.502180266505063,
+      "delta_pp": -1.9312191393688334
+    },
+    {
+      "key": "cover__unsupervised__111",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 9.5703889178387,
+      "patch_pr": 3.4941961749486135,
+      "delta_pp": -6.076192742890087
+    },
+    {
+      "key": "cover__unsupervised__222",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 8.847449470075135,
+      "patch_pr": 2.989629770098599,
+      "delta_pp": -5.857819699976536
+    },
+    {
+      "key": "cover__unsupervised__333",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 8.43846279390252,
+      "patch_pr": 3.286878904724386,
+      "delta_pp": -5.151583889178134
+    },
+    {
+      "key": "cover__unsupervised__444",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 8.65042606063779,
+      "patch_pr": 3.018963069355046,
+      "delta_pp": -5.631462991282744
+    },
+    {
+      "key": "cover__unsupervised__555",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 9.067542577248298,
+      "patch_pr": 2.908748919601703,
+      "delta_pp": -6.158793657646596
+    },
+    {
+      "key": "cover__semi-supervised__111",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 79.02328802060217,
+      "patch_pr": 53.63975388825828,
+      "delta_pp": -25.38353413234389
+    },
+    {
+      "key": "cover__semi-supervised__222",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 78.9037767327703,
+      "patch_pr": 56.44068298290471,
+      "delta_pp": -22.463093749865585
+    },
+    {
+      "key": "cover__semi-supervised__333",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 75.37193351970602,
+      "patch_pr": 53.53805030186326,
+      "delta_pp": -21.83388321784276
+    },
+    {
+      "key": "cover__semi-supervised__444",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 78.12154301689421,
+      "patch_pr": 88.54808106192831,
+      "delta_pp": 10.426538045034107
+    },
+    {
+      "key": "cover__semi-supervised__555",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 76.95473009401175,
+      "patch_pr": 41.60813413474518,
+      "delta_pp": -35.34659595926657
+    },
+    {
+      "key": "CIFAR10__unsupervised__111",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 10.569646195913414,
+      "patch_pr": 10.60592994628585,
+      "delta_pp": 0.036283750372435364
+    },
+    {
+      "key": "CIFAR10__unsupervised__222",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 10.53942434311573,
+      "patch_pr": 10.393440337051077,
+      "delta_pp": -0.14598400606465312
+    },
+    {
+      "key": "CIFAR10__unsupervised__333",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 10.42181034820779,
+      "patch_pr": 10.549293832475621,
+      "delta_pp": 0.12748348426783096
+    },
+    {
+      "key": "CIFAR10__unsupervised__444",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 10.597777747215083,
+      "patch_pr": 10.52303134177878,
+      "delta_pp": -0.07474640543630251
+    },
+    {
+      "key": "CIFAR10__unsupervised__555",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 10.403139214889519,
+      "patch_pr": 10.48977162152328,
+      "delta_pp": 0.08663240663376115
+    },
+    {
+      "key": "CIFAR10__semi-supervised__111",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 26.175705657437163,
+      "patch_pr": 19.5675716513309,
+      "delta_pp": -6.608134006106262
+    },
+    {
+      "key": "CIFAR10__semi-supervised__222",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 25.06287485330514,
+      "patch_pr": 19.509437215329722,
+      "delta_pp": -5.553437637975417
+    },
+    {
+      "key": "CIFAR10__semi-supervised__333",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 22.80030231261544,
+      "patch_pr": 19.325510827223564,
+      "delta_pp": -3.4747914853918758
+    },
+    {
+      "key": "CIFAR10__semi-supervised__444",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 25.607354292585804,
+      "patch_pr": 19.33508545310837,
+      "delta_pp": -6.272268839477434
+    },
+    {
+      "key": "CIFAR10__semi-supervised__555",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 26.352141989958504,
+      "patch_pr": 20.032164383072974,
+      "delta_pp": -6.31997760688553
+    },
+    {
+      "key": "SVHN__unsupervised__111",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 8.055345588274442,
+      "patch_pr": 8.08107941371516,
+      "delta_pp": 0.025733825440719116
+    },
+    {
+      "key": "SVHN__unsupervised__222",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 8.046010350961605,
+      "patch_pr": 8.144501514861773,
+      "delta_pp": 0.09849116390016732
+    },
+    {
+      "key": "SVHN__unsupervised__333",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 8.07464518153322,
+      "patch_pr": 8.07275455766529,
+      "delta_pp": -0.0018906238679310405
+    },
+    {
+      "key": "SVHN__unsupervised__444",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 8.011818873713999,
+      "patch_pr": 8.051464751707607,
+      "delta_pp": 0.039645877993608636
+    },
+    {
+      "key": "SVHN__unsupervised__555",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 7.9857426362695065,
+      "patch_pr": 8.077351194858393,
+      "delta_pp": 0.09160855858888617
+    },
+    {
+      "key": "SVHN__semi-supervised__111",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 16.074053285731114,
+      "patch_pr": 15.347298856102173,
+      "delta_pp": -0.7267544296289419
+    },
+    {
+      "key": "SVHN__semi-supervised__222",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 15.89352333942525,
+      "patch_pr": 15.486354067254737,
+      "delta_pp": -0.40716927217051335
+    },
+    {
+      "key": "SVHN__semi-supervised__333",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 17.236815032018892,
+      "patch_pr": 15.601407904874181,
+      "delta_pp": -1.6354071271447115
+    },
+    {
+      "key": "SVHN__semi-supervised__444",
+      "layer": "gate",
+      "action": "accept",
+      "base_pr": 15.013126025534994,
+      "patch_pr": 15.255417332233435,
+      "delta_pp": 0.24229130669844068
+    },
+    {
+      "key": "SVHN__semi-supervised__555",
+      "layer": "gate",
+      "action": "reject",
+      "base_pr": 16.660452703634704,
+      "patch_pr": 15.166630937055864,
+      "delta_pp": -1.49382176657884
+    }
+  ]
+}

@@ -83,6 +83,48 @@ def score_consistency_on_normals(
     return weights, disagreement
 
 
+def pick_winner_model(
+    train_normal_scores: Dict[str, np.ndarray],
+) -> Tuple[str, float]:
+    """Winner-take-all: lowest rank-variance model on train normals."""
+    if not train_normal_scores:
+        return "adadae", 1.0
+    vars_: Dict[str, float] = {}
+    for name, s in train_normal_scores.items():
+        r = _rank_normalize(np.asarray(s, dtype=np.float64))
+        vars_[name] = float(np.var(r) + 1e-8)
+    winner = min(vars_, key=vars_.get)
+    mats = np.stack([_rank_normalize(np.asarray(s, dtype=np.float64)) for s in train_normal_scores.values()])
+    disagreement = float(np.std(mats, axis=0).mean())
+    return winner, disagreement
+
+
+def gate_winner_predict(
+    score_dict: Dict[str, np.ndarray],
+    train_normal_scores: Dict[str, np.ndarray],
+    disagreement_threshold: float = 0.15,
+    conformal_fallback: str = "ddae",
+) -> Tuple[np.ndarray, GateDecision]:
+    """Winner-take-all GATE: use single best model on test (no rank blend)."""
+    winner, disagreement = pick_winner_model(train_normal_scores)
+    if disagreement > disagreement_threshold:
+        fallback_scores = score_dict.get(conformal_fallback, score_dict.get("adadae"))
+        return fallback_scores, GateDecision(
+            winner=conformal_fallback,
+            weights={conformal_fallback: 1.0},
+            disagreement=disagreement,
+            fallback=True,
+        )
+    if winner not in score_dict:
+        winner = "adadae"
+    return score_dict[winner], GateDecision(
+        winner=winner,
+        weights={winner: 1.0},
+        disagreement=disagreement,
+        fallback=False,
+    )
+
+
 def gate_ensemble_predict(
     adadae_scores: np.ndarray,
     ddae_scores: np.ndarray,

@@ -1,0 +1,73 @@
+{
+  "dataset": "celeba",
+  "setting": "semi-supervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.13171755127988136,
+    "ROC-AUC": 0.746536289854207,
+    "PR-AUC": 0.13157897617341516
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "celeba",
+      "split": "Classical/8_celeba.npz",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "metrics": {
+        "AP": 0.13171755127988136,
+        "ROC-AUC": 0.746536289854207,
+        "PR-AUC": 0.13157897617341516
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "use_mce": false
+      },
+      "gate": {
+        "use_gate": true,
+        "winner": "iforest",
+        "fallback": false,
+        "disagreement": 0.0765004233638819,
+        "weights": {
+          "adadae": 0.24999999999999997,
+          "ddae": 0.24999999999999997,
+          "iforest": 0.25,
+          "knn_dte": 0.25
+        }
+      },
+      "best_pr_auc": 0.1080420699842947,
+      "rss_mb": null,
+      "vram_mb": 443.7529296875,
+      "n_train": 99026,
+      "n_test": 103573,
+      "d": 39,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.031,
+      "resolved_policy": "semi_nlp_baseline",
+      "ftp_sec": 0.07728191500063986,
+      "train_sec": 13.15937883395236,
+      "score_sec": 0.005983226001262665,
+      "total_sec": 17.049704172066413
+    }
+  ]
+}

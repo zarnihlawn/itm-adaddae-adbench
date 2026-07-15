@@ -171,6 +171,26 @@ def check_g7_artifact_freshness(completed_path: Path, compare_path: Path, tol: f
     }
 
 
+def check_g9_merge_audit(audit_path: Path) -> dict:
+    """G9: no patch accepted with delta < -0.5 pp."""
+    if not audit_path.exists():
+        return {"pass": True, "reason": "merge_audit.json missing (skipped)"}
+    data = json.loads(audit_path.read_text(encoding="utf-8"))
+    bad = data.get("bad_accepts", data.get("n_bad_accepts_lt_0_5pp", 0))
+    if isinstance(bad, list):
+        n_bad = len(bad)
+        bad_list = bad
+    else:
+        n_bad = int(bad)
+        bad_list = data.get("bad_accepts", [])
+    return {
+        "pass": n_bad == 0,
+        "n_bad_accepts_lt_0_5pp": n_bad,
+        "bad_accepts": bad_list,
+        "audit_path": str(audit_path),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description="Validate v3/v4 gates")
     parser.add_argument("--completed", required=True)
@@ -204,6 +224,16 @@ def main():
         type=float,
         default=50.0,
         help="PR threshold (%%) defining hard-tail datasets",
+    )
+    parser.add_argument(
+        "--v5-strict",
+        action="store_true",
+        help="G5 requires strictly beating v4.1 (delta > 0 on combined or both settings)",
+    )
+    parser.add_argument(
+        "--merge-audit",
+        default=None,
+        help="merge_audit.json for G9 check",
     )
     args = parser.parse_args()
 
@@ -281,14 +311,23 @@ def main():
             v41_semi = macro_mean_metrics(v41, "semi-supervised")["PR-AUC"]
             cur_unsup = gates["unsupervised"]["PR-AUC"]
             cur_semi = gates["semi-supervised"]["PR-AUC"]
-            g5_pass = cur_unsup >= v41_unsup - 1e-6 and cur_semi >= v41_semi - 1e-6
+            combined_cur = (cur_unsup + cur_semi) / 2.0
+            combined_v41 = (v41_unsup + v41_semi) / 2.0
+            if args.v5_strict:
+                g5_pass = combined_cur > combined_v41 + 1e-6
+            else:
+                g5_pass = cur_unsup >= v41_unsup - 1e-6 and cur_semi >= v41_semi - 1e-6
             gates["G5_beat_v41"] = {
                 "unsup_cur": cur_unsup,
                 "unsup_v41": v41_unsup,
                 "semi_cur": cur_semi,
                 "semi_v41": v41_semi,
+                "combined_cur": combined_cur,
+                "combined_v41": combined_v41,
                 "delta_unsup_pp": cur_unsup - v41_unsup,
                 "delta_semi_pp": cur_semi - v41_semi,
+                "delta_combined_pp": combined_cur - combined_v41,
+                "strict": bool(args.v5_strict),
                 "pass": g5_pass,
                 "ref": str(v41_path),
             }
@@ -308,6 +347,14 @@ def main():
             g8 = lodo_holdout_check(hybrid, v41, holdout)
             gates["G8_lodo_holdout"] = g8
             all_pass = all_pass and g8["pass"]
+
+    audit_path = Path(args.merge_audit) if args.merge_audit else completed_path.parent.parent / "thesis" / "merge_audit.json"
+    if not audit_path.is_absolute():
+        audit_path = PROJECT_ROOT / audit_path
+    if args.v5 and audit_path.exists():
+        g9 = check_g9_merge_audit(audit_path)
+        gates["G9_merge_audit"] = g9
+        all_pass = all_pass and g9["pass"]
 
     gates["all_pass"] = all_pass
     gates["n_jobs"] = len(hybrid)
@@ -361,6 +408,9 @@ def main():
         if "G8_lodo_holdout" in gates:
             g8 = gates["G8_lodo_holdout"]
             print(f"G8 LODO holdout: {g8['n_pass']}/{g8['n_pairs']} pass {'PASS' if g8['pass'] else 'FAIL'}")
+        if "G9_merge_audit" in gates:
+            g9 = gates["G9_merge_audit"]
+            print(f"G9 merge audit: bad_accepts={g9.get('n_bad_accepts_lt_0_5pp', 0)} {'PASS' if g9['pass'] else 'FAIL'}")
     print(f"Combined macro PR: {gates['combined_macro_PR']:.2f}%")
     print(f"ALL PASS: {all_pass}")
 
