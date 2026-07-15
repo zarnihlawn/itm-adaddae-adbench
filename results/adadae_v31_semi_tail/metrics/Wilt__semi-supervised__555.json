@@ -38,6 +38,12 @@
         "scaler": "standard",
         "use_pca": false
       },
+      "mce": {
+        "use_mce": false
+      },
+      "gate": {
+        "use_gate": false
+      },
       "best_pr_auc": 0.16808908622684626,
       "rss_mb": null,
       "vram_mb": 532.6240234375,
@@ -49,10 +55,10 @@
       "contamination_mode": "label_free",
       "contamination_est": 0.04997807978956598,
       "resolved_policy": "semi_nlp_baseline",
-      "ftp_sec": 0.004649613983929157,
-      "train_sec": 5.1395038639893755,
-      "score_sec": 0.02459204406477511,
-      "total_sec": 5.426433644955978
+      "ftp_sec": 0.005967597011476755,
+      "train_sec": 5.034766450989991,
+      "score_sec": 0.02462669590022415,
+      "total_sec": 5.30695062992163
     }
   ]
 }

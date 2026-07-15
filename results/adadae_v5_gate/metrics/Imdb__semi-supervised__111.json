@@ -1,0 +1,73 @@
+{
+  "dataset": "Imdb",
+  "setting": "semi-supervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.09287252539721706,
+    "ROC-AUC": 0.5071633684210527,
+    "PR-AUC": 0.09252021223800043
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "Imdb",
+      "split": "NLP_by_BERT/imdb.npz",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "metrics": {
+        "AP": 0.09287252539721706,
+        "ROC-AUC": 0.5071633684210527,
+        "PR-AUC": 0.09252021223800043
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "use_mce": false
+      },
+      "gate": {
+        "use_gate": true,
+        "winner": "iforest",
+        "fallback": false,
+        "disagreement": 0.10054408535384654,
+        "weights": {
+          "adadae": 0.25,
+          "ddae": 0.25,
+          "iforest": 0.25000000000000006,
+          "knn_dte": 0.25
+        }
+      },
+      "best_pr_auc": 0.0925278001484247,
+      "rss_mb": null,
+      "vram_mb": 3875.34326171875,
+      "n_train": 4750,
+      "n_test": 5250,
+      "d": 768,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.050105263157894736,
+      "resolved_policy": "semi_nlp_frozen",
+      "ftp_sec": 0.06773261493071914,
+      "train_sec": 5.173575095017441,
+      "score_sec": 0.013770426041446626,
+      "total_sec": 7.169051609002054
+    }
+  ]
+}

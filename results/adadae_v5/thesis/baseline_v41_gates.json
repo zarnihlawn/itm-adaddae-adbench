@@ -34,12 +34,12 @@
       "datasets": []
     },
     "pass": true,
-    "ref": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v31_hybrid/metrics/completed.json"
+    "ref": "/workspace/ITM/project/results/adadae_v31_hybrid/metrics/completed.json"
   },
   "G7_artifact_freshness": {
     "pass": true,
     "mismatches": [],
-    "compare_path": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v41_hybrid/thesis/compare_to_ddae.json"
+    "compare_path": "/workspace/ITM/project/results/adadae_v41_hybrid/thesis/compare_to_ddae.json"
   },
   "G5_beat_v41": {
     "unsup_cur": 37.83460252653727,
@@ -49,7 +49,7 @@
     "delta_unsup_pp": 0.0,
     "delta_semi_pp": 0.0,
     "pass": true,
-    "ref": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v41_hybrid/metrics/completed.json"
+    "ref": "/workspace/ITM/project/results/adadae_v41_hybrid/metrics/completed.json"
   },
   "G6_hard_tail_macro": {
     "unsupervised": {
@@ -143,26 +143,10 @@
     ],
     "details": [
       {
-        "dataset": "cardio",
-        "setting": "unsupervised",
-        "cur_pr": 53.63204850895769,
-        "ref_pr": 53.63204850895769,
-        "delta_pp": 0.0,
-        "pass": true
-      },
-      {
         "dataset": "speech",
         "setting": "unsupervised",
         "cur_pr": 3.656209011434062,
         "ref_pr": 3.656209011434062,
-        "delta_pp": 0.0,
-        "pass": true
-      },
-      {
-        "dataset": "Wilt",
-        "setting": "unsupervised",
-        "cur_pr": 5.132189485552502,
-        "ref_pr": 5.132189485552502,
         "delta_pp": 0.0,
         "pass": true
       },
@@ -183,10 +167,18 @@
         "pass": true
       },
       {
+        "dataset": "Wilt",
+        "setting": "unsupervised",
+        "cur_pr": 5.132189485552502,
+        "ref_pr": 5.132189485552502,
+        "delta_pp": 0.0,
+        "pass": true
+      },
+      {
         "dataset": "cardio",
-        "setting": "semi-supervised",
-        "cur_pr": 82.20633487811037,
-        "ref_pr": 82.20633487811037,
+        "setting": "unsupervised",
+        "cur_pr": 53.63204850895769,
+        "ref_pr": 53.63204850895769,
         "delta_pp": 0.0,
         "pass": true
       },
@@ -195,14 +187,6 @@
         "setting": "semi-supervised",
         "cur_pr": 5.064483035647771,
         "ref_pr": 5.064483035647771,
-        "delta_pp": 0.0,
-        "pass": true
-      },
-      {
-        "dataset": "Wilt",
-        "setting": "semi-supervised",
-        "cur_pr": 55.27674186855363,
-        "ref_pr": 55.27674186855363,
         "delta_pp": 0.0,
         "pass": true
       },
@@ -219,6 +203,22 @@
         "setting": "semi-supervised",
         "cur_pr": 23.54374509108807,
         "ref_pr": 23.54374509108807,
+        "delta_pp": 0.0,
+        "pass": true
+      },
+      {
+        "dataset": "Wilt",
+        "setting": "semi-supervised",
+        "cur_pr": 55.27674186855363,
+        "ref_pr": 55.27674186855363,
+        "delta_pp": 0.0,
+        "pass": true
+      },
+      {
+        "dataset": "cardio",
+        "setting": "semi-supervised",
+        "cur_pr": 82.20633487811037,
+        "ref_pr": 82.20633487811037,
         "delta_pp": 0.0,
         "pass": true
       }

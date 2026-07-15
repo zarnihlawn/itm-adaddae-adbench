@@ -76,5 +76,5 @@
     "celeba",
     "speech"
   ],
-  "model_path": "/home/zarnihlawn/Desktop/ITM/project/configs/damp_model.pkl"
+  "model_path": "/workspace/ITM/project/configs/damp_model.pkl"
 }

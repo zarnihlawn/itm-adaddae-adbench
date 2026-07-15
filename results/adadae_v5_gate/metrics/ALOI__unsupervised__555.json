@@ -1,0 +1,73 @@
+{
+  "dataset": "ALOI",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.043049090534619916,
+    "ROC-AUC": 0.5783769133783745,
+    "PR-AUC": 0.042909310872594045
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "ALOI",
+      "split": "Classical/1_ALOI.npz",
+      "setting": "unsupervised",
+      "seed": 555,
+      "metrics": {
+        "AP": 0.043049090534619916,
+        "ROC-AUC": 0.5783769133783745,
+        "PR-AUC": 0.042909310872594045
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "use_mce": false
+      },
+      "gate": {
+        "use_gate": true,
+        "winner": "adadae",
+        "fallback": false,
+        "disagreement": 0.07138770851583073,
+        "weights": {
+          "adadae": 0.25,
+          "ddae": 0.25,
+          "iforest": 0.24999999999999997,
+          "knn_dte": 0.24999999999999997
+        }
+      },
+      "best_pr_auc": 0.04655905526586284,
+      "rss_mb": null,
+      "vram_mb": 1784.72607421875,
+      "n_train": 49534,
+      "n_test": 49534,
+      "d": 27,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.05,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.016706540947780013,
+      "train_sec": 19.212934768060222,
+      "score_sec": 0.00678918301127851,
+      "total_sec": 21.398619852028787
+    }
+  ]
+}

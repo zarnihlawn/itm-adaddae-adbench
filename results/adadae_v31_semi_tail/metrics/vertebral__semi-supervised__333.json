@@ -41,6 +41,12 @@
         "pca_components": null,
         "clip_outliers": true
       },
+      "mce": {
+        "use_mce": false
+      },
+      "gate": {
+        "use_gate": false
+      },
       "best_pr_auc": 0.3241447193274631,
       "rss_mb": null,
       "vram_mb": 51.9580078125,
@@ -52,10 +58,10 @@
       "contamination_mode": "label_free",
       "contamination_est": 0.05714285714285714,
       "resolved_policy": "semi_cvnlp_taps_light",
-      "ftp_sec": 0.004280532011762261,
-      "train_sec": 7.848472924088128,
-      "score_sec": 0.003143792971968651,
-      "total_sec": 8.095963401021436
+      "ftp_sec": 0.007503561908379197,
+      "train_sec": 8.086209345958196,
+      "score_sec": 0.003294768976047635,
+      "total_sec": 8.380131577025168
     }
   ]
 }

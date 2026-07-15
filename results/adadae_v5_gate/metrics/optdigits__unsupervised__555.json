@@ -1,0 +1,73 @@
+{
+  "dataset": "optdigits",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.03160883451054783,
+    "ROC-AUC": 0.5586767995788919,
+    "PR-AUC": 0.03118616185619421
+  },
+  "metrics_std_across_splits": {
+    "AP": 0.0,
+    "ROC-AUC": 0.0,
+    "PR-AUC": 0.0
+  },
+  "splits": [
+    {
+      "dataset": "optdigits",
+      "split": "Classical/26_optdigits.npz",
+      "setting": "unsupervised",
+      "seed": 555,
+      "metrics": {
+        "AP": 0.03160883451054783,
+        "ROC-AUC": 0.5586767995788919,
+        "PR-AUC": 0.03118616185619421
+      },
+      "noise": {
+        "num_timesteps": 50,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "time_emb_dim": 4,
+        "tau_snr": null,
+        "contamination_est": null,
+        "contamination_mode": "label_free"
+      },
+      "ftp": {
+        "scaler": "standard",
+        "use_pca": false
+      },
+      "mce": {
+        "use_mce": false
+      },
+      "gate": {
+        "use_gate": true,
+        "winner": "adadae",
+        "fallback": false,
+        "disagreement": 0.13757077868813578,
+        "weights": {
+          "adadae": 0.25,
+          "ddae": 0.25,
+          "iforest": 0.25,
+          "knn_dte": 0.25
+        }
+      },
+      "best_pr_auc": 0.03349827049117907,
+      "rss_mb": null,
+      "vram_mb": 1290.01220703125,
+      "n_train": 5216,
+      "n_test": 5216,
+      "d": 64,
+      "score_timesteps": 49,
+      "device": "cuda",
+      "contamination_mode": "label_free",
+      "contamination_est": 0.0494,
+      "resolved_policy": "unsup_baseline_fallback",
+      "ftp_sec": 0.007965269964188337,
+      "train_sec": 8.102575262077153,
+      "score_sec": 0.006056874990463257,
+      "total_sec": 9.226796008995734
+    }
+  ]
+}
