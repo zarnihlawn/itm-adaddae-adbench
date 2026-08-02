@@ -9,8 +9,27 @@ echo "=== GPU check ==="
 nvidia-smi || { echo "ERROR: nvidia-smi failed"; exit 1; }
 
 echo "=== Python venv ==="
-python3 -m venv .venv
-source .venv/bin/activate
+deactivate 2>/dev/null || true
+unset PYTHONHOME PYTHONPATH
+rm -rf .venv
+if ! python3 -c "import subprocess, _posixsubprocess" 2>/dev/null; then
+  echo "System Python incomplete — installing python3-venv / full stdlib"
+  apt-get update -y
+  apt-get install -y python3 python3-venv python3-pip python3-full python3-dev || true
+  apt-get install --reinstall -y python3 python3.12-minimal libpython3.12-stdlib || true
+fi
+if ! python3 -m venv .venv; then
+  echo "ensurepip failed — creating venv without pip and bootstrapping"
+  rm -rf .venv
+  python3 -m venv --without-pip .venv
+  # shellcheck disable=SC1091
+  source .venv/bin/activate
+  curl -sS https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
+  python /tmp/get-pip.py
+else
+  # shellcheck disable=SC1091
+  source .venv/bin/activate
+fi
 pip install --upgrade pip
 pip install -r requirements-gpu.txt
 

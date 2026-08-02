@@ -1,8 +1,10 @@
-# Final run (primary thesis tables)
+# Final run — production Vast (Tables 1–6)
 
-**Last updated:** 2026-08-02 — Fresh Vast bootstrap + full Table 1→6 sequence; AdaDDAE-6 stack; Wave-6 DANC T fail-closed; protocol knobs locked to fair DDAE.
+**Last updated:** 2026-08-02 — Production-only sheet: full 57-dataset × 2 settings × 5 seeds on Vast GPU. No local CPU, no smoke/subset/LOO/tune ladders.
 
-This is the **canonical** command sheet for primary Table 1–6 runs. Keep it in sync when configs, protocol scripts, assert gates, or Vast setup change (see [`.cursor/rules/final-run-md.mdc`](.cursor/rules/final-run-md.mdc)).
+This is the **canonical** command sheet for thesis primary tables. Keep it in sync when configs, protocol scripts, assert gates, or Vast setup change (see [`.cursor/rules/final-run-md.mdc`](.cursor/rules/final-run-md.mdc)).
+
+---
 
 ## Integrity contract (do not violate)
 
@@ -10,77 +12,127 @@ This is the **canonical** command sheet for primary Table 1–6 runs. Keep it in
 |------|--------|
 | Recipe | One frozen YAML per table; `policy: static` |
 | Early stop | `val_loss` on train-carved val (`val_fraction: 0.2`); never test-PR |
-| Shared with fair DDAE | seeds, epochs, lr, patience **30**, model `[512,512]/32, `time_emb_dim` **4**, betas |
+| Protocol size | **570 jobs** per track = **57 datasets** × `{unsupervised, semi-supervised}` × seeds `{111,222,333,444,555}` |
+| 57 datasets | **47 Classical + 5 CV (ResNet18) + 5 NLP (BERT)** — same as DDAE / `thesis/method.md` |
+| Shared with fair DDAE | seeds, epochs **100**, lr **0.001**, patience **30**, model **`[512,512]`**, latent **32**, `time_emb_dim` **4**, betas `0.0001→0.02`, linear scheduler, `num_timesteps` **50** |
 | Methods may differ | DANC / SCS / FTP / fusion / A2–A6 modules / contrastive |
-| Order | **Table 1 integrity 570 first**; then Table 2 → 3 → 4 → 5 → **6** |
-| Demoted | routed policy, GATE/MCE/SMC, guarded merges, oracle contamination |
+| Order | **Fair DDAE + Table 1 first**; then Table **2 → 3 → 4 → 5 → 6** |
+| Hardware | Always pass **`16gb`** on RTX 5070 Ti / 5060 Ti class (15–16 GB VRAM) |
+| Demoted | routed policy, GATE/MCE/SMC, guarded merges, oracle contamination, `run_adadae_v*_protocol.sh` |
 
-Configs: `configs/adadae_final.yaml`, `adadae2_final.yaml`, `adadae3_final.yaml`, `adadae4_final.yaml`, `adadae5_final.yaml`, `adadae6_final.yaml`, `baselines_ddae_valstop.yaml`.
+**Frozen configs**
+
+| Track | Config | `run_id` / results |
+|-------|--------|-------------------|
+| Fair DDAE | `configs/baselines_ddae_valstop.yaml` | `results/ddae_baseline_valstop/` |
+| Table 1 | `configs/adadae_final.yaml` | `results/adadae_final/` |
+| Table 2 | `configs/adadae2_final.yaml` | `results/adadae2_final/` |
+| Table 3 | `configs/adadae3_final.yaml` | `results/adadae3_final/` |
+| Table 4 | `configs/adadae4_final.yaml` | `results/adadae4_final/` |
+| Table 5 | `configs/adadae5_final.yaml` | `results/adadae5_final/` |
+| Table 6 | `configs/adadae6_final.yaml` | `results/adadae6_final/` |
+
+All final YAMLs set `hardware: hardware_rtx5070ti.yaml` and `paths.adbench_root: ../ADBench/adbench/datasets`.
 
 ---
 
-## 0. Layout and setup
+## 1. Machine requirements
 
-Local and Vast expect ADBench as a sibling of this repo:
+| Resource | Minimum for full Tables 1–6 |
+|----------|-----------------------------|
+| GPU | CUDA, **≥15 GB VRAM** (RTX 5070 Ti / 5060 Ti) → profile **`16gb`** |
+| Disk | **≥100 GB** free (or Vast volume). **16 GB root is not enough** |
+| RAM | ≥32 GB recommended (`rss_soft_limit_mb: 28672` in hardware profile) |
+| Continuity | `tmux` (or equivalent) — runs take days; jobs resume via `completed.json` |
+
+**Hardware profile (`configs/hardware_rtx5070ti.yaml`) — full feature set**
+
+| Knob | Value |
+|------|--------|
+| `device` | `cuda` |
+| `vram_soft_limit_mb` | `14000` |
+| `rss_soft_limit_mb` | `28672` |
+| `train_batch_size_max` | `4096` |
+| `score_batch_size_max` | `8192` |
+| `use_amp` / `amp_dtype` | `true` / `bfloat16` |
+| `pin_memory` | `true` |
+| `cudnn_benchmark` | `true` |
+| `vectorized_scoring` | `true` |
+| `max_train_samples` | `0` (full data) |
+| `dataloader_num_workers` | `4` |
+| `num_threads` | `8` (override further with `OMP_*` below) |
+
+---
+
+## 2. Layout (fixed)
 
 ```
-ITM/
-  ADBench/adbench/datasets/
-  project/          ← this repo (cwd for all commands below)
+/workspace/ITM/
+  ADBench/
+    adbench/datasets/
+      Classical/          ← required (47)
+      CV_by_ResNet18/     ← required (5 families)
+      NLP_by_BERT/        ← required (5 families)
+      CV_by_ViT/          ← unused by this repo (optional delete)
+      NLP_by_RoBERTa/     ← unused by this repo (optional delete)
+  project/                ← this repo; cwd for every command below
+    configs/
+    src/
+    scripts/
+    results/              ← written by protocols
 ```
 
-### Local (CPU smoke only)
+---
+
+## 3. Fresh Vast — directories, clones, env, max resources
+
+SSH from the Vast console (host/port are instance-specific):
 
 ```bash
-cd /path/to/ITM/project
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+ssh -p PORT root@sshN.vast.ai
 ```
 
-### Vast — fresh machine (dirs → clone → env → max hardware)
-
-Use this on a **new** Vast instance (e.g. RTX 5070 Ti 16 GB VRAM). Prefer **≥100 GB disk** or an attached volume: a 16 GB root disk is too small for ADBench + venv + full Table 1–6 results.
-
-**Repos are not separate git repos.** One ADBench clone ships all dataset families under `adbench/datasets/`. Primary tables use **Classical** (57 tabular sets); CV/NLP folders are unused by AdaDDAE and can be deleted to save disk.
+### 3.1 Create directories
 
 ```bash
-# SSH from laptop (copy exact host/port from Vast console)
-# ssh -p PORT root@sshN.vast.ai
-
-# --- 1) Project directories ---
 mkdir -p /workspace/ITM
 cd /workspace/ITM
-# After clones, results live under project/results/ (created by run scripts):
-#   /workspace/ITM/project/results/{ddae_baseline_valstop,adadae_final,adadae2_final,...}
+```
 
-# --- 2) Datasets: clone ADBench once ---
+### 3.2 Clone datasets (one repo — all 57 families)
+
+```bash
 git clone --depth 1 https://github.com/Minqi824/ADBench.git ADBench
-# Dataset families after clone (not separate remotes):
-#   ADBench/adbench/datasets/Classical/       ← required (57 tabular)
-#   ADBench/adbench/datasets/CV_by_ResNet18/  ← optional / unused
-#   ADBench/adbench/datasets/CV_by_ViT/       ← optional / unused (~1.3G)
-#   ADBench/adbench/datasets/NLP_by_BERT/     ← optional / unused
-#   ADBench/adbench/datasets/NLP_by_RoBERTa/  ← optional / unused
-ls ADBench/adbench/datasets/Classical | head
-# Disk saver (safe for Table 1–6): keep Classical only
-rm -rf ADBench/adbench/datasets/CV_by_ResNet18 \
-       ADBench/adbench/datasets/CV_by_ViT \
-       ADBench/adbench/datasets/NLP_by_BERT \
-       ADBench/adbench/datasets/NLP_by_RoBERTa
 
-# --- 3) Code: clone AdaDDAE project ---
-# SSH (deploy key / agent):
+# Verify required families (do NOT delete these three)
+ls ADBench/adbench/datasets/Classical | wc -l          # expect 47 .npz (+ maybe extras)
+ls ADBench/adbench/datasets/CV_by_ResNet18 | head
+ls ADBench/adbench/datasets/NLP_by_BERT | head
+
+# Optional ~1.5G saver — alternate embeds unused by AdaDDAE loaders
+rm -rf ADBench/adbench/datasets/CV_by_ViT \
+       ADBench/adbench/datasets/NLP_by_RoBERTa
+```
+
+### 3.3 Clone project
+
+```bash
+# Prefer SSH if a deploy key is on the instance:
 git clone git@github.com:zarnihlawn/itm-adaddae.git project
-# HTTPS (no SSH key):
+# Else HTTPS:
 # git clone https://github.com/zarnihlawn/itm-adaddae.git project
 
 cd /workspace/ITM/project
 git checkout main
 git pull origin main
 mkdir -p results
+```
 
-# Maximize CPU for this rental (adjust to rented cores; leave a few for OS)
+### 3.4 Maximize CPU / GPU for this rental
+
+Adjust thread counts to rented cores (example: 24 visible → use 20):
+
+```bash
 export OMP_NUM_THREADS=20
 export MKL_NUM_THREADS=20
 export OPENBLAS_NUM_THREADS=20
@@ -88,60 +140,92 @@ export NUMEXPR_NUM_THREADS=20
 export CUDA_DEVICE_ORDER=PCI_BUS_ID
 export CUDA_VISIBLE_DEVICES=0
 
-apt-get update -y && apt-get install -y tmux git
-tmux new -s adadae   # long runs — Ctrl-b d to detach; tmux attach -t adadae to resume
-
-bash scripts/setup_vast.sh 16gb    # venv + requirements-gpu.txt + cardio smoke
-source .venv/bin/activate
-nvidia-smi
-python scripts/detect_hardware.py
-# Expect suggested_profile≈hardware_rtx5070ti / 16gb on 15–16 GB cards
+apt-get update -y && apt-get install -y tmux git rsync \
+  python3 python3-venv python3-pip python3-full python3-dev
+tmux new -s adadae
+# Detach: Ctrl-b d | Reattach: tmux attach -t adadae
 ```
 
-If `cu124` PyTorch fails on CUDA 13.x hosts, switch the wheel index in `requirements-gpu.txt` to `cu128` (or newer), then `pip install -r requirements-gpu.txt --force-reinstall`.
+Put the same `export` lines in `~/.bashrc` or re-export after every new shell / `tmux` pane.
 
-Hardware flag for all protocol scripts: **`16gb`** (default; maps to `hardware_rtx5070ti.yaml` — 14 GB VRAM soft limit, AMP bf16, vectorized scoring). Use `12gb` or `8gb` only on smaller cards.
+### 3.5 GPU Python env
 
-### Vast — existing machine (code update only)
+Vast images often ship a broken/minimal Python (`ensurepip` fails, or `_posixsubprocess` missing). **Wipe any half-made `.venv` first**, fix system packages, then recreate.
+
+```bash
+cd /workspace/ITM/project
+
+# Leave a broken activate if you already sourced it
+deactivate 2>/dev/null || true
+unset PYTHONHOME PYTHONPATH
+rm -rf .venv
+
+# System Python must import stdlib C extensions before venv
+python3 -c "import subprocess, _posixsubprocess; print(python3_ok := 'ok')"
+
+python3 -m venv .venv
+source .venv/bin/activate
+python -c "import subprocess; print('venv_ok')"
+pip install --upgrade pip
+pip install -r requirements-gpu.txt
+```
+
+If `python3 -m venv` still fails on `ensurepip`, bootstrap pip manually:
+
+```bash
+rm -rf .venv
+python3 -m venv --without-pip .venv
+source .venv/bin/activate
+curl -sS https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py
+python /tmp/get-pip.py
+pip install --upgrade pip
+pip install -r requirements-gpu.txt
+```
+
+If **system** `python3 -c "import _posixsubprocess"` fails, reinstall the interpreter (do not keep using the broken `.venv`):
+
+```bash
+apt-get install --reinstall -y python3 python3.12-minimal libpython3.12-stdlib
+# then recreate .venv from the top of this section
+```
+
+If install/import fails on **CUDA 13.x** hosts, edit `requirements-gpu.txt`: change `--index-url` from `cu124` to `cu128` (or newer matching the driver), then:
+
+```bash
+pip install -r requirements-gpu.txt --force-reinstall
+```
+
+Confirm:
+
+```bash
+nvidia-smi
+python - <<'PY'
+import torch
+assert torch.cuda.is_available(), "CUDA required for final run"
+print("torch", torch.__version__)
+print("device", torch.cuda.get_device_name(0))
+print("vram_gb", round(torch.cuda.get_device_properties(0).total_memory / 1e9, 1))
+print("bf16", torch.cuda.is_bf16_supported())
+PY
+python scripts/detect_hardware.py
+# Expect suggested_profile ≈ hardware_rtx5070ti / 16gb
+```
+
+### 3.6 Code update on an already-cloned instance
 
 ```bash
 cd /workspace/ITM/project
 git pull origin main
 source .venv/bin/activate
-python scripts/detect_hardware.py
+# re-export OMP/MKL/CUDA_* if needed
 ```
-
-### Pull results to laptop (before destroy)
-
-```bash
-# From local ITM/project
-bash scripts/sync_results_from_vast.sh root@sshN.vast.ai:PORT /workspace/ITM/project
-```
-
-### One-shot full sequence (after preflight §1)
-
-Order locked. Each step is resumable via `results/*/metrics/completed.json`.
-
-```bash
-cd /workspace/ITM/project && source .venv/bin/activate
-# keep OMP/MKL_* exports from fresh setup
-
-bash scripts/run_adadae_final_protocol.sh all 16gb   # Table 1: fair DDAE 570 + AdaDDAE 570
-bash scripts/run_adadae2_protocol.sh all 16gb
-bash scripts/run_adadae3_protocol.sh all 16gb
-bash scripts/run_adadae4_protocol.sh all 16gb
-bash scripts/run_adadae5_protocol.sh all 16gb
-bash scripts/run_adadae6_protocol.sh all 16gb
-```
-
-Do **not** start Table 2–6 full 570 until Table 1 integrity 570 exists (or at least fair DDAE `ddae_baseline_valstop` for later compare).
 
 ---
 
-## 1. Preflight (every machine, before spend)
+## 4. Preflight (before burning GPU hours)
 
 ```bash
-cd /path/to/ITM/project   # or /workspace/ITM/project on Vast
+cd /workspace/ITM/project
 source .venv/bin/activate
 
 python scripts/assert_final_config.py --config configs/adadae_final.yaml
@@ -151,199 +235,195 @@ python scripts/assert_final_config.py --config configs/adadae4_final.yaml
 python scripts/assert_final_config.py --config configs/adadae5_final.yaml
 python scripts/assert_final_config.py --config configs/adadae6_final.yaml
 python scripts/assert_final_config.py --config configs/baselines_ddae_valstop.yaml --allow-nonfinal-run-id
-```
 
-All must print `INTEGRITY OK` and `protocol_locked_to=baselines_ddae_valstop.yaml`.
-
-Optional run card:
-
-```bash
 python scripts/write_vast_run_card.py
 ```
 
----
+Every assert must print **`INTEGRITY OK`** and `protocol_locked_to=baselines_ddae_valstop.yaml`.
 
-## 2. Table 1 — fair DDAE + AdaDDAE (`adadae_final`)
-
-**570 jobs** = 57 datasets × `{unsupervised, semi-supervised}` × seeds `{111,222,333,444,555}`. Resumable via `results/*/metrics/completed.json`.
-
-### One-shot on Vast (recommended)
+Dataset path check:
 
 ```bash
-bash scripts/run_adadae_final_protocol.sh all 16gb
+test -d ../ADBench/adbench/datasets/Classical
+test -d ../ADBench/adbench/datasets/CV_by_ResNet18
+test -d ../ADBench/adbench/datasets/NLP_by_BERT
+df -h /workspace
 ```
 
-Runs: smoke → fair DDAE 570 → AdaDDAE final 570 → compare → integrity gates G-I*.
+---
 
-### Step-by-step
+## 5. Master production sequence
+
+**Do not** use protocol mode `all` / `smoke` / `subset` / `loo` / `tune` / `smoke_hard` for the primary thesis burn — those are development ladders. Production path below is **full 570 + table artifacts only**.
 
 ```bash
-# Local or Vast — smoke (CPU OK)
-bash scripts/run_adadae_final_protocol.sh smoke
-# or: bash scripts/smoke_final_integrity.sh
+cd /workspace/ITM/project
+source .venv/bin/activate
+# OMP/MKL/CUDA exports from §3.4 must be active
 
-# Vast GPU only
-bash scripts/run_adadae_final_protocol.sh ddae 16gb    # fair baseline → results/ddae_baseline_valstop/
-bash scripts/run_adadae_final_protocol.sh final 16gb   # AdaDDAE → results/adadae_final/
+# ----- Table 1: fair DDAE + AdaDDAE -----
+bash scripts/run_adadae_final_protocol.sh ddae 16gb
+bash scripts/run_adadae_final_protocol.sh final 16gb
 bash scripts/run_adadae_final_protocol.sh compare
 bash scripts/run_adadae_final_protocol.sh gates
-```
 
-### Reproduce table artifacts after `completed.json` exists
+# ----- Table 2 -----
+bash scripts/run_adadae2_protocol.sh final 16gb
+bash scripts/run_adadae2_protocol.sh table2
 
-```bash
-bash scripts/repro_final.sh 16gb
-# or:
-python scripts/stats_table1.py \
-  --completed results/adadae_final/metrics/completed.json \
-  --baseline results/ddae_baseline_valstop/metrics/completed.json \
-  --out-dir results/adadae_final/thesis
-```
-
-**Artifacts:** `results/adadae_final/thesis/` (`compare_to_ddae.*`, `integrity_gates.json`, stats).
-
-**Do not start Table 2–6 full 570 until Table 1 integrity 570 exists.**
-
----
-
-## 3. Table 2 — AdaDDAE-2
-
-```bash
-bash scripts/run_adadae2_protocol.sh smoke              # CPU OK
-bash scripts/run_adadae2_protocol.sh subset 16gb        # optional ladder
-bash scripts/run_adadae2_protocol.sh final 16gb         # 570
-bash scripts/run_adadae2_protocol.sh table2             # vs fair DDAE (+ vs Table 1 if present)
-
-# or one-shot:
-bash scripts/run_adadae2_protocol.sh all 16gb
-```
-
-Config: `configs/adadae2_final.yaml` → `results/adadae2_final/`.
-
----
-
-## 4. Table 3 — AdaDDAE-3
-
-```bash
-bash scripts/run_adadae3_protocol.sh smoke
-bash scripts/run_adadae3_protocol.sh subset 16gb        # optional
-bash scripts/run_adadae3_protocol.sh loo 16gb           # optional
-bash scripts/run_adadae3_protocol.sh tune 16gb          # optional val-only
+# ----- Table 3 -----
 bash scripts/run_adadae3_protocol.sh final 16gb
 bash scripts/run_adadae3_protocol.sh table3
 
-# or one-shot:
-bash scripts/run_adadae3_protocol.sh all 16gb
-```
-
-Config: `configs/adadae3_final.yaml` → `results/adadae3_final/`.
-
----
-
-## 5. Table 4 — AdaDDAE-4
-
-```bash
-bash scripts/run_adadae4_protocol.sh audit              # regime CSV
-bash scripts/run_adadae4_protocol.sh smoke
-bash scripts/run_adadae4_protocol.sh subset 16gb        # optional
-bash scripts/run_adadae4_protocol.sh loo 16gb           # optional
-bash scripts/run_adadae4_protocol.sh tune 16gb          # optional
+# ----- Table 4 (audit builds regime CSV used by table4) -----
+bash scripts/run_adadae4_protocol.sh audit
 bash scripts/run_adadae4_protocol.sh final 16gb
-bash scripts/run_adadae4_protocol.sh table4             # + regime_breakdown.json
+bash scripts/run_adadae4_protocol.sh table4
 
-# or one-shot:
-bash scripts/run_adadae4_protocol.sh all 16gb
-```
-
-Config: `configs/adadae4_final.yaml` → `results/adadae4_final/`.
-
----
-
-## 6. Table 5 — AdaDDAE-5 (information-geometric)
-
-After fair DDAE (+ ideally Table 1). Stretch metric ladder: G5-1 vs fair DDAE → G5-2/G5-3 absolute; unsup PR ≥80 macro is a disclosed moonshot.
-
-**Wave-6:** DANC `_resolve_T_from_snr` fail-closes to `T_max` (semi no longer stuck at T=5); FIGARO T★ is a lower bound; CONFAL fits on EVT-transformed scores; `use_elbo_s: false` by default; `auto_regime_gates` may enable GEODE/ORBIS on high-d. **Re-run Table 1 smoke/570 after DANC T fix** (realized T changes; protocol knobs unchanged).
-
-Ablation ladder steps (wired): `adadae5_core` → `figaro_dsm` → `mahala_dte` → `lexicon_fuse` → `full_adadae5`. LOO uses `LEAVE_ONE_OUT_A5` (not A2).
-
-```bash
-bash scripts/run_adadae5_protocol.sh smoke
-bash scripts/run_adadae5_protocol.sh smoke_hard   # thyroid/letter/speech, PR floor 0.01 (speech rare)
-bash scripts/run_adadae5_protocol.sh subset 16gb        # optional ladder (fails loud if steps missing)
-bash scripts/run_adadae5_protocol.sh loo 16gb           # optional A5 LOO
-bash scripts/run_adadae5_protocol.sh tune 16gb          # optional val-only
+# ----- Table 5 -----
 bash scripts/run_adadae5_protocol.sh final 16gb
 bash scripts/run_adadae5_protocol.sh table5
 
-# or one-shot:
-bash scripts/run_adadae5_protocol.sh all 16gb
-```
-
-Config: `configs/adadae5_final.yaml` → `results/adadae5_final/`.
-
----
-
-## 6b. Table 6 — AdaDDAE-6 (ADBench regime stack)
-
-After Table 5. Catalog: [`thesis/adbench_improve_catalog.md`](thesis/adbench_improve_catalog.md). Modules: HELIX, DELTA, APEX, NAUTILUS, TORQUE, ORBIT, KALE, RIDGE, LOCUS, SPIRAL on A5 core. Fusion default: `kale`.
-
-```bash
-bash scripts/run_adadae6_protocol.sh smoke
-bash scripts/run_adadae6_protocol.sh smoke_hard
-bash scripts/run_adadae6_protocol.sh subset 16gb
-bash scripts/run_adadae6_protocol.sh loo 16gb
+# ----- Table 6 -----
 bash scripts/run_adadae6_protocol.sh final 16gb
 bash scripts/run_adadae6_protocol.sh table6
-
-# or one-shot:
-bash scripts/run_adadae6_protocol.sh all 16gb
 ```
 
-Config: `configs/adadae6_final.yaml` → `results/adadae6_final/`.
+**Gate:** do not start Table 2–6 `final` until `results/ddae_baseline_valstop/metrics/completed.json` and `results/adadae_final/metrics/completed.json` exist (Table 1 compare/gates done).
+
+### Resume after disconnect / kill
+
+Re-run the same `… final 16gb` command. `run_full_protocol.py` skips keys already in `results/<run>/metrics/completed.json`.
+
+### Completion check (expect 570 per track)
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+tracks = [
+  "ddae_baseline_valstop",
+  "adadae_final",
+  "adadae2_final",
+  "adadae3_final",
+  "adadae4_final",
+  "adadae5_final",
+  "adadae6_final",
+]
+for t in tracks:
+    p = Path(f"results/{t}/metrics/completed.json")
+    if not p.exists():
+        print(f"{t}: MISSING")
+        continue
+    n = len(json.loads(p.read_text()).get("completed", {}))
+    print(f"{t}: {n}/570")
+PY
+```
 
 ---
 
-## 7. Modes cheat sheet
+## 6. Per-table feature detail (what each frozen YAML enables)
 
-| Script | Modes |
-|--------|--------|
-| `run_adadae_final_protocol.sh` | `smoke` \| `ddae` \| `final` \| `compare` \| `gates` \| `all` |
-| `run_adadae2_protocol.sh` | `smoke` \| `subset` \| `final` \| `table2` \| `all` |
-| `run_adadae3_protocol.sh` | `smoke` \| `subset` \| `loo` \| `tune` \| `final` \| `table3` \| `all` |
-| `run_adadae4_protocol.sh` | `audit` \| `smoke` \| `subset` \| `loo` \| `tune` \| `final` \| `table4` \| `all` |
-| `run_adadae5_protocol.sh` | `smoke` \| `smoke_hard` \| `subset` \| `loo` \| `tune` \| `final` \| `table5` \| `all` |
-| `run_adadae6_protocol.sh` | `smoke` \| `smoke_hard` \| `subset` \| `loo` \| `final` \| `table6` \| `all` |
+Shared on **every** final track (locked by `assert_final_config.py`):
 
-Second arg (optional): hardware tier `16gb` \| `12gb` \| `8gb`.
+- `policy: static`
+- `early_stop_metric: val_loss`, `early_stop_patience: 30`, `val_fraction: 0.2`
+- `epochs: 100`, `lr: 0.001`, `eval_every: 10`
+- `model.hidden_dims: [512, 512]`, `latent_dim: 32`
+- `diffusion`: `num_timesteps: 50`, `beta_start/end: 0.0001/0.02`, `time_emb_dim: 4`
+- `use_mce: false`, `use_gate: false`
+- Features: `scaler: auto`, PCA threshold 128, clip outliers σ=5
+
+### Fair DDAE — `baselines_ddae_valstop.yaml`
+
+| Feature | On |
+|---------|----|
+| Contrastive / DANC / SCS / FTP / multiview / fusion extras | **Off** (plain DDAE under same val-stop protocol) |
+
+### Table 1 — `adadae_final.yaml` — fusion `calibrated`
+
+| Feature | On |
+|---------|----|
+| DANC (label-free) | yes |
+| SCS (`snr_weighted`, stratified, max T 64) | yes |
+| FTP | yes |
+| Multiview + uncertainty (3 draws) + DTE-View | yes |
+| Rejection training (RDT) | yes |
+| Contrastive + TAPS pairing + hard negatives + adaptive α | yes |
+| Fusion weights | recon/latent/residual/uncertainty/diffusion_time |
+
+### Table 2 — `adadae2_final.yaml` — fusion `calix`
+
+Adds / changes vs Table 1 core: **CHRONOS**, **GEODE**, **AETHER**, **NEXUS**; uncertainty view **off**; DTE-View + RDT on.
+
+### Table 3 — `adadae3_final.yaml` — fusion `calix`
+
+Adds: **HELIOS**, **KAIROS**, **ORBIS**, **PLEXUS**, **NEXUS_V2**, **RDT_V2**, **EPOCHE**; NEXUS off; STRATA/PHASOR/ARGOS/ATLAS/HYDRA/FLUX/SCRIBE off.
+
+### Table 4 — `adadae4_final.yaml` — fusion `quell`
+
+Adds: **OMNI**, **NANO**, **TORRENT**, **PRISM**, **POLIS**, **SIEVE**, **NEEDLE**, **SPARSE_VIEW**, **ROBUST**, **QUELL**, plus Table-3 stack (GEODE/AETHER/HELIOS/KAIROS/ORBIS/PLEXUS/NEXUS_V2/RDT_V2/EPOCHE). MIRAGE/AEGIS/FLUX/ATLAS off.
+
+Regime audit artifact: `results/thesis/adbench_regimes.csv` (from `audit`).
+
+### Table 5 — `adadae5_final.yaml` — fusion `lexicon` (info-geometry)
+
+A2–A4 regime modules default **off** (`auto_regime_gates` may enable GEODE/ORBIS on high-d). **On:** FIGARO, DSM+, MAHALA, full DTE, LEXICON, PURA, EVT tail, CONFAL, SPECTRA, SINKHORN, IB latent, curriculum SNR, vMF-z. **Off:** ELBO-S. Wave-6: DANC T fail-closes to `T_max`; FIGARO T★ lower bound; CONFAL on EVT scores.
+
+### Table 6 — `adadae6_final.yaml` — fusion `kale`
+
+A5 core **on** + ADBench 10-loop stack **on:** HELIX, DELTA, APEX, NAUTILUS, TORQUE, ORBIT, KALE, RIDGE, LOCUS, SPIRAL. Catalog: [`thesis/adbench_improve_catalog.md`](thesis/adbench_improve_catalog.md).
 
 ---
 
-## 8. Key paths
+## 7. Artifacts (must exist after each track)
 
-| What | Path |
-|------|------|
-| Fair DDAE completed | `results/ddae_baseline_valstop/metrics/completed.json` |
-| Table 1 completed | `results/adadae_final/metrics/completed.json` |
-| Table 2–6 completed | `results/adadae{2,3,4,5,6}_final/metrics/completed.json` |
-| Thesis outputs | `results/adadae*_final/thesis/` |
-| Regime audit (A4) | `results/thesis/adbench_regimes.csv` |
-| Claims map | `thesis/claims_code_map.md` |
-| Method / protocol | `thesis/method.md` |
+| Track | `completed.json` | Thesis outputs |
+|-------|------------------|----------------|
+| Fair DDAE | `results/ddae_baseline_valstop/metrics/completed.json` | — |
+| Table 1 | `results/adadae_final/metrics/completed.json` | `results/adadae_final/thesis/` (`compare_to_ddae.*`, `integrity_gates.json`, stats) |
+| Table 2 | `results/adadae2_final/metrics/completed.json` | `results/adadae2_final/thesis/` |
+| Table 3 | `results/adadae3_final/metrics/completed.json` | `results/adadae3_final/thesis/` |
+| Table 4 | `results/adadae4_final/metrics/completed.json` | `results/adadae4_final/thesis/` (+ `regime_breakdown.json`) |
+| Table 5 | `results/adadae5_final/metrics/completed.json` | `results/adadae5_final/thesis/` |
+| Table 6 | `results/adadae6_final/metrics/completed.json` | `results/adadae6_final/thesis/` |
+
+Claims / method references: [`thesis/claims_code_map.md`](thesis/claims_code_map.md), [`thesis/method.md`](thesis/method.md), [`thesis/novelty.md`](thesis/novelty.md).
 
 ---
 
-## 9. Out of scope for primary tables
+## 8. Pull results to laptop (before destroy)
 
-Do **not** use these for Table 1–6 claims:
+On the **laptop**, from local `ITM/project`:
 
+```bash
+bash scripts/sync_results_from_vast.sh root@sshN.vast.ai:PORT /workspace/ITM/project
+```
+
+Equivalent:
+
+```bash
+rsync -avz --progress -e 'ssh -p PORT' \
+  root@sshN.vast.ai:/workspace/ITM/project/results/ \
+  ./results/
+```
+
+---
+
+## 9. Forbidden for primary tables
+
+Do **not** use for Table 1–6 claims:
+
+- Local CPU / `requirements.txt` path
+- Protocol modes: `smoke`, `smoke_hard`, `subset`, `loo`, `tune`, or umbrella `all` (those embed development ladders)
+- Smoke YAMLs (`*_final_smoke.yaml`, `*_smoke_hard.yaml`) as the reported recipe
 - `run_adadae_v*_protocol.sh` (v2–v5.1 hybrids)
 - `policy: routed`, `policy_exceptions.yaml`, `merge_v5_guarded.py`
-- Smoke YAMLs (`*_final_smoke.yaml`) — debug only
-- Comparing only to published paper means without `ddae_baseline_valstop` (paper means are secondary reference via `compare_to_ddae.py`)
+- Comparing only to published paper means without `ddae_baseline_valstop` (paper means are secondary via `compare_to_ddae.py`)
+- Deleting `Classical/`, `CV_by_ResNet18/`, or `NLP_by_BERT/` (breaks the 57-dataset protocol)
 
 ---
 
 ## Maintainer note
 
-When you change any of: `configs/*_final.yaml`, `baselines_ddae_valstop.yaml`, `scripts/run_adadae*_protocol.sh`, `scripts/assert_final_config.py`, `scripts/repro_final.sh`, `scripts/smoke_final_integrity.*`, Vast setup/sync scripts, or the integrity contract — **update this file in the same change** (commands, paths, knobs, last-updated date).
+When you change any of: `configs/*_final.yaml`, `baselines_ddae_valstop.yaml`, `hardware_rtx5070ti.yaml`, `scripts/run_adadae*_protocol.sh`, `scripts/assert_final_config.py`, Vast setup/sync scripts, dataset layout, or the integrity contract — **update this file in the same change** (commands, paths, feature tables, last-updated date).
