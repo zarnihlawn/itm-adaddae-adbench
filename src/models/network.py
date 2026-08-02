@@ -31,6 +31,9 @@ class DiffusionBottleneckAE(nn.Module):
         time_emb_dim: int = 8,
         activation: str = "lrelu",
         time_emb_type: str = "sinusoidal",
+        use_atlas: bool = False,
+        atlas_cond_dim: int = 24,
+        atlas_film_hidden: int = 32,
     ):
         super().__init__()
         if hidden_dims is None:
@@ -39,11 +42,20 @@ class DiffusionBottleneckAE(nn.Module):
         self.latent_dim = latent_dim
         self.time_emb_dim = time_emb_dim
         self.time_emb_type = time_emb_type
+        self.use_atlas = bool(use_atlas)
+        self._atlas_cond: Optional[torch.Tensor] = None
 
         if time_emb_type == "learnable":
             self.timestep_embedding = nn.Linear(1, time_emb_dim)
+            self.phasor_embedding = None
+        elif time_emb_type == "phasor":
+            from .adadae3.phasor import PhasorTimeEmbedding
+
+            self.timestep_embedding = None
+            self.phasor_embedding = PhasorTimeEmbedding(time_emb_dim)
         elif time_emb_type == "sinusoidal":
             self.timestep_embedding = None
+            self.phasor_embedding = None
         else:
             raise ValueError(f"Invalid time_emb_type: {time_emb_type}")
 
@@ -64,7 +76,16 @@ class DiffusionBottleneckAE(nn.Module):
         dec_layers.append(nn.Linear(prev, input_dim))
         self.decoder = nn.Sequential(*dec_layers)
 
+        self.atlas_film = None
+        if self.use_atlas:
+            from .adadae3.atlas import FilmGenerator
+
+            self.atlas_film = FilmGenerator(atlas_cond_dim, atlas_film_hidden, latent_dim)
+
         self.apply(self._init_weights)
+
+    def set_atlas_cond(self, cond: Optional[torch.Tensor]) -> None:
+        self._atlas_cond = cond
 
     @staticmethod
     def _init_weights(m: nn.Module) -> None:
@@ -78,6 +99,8 @@ class DiffusionBottleneckAE(nn.Module):
             return t.new_zeros((t.shape[0], 0))
         if self.time_emb_type == "learnable":
             return self.timestep_embedding(t.unsqueeze(1).float())
+        if self.time_emb_type == "phasor" and self.phasor_embedding is not None:
+            return self.phasor_embedding(t)
         return self.sine_cosine_transform_timesteps(t.float())
 
     def sine_cosine_transform_timesteps(self, timesteps: torch.Tensor, max_period: int = 10000):
@@ -98,7 +121,16 @@ class DiffusionBottleneckAE(nn.Module):
             h = torch.cat([x_t, e_t], dim=1)
         else:
             h = x_t
-        return self.encoder(h)
+        z = self.encoder(h)
+        if self.atlas_film is not None and self._atlas_cond is not None:
+            from .adadae3.atlas import film
+
+            cond = self._atlas_cond
+            if cond.dim() == 1:
+                cond = cond.unsqueeze(0).expand(z.size(0), -1)
+            gamma, beta = self.atlas_film(cond.to(z.device))
+            z = film(z, gamma, beta)
+        return z
 
     def decode(self, z: torch.Tensor) -> torch.Tensor:
         return self.decoder(z)

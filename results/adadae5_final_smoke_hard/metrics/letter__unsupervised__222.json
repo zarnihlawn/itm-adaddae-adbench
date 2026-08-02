@@ -1,0 +1,15 @@
+{
+  "dataset": "letter",
+  "setting": "unsupervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.16072009538151227,
+    "ROC-AUC": 0.7142666666666666,
+    "PR-AUC": 0.1609525697576413
+  },
+  "early_stop_metric": "val_loss",
+  "best_val_metric": 0.32193744778633115,
+  "resolved_policy": null,
+  "n_val": 320
+}

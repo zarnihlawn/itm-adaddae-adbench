@@ -1,0 +1,25 @@
+{
+  "generated": "2026-08-02T11:59:21.339886+00:00",
+  "configs": {
+    "configs/adadae_final.yaml": {
+      "ok": true,
+      "errors": []
+    },
+    "configs/baselines_ddae_valstop.yaml": {
+      "ok": true,
+      "errors": []
+    },
+    "configs/adadae2_final.yaml": {
+      "ok": true,
+      "errors": []
+    }
+  },
+  "command": [
+    "bash scripts/setup_vast.sh 16gb",
+    "bash scripts/run_adadae_final_protocol.sh all 16gb",
+    "bash scripts/run_adadae2_protocol.sh all 16gb",
+    "bash scripts/sync_results_from_vast.sh <ssh-host>"
+  ],
+  "local_cuda": false,
+  "note": "Full 570 jobs require Vast GPU; local machine prepares configs/smoke only."
+}

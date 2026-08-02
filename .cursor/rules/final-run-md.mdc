@@ -1,0 +1,27 @@
+---
+description: Keep FINAL_RUN.md in sync whenever primary protocol, configs, or Vast run commands change
+globs: configs/*final*.yaml,configs/baselines_ddae*.yaml,scripts/run_adadae*_protocol.sh,scripts/assert_final_config.py,scripts/repro_final.sh,scripts/smoke_final_integrity.*,scripts/setup_vast.sh,scripts/vast_smoke.sh,scripts/sync_*vast*,scripts/write_vast_run_card.py,FINAL_RUN.md,thesis/method.md
+alwaysApply: false
+---
+
+# FINAL_RUN.md must stay current
+
+[`FINAL_RUN.md`](FINAL_RUN.md) is the canonical command sheet for primary Table 1–4 runs.
+
+## When editing matched files
+
+In the **same** change set, update `FINAL_RUN.md` if any of the following drift:
+
+- Protocol script modes, usage, or order (Table 1 before 2→3→4)
+- Config paths / `run_id` / results directories
+- Shared fair-DDAE knobs (`early_stop_patience`, `time_emb_dim`, seeds, epochs, val stop)
+- Assert / smoke / Vast setup / sync / hardware tier commands
+- Artifact paths (`completed.json`, thesis compare/gates)
+
+Also bump the **Last updated** date at the top of `FINAL_RUN.md`.
+
+## Do not
+
+- Leave stale commands after renaming scripts or configs
+- Document demoted hybrids (v2–v5.1 routed/GATE/merges) as primary final runs
+- Skip updating `FINAL_RUN.md` because “README already mentions it”

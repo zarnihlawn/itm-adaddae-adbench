@@ -1,7 +1,9 @@
-"""Diffusion Time Estimation (DTE) scoring for AdaDDAE.
+"""DTE-inspired scoring proxies for AdaDDAE (not a full ICLR 2024 DTE reimplementation).
 
 Inspired by: On Diffusion Modeling for Anomaly Detection (ICLR 2024).
 Anomalies are off-manifold → higher posterior mass on large diffusion timesteps.
+Here we use (1) a soft E[t|x] from per-timestep reconstruction errors and
+(2) a kNN distance in latent space — both are proxies for the paper's estimator.
 """
 from __future__ import annotations
 

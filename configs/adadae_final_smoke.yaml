@@ -1,0 +1,79 @@
+# CPU/GPU smoke for Phase-1 integrity (not primary Table 1).
+# Same frozen stack as adadae_final, fewer epochs.
+seed: 111
+seeds: [111, 222]
+
+paths:
+  adbench_root: ../ADBench/adbench/datasets
+  results_dir: results/adadae_final_smoke
+  run_id: adadae_final_smoke
+
+train:
+  setting: semi-supervised
+  lr: 0.001
+  epochs: 10
+  eval_every: 2
+  early_stop_patience: 6
+  val_fraction: 0.2
+  early_stop_metric: val_loss
+  contrastive: true
+  contrastive_alpha: 0.15
+  contrastive_alpha_unsupervised: 0.05
+  hard_negative_mining: true
+  contrastive_gamma: 1.0
+  contrastive_adaptive_alpha: true
+
+model:
+  hidden_dims: [512, 512]
+  latent_dim: 32
+  activation: lrelu
+
+diffusion:
+  num_timesteps: 50
+  beta_start: 0.0001
+  beta_end: 0.02
+  scheduler: linear
+  time_emb_dim: 8
+  time_emb_type: sinusoidal
+
+adadae:
+  policy: static
+  use_danc: true
+  use_scs: true
+  use_ftp: true
+  use_multiview: true
+  scs_max_timesteps: 32
+  scs_mode: snr_weighted
+  scs_selection: snr_stratified
+  scs_full_sum_ablation: false
+  danc_contamination_mode: label_free
+  contrastive_pairing: taps
+  use_uncertainty_view: true
+  uncertainty_draws: 2
+  use_dte_view: true
+  dte_knn: 5
+  dte_memory_size: 2048
+  dte_knn_weight: 0.5
+  use_rejection_training: true
+  rejection_quantile: 0.95
+  rejection_min_weight: 0.1
+  rejection_warmup_epochs: 1
+  fusion_mode: calibrated
+  use_mce: false
+  use_gate: false
+  fusion_weights:
+    reconstruction: 0.45
+    latent: 0.2
+    residual: 0.1
+    uncertainty: 0.1
+    diffusion_time: 0.15
+
+features:
+  scaler: auto
+  pca_dim_threshold: 128
+  pca_max_components: 128
+  pca_variance: 0.95
+  clip_outliers: true
+  clip_sigma: 5.0
+
+hardware: hardware_cpu.yaml

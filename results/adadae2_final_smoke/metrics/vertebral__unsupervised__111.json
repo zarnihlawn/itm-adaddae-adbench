@@ -1,0 +1,15 @@
+{
+  "dataset": "vertebral",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.10165718809864975,
+    "ROC-AUC": 0.3965079365079365,
+    "PR-AUC": 0.09596070067315371
+  },
+  "early_stop_metric": "val_loss",
+  "best_val_metric": 0.41874409715334576,
+  "resolved_policy": null,
+  "n_val": 48
+}

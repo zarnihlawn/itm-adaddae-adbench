@@ -1,0 +1,98 @@
+# AdaDDAE-5 hard-subset smoke — thyroid / letter / speech; short epochs.
+# Separate results dir so it does not collide with cardio/glass/vertebral smoke.
+seed: 111
+seeds: [111, 222]
+
+paths:
+  adbench_root: ../ADBench/adbench/datasets
+  results_dir: results/adadae5_final_smoke_hard
+  run_id: adadae5_final_hard_smoke
+
+train:
+  setting: semi-supervised
+  lr: 0.001
+  epochs: 6
+  eval_every: 2
+  early_stop_patience: 6
+  val_fraction: 0.2
+  early_stop_metric: val_loss
+  contrastive: true
+  contrastive_alpha: 0.15
+  contrastive_alpha_unsupervised: 0.05
+  hard_negative_mining: true
+  contrastive_gamma: 1.0
+  contrastive_adaptive_alpha: true
+
+model:
+  hidden_dims: [512, 512]
+  latent_dim: 32
+  activation: lrelu
+
+diffusion:
+  num_timesteps: 50
+  beta_start: 0.0001
+  beta_end: 0.02
+  scheduler: linear
+  time_emb_dim: 4
+  time_emb_type: sinusoidal
+
+adadae:
+  policy: static
+  use_danc: true
+  use_scs: true
+  use_ftp: true
+  use_multiview: true
+  scs_max_timesteps: 32
+  scs_mode: snr_weighted
+  scs_selection: snr_stratified
+  danc_contamination_mode: label_free
+  contrastive_pairing: taps
+  use_uncertainty_view: true
+  uncertainty_draws: 2
+  use_dte_view: true
+  dte_knn: 5
+  dte_memory_size: 1024
+  use_rejection_training: true
+  rejection_quantile: 0.95
+  rejection_min_weight: 0.1
+  rejection_warmup_epochs: 1
+  fusion_mode: lexicon
+  use_mce: false
+  use_gate: false
+  use_figaro: true
+  use_dsm_plus: true
+  dsm_plus_lambda: 0.5
+  use_mahala: true
+  use_full_dte: true
+  use_lexicon: true
+  use_pura: true
+  use_evt_tail: true
+  use_confal: true
+  use_spectra: true
+  spectra_components: 4
+  use_sinkhorn: true
+  use_ib_latent: true
+  ib_latent_beta: 0.01
+  use_elbo_s: false
+  use_curriculum_snr: true
+  use_vmf_z: true
+  vmf_kappa: 1.0
+  auto_regime_gates: true
+  fusion_weights:
+    reconstruction: 0.36
+    latent: 0.16
+    residual: 0.12
+    uncertainty: 0.08
+    diffusion_time: 0.14
+    mahala: 0.10
+    sinkhorn: 0.04
+
+features:
+  scaler: auto
+  pca_dim_threshold: 128
+  pca_max_components: 64
+  pca_variance: 0.95
+  clip_outliers: true
+  clip_sigma: 5.0
+
+hardware: hardware_cpu.yaml

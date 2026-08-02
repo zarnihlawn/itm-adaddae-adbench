@@ -129,6 +129,10 @@ def vectorized_q_sample(
     """
     x0: (B, d), timesteps: (K,), noise: (B, K, d)
     Returns x_t: (B, K, d)
+
+    Indexing matches DiffusionScheduler.q_sample: alpha_bar[t] with t in
+    the same convention as training (typically 1..T-1).
     """
-    ab = alpha_bar[timesteps - 1].view(1, -1, 1)
+    idx = timesteps.clamp(0, alpha_bar.numel() - 1)
+    ab = alpha_bar[idx].view(1, -1, 1)
     return torch.sqrt(ab) * x0.unsqueeze(1) + torch.sqrt(1.0 - ab) * noise

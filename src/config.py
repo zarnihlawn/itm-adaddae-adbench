@@ -11,6 +11,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]  # project/
 
 # Short names / tiers -> configs/*.yaml (relative to configs/)
 HARDWARE_PROFILES: Dict[str, str] = {
+    "cpu": "hardware_cpu.yaml",
     "8gb": "hardware_rtx5070.yaml",
     "12gb": "hardware_rtx5070_12g.yaml",
     "16gb": "hardware_rtx5070ti.yaml",

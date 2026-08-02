@@ -78,6 +78,12 @@ def main():
         type=str,
         default="results/metrics/completed.json",
     )
+    parser.add_argument(
+        "--baseline",
+        type=str,
+        default=None,
+        help="Optional fair DDAE completed.json (e.g. ddae_baseline_valstop) for paired deltas",
+    )
     parser.add_argument("--out-dir", type=str, default="results/thesis")
     args = parser.parse_args()
 
@@ -91,6 +97,14 @@ def main():
 
     state = load_completed(completed_path)
     completed = state.get("completed", state)
+
+    baseline = None
+    if args.baseline:
+        bpath = Path(args.baseline)
+        if not bpath.is_absolute():
+            bpath = PROJECT_ROOT / bpath
+        bstate = load_completed(bpath)
+        baseline = bstate.get("completed", bstate)
 
     rows = []
     for setting in ["unsupervised", "semi-supervised"]:
@@ -108,20 +122,38 @@ def main():
             "AdaDDAE_PR_std": summary["PR-AUC"]["std"],
             "AdaDDAE_ROC_AUC": summary["ROC-AUC"]["mean"],
             "AdaDDAE_ROC_std": summary["ROC-AUC"]["std"],
+            "DDAE_paper_PR_AUC": ddae["PR-AUC"],
+            "DDAE_paper_ROC_AUC": ddae["ROC-AUC"],
             "DDAE_PR_AUC": ddae["PR-AUC"],
             "DDAE_ROC_AUC": ddae["ROC-AUC"],
             "delta_PR": summary["PR-AUC"]["mean"] - ddae["PR-AUC"],
             "delta_ROC": summary["ROC-AUC"]["mean"] - ddae["ROC-AUC"],
             "n_datasets": summary["n_datasets"],
         }
+        if baseline is not None:
+            bsum, _ = aggregate(baseline, setting)
+            if bsum is not None:
+                row["DDAE_fair_PR_AUC"] = bsum["PR-AUC"]["mean"]
+                row["DDAE_fair_ROC_AUC"] = bsum["ROC-AUC"]["mean"]
+                row["delta_PR_vs_fair"] = summary["PR-AUC"]["mean"] - bsum["PR-AUC"]["mean"]
+                row["delta_ROC_vs_fair"] = summary["ROC-AUC"]["mean"] - bsum["ROC-AUC"]["mean"]
         rows.append(row)
         print(f"\n=== {setting} ===")
         print(
             f"AdaDDAE  PR-AUC {summary['PR-AUC']['mean']:.2f}±{summary['PR-AUC']['std']:.2f}  "
             f"ROC-AUC {summary['ROC-AUC']['mean']:.2f}±{summary['ROC-AUC']['std']:.2f}"
         )
-        print(f"DDAE     PR-AUC {ddae['PR-AUC']:.2f}  ROC-AUC {ddae['ROC-AUC']:.2f}")
-        print(f"Δ        PR {row['delta_PR']:+.2f}  ROC {row['delta_ROC']:+.2f}")
+        print(f"DDAE paper PR-AUC {ddae['PR-AUC']:.2f}  ROC-AUC {ddae['ROC-AUC']:.2f}")
+        print(f"Δ paper  PR {row['delta_PR']:+.2f}  ROC {row['delta_ROC']:+.2f}")
+        if "DDAE_fair_PR_AUC" in row:
+            print(
+                f"DDAE fair PR-AUC {row['DDAE_fair_PR_AUC']:.2f}  "
+                f"ROC-AUC {row['DDAE_fair_ROC_AUC']:.2f}"
+            )
+            print(
+                f"Δ fair   PR {row['delta_PR_vs_fair']:+.2f}  "
+                f"ROC {row['delta_ROC_vs_fair']:+.2f}"
+            )
 
     if rows:
         pd.DataFrame(rows).to_csv(out_dir / "compare_to_ddae.csv", index=False)

@@ -1,0 +1,96 @@
+# AdaDDAE-4 smoke — few epochs, CPU, regime gates on
+seed: 111
+seeds: [111, 222]
+
+paths:
+  adbench_root: ../ADBench/adbench/datasets
+  results_dir: results/adadae4_final_smoke
+  run_id: adadae4_final_smoke
+
+train:
+  setting: semi-supervised
+  lr: 0.001
+  epochs: 6
+  eval_every: 2
+  early_stop_patience: 6
+  val_fraction: 0.2
+  early_stop_metric: val_loss
+  contrastive: true
+  contrastive_alpha: 0.15
+  contrastive_alpha_unsupervised: 0.05
+  hard_negative_mining: true
+  contrastive_gamma: 1.0
+  contrastive_adaptive_alpha: true
+
+model:
+  hidden_dims: [128, 128]
+  latent_dim: 16
+  activation: lrelu
+
+diffusion:
+  num_timesteps: 20
+  beta_start: 0.0001
+  beta_end: 0.02
+  scheduler: linear
+  time_emb_dim: 8
+  time_emb_type: sinusoidal
+
+adadae:
+  policy: static
+  use_danc: true
+  use_chronos: true
+  chronos_hidden: 16
+  chronos_in_dim: 16
+  use_scs: true
+  use_ftp: true
+  use_multiview: true
+  scs_max_timesteps: 8
+  scs_mode: snr_weighted
+  scs_selection: snr_stratified
+  danc_contamination_mode: label_free
+  contrastive_pairing: taps
+  use_uncertainty_view: false
+  use_dte_view: true
+  dte_knn: 5
+  dte_memory_size: 512
+  use_rejection_training: true
+  use_geode: true
+  geode_neighbors: 8
+  geode_components: 2
+  use_aether: true
+  aether_loss_weight: 0.05
+  use_helios: true
+  use_kairos: true
+  use_orbis: true
+  use_plexus: true
+  use_nexus_v2: true
+  nexus_loss_weight: 0.02
+  use_rdt_v2: true
+  use_epoche: true
+  use_mirage: false
+  use_flux: false
+  use_atlas: false
+  use_omni: true
+  auto_regime_gates: true
+  use_nano: true
+  use_torrent: true
+  use_prism: true
+  use_polis: true
+  use_sieve: true
+  use_needle: true
+  use_sparse_view: true
+  use_robust: true
+  use_quell: true
+  fusion_mode: quell
+  use_mce: false
+  use_gate: false
+
+features:
+  scaler: auto
+  pca_dim_threshold: 128
+  pca_max_components: 64
+  pca_variance: 0.95
+  clip_outliers: true
+  clip_sigma: 5.0
+
+hardware: hardware_cpu.yaml

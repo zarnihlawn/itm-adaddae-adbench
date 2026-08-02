@@ -1,0 +1,15 @@
+{
+  "dataset": "thyroid",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.41885948131195866,
+    "ROC-AUC": 0.9708137145729759,
+    "PR-AUC": 0.41277381679845
+  },
+  "early_stop_metric": "val_loss",
+  "best_val_metric": 0.36484894923253147,
+  "resolved_policy": null,
+  "n_val": 754
+}

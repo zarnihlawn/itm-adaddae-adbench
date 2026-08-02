@@ -137,17 +137,19 @@ Training loss is weighted: \(\mathcal{L} = \sum_i w_i \ell_i / \sum_i w_i\). Con
 
 ---
 
-## DTE-View — Diffusion Time Posterior Score (5th view)
+## DTE-inspired proxy — time / kNN scoring view (5th view)
 
-Inspired by [DTE (ICLR 2024)](https://arxiv.org/abs/2305.18593): anomalies are off-manifold → higher expected diffusion time.
+Inspired by [DTE (ICLR 2024)](https://arxiv.org/abs/2305.18593): anomalies are off-manifold → higher expected diffusion time. AdaDDAE uses a **proxy**, not the full DTE estimator (see [`src/models/dte.py`](../src/models/dte.py)).
 
-**Posterior from reconstruction:**
+**Soft time estimate from reconstruction:**
 
 \[
-\mathbb{E}[t \mid x_0] = \sum_{t \in \mathcal{T}^*} p(t \mid x_0)\, t, \quad p(t \mid x_0) \propto \|x_0 - \hat{x}_0(x_t)\|^2
+\widehat{\mathbb{E}}[t \mid x_0] = \sum_{t \in \mathcal{T}^*} p(t \mid x_0)\, t, \quad p(t \mid x_0) \propto \|x_0 - \hat{x}_0(x_t)\|^2
 \]
 
-**kNN latent proxy:** \(s_{\text{DTE}}^{\text{kNN}} \propto d_{\text{kNN}}(z_0)\), fused with posterior mean. Config: `use_dte_view: true`.
+**kNN latent proxy:** \(s_{\text{DTE}}^{\text{kNN}} \propto d_{\text{kNN}}(z_0)\), fused with the soft time estimate. Config: `use_dte_view: true`. Thesis wording must say “DTE-inspired proxy,” not “we implement DTE.”
+
+Primary recipe: [`configs/adadae_final.yaml`](../configs/adadae_final.yaml). Claims map: [`thesis/claims_code_map.md`](claims_code_map.md).
 
 ---
 
@@ -209,6 +211,8 @@ Leak-safe preprocessing: fit scaler / PCA / clip **only on training normals** in
 - Semi-supervised: train on 50% of normals; test = remaining normals + all anomalies
 - Metrics: PR-AUC, ROC-AUC, AP
 
+**Fair primary comparison:** Table deltas use the same train/test splits, seeds, epochs, LR, val carve (`val_fraction: 0.2`), `early_stop_metric: val_loss`, patience, model width/latent, and base diffusion betas / `time_emb_dim` as [`configs/baselines_ddae_valstop.yaml`](../configs/baselines_ddae_valstop.yaml). Only Ada method flags (DANC, SCS, FTP, fusion, A2–A4 modules, contrastive, etc.) differ. `scripts/assert_final_config.py` locks those shared knobs. Published paper Table-1 means remain a secondary reference via `scripts/compare_to_ddae.py` (not the apples-to-apples baseline).
+
 ---
 
 ## Hardware profiles
@@ -231,12 +235,13 @@ Log **rss_mb** and **vram_mb** in JSONL for reproducibility.
 
 ## Primary thesis claim
 
-AdaDDAE v3 improves mean PR-AUC / ROC-AUC over **DDAE** on ADBench under the same protocol, with ablations showing positive contributions from LF-DANC, MANS, SSTS, TAPS, VUS, FTP, and calibrated fusion. See [`thesis/novelty.md`](thesis/novelty.md) for the contribution showcase.
+**Primary model** = one frozen recipe [`configs/adadae_final.yaml`](../configs/adadae_final.yaml) (`policy: static`, val-only early stop). It improves mean PR-AUC / ROC-AUC over a **fair DDAE baseline** (same val-stop protocol) on ADBench 57×2×5, with ablations isolating LF-DANC, MANS, SSTS, TAPS, VUS, FTP, DTE-proxy, RDT, and calibrated fusion. See [`thesis/novelty.md`](novelty.md) and [`thesis/claims_code_map.md`](claims_code_map.md).
 
-Secondary claim: competitive standing vs diffusion baselines (DDPM, DTE-*). Matching every classical #1 method unsupervised is **not** required for the primary claim.
+Secondary claim: competitive standing vs diffusion baselines (DDPM, DTE-*). Matching every classical #1 method unsupervised is **not** required for the primary claim. Routed hybrids and guarded merges are **appendix only**.
 
 ## Known limitations (disclose)
 
 - Very large tables may be train-subsampled on CPU only; GPU uses full protocol data.
 - SCS subset is a deliberate trade-off vs full-sum Eq. 6; ablate `scs_mode: full_sum` on a subset.
+- DTE-inspired scoring is a **proxy** (recon-softmax + kNN), not full ICLR 2024 DTE.
 - Early ablations on 5 datasets with few epochs showed `full_adadae` below `scs`-only; GPU runs use 100 epochs, calibrated fusion, and SNR-guided schedules to address this.

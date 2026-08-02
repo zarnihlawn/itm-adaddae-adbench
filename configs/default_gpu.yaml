@@ -12,6 +12,8 @@ train:
   epochs: 100
   eval_every: 10
   early_stop_patience: 20
+  val_fraction: 0.2
+  early_stop_metric: val_loss
   contrastive: true
   contrastive_alpha: 0.15
   contrastive_alpha_unsupervised: 0.05
@@ -33,6 +35,7 @@ diffusion:
   time_emb_type: sinusoidal
 
 adadae:
+  policy: static
   use_danc: true
   use_scs: true
   use_ftp: true

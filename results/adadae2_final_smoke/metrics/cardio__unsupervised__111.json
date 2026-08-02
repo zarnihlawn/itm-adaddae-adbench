@@ -1,0 +1,15 @@
+{
+  "dataset": "cardio",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.388658861095163,
+    "ROC-AUC": 0.8327176599835211,
+    "PR-AUC": 0.38651680831536767
+  },
+  "early_stop_metric": "val_loss",
+  "best_val_metric": 0.351094311215187,
+  "resolved_policy": null,
+  "n_val": 366
+}

@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 import fcntl
 from contextlib import contextmanager
 from datetime import datetime, timezone
@@ -77,6 +78,17 @@ def run_dataset_job(spec, setting, seed, cfg, logger, adbench):
         cleanup_memory()
 
     agg = mean_std_metrics([r["metrics"] for r in split_rows])
+    vram_vals = [
+        float(r["vram_peak_mb"])
+        for r in split_rows
+        if r.get("vram_peak_mb") is not None
+    ]
+    if not vram_vals:
+        vram_vals = [
+            float(r["vram_mb"])
+            for r in split_rows
+            if r.get("vram_mb") is not None
+        ]
     summary = {
         "dataset": spec.name,
         "setting": setting,
@@ -85,6 +97,8 @@ def run_dataset_job(spec, setting, seed, cfg, logger, adbench):
         "metrics_mean": {k: v["mean"] for k, v in agg.items()},
         "noise": split_rows[0].get("noise") if split_rows else {},
         "resolved_policy": split_rows[0].get("resolved_policy") if split_rows else None,
+        "vram_peak_mb": max(vram_vals) if vram_vals else None,
+        "vram_mb": max(vram_vals) if vram_vals else None,
         "time": datetime.now(timezone.utc).isoformat(),
     }
     return summary
@@ -157,11 +171,15 @@ def main():
     print(f"Total jobs: {total}{shard_note} | Resume file: {completed_path}")
 
     bar = job_progress(total, desc="protocol")
+    t0 = time.perf_counter()
+    done = 0
+    vram_watermark = 0.0
     for spec, setting, seed in jobs:
         key = job_key(spec.name, setting, seed)
         state = load_completed(completed_path)
         if key in state["completed"]:
             bar.update(1)
+            done += 1
             continue
         try:
             logger.info(f"START {key}")
@@ -175,24 +193,44 @@ def main():
             with open(out, "w", encoding="utf-8") as f:
                 json.dump(summary, f, indent=2)
             m = summary["metrics_mean"]
+            done += 1
+            elapsed = time.perf_counter() - t0
+            rate = elapsed / max(done, 1)
+            eta_s = rate * max(0, total - done)
+            vram = summary.get("vram_peak_mb") or summary.get("vram_mb") or 0.0
+            try:
+                vram_watermark = max(vram_watermark, float(vram or 0.0))
+            except (TypeError, ValueError):
+                pass
             bar.set_postfix(
                 job=key[:40],
                 pr=f"{m.get('PR-AUC', float('nan')):.3f}",
                 roc=f"{m.get('ROC-AUC', float('nan')):.3f}",
+                eta_min=f"{eta_s / 60.0:.1f}",
+                vram_mb=f"{vram_watermark:.0f}",
             )
         except Exception as e:
             logger.log("job_failed", key=key, error=str(e))
             with _completed_lock(completed_path) as state:
                 state.setdefault("failed", {})[key] = str(e)
             print(f"FAILED {key}: {e}")
+            done += 1
         bar.update(1)
         cleanup_memory()
 
     bar.close()
     state = load_completed(completed_path)
-    logger.info("Protocol finished", n_completed=len(state["completed"]), n_failed=len(state.get("failed", {})))
+    logger.info(
+        "Protocol finished",
+        n_completed=len(state["completed"]),
+        n_failed=len(state.get("failed", {})),
+        vram_watermark_mb=vram_watermark,
+    )
     logger.close()
-    print(f"Done. Completed={len(state['completed'])} Failed={len(state.get('failed', {}))}")
+    print(
+        f"Done. Completed={len(state['completed'])} Failed={len(state.get('failed', {}))} "
+        f"VRAM watermark≈{vram_watermark:.0f} MB"
+    )
 
 
 if __name__ == "__main__":

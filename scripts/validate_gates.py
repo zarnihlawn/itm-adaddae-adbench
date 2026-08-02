@@ -191,6 +191,129 @@ def check_g9_merge_audit(audit_path: Path) -> dict:
     }
 
 
+def check_gi1_complete_570(completed: dict, n_seeds: int = 5) -> dict:
+    """G-I1: exactly 57 datasets × 2 settings × 5 seeds."""
+    keys = list(completed.keys())
+    n = len(keys)
+    by_ds_setting: dict[tuple[str, str], set[int]] = {}
+    for job in completed.values():
+        ds = job.get("dataset")
+        setting = job.get("setting")
+        seed = job.get("seed")
+        if ds is None or setting is None or seed is None:
+            continue
+        by_ds_setting.setdefault((ds, setting), set()).add(int(seed))
+    n_pairs = len(by_ds_setting)
+    incomplete = [
+        f"{ds}/{setting}: seeds={sorted(seeds)}"
+        for (ds, setting), seeds in sorted(by_ds_setting.items())
+        if len(seeds) != n_seeds
+    ]
+    ok = n == 570 and n_pairs == 114 and not incomplete
+    return {
+        "pass": ok,
+        "n_jobs": n,
+        "n_dataset_setting_pairs": n_pairs,
+        "expected_jobs": 570,
+        "incomplete_pairs": incomplete[:20],
+    }
+
+
+def check_gi2_no_routing(completed: dict) -> dict:
+    """G-I2: no resolved_policy / routing overrides on primary jobs."""
+    routed = []
+    for key, job in completed.items():
+        pol = job.get("resolved_policy")
+        if pol not in (None, "", "static"):
+            routed.append({"key": key, "resolved_policy": pol})
+    return {"pass": len(routed) == 0, "n_routed": len(routed), "examples": routed[:10]}
+
+
+def check_gi3_val_only_stop(completed: dict, logs_dir: Path | None = None) -> dict:
+    """G-I3: early_stop_metric is val_loss (or train_loss fallback), never test PR."""
+    bad = []
+    for key, job in completed.items():
+        esm = job.get("early_stop_metric")
+        if esm is None:
+            # older jobs may omit; fail closed for integrity mode
+            bad.append({"key": key, "reason": "missing early_stop_metric"})
+        elif esm not in ("val_loss", "train_loss"):
+            bad.append({"key": key, "reason": f"early_stop_metric={esm!r}"})
+    log_bad = []
+    if logs_dir and logs_dir.exists():
+        for path in logs_dir.glob("*.jsonl"):
+            for line in path.read_text(encoding="utf-8").splitlines():
+                if not line.strip():
+                    continue
+                try:
+                    ev = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if ev.get("event") == "early_stop":
+                    esm = ev.get("early_stop_metric")
+                    if esm not in ("val_loss", "train_loss", None):
+                        log_bad.append({"file": path.name, "early_stop_metric": esm})
+                    if "best_test" in str(ev).lower():
+                        log_bad.append({"file": path.name, "reason": "test in early_stop"})
+    return {
+        "pass": len(bad) == 0 and len(log_bad) == 0,
+        "n_bad_jobs": len(bad),
+        "examples": bad[:10],
+        "n_bad_log_events": len(log_bad),
+        "log_examples": log_bad[:10],
+    }
+
+
+def check_gi5_not_guarded_merge(completed_path: Path) -> dict:
+    """G-I5: primary completed.json must not be a guarded-merge hybrid artifact."""
+    text = completed_path.read_text(encoding="utf-8")
+    markers = ("merge_audit", "guarded_merge", "accepted_patches", "delta_pr_pp")
+    hits = [m for m in markers if m in text]
+    parent = completed_path.parent.parent
+    audit = parent / "thesis" / "merge_audit.json"
+    # Path name heuristics
+    path_l = str(completed_path).lower()
+    path_hit = any(x in path_l for x in ("hybrid", "guarded", "v51_hybrid", "v5_hybrid"))
+    return {
+        "pass": len(hits) == 0 and not path_hit and not audit.exists(),
+        "content_markers": hits,
+        "path_looks_hybrid": path_hit,
+        "merge_audit_present": audit.exists(),
+        "path": str(completed_path),
+    }
+
+
+def run_integrity_gates(
+    completed_path: Path,
+    compare_path: Path | None = None,
+    logs_dir: Path | None = None,
+) -> dict:
+    """G-I1..G-I5 integrity suite for adadae_final."""
+    completed = load_completed(completed_path)
+    gates = {
+        "G-I1_complete_570": check_gi1_complete_570(completed),
+        "G-I2_no_routing": check_gi2_no_routing(completed),
+        "G-I3_val_only_early_stop": check_gi3_val_only_stop(completed, logs_dir),
+        "G-I5_not_guarded_merge": check_gi5_not_guarded_merge(completed_path),
+    }
+    if compare_path is not None:
+        gates["G-I4_artifact_freshness"] = check_g7_artifact_freshness(completed_path, compare_path)
+    else:
+        default_compare = completed_path.parent.parent / "thesis" / "compare_to_ddae.json"
+        if default_compare.exists():
+            gates["G-I4_artifact_freshness"] = check_g7_artifact_freshness(
+                completed_path, default_compare
+            )
+        else:
+            gates["G-I4_artifact_freshness"] = {
+                "pass": False,
+                "reason": "compare_to_ddae.json missing (run compare_to_ddae.py after 570)",
+            }
+    gates["all_pass"] = all(g.get("pass") for g in gates.values())
+    gates["n_jobs"] = len(completed)
+    return gates
+
+
 def main():
     parser = argparse.ArgumentParser(description="Validate v3/v4 gates")
     parser.add_argument("--completed", required=True)
@@ -235,11 +358,47 @@ def main():
         default=None,
         help="merge_audit.json for G9 check",
     )
+    parser.add_argument(
+        "--integrity",
+        action="store_true",
+        help="Run Phase-1 integrity gates G-I1..G-I5 (primary adadae_final)",
+    )
+    parser.add_argument(
+        "--logs-dir",
+        default=None,
+        help="Optional logs dir for G-I3 early-stop scan",
+    )
     args = parser.parse_args()
 
     completed_path = Path(args.completed)
     if not completed_path.is_absolute():
         completed_path = PROJECT_ROOT / completed_path
+
+    if args.integrity:
+        compare_path = Path(args.compare) if args.compare else None
+        if compare_path is not None and not compare_path.is_absolute():
+            compare_path = PROJECT_ROOT / compare_path
+        logs_dir = Path(args.logs_dir) if args.logs_dir else completed_path.parent.parent / "logs"
+        if not logs_dir.is_absolute():
+            logs_dir = PROJECT_ROOT / logs_dir
+        gates = run_integrity_gates(completed_path, compare_path=compare_path, logs_dir=logs_dir)
+        print("=== Integrity gates G-I1..G-I5 ===")
+        for name, g in gates.items():
+            if name in ("all_pass", "n_jobs"):
+                continue
+            status = "PASS" if g.get("pass") else "FAIL"
+            extra = g.get("reason") or g.get("n_jobs") or g.get("n_routed") or ""
+            print(f"{name}: {status} {extra}")
+        print(f"n_jobs={gates['n_jobs']} ALL PASS: {gates['all_pass']}")
+        if args.out:
+            out_path = Path(args.out)
+            if not out_path.is_absolute():
+                out_path = PROJECT_ROOT / out_path
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            out_path.write_text(json.dumps(gates, indent=2), encoding="utf-8")
+            print(f"Wrote {out_path}")
+        sys.exit(0 if gates["all_pass"] else 1)
+
     backup_path = Path(args.backup)
     if not backup_path.is_absolute():
         backup_path = PROJECT_ROOT / backup_path

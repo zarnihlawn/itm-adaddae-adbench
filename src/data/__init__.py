@@ -1,6 +1,7 @@
 from .datasets import (
     DatasetSpec,
     build_registry,
+    carve_val_from_train,
     get_spec,
     list_dataset_names,
     load_dataset_files,
@@ -11,6 +12,7 @@ from .datasets import (
 __all__ = [
     "DatasetSpec",
     "build_registry",
+    "carve_val_from_train",
     "get_spec",
     "list_dataset_names",
     "load_dataset_files",

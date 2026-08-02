@@ -1,0 +1,111 @@
+# AdaDDAE-6 smoke — short epochs; integrity flags only.
+seed: 111
+seeds: [111, 222]
+
+paths:
+  adbench_root: ../ADBench/adbench/datasets
+  results_dir: results/adadae6_final_smoke
+  run_id: adadae6_final_smoke
+
+train:
+  setting: semi-supervised
+  lr: 0.001
+  epochs: 6
+  eval_every: 2
+  early_stop_patience: 6
+  val_fraction: 0.2
+  early_stop_metric: val_loss
+  contrastive: true
+  contrastive_alpha: 0.15
+  contrastive_alpha_unsupervised: 0.05
+  hard_negative_mining: true
+  contrastive_gamma: 1.0
+  contrastive_adaptive_alpha: true
+
+model:
+  hidden_dims: [512, 512]
+  latent_dim: 32
+  activation: lrelu
+
+diffusion:
+  num_timesteps: 50
+  beta_start: 0.0001
+  beta_end: 0.02
+  scheduler: linear
+  time_emb_dim: 4
+  time_emb_type: sinusoidal
+
+adadae:
+  policy: static
+  use_danc: true
+  use_scs: true
+  use_ftp: true
+  use_multiview: true
+  scs_max_timesteps: 32
+  scs_mode: snr_weighted
+  scs_selection: snr_stratified
+  danc_contamination_mode: label_free
+  contrastive_pairing: taps
+  use_uncertainty_view: true
+  uncertainty_draws: 2
+  use_dte_view: true
+  dte_knn: 5
+  dte_memory_size: 1024
+  use_rejection_training: true
+  rejection_quantile: 0.95
+  rejection_min_weight: 0.1
+  rejection_warmup_epochs: 1
+  fusion_mode: kale
+  use_mce: false
+  use_gate: false
+  use_figaro: true
+  use_dsm_plus: true
+  dsm_plus_lambda: 0.5
+  use_mahala: true
+  use_full_dte: true
+  use_lexicon: false
+  use_pura: true
+  use_evt_tail: true
+  use_confal: true
+  use_spectra: true
+  spectra_components: 4
+  use_sinkhorn: true
+  use_ib_latent: true
+  ib_latent_beta: 0.01
+  use_elbo_s: false
+  use_curriculum_snr: true
+  use_vmf_z: true
+  vmf_kappa: 1.0
+  auto_regime_gates: true
+  use_helix: true
+  use_delta: true
+  use_apex: true
+  use_nautilus: true
+  use_torque: true
+  use_orbit: true
+  use_kale: true
+  use_ridge: true
+  ridge_delta: 1.0
+  use_locus: true
+  use_spiral: true
+  fusion_weights:
+    reconstruction: 0.30
+    latent: 0.12
+    residual: 0.10
+    uncertainty: 0.06
+    diffusion_time: 0.12
+    mahala: 0.08
+    sinkhorn: 0.04
+    orbit: 0.06
+    locus: 0.06
+    spiral: 0.06
+
+features:
+  scaler: auto
+  pca_dim_threshold: 128
+  pca_max_components: 64
+  pca_variance: 0.95
+  clip_outliers: true
+  clip_sigma: 5.0
+
+hardware: hardware_cpu.yaml

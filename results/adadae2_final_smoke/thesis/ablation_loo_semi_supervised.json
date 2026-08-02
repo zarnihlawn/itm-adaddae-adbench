@@ -1,0 +1,80 @@
+{
+  "loo_no_chronos": {
+    "setting": "semi-supervised",
+    "seeds": [
+      111
+    ],
+    "n_datasets": 1,
+    "n_rows": 1,
+    "metrics": {
+      "AP": 0.6933638494546525,
+      "ROC-AUC": 0.9086654589371981,
+      "PR-AUC": 0.692377446829736
+    }
+  },
+  "loo_no_geode": {
+    "setting": "semi-supervised",
+    "seeds": [
+      111
+    ],
+    "n_datasets": 1,
+    "n_rows": 1,
+    "metrics": {
+      "AP": 0.6752194558597387,
+      "ROC-AUC": 0.8906661725955203,
+      "PR-AUC": 0.6742736726789567
+    }
+  },
+  "loo_no_calix": {
+    "setting": "semi-supervised",
+    "seeds": [
+      111
+    ],
+    "n_datasets": 1,
+    "n_rows": 1,
+    "metrics": {
+      "AP": 0.7695429890623364,
+      "ROC-AUC": 0.9323945981554678,
+      "PR-AUC": 0.768890739257675
+    }
+  },
+  "loo_no_nexus": {
+    "setting": "semi-supervised",
+    "seeds": [
+      111
+    ],
+    "n_datasets": 1,
+    "n_rows": 1,
+    "metrics": {
+      "AP": 0.792857246605057,
+      "ROC-AUC": 0.9374862758014932,
+      "PR-AUC": 0.7923190422785601
+    }
+  },
+  "loo_no_aether": {
+    "setting": "semi-supervised",
+    "seeds": [
+      111
+    ],
+    "n_datasets": 1,
+    "n_rows": 1,
+    "metrics": {
+      "AP": 0.740310046106708,
+      "ROC-AUC": 0.9252580149319279,
+      "PR-AUC": 0.7394662111022758
+    }
+  },
+  "loo_no_dte": {
+    "setting": "semi-supervised",
+    "seeds": [
+      111
+    ],
+    "n_datasets": 1,
+    "n_rows": 1,
+    "metrics": {
+      "AP": 0.7530911319956309,
+      "ROC-AUC": 0.9248874615722442,
+      "PR-AUC": 0.7524052790499876
+    }
+  }
+}

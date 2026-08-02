@@ -1,0 +1,120 @@
+# AdaDDAE-3 frozen recipe (Table 3) — patched after smoke regression triage.
+# Kitchen-sink losers demoted (MIRAGE/FLUX/ATLAS/AEGIS off); keep HELIOS+KAIROS+ORBIS+
+# GEODE+PLEXUS+CHRONOS+AETHER+NEXUS-v2+RDT-v2+EPOCHÉ; fusion calix (not argos).
+# See thesis/claims_code_map.md negative-result rows. VUS/GATE off; policy: static.
+seed: 111
+seeds: [111, 222, 333, 444, 555]
+
+paths:
+  adbench_root: ../ADBench/adbench/datasets
+  results_dir: results/adadae3_final
+  run_id: adadae3_final
+
+train:
+  setting: semi-supervised
+  lr: 0.001
+  epochs: 100
+  eval_every: 10
+  early_stop_patience: 30
+  val_fraction: 0.2
+  early_stop_metric: val_loss
+  contrastive: true
+  contrastive_alpha: 0.15
+  contrastive_alpha_unsupervised: 0.05
+  hard_negative_mining: true
+  contrastive_gamma: 1.0
+  contrastive_adaptive_alpha: true
+
+model:
+  hidden_dims: [512, 512]
+  latent_dim: 32
+  activation: lrelu
+
+diffusion:
+  num_timesteps: 50
+  beta_start: 0.0001
+  beta_end: 0.02
+  scheduler: linear
+  time_emb_dim: 4
+  time_emb_type: sinusoidal
+
+adadae:
+  policy: static
+  use_danc: true
+  use_chronos: true
+  chronos_hidden: 32
+  use_scs: true
+  use_ftp: true
+  use_multiview: true
+  scs_max_timesteps: 64
+  scs_mode: snr_weighted
+  scs_selection: snr_stratified
+  scs_full_sum_ablation: false
+  danc_contamination_mode: label_free
+  contrastive_pairing: taps
+  use_uncertainty_view: false
+  use_dte_view: true
+  dte_knn: 5
+  dte_memory_size: 4096
+  dte_knn_weight: 0.5
+  use_rejection_training: true
+  rejection_quantile: 0.95
+  rejection_min_weight: 0.1
+  rejection_warmup_epochs: 1
+  use_geode: true
+  geode_neighbors: 32
+  geode_components: 4
+  use_aether: true
+  aether_loss_weight: 0.1
+  use_nexus: false
+  # AdaDDAE-3 keepers
+  use_helios: true
+  use_kairos: true
+  use_orbis: true
+  orbis_top_k: 8
+  use_strata: false
+  use_plexus: true
+  plexus_neighbors: 16
+  use_phasor: false
+  use_argos: false
+  # Triage: smoke cardio semi collapsed with these on
+  use_aegis: false
+  use_mirage: false
+  use_nexus_v2: true
+  nexus_loss_weight: 0.05
+  nexus_noise_std: 0.05
+  use_rdt_v2: true
+  rdt_v2_steepness: 4.0
+  use_lynx: false
+  fusion_mode: calix
+  use_atlas: false
+  use_hydra: false
+  use_flux: false
+  use_scribe: false
+  use_epoche: true
+  epoche_patience: 5
+  use_mce: false
+  use_gate: false
+  profile_breakdown: false
+  fusion_weights:
+    reconstruction: 0.3
+    latent: 0.12
+    residual: 0.08
+    diffusion_time: 0.15
+    geode: 0.15
+    aether: 0.1
+    orbis: 0.05
+    plexus: 0.05
+
+adadae_perf:
+  force_fp32_views: true
+
+features:
+  scaler: auto
+  pca_dim_threshold: 128
+  pca_max_components: 128
+  pca_variance: 0.95
+  clip_outliers: true
+  clip_sigma: 5.0
+
+hardware: hardware_rtx5070ti.yaml

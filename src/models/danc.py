@@ -127,9 +127,14 @@ def _resolve_T_from_snr(
     T_max: int,
     device: torch.device,
 ) -> int:
-    """Find smallest T where alpha_bar_T <= tau_snr."""
+    """Find smallest T where alpha_bar_T <= tau_snr.
+
+    If no T in [5, T_max] reaches the target (common for semi + linear
+    schedules where ᾱ_T stays above τ), fail closed to T_max — not floor 5.
+    """
+    T_max = max(5, int(T_max))
     lo, hi = 5, T_max
-    best = lo
+    best: Optional[int] = None
     while lo <= hi:
         mid = (lo + hi) // 2
         sched = DiffusionScheduler(
@@ -145,6 +150,8 @@ def _resolve_T_from_snr(
             hi = mid - 1
         else:
             lo = mid + 1
+    if best is None:
+        return T_max
     return max(5, min(best, T_max))
 
 

@@ -170,6 +170,41 @@ def split_data(
     raise ValueError("train_setting must be 'unsupervised' or 'semi-supervised'")
 
 
+def carve_val_from_train(
+    X_train: np.ndarray,
+    y_train: np.ndarray,
+    val_fraction: float = 0.2,
+    random_state: Optional[int] = None,
+    min_val: int = 8,
+    min_fit: int = 16,
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """Hold out a validation slice from train only (never from test).
+
+    Used for early stopping / checkpointing without test labels.
+    Returns (X_fit, X_val, y_fit, y_val).
+    """
+    if val_fraction <= 0.0:
+        return X_train, X_train[:0], y_train, y_train[:0]
+
+    n = int(X_train.shape[0])
+    if n < (min_val + min_fit):
+        # Too small to carve — train on all; caller should fall back to train loss.
+        return X_train, X_train[:0], y_train, y_train[:0]
+
+    rng = np.random.RandomState(random_state if random_state is not None else 0)
+    n_val = int(round(n * float(val_fraction)))
+    n_val = max(min_val, min(n_val, n - min_fit))
+    idx = rng.permutation(n)
+    val_idx = idx[:n_val]
+    fit_idx = idx[n_val:]
+    return (
+        X_train[fit_idx],
+        X_train[val_idx],
+        y_train[fit_idx],
+        y_train[val_idx],
+    )
+
+
 def list_dataset_names(adbench_root: Path) -> List[str]:
     return [s.name for s in build_registry(adbench_root)]
 

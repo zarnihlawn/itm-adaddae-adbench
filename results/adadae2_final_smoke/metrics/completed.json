@@ -1,0 +1,185 @@
+{
+  "completed": {
+    "cardio__unsupervised__111": {
+      "dataset": "cardio",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.388658861095163,
+        "ROC-AUC": 0.8327176599835211,
+        "PR-AUC": 0.38651680831536767
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.351094311215187,
+      "resolved_policy": null,
+      "n_val": 366
+    },
+    "cardio__unsupervised__222": {
+      "dataset": "cardio",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.38990279448518617,
+        "ROC-AUC": 0.8442495193628125,
+        "PR-AUC": 0.3870753888284787
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.39456325915993234,
+      "resolved_policy": null,
+      "n_val": 366
+    },
+    "cardio__semi-supervised__111": {
+      "dataset": "cardio",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.6995665192400982,
+        "ROC-AUC": 0.8926081466842336,
+        "PR-AUC": 0.6986976354176188
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.15237259792559074,
+      "resolved_policy": null,
+      "n_val": 165
+    },
+    "cardio__semi-supervised__222": {
+      "dataset": "cardio",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.6794956797105494,
+        "ROC-AUC": 0.8925326635924462,
+        "PR-AUC": 0.6785213753575077
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.14125437881007338,
+      "resolved_policy": null,
+      "n_val": 165
+    },
+    "glass__unsupervised__111": {
+      "dataset": "glass",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.12315607152423153,
+        "ROC-AUC": 0.802710027100271,
+        "PR-AUC": 0.10322229831335582
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.47501203209854836,
+      "resolved_policy": null,
+      "n_val": 43
+    },
+    "glass__unsupervised__222": {
+      "dataset": "glass",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.2088830191246119,
+        "ROC-AUC": 0.7875338753387534,
+        "PR-AUC": 0.19792824553355562
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.4100258114726044,
+      "resolved_policy": null,
+      "n_val": 43
+    },
+    "glass__semi-supervised__111": {
+      "dataset": "glass",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.29641455522235505,
+        "ROC-AUC": 0.8122977346278317,
+        "PR-AUC": 0.27779701755037983
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.0911318153142929,
+      "resolved_policy": null,
+      "n_val": 20
+    },
+    "glass__semi-supervised__222": {
+      "dataset": "glass",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.3843278245565827,
+        "ROC-AUC": 0.8306364617044228,
+        "PR-AUC": 0.3606445110749821
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.1529277518391609,
+      "resolved_policy": null,
+      "n_val": 20
+    },
+    "vertebral__unsupervised__111": {
+      "dataset": "vertebral",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.10165718809864975,
+        "ROC-AUC": 0.3965079365079365,
+        "PR-AUC": 0.09596070067315371
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.41874409715334576,
+      "resolved_policy": null,
+      "n_val": 48
+    },
+    "vertebral__unsupervised__222": {
+      "dataset": "vertebral",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.09720009633446115,
+        "ROC-AUC": 0.38587301587301587,
+        "PR-AUC": 0.09322432946930118
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.405172735452652,
+      "resolved_policy": null,
+      "n_val": 48
+    },
+    "vertebral__semi-supervised__111": {
+      "dataset": "vertebral",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.26575488581767026,
+        "ROC-AUC": 0.5838095238095238,
+        "PR-AUC": 0.25059535277292105
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.1393848838550704,
+      "resolved_policy": null,
+      "n_val": 21
+    },
+    "vertebral__semi-supervised__222": {
+      "dataset": "vertebral",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.20140862291528144,
+        "ROC-AUC": 0.4546031746031746,
+        "PR-AUC": 0.19202725149327185
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.10612897858733222,
+      "resolved_policy": null,
+      "n_val": 21
+    }
+  },
+  "failed": {}
+}

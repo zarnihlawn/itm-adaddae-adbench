@@ -48,7 +48,7 @@ flowchart TB
 | **TAPS** | Timestep-Adaptive Pair Sampling | Random batch shuffle pairs | Semi: normal-only positives; unsup: same-\(t\) |
 | **VUS** | Variance-Uncertainty Score | Single-noise reconstruction only | \(\mathrm{Var}_\epsilon[\|x_0-\hat{x}_0\|]\) |
 | **RDT** | Rejection-aware Diffusion Training | Trains on all points equally | Down-weight high-loss contamination |
-| **DTE-View** | Diffusion Time Posterior Score | Reconstruction sum only (DDAE Eq. 6) | \(\mathbb{E}[t \mid x_0]\) from [DTE ICLR 2024](https://arxiv.org/abs/2305.18593) |
+| **DTE-proxy** | DTE-inspired time / kNN score (proxy) | Reconstruction sum only (DDAE Eq. 6) | Soft \(\widehat{\mathbb{E}}[t \mid x]\) + kNN latent distance — **not** full ICLR 2024 DTE |
 
 ---
 
@@ -112,24 +112,28 @@ Anomalies are **unstable under noise resampling**; normals reconstruct consisten
 |------------|--------|
 | ADBench 57 datasets, splits, seeds | Yes |
 | PR-AUC / ROC-AUC metrics | Yes |
-| No test-set tuning | Yes |
-| Per-dataset manual hyperparameter search | No — deterministic policy |
+| No test-set model selection / early stop | Yes — val carved from train; `early_stop_metric: val_loss` |
+| Per-dataset manual hyperparameter search | No — one frozen YAML for all datasets |
+| Per-dataset routed specialists / guarded merge | No — appendix / development history only |
 
-**Primary claim:** AdaDDAE improves mean metrics by adapting from **train-only dataset characteristics**, not by oracle tuning.
+**Primary claim:** AdaDDAE (`configs/adadae_final.yaml`, run_id `adadae_final`) improves mean metrics with **one train-only adaptive recipe** shared by all 57 datasets — not by oracle routing or test-PR merges.
 
 **Ablation ladder** isolates each component:
 
 ```
-ddae_repro → adadae_fixed → +ftp → +lfdanc → +ssts → +rdt → +taps → +vus → +dte → full_adadae
+ddae_repro → adadae_fixed → +ftp → +lfdanc → +ssts → +rdt → +taps → +vus → +dte_proxy → full_adadae
 ```
 
 **RDT** (TabADM-inspired): reject likely anomalies during training via loss quantile weighting.
 
-**DTE-View** (ICLR 2024 DTE): 5th fusion view from diffusion time posterior + kNN latent proxy.
+**DTE-proxy:** 5th fusion view from a reconstruction-softmax time estimate plus kNN latent distance ([`src/models/dte.py`](../src/models/dte.py)). Inspired by [DTE (ICLR 2024)](https://arxiv.org/abs/2305.18593); **not** a reimplementation of the full DTE diffusion estimator.
+
+Claims ↔ code: [`thesis/claims_code_map.md`](claims_code_map.md).
 
 Run:
 
 ```bash
+python scripts/assert_final_config.py --config configs/adadae_final.yaml
 python scripts/showcase_novelty.py --epochs 20
 python scripts/ablations.py --steps ddae_repro lfdanc ssts full_adadae oracle_danc
 python scripts/profile_job.py
@@ -151,97 +155,74 @@ Hard datasets (e.g. ALOI unsupervised) may remain difficult — disclose in thes
 
 ---
 
-## AdaDDAE v3 (dataset-aware routing)
+## Development history (appendix only — not primary Table 1)
 
-v3 extends v2 family routing with **per-dataset exceptions** backed by oracle ceiling analysis (`scripts/oracle_policy_table.py`).
+Earlier tracks (v2–v5.1 hybrids, `policy: routed`, `policy_exceptions.yaml`, MCE/SMC/GATE, `merge_v5_guarded.py`) were used for **exploration**. They must not be presented as “the AdaDDAE model.” Primary numbers come only from `results/adadae_final/` after a full 570-job run under val-only early stopping, paired with `results/ddae_baseline_valstop/` (or equivalent fair DDAE).
 
-### v3 policies (`src/policy.py` + `configs/policy_exceptions.yaml`)
+### Why hybrids were demoted
 
-| Route | When | Components |
-|-------|------|------------|
-| `unsup_ssts` | Default unsupervised | LF-DANC + MANS + SSTS + FTP |
-| `unsup_baseline_fallback` | vowels, letter, skin, fault, wine, glass | DDAE-faithful (SSTS regressed −35% on vowels) |
-| `baseline_ddae` | Semi classical | Pure DDAE repro |
-| `semi_cvnlp_ftp` | Semi CV | FTP + fixed T=50, contrastive **off** |
-| `semi_nlp_baseline` | Semi NLP | DDAE-faithful (FTP+TAPS hurt Agnews −5.7%) |
-| `semi_speech_specialist` | speech semi | RobustScaler + FTP + RDT + T=80 |
+- Per-dataset exceptions / oracle routing select specialists after looking at outcomes.
+- Guarded merge accepted patches using test PR deltas.
+- Test-label early stopping in older `fit()` selected checkpoints with test PR-AUC.
 
-### Table-1 results (57 datasets, 5 seeds)
+Those practices invalidate a single-method claim even when individual jobs are real.
 
-| Model | Unsup PR | Semi PR | vs DDAE unsup | vs DDAE semi |
-|-------|----------|---------|---------------|--------------|
-| DDAE paper | 32.77% | 61.36% | — | — |
-| DDAE baseline 570 | 32.63% | 60.75% | −0.14% | −0.61% |
-| AdaDDAE v2 hybrid | 34.01% | 60.61% | **+1.24%** | −0.75% |
-| AdaDDAE v2.1 (revert semi CV/NLP) | 34.01% | 60.75% | **+1.24%** | −0.61% |
-| AdaDDAE v3 oracle-best | **36.93%** | 60.77% | **+4.16%** | −0.59% |
+### Negative results (keep in thesis)
 
-**v3 oracle ceiling** proves routing alone can reach **+4.16% unsup PR**; semi still needs **+0.59%** from specialists (speech, ALOI) via GPU patch runs.
-
-### Run v3 on Vast
-
-```bash
-cd /workspace/ITM/project && git pull origin main
-bash scripts/vast_adadae_v2_smoke.sh 12gb   # verify env
-bash scripts/v3_hard_bisect.py --hardware 12gb --epochs 100  # hard-dataset matrix
-bash scripts/run_adadae_v3_protocol.sh all  # ~100-130 selective jobs
-python scripts/validate_gates.py --completed results/adadae_v3_hybrid/metrics/completed.json
-```
-
-### Negative results (document in thesis)
-
-- Monolithic `default_gpu`: semi PR **25%** (vs 61% paper)
-- VUS on semi classical: **−18.7%** PR on ablation subset
-- Blanket FTP+TAPS on NLP semi: Agnews **−5.7%**, 20newsgroups **−2.4%**
-- SSTS on vowels/letter unsup: **−35% / −25%** vs baseline
+- Monolithic early GPU stack regressions on some families
+- VUS / blanket FTP+TAPS / SSTS harms on specific datasets (document, don’t patch into primary)
+- Proxy DTE ≠ full ICLR 2024 DTE — state the gap explicitly
 
 ---
 
-## AdaDDAE v5 (meta-learned adaptation stack)
+## AdaDDAE-2 (Table 2 — advanced frozen recipe)
 
-v5 closes the routing-saturation gap with four train-only components beyond v4.1 bisect patches.
+Under the **same integrity rules** (one recipe, val-only stop, no routing/merge):
 
-### DAMP — Dataset-Adaptive Meta-Diffusion Policy
+| Module | Role |
+|--------|------|
+| **CHRONOS** | Shared schedule hypernet from train meta |
+| **GEODE** | Local PCA off-manifold latent residual |
+| **CALIX** | Conformal / quantile multi-view fusion |
+| **NEXUS** | VICReg SSL normality prior |
+| **AETHER** | DSM train loss + energy path score |
 
-LODO-trained gradient-boosted classifier over bisect matrices maps train-only meta-features \(\phi\) to policy \(\pi^*\):
+Config: [`configs/adadae2_final.yaml`](../configs/adadae2_final.yaml). Run: `bash scripts/run_adadae2_protocol.sh all 16gb` on Vast after Table 1.
 
-\[
-\pi^* = \arg\max_\pi \; \mathbb{E}[\text{PR-AUC} \mid \phi_{\text{train}}, \text{setting}]
-\]
+---
 
-Meta-features: \(\log n\), \(\log d\), contamination \(\hat{c}\), intrinsic dimension, tail rate, SNR proxy. Holdout: `speech`, `Agnews`, `Wilt`, `celeba`, `cardio`. Module: [`src/policy_damp.py`](../src/policy_damp.py).
+## AdaDDAE-5 (Table 5 — information-geometric breakthrough)
 
-### MCE — Modality-Conditional Encoders
+Industry diffusion-AD mostly does fixed schedule → reconstruct → sum MSE. AdaDDAE-5 treats the diffusion path as an **information-geometry probe** of the normal manifold, then scores with geometry-aware residuals and train-only calibrated extremes — still one frozen YAML, no test labels, no routing.
 
-| Modality | Encoder | Output \(d'\) |
-|----------|---------|---------------|
-| NLP | Truncated SVD on standardized features | \(\min(128, d/4)\) |
-| CV | RobustScaler + random projection | 128 |
-| Classical | Optional SVD when \(d > 256\) | auto |
+| Module | Role |
+|--------|------|
+| **FIGARO** | Fisher-proxy adaptive \(T^*,\beta^*\) |
+| **DSM+** | Joint recon + denoising score matching |
+| **MAHALA** | Shrinkage Mahalanobis on residual⊕latent |
+| **FULL-DTE** | Sharpened soft posterior over \(t\) (+ kNN) |
+| **LEXICON** | Dirichlet fusion from train rank consistency |
+| **PURA** | Positive-unlabeled risk weights (label-free \(\hat\pi\)) |
+| **EVT-TAIL / CONFAL** | Extreme-value + conformal score maps (train-only) |
+| **SPECTRA / SINKHORN** | Spectral FTP channels + OT geometry score |
+| **IB / ELBO-S / CURRICULUM / vMF** | Representation pressure + ELBO view + SNR curriculum |
 
-Fit on training normals only. Flag: `adadae.use_mce`. Module: [`src/features/modality_encoder.py`](../src/features/modality_encoder.py).
+Config: [`configs/adadae5_final.yaml`](../configs/adadae5_final.yaml). Run: `bash scripts/run_adadae5_protocol.sh all 16gb` after fair DDAE (+ ideally Table 1). See [`FINAL_RUN.md`](../FINAL_RUN.md).
 
-### SMC — SNR-Calibrated Multi-View Fusion
+---
 
-Per-view reliability from train-normal score variance:
+## AdaDDAE-6 (Table 6 — ADBench regime stack)
 
-\[
-r_v(t) = \frac{1}{\mathrm{Var}_\epsilon[s_v(t)] + \epsilon}, \quad
-s(x) = \sum_{t,v} w_t \cdot r_v(t) \cdot \tilde{s}_v(x,t)
-\]
+Ten analysis loops over ADBench regimes (tiny/huge/rare/high-d/CV-NLP/skew/…) mapped to complementary modules on the **A5 integrity core** — not a re-enable of demoted A3 kitchen-sink. Catalog: [`adbench_improve_catalog.md`](adbench_improve_catalog.md).
 
-Flag: `fusion_mode: smc`. Module: [`src/models/fusion_smc.py`](../src/models/fusion_smc.py).
+| Module | Role |
+|--------|------|
+| **HELIX** | Train-only linear vs cosine schedule family |
+| **DELTA** | LF contamination sandwich → τ retune |
+| **APEX** | Contam-aware rare-tail map (after EVT→CONFAL) |
+| **NAUTILUS / TORQUE** | Tiny-n shrink / huge-n caps |
+| **ORBIT / LOCUS / SPIRAL** | Cosine residual, latent LOF, reverse consistency views |
+| **KALE / RIDGE** | Conflict-aware fusion + Huber recon |
 
-### GATE — Train-Only Ensemble Gate
-
-Ensemble \(\{\text{AdaDDAE}, \text{DDAE}, \text{IF}, \text{kNN-DTE}\}\) with weights from train-normal rank consistency; conformal fallback to DDAE when disagreement \(> \tau\). Flag: `adadae.use_gate`. Module: [`src/ensemble/gate.py`](../src/ensemble/gate.py).
-
-### v5 protocol
-
-```bash
-bash scripts/run_adadae_v5_protocol.sh local    # CPU: phase0 + DAMP + merge
-bash scripts/run_adadae_v5_protocol.sh all      # Vast: full MCE/SMC/GATE GPU tracks
-python scripts/validate_gates.py --completed results/adadae_v5_hybrid/metrics/completed.json --v5
-python scripts/compute_benchmark_tiers.py --completed results/adadae_v5_hybrid/metrics/completed.json
-```
+Config: [`configs/adadae6_final.yaml`](../configs/adadae6_final.yaml). Run: `bash scripts/run_adadae6_protocol.sh all 16gb` after Tables 1–5. Proxies only — not formal conformal coverage or full reverse SDE.
 

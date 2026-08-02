@@ -16,9 +16,29 @@ AdaDDAE is a **named component framework** — each piece has an equation and an
 | **TAPS** | Timestep-Adaptive Pair Sampling (normal-only contrastive) |
 | **VUS** | Variance-Uncertainty Score (4th fusion view) |
 | **RDT** | Rejection-aware Diffusion Training (TabADM-inspired) |
-| **DTE-View** | Diffusion Time Posterior Score ([ICLR 2024 DTE](https://arxiv.org/abs/2305.18593)) |
+| **DTE-proxy** | DTE-inspired time/kNN score (proxy — not full ICLR 2024 DTE) |
 
-Full showcase: [`thesis/novelty.md`](thesis/novelty.md) · Equations: [`thesis/method.md`](thesis/method.md)
+Full showcase: [`thesis/novelty.md`](thesis/novelty.md) · Equations: [`thesis/method.md`](thesis/method.md) · Claims map: [`thesis/claims_code_map.md`](thesis/claims_code_map.md)
+
+**Primary thesis result** = `configs/adadae_final.yaml` only (one frozen recipe, val-only early stop). Legacy hybrids / routed specialists / guarded merges are appendix history — never primary Table 1.
+
+**Canonical final-run commands (Tables 1–5):** [`FINAL_RUN.md`](FINAL_RUN.md) — keep that file updated when protocol/configs change.
+
+```bash
+# Integrity lock before any primary run
+python scripts/assert_final_config.py --config configs/adadae_final.yaml
+
+# Phase-1 smoke (3 datasets × 2 settings × 2 seeds) — works on CPU
+bash scripts/smoke_final_integrity.sh
+
+# Full 570 on Vast GPU (fair DDAE + AdaDDAE final + Table 1 + G-I gates)
+bash scripts/run_adadae_final_protocol.sh all 16gb
+
+# AdaDDAE-2 advanced stack (after Table 1)
+bash scripts/run_adadae2_protocol.sh smoke          # CPU OK
+bash scripts/run_adadae2_protocol.sh all 16gb       # Vast: subset + 570 Table 2
+python scripts/write_vast_run_card.py               # prints Vast commands
+```
 
 ```bash
 # Contribution waterfall (5 datasets × 2 settings)
@@ -202,6 +222,18 @@ Config: `adadae_v3_hybrid.yaml` (routed + exceptions). Oracle-best unsup PR **+4
 |---------|--------|---------|
 | Unsupervised | 32.77 | 74.08 |
 | Semi-supervised | 61.36 | 83.17 |
+
+## Version diagrams
+
+Architecture, training, scoring, and protocol diagrams for every generation (DDAE → v5.1):
+
+**[`docs/diagrams/`](docs/diagrams/)** — start at the [index](docs/diagrams/README.md) or [evolution overview](docs/diagrams/00_overview.md).
+
+| Version | Pack |
+|---------|------|
+| DDAE → v3.1 | [baseline](docs/diagrams/00_ddae_baseline.md) · [v2](docs/diagrams/02_v2.md) · [v2.1](docs/diagrams/02_1_v2_1.md) · [v3](docs/diagrams/03_v3.md) · [v3.1](docs/diagrams/03_1_v31.md) |
+| v4 → v5.1 | [v4](docs/diagrams/04_v4.md) · [v4.1](docs/diagrams/04_1_v41.md) · [v5](docs/diagrams/05_v5.md) · [v5.1](docs/diagrams/05_1_v51.md) |
+| Cross-version | [comparison](docs/diagrams/00_comparison.md) |
 
 ## Layout
 

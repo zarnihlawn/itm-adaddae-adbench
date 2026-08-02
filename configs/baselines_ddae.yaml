@@ -13,6 +13,8 @@ train:
   epochs: 100
   eval_every: 10
   early_stop_patience: 30
+  val_fraction: 0.2
+  early_stop_metric: val_loss
   contrastive: false
   contrastive_alpha: 0.0
   hard_negative_mining: false
@@ -31,6 +33,7 @@ diffusion:
   time_emb_type: sinusoidal
 
 adadae:
+  policy: static
   use_danc: false
   use_scs: false
   use_ftp: false

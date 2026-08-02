@@ -1,0 +1,15 @@
+{
+  "dataset": "speech",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.014617320352987666,
+    "ROC-AUC": 0.41271226681741097,
+    "PR-AUC": 0.013734957384069466
+  },
+  "early_stop_metric": "val_loss",
+  "best_val_metric": 0.7878562619598782,
+  "resolved_policy": null,
+  "n_val": 737
+}
