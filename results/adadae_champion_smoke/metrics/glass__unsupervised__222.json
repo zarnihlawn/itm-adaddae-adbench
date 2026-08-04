@@ -1,0 +1,15 @@
+{
+  "dataset": "glass",
+  "setting": "unsupervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.1999788377882118,
+    "ROC-AUC": 0.7728997289972901,
+    "PR-AUC": 0.19022624261970325
+  },
+  "early_stop_metric": "val_loss",
+  "best_val_metric": 0.32242496900780254,
+  "resolved_policy": "paradigm_unsup_ssts",
+  "n_val": 43
+}

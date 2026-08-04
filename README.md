@@ -20,24 +20,19 @@ AdaDDAE is a **named component framework** — each piece has an equation and an
 
 Full showcase: [`thesis/novelty.md`](thesis/novelty.md) · Equations: [`thesis/method.md`](thesis/method.md) · Claims map: [`thesis/claims_code_map.md`](thesis/claims_code_map.md)
 
-**Primary thesis result** = `configs/adadae_final.yaml` only (one frozen recipe, val-only early stop). Legacy hybrids / routed specialists / guarded merges are appendix history — never primary Table 1.
+**Primary thesis result** = `configs/adadae_champion.yaml` (`policy: paradigm`, val-only early stop). Ship gate: beat published DDAE PR+ROC on **both** settings. Legacy Tables 1–6 / hybrids / routed specialists are appendix only.
 
-**Canonical final-run commands (Tables 1–5):** [`FINAL_RUN.md`](FINAL_RUN.md) — keep that file updated when protocol/configs change.
+**Canonical final-run commands:** [`FINAL_RUN.md`](FINAL_RUN.md)
 
 ```bash
 # Integrity lock before any primary run
-python scripts/assert_final_config.py --config configs/adadae_final.yaml
+python scripts/assert_final_config.py --config configs/adadae_champion.yaml
 
-# Phase-1 smoke (3 datasets × 2 settings × 2 seeds) — works on CPU
-bash scripts/smoke_final_integrity.sh
+# Smoke (3 datasets × 2 settings × 2 seeds) — works on CPU
+bash scripts/run_adadae_champion_protocol.sh smoke
 
-# Full 570 on Vast GPU (fair DDAE + AdaDDAE final + Table 1 + G-I gates)
-bash scripts/run_adadae_final_protocol.sh all 16gb
-
-# AdaDDAE-2 advanced stack (after Table 1)
-bash scripts/run_adadae2_protocol.sh smoke          # CPU OK
-bash scripts/run_adadae2_protocol.sh all 16gb       # Vast: subset + 570 Table 2
-python scripts/write_vast_run_card.py               # prints Vast commands
+# Full path on Vast GPU (fair DDAE + champion 570 + paper-both gate)
+bash scripts/run_adadae_champion_protocol.sh all 16gb
 ```
 
 ```bash

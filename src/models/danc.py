@@ -126,14 +126,16 @@ def _resolve_T_from_snr(
     tau_snr: float,
     T_max: int,
     device: torch.device,
+    t_min: int = 5,
 ) -> int:
     """Find smallest T where alpha_bar_T <= tau_snr.
 
-    If no T in [5, T_max] reaches the target (common for semi + linear
-    schedules where ᾱ_T stays above τ), fail closed to T_max — not floor 5.
+    If no T in [t_min, T_max] reaches the target (common for semi + linear
+    schedules where ᾱ_T stays above τ), fail closed to T_max — not floor t_min.
     """
-    T_max = max(5, int(T_max))
-    lo, hi = 5, T_max
+    t_min = max(5, int(t_min))
+    T_max = max(t_min, int(T_max))
+    lo, hi = t_min, T_max
     best: Optional[int] = None
     while lo <= hi:
         mid = (lo + hi) // 2
@@ -152,7 +154,7 @@ def _resolve_T_from_snr(
             lo = mid + 1
     if best is None:
         return T_max
-    return max(5, min(best, T_max))
+    return max(t_min, min(best, T_max))
 
 
 def danc_select(
@@ -160,6 +162,7 @@ def danc_select(
     setting: str,
     hardware_profile: str = "cpu",
     device: Optional[torch.device] = None,
+    t_min: int = 5,
 ) -> NoiseConfig:
     n, d = meta["n"], meta["d"]
     skew = meta["skewness"]
@@ -195,7 +198,9 @@ def danc_select(
         tau0 = 0.08
 
     tau = _mans_tau_snr(tau0, setting, meta, hardware_profile)
-    T = _resolve_T_from_snr(scheduler, 1e-4, beta_end, tau, T_max, dev)
+    T = _resolve_T_from_snr(
+        scheduler, 1e-4, beta_end, tau, T_max, dev, t_min=int(t_min)
+    )
 
     return NoiseConfig(
         num_timesteps=int(T),
@@ -214,5 +219,12 @@ def danc_policy(
     setting: str,
     hardware_profile: str = "cpu",
     device: Optional[torch.device] = None,
+    t_min: int = 5,
 ) -> NoiseConfig:
-    return danc_select(meta, setting, hardware_profile=hardware_profile, device=device)
+    return danc_select(
+        meta,
+        setting,
+        hardware_profile=hardware_profile,
+        device=device,
+        t_min=t_min,
+    )

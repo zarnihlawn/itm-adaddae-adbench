@@ -95,17 +95,18 @@ adadae:
   fusion_mode: quell
   use_mce: false
   use_gate: false
+  # Must sum ≈ 1.0 (assert_final_config); was 1.12 — rescaled + rounded.
   fusion_weights:
-    reconstruction: 0.28
-    latent: 0.12
-    residual: 0.08
-    diffusion_time: 0.12
-    geode: 0.12
-    aether: 0.1
-    orbis: 0.05
-    plexus: 0.05
-    prism: 0.08
-    polis: 0.05
+    reconstruction: 0.25
+    latent: 0.11
+    residual: 0.07
+    diffusion_time: 0.11
+    geode: 0.11
+    aether: 0.09
+    orbis: 0.04
+    plexus: 0.04
+    prism: 0.07
+    polis: 0.04
     sparse: 0.03
     sieve: 0.04
 

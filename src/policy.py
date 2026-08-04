@@ -87,6 +87,53 @@ UNSUP_SSTS: Dict[str, Any] = {
     },
 }
 
+# Champion semi: fair DDAE scoring + FTP/auto features only (no multiview/VUS/DANC)
+CHAMPION_SEMI: Dict[str, Any] = {
+    "train": {
+        "contrastive": False,
+        "contrastive_alpha": 0.0,
+        "hard_negative_mining": False,
+    },
+    "diffusion": {
+        "num_timesteps": 50,
+        "beta_start": 0.0001,
+        "beta_end": 0.02,
+        "scheduler": "linear",
+        "time_emb_dim": 4,
+        "time_emb_type": "sinusoidal",
+    },
+    "adadae": {
+        "use_danc": False,
+        "use_scs": False,
+        "use_ftp": True,
+        "use_multiview": False,
+        "use_uncertainty_view": False,
+        "use_dte_view": False,
+        "use_rejection_training": False,
+        "use_chronos": False,
+        "use_geode": False,
+        "use_aether": False,
+        "use_nexus": False,
+        "contrastive_pairing": "random",
+        "fusion_mode": "fixed",
+        "fusion_weights": {
+            "reconstruction": 1.0,
+            "latent": 0.0,
+            "residual": 0.0,
+            "uncertainty": 0.0,
+            "diffusion_time": 0.0,
+        },
+    },
+    "features": {
+        "scaler": "auto",
+        "pca_dim_threshold": 128,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": True,
+        "clip_sigma": 5.0,
+    },
+}
+
 # Semi CV: FTP + fixed T=50, contrastive off
 SEMI_CVNLP_FTP: Dict[str, Any] = {
     "train": {
@@ -363,6 +410,7 @@ SEMI_SMC_TAIL: Dict[str, Any] = {
 POLICY_REGISTRY: Dict[str, Dict[str, Any]] = {
     "baseline_ddae": BASELINE_DDAE,
     "unsup_ssts": UNSUP_SSTS,
+    "champion_semi": CHAMPION_SEMI,
     "unsup_baseline_fallback": BASELINE_DDAE,
     "unsup_nlp_ssts_light": UNSUP_NLP_SSTS_LIGHT,
     "unsup_classical_plus": UNSUP_CLASSICAL_PLUS,
@@ -507,6 +555,13 @@ def policy_overrides(policy_name: str) -> Dict[str, Any]:
     return POLICY_REGISTRY[policy_name]
 
 
+def resolve_paradigm_policy_name(setting: str) -> str:
+    """Setting-only champion branch (no dataset / family exceptions)."""
+    if setting == "unsupervised":
+        return "unsup_ssts"
+    return "champion_semi"
+
+
 def apply_routed_config(
     config: Dict[str, Any],
     setting: str,
@@ -514,9 +569,26 @@ def apply_routed_config(
     dataset_name: str = "",
     meta: Optional[Dict[str, float]] = None,
 ) -> Dict[str, Any]:
-    """Merge routed policy overrides into a copy of config."""
+    """Merge policy overrides into a copy of config.
+
+    - ``static``: no-op
+    - ``paradigm``: setting-only (unsup_ssts / champion_semi); no dataset routing
+    - ``routed``: legacy per-dataset / family routing (appendix only)
+    """
     adadae_cfg = config.get("adadae", {})
-    if str(adadae_cfg.get("policy", "static")) != "routed":
+    policy = str(adadae_cfg.get("policy", "static"))
+    if policy == "static":
+        return config
+
+    if policy == "paradigm":
+        name = resolve_paradigm_policy_name(setting)
+        overrides = policy_overrides(name)
+        out = _deep_update(config, overrides)
+        out.setdefault("adadae", {})["policy"] = "paradigm"
+        out["adadae"]["resolved_policy"] = f"paradigm_{name}"
+        return out
+
+    if policy != "routed":
         return config
 
     exc_path = adadae_cfg.get("exceptions_file")

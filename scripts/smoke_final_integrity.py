@@ -49,6 +49,14 @@ def _finite_metrics(m: dict) -> bool:
     return True
 
 
+def _allowed_smoke_policy(pol) -> bool:
+    if pol in (None, "", "static"):
+        return True
+    if isinstance(pol, str) and pol.startswith("paradigm_"):
+        return True
+    return False
+
+
 def _scan_logs(log_dir: Path, run_id: str) -> list[str]:
     errs: list[str] = []
     if not log_dir.exists():
@@ -97,7 +105,7 @@ def _scan_logs(log_dir: Path, run_id: str) -> list[str]:
                 esm = ev.get("early_stop_metric")
                 if esm not in ("val_loss", "train_loss", None):
                     errs.append(f"{path.name}: job_end early_stop_metric={esm!r}")
-                if ev.get("resolved_policy") not in (None,):
+                if not _allowed_smoke_policy(ev.get("resolved_policy")):
                     errs.append(f"{path.name}: resolved_policy={ev.get('resolved_policy')!r}")
                 metrics = ev.get("metrics") or {}
                 if metrics and not _finite_metrics(metrics):
@@ -195,7 +203,7 @@ def assert_completed(completed_path: Path, expected_n: int, min_pr_auc: float | 
         esm = job.get("early_stop_metric")
         if esm not in ("val_loss", "train_loss", None):
             errs.append(f"{key}: early_stop_metric={esm!r}")
-        if job.get("resolved_policy") not in (None,):
+        if not _allowed_smoke_policy(job.get("resolved_policy")):
             errs.append(f"{key}: resolved_policy={job.get('resolved_policy')!r}")
         if job.get("n_val") is not None and int(job["n_val"]) <= 0 and esm == "val_loss":
             errs.append(f"{key}: val_loss claimed but n_val={job.get('n_val')}")
@@ -238,6 +246,11 @@ def main() -> int:
     # Still require val_loss / static / no MCE-GATE (audit already does)
     if raw.get("adadae", {}).get("policy") == "routed":
         cfg_errs.append("smoke config must not use routed policy")
+    if raw.get("adadae", {}).get("policy") not in ("static", "paradigm", None):
+        cfg_errs.append(
+            f"smoke config policy must be static or paradigm "
+            f"(got {raw.get('adadae', {}).get('policy')!r})"
+        )
     if cfg_errs:
         print("CONFIG FAIL:")
         for e in cfg_errs:

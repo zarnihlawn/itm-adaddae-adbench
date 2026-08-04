@@ -115,6 +115,7 @@ def audit_primary_config(
     errs: List[str] = []
     run_id = str(_get(cfg, "paths", "run_id", default="") or "")
     allowed_final = {
+        "adadae_champion",
         "adadae_final",
         "adadae2_final",
         "adadae3_final",
@@ -130,6 +131,8 @@ def audit_primary_config(
     policy = str(_get(cfg, "adadae", "policy", default="static") or "static")
     if policy == "routed":
         errs.append("adadae.policy must not be 'routed' for the primary recipe")
+    if policy not in ("static", "paradigm"):
+        errs.append(f"adadae.policy must be 'static' or 'paradigm' (got {policy!r})")
 
     if _get(cfg, "adadae", "exceptions_file"):
         errs.append("adadae.exceptions_file must be unset for the primary recipe")
@@ -138,6 +141,22 @@ def audit_primary_config(
         errs.append("adadae.use_mce must be false for the primary recipe")
     if bool(_get(cfg, "adadae", "use_gate", default=False)):
         errs.append("adadae.use_gate must be false for the primary recipe")
+
+    if run_id.startswith("adadae_champion"):
+        if bool(_get(cfg, "adadae", "use_uncertainty_view", default=False)):
+            errs.append("champion: use_uncertainty_view must be false")
+        fusion_c = str(_get(cfg, "adadae", "fusion_mode", default="fixed") or "fixed")
+        if fusion_c == "calibrated":
+            errs.append("champion: fusion_mode 'calibrated' is banned")
+        for flag in (
+            "use_chronos",
+            "use_geode",
+            "use_aether",
+            "use_nexus",
+            "use_dte_view",
+        ):
+            if bool(_get(cfg, "adadae", flag, default=False)):
+                errs.append(f"champion: adadae.{flag} must be false (kitchen-sink ban)")
 
     fusion = str(_get(cfg, "adadae", "fusion_mode", default="fixed") or "fixed")
     if fusion == "smc" and run_id in allowed_final:

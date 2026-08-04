@@ -1,0 +1,78 @@
+# AdaDDAE champion — ONE primary recipe for the thesis full 570.
+# policy: paradigm → setting-only branches (no per-dataset routing):
+#   unsupervised  → unsup_ssts (LF-DANC + SCS + FTP, recon-only)
+#   semi-supervised → champion_semi (fair DDAE score + FTP/auto features)
+# Hard bans: VUS, calibrated fusion, MCE/GATE/SMC, AdaDDAE-2…6 kitchen-sink.
+seed: 111
+seeds: [111, 222, 333, 444, 555]
+
+paths:
+  adbench_root: ../ADBench/adbench/datasets
+  results_dir: results/adadae_champion
+  run_id: adadae_champion
+
+train:
+  setting: semi-supervised
+  lr: 0.001
+  epochs: 100
+  eval_every: 10
+  early_stop_patience: 30
+  val_fraction: 0.2
+  early_stop_metric: val_loss
+  contrastive: false
+  contrastive_alpha: 0.0
+  hard_negative_mining: false
+
+model:
+  hidden_dims: [512, 512]
+  latent_dim: 32
+  activation: lrelu
+
+diffusion:
+  num_timesteps: 50
+  beta_start: 0.0001
+  beta_end: 0.02
+  scheduler: linear
+  time_emb_dim: 4
+  time_emb_type: sinusoidal
+
+adadae:
+  policy: paradigm
+  # Shell defaults; paradigm overrides per setting (see src/policy.py)
+  use_danc: true
+  use_scs: true
+  use_ftp: true
+  use_multiview: false
+  scs_max_timesteps: 50
+  scs_mode: snr_weighted
+  scs_selection: snr_stratified
+  scs_full_sum_ablation: false
+  danc_contamination_mode: label_free
+  danc_t_min: 5
+  contrastive_pairing: random
+  use_uncertainty_view: false
+  use_dte_view: false
+  use_rejection_training: false
+  use_chronos: false
+  use_geode: false
+  use_aether: false
+  use_nexus: false
+  fusion_mode: fixed
+  use_mce: false
+  use_gate: false
+  fusion_weights:
+    reconstruction: 1.0
+    latent: 0.0
+    residual: 0.0
+    uncertainty: 0.0
+    diffusion_time: 0.0
+
+features:
+  scaler: auto
+  pca_dim_threshold: 128
+  pca_max_components: 128
+  pca_variance: 0.95
+  clip_outliers: true
+  clip_sigma: 5.0
+
+hardware: hardware_rtx5070ti.yaml

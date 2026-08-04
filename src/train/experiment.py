@@ -284,7 +284,13 @@ def run_single_file(
                 use_learned=True,
             )
         else:
-            noise = danc_policy(meta, setting, hardware_profile=hw_profile, device=device)
+            noise = danc_policy(
+                meta,
+                setting,
+                hardware_profile=hw_profile,
+                device=device,
+                t_min=int(adadae_cfg.get("danc_t_min", 5)),
+            )
     else:
         noise = NoiseConfig(
             num_timesteps=int(diff_cfg.get("num_timesteps", 50)),

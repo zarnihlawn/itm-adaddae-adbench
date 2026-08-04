@@ -9,7 +9,12 @@ import pytest
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.policy import apply_routed_config, load_policy_exceptions, resolve_policy_name
+from src.policy import (
+    apply_routed_config,
+    load_policy_exceptions,
+    resolve_paradigm_policy_name,
+    resolve_policy_name,
+)
 
 
 @pytest.fixture
@@ -57,3 +62,26 @@ def test_exceptions_file_loads():
     exc = load_policy_exceptions()
     assert "vowels" in exc["unsup_baseline_fallback"]
     assert exc["semi_specialists"]["speech"] == "semi_speech_specialist"
+
+
+def test_paradigm_setting_only():
+    assert resolve_paradigm_policy_name("unsupervised") == "unsup_ssts"
+    assert resolve_paradigm_policy_name("semi-supervised") == "champion_semi"
+    cfg = {
+        "adadae": {
+            "policy": "paradigm",
+            "use_uncertainty_view": False,
+            "fusion_mode": "fixed",
+        },
+        "train": {"contrastive": False},
+        "features": {"scaler": "standard"},
+    }
+    u = apply_routed_config(cfg, "unsupervised", "classical", "speech")
+    s = apply_routed_config(cfg, "semi-supervised", "classical", "speech")
+    assert u["adadae"]["resolved_policy"] == "paradigm_unsup_ssts"
+    assert s["adadae"]["resolved_policy"] == "paradigm_champion_semi"
+    # Dataset name must not change paradigm branch (no specialists)
+    assert u["adadae"]["use_danc"] is True
+    assert s["adadae"]["use_danc"] is False
+    assert s["adadae"]["use_ftp"] is True
+    assert s["adadae"]["use_uncertainty_view"] is False

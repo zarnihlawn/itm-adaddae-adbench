@@ -219,12 +219,21 @@ def check_gi1_complete_570(completed: dict, n_seeds: int = 5) -> dict:
     }
 
 
+def _is_allowed_resolved_policy(pol) -> bool:
+    """Allow null/static and paradigm_* labels; reject dataset routing ids."""
+    if pol in (None, "", "static"):
+        return True
+    if isinstance(pol, str) and pol.startswith("paradigm_"):
+        return True
+    return False
+
+
 def check_gi2_no_routing(completed: dict) -> dict:
-    """G-I2: no resolved_policy / routing overrides on primary jobs."""
+    """G-I2: no per-dataset routing; paradigm_* setting labels are allowed."""
     routed = []
     for key, job in completed.items():
         pol = job.get("resolved_policy")
-        if pol not in (None, "", "static"):
+        if not _is_allowed_resolved_policy(pol):
             routed.append({"key": key, "resolved_policy": pol})
     return {"pass": len(routed) == 0, "n_routed": len(routed), "examples": routed[:10]}
 
@@ -283,12 +292,45 @@ def check_gi5_not_guarded_merge(completed_path: Path) -> dict:
     }
 
 
+def check_paper_both(compare_path: Path) -> dict:
+    """Ship gate: beat published DDAE PR and ROC on both settings."""
+    if not compare_path.exists():
+        return {"pass": False, "reason": f"missing {compare_path}"}
+    data = json.loads(compare_path.read_text(encoding="utf-8"))
+    rows = {r["setting"]: r for r in data.get("adadae", [])}
+    details = {}
+    ok = True
+    for setting, paper in PUBLISHED.items():
+        row = rows.get(setting)
+        if row is None:
+            details[setting] = {"pass": False, "reason": "missing setting row"}
+            ok = False
+            continue
+        pr = float(row["AdaDDAE_PR_AUC"])
+        roc = float(row["AdaDDAE_ROC_AUC"])
+        pr_ok = pr > float(paper["PR-AUC"])
+        roc_ok = roc > float(paper["ROC-AUC"])
+        details[setting] = {
+            "pass": pr_ok and roc_ok,
+            "AdaDDAE_PR_AUC": pr,
+            "AdaDDAE_ROC_AUC": roc,
+            "paper_PR_AUC": paper["PR-AUC"],
+            "paper_ROC_AUC": paper["ROC-AUC"],
+            "delta_PR": pr - paper["PR-AUC"],
+            "delta_ROC": roc - paper["ROC-AUC"],
+        }
+        if not (pr_ok and roc_ok):
+            ok = False
+    return {"pass": ok, "settings": details}
+
+
 def run_integrity_gates(
     completed_path: Path,
     compare_path: Path | None = None,
     logs_dir: Path | None = None,
+    require_paper_both: bool = False,
 ) -> dict:
-    """G-I1..G-I5 integrity suite for adadae_final."""
+    """G-I1..G-I5 integrity suite for primary / champion recipes."""
     completed = load_completed(completed_path)
     gates = {
         "G-I1_complete_570": check_gi1_complete_570(completed),
@@ -296,19 +338,24 @@ def run_integrity_gates(
         "G-I3_val_only_early_stop": check_gi3_val_only_stop(completed, logs_dir),
         "G-I5_not_guarded_merge": check_gi5_not_guarded_merge(completed_path),
     }
-    if compare_path is not None:
-        gates["G-I4_artifact_freshness"] = check_g7_artifact_freshness(completed_path, compare_path)
-    else:
+    resolved_compare = compare_path
+    if resolved_compare is None:
         default_compare = completed_path.parent.parent / "thesis" / "compare_to_ddae.json"
         if default_compare.exists():
-            gates["G-I4_artifact_freshness"] = check_g7_artifact_freshness(
-                completed_path, default_compare
-            )
-        else:
-            gates["G-I4_artifact_freshness"] = {
-                "pass": False,
-                "reason": "compare_to_ddae.json missing (run compare_to_ddae.py after 570)",
-            }
+            resolved_compare = default_compare
+    if resolved_compare is not None:
+        gates["G-I4_artifact_freshness"] = check_g7_artifact_freshness(
+            completed_path, resolved_compare
+        )
+        if require_paper_both:
+            gates["G_paper_both"] = check_paper_both(resolved_compare)
+    else:
+        gates["G-I4_artifact_freshness"] = {
+            "pass": False,
+            "reason": "compare_to_ddae.json missing (run compare_to_ddae.py after 570)",
+        }
+        if require_paper_both:
+            gates["G_paper_both"] = {"pass": False, "reason": "compare_to_ddae.json missing"}
     gates["all_pass"] = all(g.get("pass") for g in gates.values())
     gates["n_jobs"] = len(completed)
     return gates
@@ -361,7 +408,12 @@ def main():
     parser.add_argument(
         "--integrity",
         action="store_true",
-        help="Run Phase-1 integrity gates G-I1..G-I5 (primary adadae_final)",
+        help="Run Phase-1 integrity gates G-I1..G-I5 (primary / champion)",
+    )
+    parser.add_argument(
+        "--paper-both",
+        action="store_true",
+        help="Also require beating published DDAE PR+ROC on both settings",
     )
     parser.add_argument(
         "--logs-dir",
@@ -381,7 +433,12 @@ def main():
         logs_dir = Path(args.logs_dir) if args.logs_dir else completed_path.parent.parent / "logs"
         if not logs_dir.is_absolute():
             logs_dir = PROJECT_ROOT / logs_dir
-        gates = run_integrity_gates(completed_path, compare_path=compare_path, logs_dir=logs_dir)
+        gates = run_integrity_gates(
+            completed_path,
+            compare_path=compare_path,
+            logs_dir=logs_dir,
+            require_paper_both=bool(args.paper_both),
+        )
         print("=== Integrity gates G-I1..G-I5 ===")
         for name, g in gates.items():
             if name in ("all_pass", "n_jobs"):

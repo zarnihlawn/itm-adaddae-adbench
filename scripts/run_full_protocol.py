@@ -89,14 +89,16 @@ def run_dataset_job(spec, setting, seed, cfg, logger, adbench):
             for r in split_rows
             if r.get("vram_mb") is not None
         ]
+    first = split_rows[0] if split_rows else {}
     summary = {
         "dataset": spec.name,
         "setting": setting,
         "seed": seed,
         "n_splits": len(split_rows),
         "metrics_mean": {k: v["mean"] for k, v in agg.items()},
-        "noise": split_rows[0].get("noise") if split_rows else {},
-        "resolved_policy": split_rows[0].get("resolved_policy") if split_rows else None,
+        "noise": first.get("noise") if first else {},
+        "resolved_policy": first.get("resolved_policy") if first else None,
+        "early_stop_metric": first.get("early_stop_metric") if first else None,
         "vram_peak_mb": max(vram_vals) if vram_vals else None,
         "vram_mb": max(vram_vals) if vram_vals else None,
         "time": datetime.now(timezone.utc).isoformat(),
