@@ -1,0 +1,25 @@
+{
+  "dataset": "fraud",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.09230576271073762,
+    "ROC-AUC": 0.9546792433218109,
+    "PR-AUC": 0.09171667081923647
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.031042609371378524,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012575,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 158.5537109375,
+  "vram_mb": 158.5537109375,
+  "time": "2026-08-03T10:22:52.550770+00:00"
+}

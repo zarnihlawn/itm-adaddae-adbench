@@ -1,0 +1,25 @@
+{
+  "dataset": "Yelp",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.09126201261918182,
+    "ROC-AUC": 0.6721428421052632,
+    "PR-AUC": 0.09057128100279727
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.024224568194526647,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 899.23681640625,
+  "vram_mb": 899.23681640625,
+  "time": "2026-08-03T19:34:05.144318+00:00"
+}

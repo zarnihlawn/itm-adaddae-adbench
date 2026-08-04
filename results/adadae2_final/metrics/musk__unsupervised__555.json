@@ -1,0 +1,25 @@
+{
+  "dataset": "musk",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.1609190835199323,
+    "ROC-AUC": 0.4493802263521149,
+    "PR-AUC": 0.1596741771739585
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.026750861439104233,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.05020408163265306,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 362.08251953125,
+  "vram_mb": 362.08251953125,
+  "time": "2026-08-03T13:06:58.149862+00:00"
+}

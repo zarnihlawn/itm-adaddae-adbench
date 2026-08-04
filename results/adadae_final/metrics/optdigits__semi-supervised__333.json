@@ -1,0 +1,25 @@
+{
+  "dataset": "optdigits",
+  "setting": "semi-supervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.0390324980887877,
+    "ROC-AUC": 0.3461929201210685,
+    "PR-AUC": 0.0386309880839334
+  },
+  "noise": {
+    "num_timesteps": 100,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.030017732095390392,
+    "time_emb_dim": 4,
+    "tau_snr": 0.08379072063178677,
+    "contamination_est": 0.04738400789733465,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 982.96826171875,
+  "vram_mb": 982.96826171875,
+  "time": "2026-08-03T00:31:51.035129+00:00"
+}

@@ -1,0 +1,25 @@
+{
+  "dataset": "mammography",
+  "setting": "semi-supervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.24014128721324157,
+    "ROC-AUC": 0.8124595104639045,
+    "PR-AUC": 0.23941806204989305
+  },
+  "noise": {
+    "num_timesteps": 80,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.03286266586089917,
+    "time_emb_dim": 4,
+    "tau_snr": 0.054530035477225916,
+    "contamination_est": 0.05012588693064775,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 1566.74267578125,
+  "vram_mb": 1566.74267578125,
+  "time": "2026-08-03T13:01:01.870110+00:00"
+}

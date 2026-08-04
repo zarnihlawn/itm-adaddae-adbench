@@ -1,0 +1,25 @@
+{
+  "dataset": "campaign",
+  "setting": "semi-supervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.4360485284272484,
+    "ROC-AUC": 0.7403062646948935,
+    "PR-AUC": 0.4358430966102196
+  },
+  "noise": {
+    "num_timesteps": 80,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.030304460457117124,
+    "time_emb_dim": 4,
+    "tau_snr": 0.05444500000000001,
+    "contamination_est": 0.048,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 2520.255859375,
+  "vram_mb": 2520.255859375,
+  "time": "2026-08-03T04:43:32.580712+00:00"
+}

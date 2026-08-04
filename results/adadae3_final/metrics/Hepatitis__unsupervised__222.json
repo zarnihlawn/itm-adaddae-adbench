@@ -1,0 +1,25 @@
+{
+  "dataset": "Hepatitis",
+  "setting": "unsupervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.24782792120960306,
+    "ROC-AUC": 0.6681974741676234,
+    "PR-AUC": 0.2224689763113794
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.02956080163827017,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.01,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 79.05224609375,
+  "vram_mb": 79.05224609375,
+  "time": "2026-08-04T01:50:28.346201+00:00"
+}

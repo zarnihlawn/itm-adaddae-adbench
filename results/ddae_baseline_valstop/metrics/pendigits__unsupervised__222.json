@@ -1,0 +1,25 @@
+{
+  "dataset": "pendigits",
+  "setting": "unsupervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.036802654751000245,
+    "ROC-AUC": 0.5791132956012313,
+    "PR-AUC": 0.034690225735763275
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 1491.57373046875,
+  "vram_mb": 1491.57373046875,
+  "time": "2026-08-02T18:31:43.861797+00:00"
+}

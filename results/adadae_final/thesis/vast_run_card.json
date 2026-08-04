@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-02T11:59:21.339886+00:00",
+  "generated": "2026-08-02T16:01:34.952552+00:00",
   "configs": {
     "configs/adadae_final.yaml": {
       "ok": true,
@@ -20,6 +20,6 @@
     "bash scripts/run_adadae2_protocol.sh all 16gb",
     "bash scripts/sync_results_from_vast.sh <ssh-host>"
   ],
-  "local_cuda": false,
+  "local_cuda": true,
   "note": "Full 570 jobs require Vast GPU; local machine prepares configs/smoke only."
 }

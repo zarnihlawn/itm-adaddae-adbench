@@ -1,0 +1,25 @@
+{
+  "dataset": "mnist",
+  "setting": "semi-supervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.3588267535906068,
+    "ROC-AUC": 0.6587895216023837,
+    "PR-AUC": 0.3579287319304596
+  },
+  "noise": {
+    "num_timesteps": 100,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.027972933742164523,
+    "time_emb_dim": 4,
+    "tau_snr": 0.08399855124954726,
+    "contamination_est": 0.049981890619340816,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 1669.4521484375,
+  "vram_mb": 1669.4521484375,
+  "time": "2026-08-03T00:28:32.169655+00:00"
+}

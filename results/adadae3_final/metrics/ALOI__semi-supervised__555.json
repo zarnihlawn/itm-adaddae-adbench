@@ -1,0 +1,25 @@
+{
+  "dataset": "ALOI",
+  "setting": "semi-supervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.0723625761826332,
+    "ROC-AUC": 0.5472760886261763,
+    "PR-AUC": 0.07216127025422464
+  },
+  "noise": {
+    "num_timesteps": 80,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.03249414721576697,
+    "time_emb_dim": 4,
+    "tau_snr": 0.054525000000000004,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 1471.564453125,
+  "vram_mb": 1471.564453125,
+  "time": "2026-08-03T20:08:40.998739+00:00"
+}

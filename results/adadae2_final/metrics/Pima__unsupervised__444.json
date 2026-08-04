@@ -1,0 +1,25 @@
+{
+  "dataset": "Pima",
+  "setting": "unsupervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.4792089108607056,
+    "ROC-AUC": 0.6524328358208955,
+    "PR-AUC": 0.47663777653269723
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.030618888430248212,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.04071661237785016,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 140.3232421875,
+  "vram_mb": 140.3232421875,
+  "time": "2026-08-03T13:19:19.255842+00:00"
+}

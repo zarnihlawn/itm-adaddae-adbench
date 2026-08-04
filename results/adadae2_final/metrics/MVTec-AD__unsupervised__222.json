@@ -1,0 +1,25 @@
+{
+  "dataset": "MVTec-AD",
+  "setting": "unsupervised",
+  "seed": 222,
+  "n_splits": 15,
+  "metrics_mean": {
+    "AP": 0.5424033766207963,
+    "ROC-AUC": 0.7476370370305117,
+    "PR-AUC": 0.5374528107469075
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.026666742053794455,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.05128205128205128,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 122.6728515625,
+  "vram_mb": 122.6728515625,
+  "time": "2026-08-03T17:48:42.853199+00:00"
+}

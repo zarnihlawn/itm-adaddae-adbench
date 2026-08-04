@@ -1,0 +1,36 @@
+{
+  "unsupervised": {
+    "n_datasets": 57,
+    "macro_ada_pr": 29.622593424763757,
+    "macro_ddae_pr": 25.807419392702407,
+    "macro_delta_pr": 3.815174032061349,
+    "bootstrap_ci95_delta": [
+      0.9435118610425899,
+      7.266408604868185
+    ],
+    "wins": 31,
+    "ties": 0,
+    "losses": 26,
+    "wilcoxon": {
+      "statistic": 623.0,
+      "pvalue": 0.10591069673643301
+    }
+  },
+  "semi-supervised": {
+    "n_datasets": 57,
+    "macro_ada_pr": 49.731577839388926,
+    "macro_ddae_pr": 58.69953928485905,
+    "macro_delta_pr": -8.967961445470127,
+    "bootstrap_ci95_delta": [
+      -13.675756660092318,
+      -5.039124737211888
+    ],
+    "wins": 16,
+    "ties": 1,
+    "losses": 40,
+    "wilcoxon": {
+      "statistic": 317.0,
+      "pvalue": 8.725088777190965e-05
+    }
+  }
+}

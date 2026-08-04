@@ -1,0 +1,25 @@
+{
+  "dataset": "donors",
+  "setting": "semi-supervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.3067222600068294,
+    "ROC-AUC": 0.8401296074059182,
+    "PR-AUC": 0.3066854295437528
+  },
+  "noise": {
+    "num_timesteps": 100,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.036316476632576235,
+    "time_emb_dim": 4,
+    "tau_snr": 0.083472,
+    "contamination_est": 0.0434,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 1017.30029296875,
+  "vram_mb": 1017.30029296875,
+  "time": "2026-08-02T23:06:41.960776+00:00"
+}

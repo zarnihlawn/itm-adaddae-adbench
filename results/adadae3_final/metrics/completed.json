@@ -1,0 +1,3780 @@
+{
+  "completed": {
+    "ALOI__unsupervised__111": {
+      "dataset": "ALOI",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.03634469153148985,
+        "ROC-AUC": 0.5539356942045428,
+        "PR-AUC": 0.03622988238974414
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03231822459093263,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 899.38232421875,
+      "vram_mb": 899.38232421875,
+      "time": "2026-08-03T20:00:06.758502+00:00"
+    },
+    "ALOI__unsupervised__222": {
+      "dataset": "ALOI",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.036675660940486805,
+        "ROC-AUC": 0.555861382169097,
+        "PR-AUC": 0.036551727291142436
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03264767026886308,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 899.38232421875,
+      "vram_mb": 899.38232421875,
+      "time": "2026-08-03T20:01:20.382473+00:00"
+    },
+    "ALOI__unsupervised__333": {
+      "dataset": "ALOI",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.03592000520050001,
+        "ROC-AUC": 0.5532057900555856,
+        "PR-AUC": 0.03583026753258771
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.032466632924427447,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 899.38232421875,
+      "vram_mb": 899.38232421875,
+      "time": "2026-08-03T20:02:34.834691+00:00"
+    },
+    "ALOI__unsupervised__444": {
+      "dataset": "ALOI",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.036223117341335945,
+        "ROC-AUC": 0.5525475480180331,
+        "PR-AUC": 0.03613046519834424
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.032335562024928946,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 899.38232421875,
+      "vram_mb": 899.38232421875,
+      "time": "2026-08-03T20:03:48.984742+00:00"
+    },
+    "ALOI__unsupervised__555": {
+      "dataset": "ALOI",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.03607085892878112,
+        "ROC-AUC": 0.553250727308296,
+        "PR-AUC": 0.03597339650252289
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.032612839760122664,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 899.38232421875,
+      "vram_mb": 899.38232421875,
+      "time": "2026-08-03T20:05:02.596947+00:00"
+    },
+    "ALOI__semi-supervised__111": {
+      "dataset": "ALOI",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.07050710283172693,
+        "ROC-AUC": 0.5485658271309937,
+        "PR-AUC": 0.0703320204311911
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.032475282030871286,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1471.564453125,
+      "vram_mb": 1471.564453125,
+      "time": "2026-08-03T20:05:47.130582+00:00"
+    },
+    "ALOI__semi-supervised__222": {
+      "dataset": "ALOI",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.07048283765867919,
+        "ROC-AUC": 0.5430732507734262,
+        "PR-AUC": 0.07026254308482693
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03259970712616937,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1471.564453125,
+      "vram_mb": 1471.564453125,
+      "time": "2026-08-03T20:06:30.274941+00:00"
+    },
+    "ALOI__semi-supervised__333": {
+      "dataset": "ALOI",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.0706405661491504,
+        "ROC-AUC": 0.5459477299044804,
+        "PR-AUC": 0.07039795237240028
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03261258744872967,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1471.564453125,
+      "vram_mb": 1471.564453125,
+      "time": "2026-08-03T20:07:13.345845+00:00"
+    },
+    "ALOI__semi-supervised__444": {
+      "dataset": "ALOI",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.07077560209828504,
+        "ROC-AUC": 0.5449095405991957,
+        "PR-AUC": 0.0705738652021114
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03262885127887978,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1471.564453125,
+      "vram_mb": 1471.564453125,
+      "time": "2026-08-03T20:07:57.229775+00:00"
+    },
+    "ALOI__semi-supervised__555": {
+      "dataset": "ALOI",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.0723625761826332,
+        "ROC-AUC": 0.5472760886261763,
+        "PR-AUC": 0.07216127025422464
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03249414721576697,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1471.564453125,
+      "vram_mb": 1471.564453125,
+      "time": "2026-08-03T20:08:40.998739+00:00"
+    },
+    "annthyroid__unsupervised__111": {
+      "dataset": "annthyroid",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.3338191987363534,
+        "ROC-AUC": 0.8552627734683581,
+        "PR-AUC": 0.3322580754619105
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.02978636026136113,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.0458,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 751.08837890625,
+      "vram_mb": 751.08837890625,
+      "time": "2026-08-03T20:09:01.238697+00:00"
+    },
+    "annthyroid__unsupervised__222": {
+      "dataset": "annthyroid",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.34339729329444624,
+        "ROC-AUC": 0.8544406406932828,
+        "PR-AUC": 0.34202774441475425
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.029823486405396435,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.0496,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 751.08837890625,
+      "vram_mb": 751.08837890625,
+      "time": "2026-08-03T20:09:23.419511+00:00"
+    },
+    "annthyroid__unsupervised__333": {
+      "dataset": "annthyroid",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.32199068327603375,
+        "ROC-AUC": 0.835252345459265,
+        "PR-AUC": 0.32015930348161087
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.029766894324894454,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.0498,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 751.08837890625,
+      "vram_mb": 751.08837890625,
+      "time": "2026-08-03T20:09:50.365550+00:00"
+    },
+    "annthyroid__unsupervised__444": {
+      "dataset": "annthyroid",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.32187749718980135,
+        "ROC-AUC": 0.8514118265759161,
+        "PR-AUC": 0.3201933147775748
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.02985158396204008,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.0498,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 751.08837890625,
+      "vram_mb": 751.08837890625,
+      "time": "2026-08-03T20:10:12.896243+00:00"
+    },
+    "annthyroid__unsupervised__555": {
+      "dataset": "annthyroid",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.31691765534654637,
+        "ROC-AUC": 0.8418086190641536,
+        "PR-AUC": 0.31524668980390624
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.02974896712227465,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.0492,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 751.08837890625,
+      "vram_mb": 751.08837890625,
+      "time": "2026-08-03T20:10:37.064674+00:00"
+    },
+    "annthyroid__semi-supervised__111": {
+      "dataset": "annthyroid",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.6831734054765397,
+        "ROC-AUC": 0.9152583797705612,
+        "PR-AUC": 0.6827526120278917
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03305447021413542,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054535502625656415,
+        "contamination_est": 0.05026256564141035,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 701.103515625,
+      "vram_mb": 701.103515625,
+      "time": "2026-08-03T20:10:48.936114+00:00"
+    },
+    "annthyroid__semi-supervised__222": {
+      "dataset": "annthyroid",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.593626941893255,
+        "ROC-AUC": 0.8852216682342391,
+        "PR-AUC": 0.5923491351800281
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.030048625826968274,
+        "time_emb_dim": 4,
+        "tau_snr": 0.05450549512378095,
+        "contamination_est": 0.04951237809452363,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 701.103515625,
+      "vram_mb": 701.103515625,
+      "time": "2026-08-03T20:11:00.971120+00:00"
+    },
+    "annthyroid__semi-supervised__333": {
+      "dataset": "annthyroid",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.5720781750046413,
+        "ROC-AUC": 0.885708795598661,
+        "PR-AUC": 0.5702923810552255
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.030025088329542312,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054535502625656415,
+        "contamination_est": 0.05026256564141035,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 701.103515625,
+      "vram_mb": 701.103515625,
+      "time": "2026-08-03T20:11:23.952040+00:00"
+    },
+    "annthyroid__semi-supervised__444": {
+      "dataset": "annthyroid",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.6008733115807728,
+        "ROC-AUC": 0.9128036399145534,
+        "PR-AUC": 0.5993884529963305
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.030027428739602735,
+        "time_emb_dim": 4,
+        "tau_snr": 0.05452049887471868,
+        "contamination_est": 0.04988747186796699,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 701.103515625,
+      "vram_mb": 701.103515625,
+      "time": "2026-08-03T20:11:46.854391+00:00"
+    },
+    "annthyroid__semi-supervised__555": {
+      "dataset": "annthyroid",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.49715429522438903,
+        "ROC-AUC": 0.8403486416057337,
+        "PR-AUC": 0.4957350986404081
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.029963364348730443,
+        "time_emb_dim": 4,
+        "tau_snr": 0.05452049887471868,
+        "contamination_est": 0.04988747186796699,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 701.103515625,
+      "vram_mb": 701.103515625,
+      "time": "2026-08-03T20:12:02.243772+00:00"
+    },
+    "backdoor__unsupervised__111": {
+      "dataset": "backdoor",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.5486565693905456,
+        "ROC-AUC": 0.8997623582044072,
+        "PR-AUC": 0.5482987651818741
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.02728574939209625,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1098.8193359375,
+      "vram_mb": 1098.8193359375,
+      "time": "2026-08-03T20:14:23.151703+00:00"
+    },
+    "backdoor__unsupervised__222": {
+      "dataset": "backdoor",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.5583108127646417,
+        "ROC-AUC": 0.9007951264329608,
+        "PR-AUC": 0.5580606012202153
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.027652873176756312,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1098.8193359375,
+      "vram_mb": 1098.8193359375,
+      "time": "2026-08-03T20:16:42.968713+00:00"
+    },
+    "backdoor__unsupervised__333": {
+      "dataset": "backdoor",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.5585297845184104,
+        "ROC-AUC": 0.9018790680388001,
+        "PR-AUC": 0.5582339779759661
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.027484959123268975,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1098.8193359375,
+      "vram_mb": 1098.8193359375,
+      "time": "2026-08-03T20:19:02.873901+00:00"
+    },
+    "backdoor__unsupervised__444": {
+      "dataset": "backdoor",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.5498282913605093,
+        "ROC-AUC": 0.9007407327894662,
+        "PR-AUC": 0.5495676606876742
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.027569463418536656,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1098.8193359375,
+      "vram_mb": 1098.8193359375,
+      "time": "2026-08-03T20:21:23.435464+00:00"
+    },
+    "backdoor__unsupervised__555": {
+      "dataset": "backdoor",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.5555703061607447,
+        "ROC-AUC": 0.9028000664829153,
+        "PR-AUC": 0.555297647042065
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.02718593797044823,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1098.8193359375,
+      "vram_mb": 1098.8193359375,
+      "time": "2026-08-03T20:23:43.473964+00:00"
+    },
+    "backdoor__semi-supervised__111": {
+      "dataset": "backdoor",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.18343813634082087,
+        "ROC-AUC": 0.8405617760172116,
+        "PR-AUC": 0.183153085819007
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03151345179211813,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1494.8837890625,
+      "vram_mb": 1494.8837890625,
+      "time": "2026-08-03T20:24:54.333689+00:00"
+    },
+    "backdoor__semi-supervised__222": {
+      "dataset": "backdoor",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.1596362410622044,
+        "ROC-AUC": 0.7967434867518941,
+        "PR-AUC": 0.1592825191733354
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03107057969598602,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1507.44775390625,
+      "vram_mb": 1507.44775390625,
+      "time": "2026-08-03T20:26:06.057512+00:00"
+    },
+    "backdoor__semi-supervised__333": {
+      "dataset": "backdoor",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.14818151933784904,
+        "ROC-AUC": 0.7834595631518441,
+        "PR-AUC": 0.14790185470031558
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.030881825041976993,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1503.15625,
+      "vram_mb": 1503.15625,
+      "time": "2026-08-03T20:27:17.164324+00:00"
+    },
+    "backdoor__semi-supervised__444": {
+      "dataset": "backdoor",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.18195938934250425,
+        "ROC-AUC": 0.8378926300918297,
+        "PR-AUC": 0.18166285538803528
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02984506427485282,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1507.44775390625,
+      "vram_mb": 1507.44775390625,
+      "time": "2026-08-03T20:28:28.063206+00:00"
+    },
+    "backdoor__semi-supervised__555": {
+      "dataset": "backdoor",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.1589459341442418,
+        "ROC-AUC": 0.7854588198359164,
+        "PR-AUC": 0.1586529634115917
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03037366057860614,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1499.86474609375,
+      "vram_mb": 1499.86474609375,
+      "time": "2026-08-03T20:29:38.709761+00:00"
+    },
+    "breastw__unsupervised__111": {
+      "dataset": "breastw",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.954839884757881,
+        "ROC-AUC": 0.9833012929247239,
+        "PR-AUC": 0.9546261050104533
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.027207729773508237,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.03296703296703297,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 133.5966796875,
+      "vram_mb": 133.5966796875,
+      "time": "2026-08-03T20:29:53.064136+00:00"
+    },
+    "breastw__unsupervised__222": {
+      "dataset": "breastw",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.9765048782888714,
+        "ROC-AUC": 0.9893135813637906,
+        "PR-AUC": 0.9764409805153813
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.027146432303070164,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.031135531135531136,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 133.5966796875,
+      "vram_mb": 133.5966796875,
+      "time": "2026-08-03T20:30:10.470579+00:00"
+    },
+    "breastw__unsupervised__333": {
+      "dataset": "breastw",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.9694259225113115,
+        "ROC-AUC": 0.9872686494025406,
+        "PR-AUC": 0.9693314299192406
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.027125578780475418,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.0347985347985348,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 133.5966796875,
+      "vram_mb": 133.5966796875,
+      "time": "2026-08-03T20:30:27.737159+00:00"
+    },
+    "breastw__unsupervised__444": {
+      "dataset": "breastw",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.9589635090525288,
+        "ROC-AUC": 0.9845169437219646,
+        "PR-AUC": 0.9587901030447106
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.027111121223795498,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.0347985347985348,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 133.5966796875,
+      "vram_mb": 133.5966796875,
+      "time": "2026-08-03T20:30:43.572213+00:00"
+    },
+    "breastw__unsupervised__555": {
+      "dataset": "breastw",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.9559348053998086,
+        "ROC-AUC": 0.9828395340947642,
+        "PR-AUC": 0.9557666244459146
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.027072090564608273,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.031135531135531136,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 133.5966796875,
+      "vram_mb": 133.5966796875,
+      "time": "2026-08-03T20:30:58.003967+00:00"
+    },
+    "breastw__semi-supervised__111": {
+      "dataset": "breastw",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.9796011578694485,
+        "ROC-AUC": 0.9836593916091824,
+        "PR-AUC": 0.9795393635142671
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.032936196274883436,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054322752808988774,
+        "contamination_est": 0.0449438202247191,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 118.88330078125,
+      "vram_mb": 118.88330078125,
+      "time": "2026-08-03T20:31:10.399458+00:00"
+    },
+    "breastw__semi-supervised__222": {
+      "dataset": "breastw",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.977140030469494,
+        "ROC-AUC": 0.983414376719816,
+        "PR-AUC": 0.9770406065984603
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03262136972841839,
+        "time_emb_dim": 4,
+        "tau_snr": 0.05387331460674158,
+        "contamination_est": 0.033707865168539325,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 118.88330078125,
+      "vram_mb": 118.88330078125,
+      "time": "2026-08-03T20:31:30.047634+00:00"
+    },
+    "breastw__semi-supervised__333": {
+      "dataset": "breastw",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.9956808070414966,
+        "ROC-AUC": 0.9954201062987674,
+        "PR-AUC": 0.995671536651588
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.032606739448165396,
+        "time_emb_dim": 4,
+        "tau_snr": 0.05454747191011236,
+        "contamination_est": 0.05056179775280899,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 118.88330078125,
+      "vram_mb": 118.88330078125,
+      "time": "2026-08-03T20:31:41.595576+00:00"
+    },
+    "breastw__semi-supervised__444": {
+      "dataset": "breastw",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.9899395359615524,
+        "ROC-AUC": 0.9907271288024426,
+        "PR-AUC": 0.9899134642822371
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03361286891816284,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054322752808988774,
+        "contamination_est": 0.0449438202247191,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 118.88330078125,
+      "vram_mb": 118.88330078125,
+      "time": "2026-08-03T20:31:57.514118+00:00"
+    },
+    "breastw__semi-supervised__555": {
+      "dataset": "breastw",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.9764349641042734,
+        "ROC-AUC": 0.9818312035885257,
+        "PR-AUC": 0.9763429484545411
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.033067967586746266,
+        "time_emb_dim": 4,
+        "tau_snr": 0.05454747191011236,
+        "contamination_est": 0.05056179775280899,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 118.88330078125,
+      "vram_mb": 118.88330078125,
+      "time": "2026-08-03T20:32:17.369903+00:00"
+    },
+    "campaign__unsupervised__111": {
+      "dataset": "campaign",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.29683890277223524,
+        "ROC-AUC": 0.7584811972587773,
+        "PR-AUC": 0.29661771916965834
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.030241166727064332,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.037,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1004.92041015625,
+      "vram_mb": 1004.92041015625,
+      "time": "2026-08-03T20:33:17.501958+00:00"
+    },
+    "campaign__unsupervised__222": {
+      "dataset": "campaign",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.28966387984416614,
+        "ROC-AUC": 0.7564929728689339,
+        "PR-AUC": 0.2894451287366556
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.030196352583577772,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.0372,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1004.92041015625,
+      "vram_mb": 1004.92041015625,
+      "time": "2026-08-03T20:34:17.733344+00:00"
+    },
+    "campaign__unsupervised__333": {
+      "dataset": "campaign",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.29067397215903407,
+        "ROC-AUC": 0.7562733661778748,
+        "PR-AUC": 0.29047686393651906
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03006767834382232,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.0424,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1004.92041015625,
+      "vram_mb": 1004.92041015625,
+      "time": "2026-08-03T20:35:17.139857+00:00"
+    },
+    "campaign__unsupervised__444": {
+      "dataset": "campaign",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.29767054112049635,
+        "ROC-AUC": 0.7570880482398207,
+        "PR-AUC": 0.2974496151250511
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03024145888811564,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.0362,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1004.92041015625,
+      "vram_mb": 1004.92041015625,
+      "time": "2026-08-03T20:36:17.218694+00:00"
+    },
+    "campaign__unsupervised__555": {
+      "dataset": "campaign",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.28988951166159,
+        "ROC-AUC": 0.7553610356055145,
+        "PR-AUC": 0.2896715760720553
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.030285557839398153,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.0396,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1004.92041015625,
+      "vram_mb": 1004.92041015625,
+      "time": "2026-08-03T20:37:18.356506+00:00"
+    },
+    "campaign__semi-supervised__111": {
+      "dataset": "campaign",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.3198323729157925,
+        "ROC-AUC": 0.6559194002785189,
+        "PR-AUC": 0.31963579519408103
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.030304460457117124,
+        "time_emb_dim": 4,
+        "tau_snr": 0.05444500000000001,
+        "contamination_est": 0.048,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1606.2578125,
+      "vram_mb": 1606.2578125,
+      "time": "2026-08-03T20:37:48.475686+00:00"
+    },
+    "campaign__semi-supervised__222": {
+      "dataset": "campaign",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.3103918006916706,
+        "ROC-AUC": 0.6462295214984168,
+        "PR-AUC": 0.3101916398280246
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.030266618719308785,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054421000000000004,
+        "contamination_est": 0.0474,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1606.2578125,
+      "vram_mb": 1606.2578125,
+      "time": "2026-08-03T20:38:17.900274+00:00"
+    },
+    "campaign__semi-supervised__333": {
+      "dataset": "campaign",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.36074531678700955,
+        "ROC-AUC": 0.6791608720511146,
+        "PR-AUC": 0.360514564613552
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.030296839796567693,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054173,
+        "contamination_est": 0.0412,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1606.2578125,
+      "vram_mb": 1606.2578125,
+      "time": "2026-08-03T20:38:44.560266+00:00"
+    },
+    "campaign__semi-supervised__444": {
+      "dataset": "campaign",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.3218387797907213,
+        "ROC-AUC": 0.655865226126813,
+        "PR-AUC": 0.32161842462727713
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.030278195110346916,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054293,
+        "contamination_est": 0.0442,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1606.2578125,
+      "vram_mb": 1606.2578125,
+      "time": "2026-08-03T20:39:14.160966+00:00"
+    },
+    "campaign__semi-supervised__555": {
+      "dataset": "campaign",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.31292303919047415,
+        "ROC-AUC": 0.6501124937729504,
+        "PR-AUC": 0.31269787613409367
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.030276026103129242,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054261000000000004,
+        "contamination_est": 0.0434,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1606.2578125,
+      "vram_mb": 1606.2578125,
+      "time": "2026-08-03T20:39:44.172240+00:00"
+    },
+    "cardio__unsupervised__111": {
+      "dataset": "cardio",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.4303886307423699,
+        "ROC-AUC": 0.8353371326558638,
+        "PR-AUC": 0.42843813554341825
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.028148113307221563,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.050511945392491465,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 249.28857421875,
+      "vram_mb": 249.28857421875,
+      "time": "2026-08-03T20:40:07.857436+00:00"
+    },
+    "cardio__unsupervised__222": {
+      "dataset": "cardio",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.39274404437114224,
+        "ROC-AUC": 0.8437311178247733,
+        "PR-AUC": 0.3898842230360865
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.030916931582255523,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.050511945392491465,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 249.28857421875,
+      "vram_mb": 249.28857421875,
+      "time": "2026-08-03T20:40:30.530016+00:00"
+    },
+    "cardio__unsupervised__333": {
+      "dataset": "cardio",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.3695070469299754,
+        "ROC-AUC": 0.8340565778632244,
+        "PR-AUC": 0.36475750186548445
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.028154240733703564,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.049146757679180884,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 249.28857421875,
+      "vram_mb": 249.28857421875,
+      "time": "2026-08-03T20:40:52.969995+00:00"
+    },
+    "cardio__unsupervised__444": {
+      "dataset": "cardio",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.41065188452160806,
+        "ROC-AUC": 0.8406069761054656,
+        "PR-AUC": 0.40826269970932677
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.030898331971562012,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.050511945392491465,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 249.28857421875,
+      "vram_mb": 249.28857421875,
+      "time": "2026-08-03T20:41:15.405182+00:00"
+    },
+    "cardio__unsupervised__555": {
+      "dataset": "cardio",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.3585777644603097,
+        "ROC-AUC": 0.8339432848118649,
+        "PR-AUC": 0.35574423063593597
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.030893876987777215,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.04505119453924915,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 249.28857421875,
+      "vram_mb": 249.28857421875,
+      "time": "2026-08-03T20:41:37.899661+00:00"
+    },
+    "cardio__semi-supervised__111": {
+      "dataset": "cardio",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.782144801489247,
+        "ROC-AUC": 0.9344600900307422,
+        "PR-AUC": 0.781499544789371
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.031096345963728574,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054579380664652566,
+        "contamination_est": 0.0513595166163142,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 237.44384765625,
+      "vram_mb": 237.44384765625,
+      "time": "2026-08-03T20:41:58.645388+00:00"
+    },
+    "cardio__semi-supervised__222": {
+      "dataset": "cardio",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.7599437853660901,
+        "ROC-AUC": 0.9151501427316645,
+        "PR-AUC": 0.7593777677992437
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.027861067995518324,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054579380664652566,
+        "contamination_est": 0.0513595166163142,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 237.44384765625,
+      "vram_mb": 237.44384765625,
+      "time": "2026-08-03T20:42:08.542949+00:00"
+    },
+    "cardio__semi-supervised__333": {
+      "dataset": "cardio",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.758942505836894,
+        "ROC-AUC": 0.9047266139657444,
+        "PR-AUC": 0.7584316718742303
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.027890224449144945,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054579380664652566,
+        "contamination_est": 0.0513595166163142,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 237.44384765625,
+      "vram_mb": 237.44384765625,
+      "time": "2026-08-03T20:42:18.432438+00:00"
+    },
+    "cardio__semi-supervised__444": {
+      "dataset": "cardio",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.7544826355099113,
+        "ROC-AUC": 0.9114720575318401,
+        "PR-AUC": 0.7538831721100785
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02790548692589142,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054579380664652566,
+        "contamination_est": 0.0513595166163142,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 237.44384765625,
+      "vram_mb": 237.44384765625,
+      "time": "2026-08-03T20:42:28.355023+00:00"
+    },
+    "cardio__semi-supervised__555": {
+      "dataset": "cardio",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.8226630791238926,
+        "ROC-AUC": 0.9434219916556873,
+        "PR-AUC": 0.8222447736359114
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02797844866883592,
+        "time_emb_dim": 4,
+        "tau_snr": 0.05421684290030212,
+        "contamination_est": 0.04229607250755287,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 237.44384765625,
+      "vram_mb": 237.44384765625,
+      "time": "2026-08-03T20:42:50.195061+00:00"
+    },
+    "Cardiotocography__unsupervised__111": {
+      "dataset": "Cardiotocography",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.32146983754308545,
+        "ROC-AUC": 0.5491517875744822,
+        "PR-AUC": 0.31965482650860577
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.030785314970542436,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.046126552335895916,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 277.23681640625,
+      "vram_mb": 277.23681640625,
+      "time": "2026-08-03T20:43:16.882981+00:00"
+    },
+    "Cardiotocography__unsupervised__222": {
+      "dataset": "Cardiotocography",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.324200106553977,
+        "ROC-AUC": 0.5439237051543815,
+        "PR-AUC": 0.32308717000213233
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03083295601875613,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.04967474866942637,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 277.23681640625,
+      "vram_mb": 277.23681640625,
+      "time": "2026-08-03T20:43:42.596986+00:00"
+    },
+    "Cardiotocography__unsupervised__333": {
+      "dataset": "Cardiotocography",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.3398310431645425,
+        "ROC-AUC": 0.5605233551397975,
+        "PR-AUC": 0.3388858769074759
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.030856745600280674,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.04139562389118864,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 277.23681640625,
+      "vram_mb": 277.23681640625,
+      "time": "2026-08-03T20:44:08.373612+00:00"
+    },
+    "Cardiotocography__unsupervised__444": {
+      "dataset": "Cardiotocography",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.33911546308591295,
+        "ROC-AUC": 0.546194633109713,
+        "PR-AUC": 0.33822149831952947
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03080281399825678,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.0319337670017741,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 277.23681640625,
+      "vram_mb": 277.23681640625,
+      "time": "2026-08-03T20:44:34.172605+00:00"
+    },
+    "Cardiotocography__unsupervised__555": {
+      "dataset": "Cardiotocography",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.34088052091663235,
+        "ROC-AUC": 0.5606561731738823,
+        "PR-AUC": 0.33996840546931384
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03084925219707627,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.03666469544648137,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 277.23681640625,
+      "vram_mb": 277.23681640625,
+      "time": "2026-08-03T20:45:00.600441+00:00"
+    },
+    "Cardiotocography__semi-supervised__111": {
+      "dataset": "Cardiotocography",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.6291674639708937,
+        "ROC-AUC": 0.7137068211175466,
+        "PR-AUC": 0.6287600273822913
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03110946896070973,
+        "time_emb_dim": 4,
+        "tau_snr": 0.05367826251896814,
+        "contamination_est": 0.028831562974203338,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 285.5380859375,
+      "vram_mb": 285.5380859375,
+      "time": "2026-08-03T20:45:10.662375+00:00"
+    },
+    "Cardiotocography__semi-supervised__222": {
+      "dataset": "Cardiotocography",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.671763886315301,
+        "ROC-AUC": 0.7321893620567523,
+        "PR-AUC": 0.6713811877634508
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03107907355115088,
+        "time_emb_dim": 4,
+        "tau_snr": 0.05331407435508346,
+        "contamination_est": 0.019726858877086494,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 285.5380859375,
+      "vram_mb": 285.5380859375,
+      "time": "2026-08-03T20:45:32.004968+00:00"
+    },
+    "Cardiotocography__semi-supervised__333": {
+      "dataset": "Cardiotocography",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.6526942243071063,
+        "ROC-AUC": 0.744572690528772,
+        "PR-AUC": 0.6522593734338206
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.027941989961858933,
+        "time_emb_dim": 4,
+        "tau_snr": 0.05355686646433991,
+        "contamination_est": 0.025796661608497723,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 285.5380859375,
+      "vram_mb": 285.5380859375,
+      "time": "2026-08-03T20:45:42.263430+00:00"
+    },
+    "Cardiotocography__semi-supervised__444": {
+      "dataset": "Cardiotocography",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.6539167803137219,
+        "ROC-AUC": 0.7643847139464144,
+        "PR-AUC": 0.6534060128616688
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.027975248351959324,
+        "time_emb_dim": 4,
+        "tau_snr": 0.05361756449165402,
+        "contamination_est": 0.027314112291350532,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 285.5380859375,
+      "vram_mb": 285.5380859375,
+      "time": "2026-08-03T20:45:52.369870+00:00"
+    },
+    "Cardiotocography__semi-supervised__555": {
+      "dataset": "Cardiotocography",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.6858711123634387,
+        "ROC-AUC": 0.7757484686861952,
+        "PR-AUC": 0.6854812718254183
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.031189042533891022,
+        "time_emb_dim": 4,
+        "tau_snr": 0.0534961684370258,
+        "contamination_est": 0.024279210925644917,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 285.5380859375,
+      "vram_mb": 285.5380859375,
+      "time": "2026-08-03T20:46:13.117144+00:00"
+    },
+    "celeba__unsupervised__111": {
+      "dataset": "celeba",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.046030745492615543,
+        "ROC-AUC": 0.6788997909797575,
+        "PR-AUC": 0.04596050317388919
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.032021908348558656,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.044,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 151.2509765625,
+      "vram_mb": 151.2509765625,
+      "time": "2026-08-03T20:51:32.144539+00:00"
+    },
+    "celeba__unsupervised__222": {
+      "dataset": "celeba",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.046855031999269825,
+        "ROC-AUC": 0.681205897720019,
+        "PR-AUC": 0.04675728060503371
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03199399587145295,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.0428,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 151.2509765625,
+      "vram_mb": 151.2509765625,
+      "time": "2026-08-03T20:56:47.642984+00:00"
+    },
+    "celeba__unsupervised__333": {
+      "dataset": "celeba",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.05563022002862944,
+        "ROC-AUC": 0.7041652664180257,
+        "PR-AUC": 0.055520294519307935
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.031991978853821615,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.0362,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 151.2509765625,
+      "vram_mb": 151.2509765625,
+      "time": "2026-08-03T21:01:28.745274+00:00"
+    },
+    "celeba__unsupervised__444": {
+      "dataset": "celeba",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.05167920384580057,
+        "ROC-AUC": 0.69448137527208,
+        "PR-AUC": 0.05155252830014018
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03197745015961166,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.043,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 151.2509765625,
+      "vram_mb": 151.2509765625,
+      "time": "2026-08-03T21:06:11.067357+00:00"
+    },
+    "celeba__unsupervised__555": {
+      "dataset": "celeba",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.04616141859286968,
+        "ROC-AUC": 0.6758743700035975,
+        "PR-AUC": 0.04604898037226031
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03204237474670665,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.042,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 151.2509765625,
+      "vram_mb": 151.2509765625,
+      "time": "2026-08-03T21:11:27.432708+00:00"
+    },
+    "celeba__semi-supervised__111": {
+      "dataset": "celeba",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.05031361501035323,
+        "ROC-AUC": 0.577863497125739,
+        "PR-AUC": 0.050282254329352086
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.031994863403594136,
+        "time_emb_dim": 4,
+        "tau_snr": 0.053909,
+        "contamination_est": 0.0346,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 402.564453125,
+      "vram_mb": 402.564453125,
+      "time": "2026-08-03T21:13:17.363574+00:00"
+    },
+    "celeba__semi-supervised__222": {
+      "dataset": "celeba",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.05332278943809903,
+        "ROC-AUC": 0.5914495008521776,
+        "PR-AUC": 0.05329794674083168
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03204903750551813,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054205,
+        "contamination_est": 0.042,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 402.564453125,
+      "vram_mb": 402.564453125,
+      "time": "2026-08-03T21:15:07.279218+00:00"
+    },
+    "celeba__semi-supervised__333": {
+      "dataset": "celeba",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.05186652042138045,
+        "ROC-AUC": 0.5852660710348484,
+        "PR-AUC": 0.05184060783375609
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03204020005735275,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054021000000000007,
+        "contamination_est": 0.0374,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 402.564453125,
+      "vram_mb": 402.564453125,
+      "time": "2026-08-03T21:16:56.781215+00:00"
+    },
+    "celeba__semi-supervised__444": {
+      "dataset": "celeba",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.049949507841907534,
+        "ROC-AUC": 0.5772118831969234,
+        "PR-AUC": 0.04992142777393628
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03197224795028288,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054037,
+        "contamination_est": 0.0378,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 402.564453125,
+      "vram_mb": 402.564453125,
+      "time": "2026-08-03T21:18:46.800993+00:00"
+    },
+    "celeba__semi-supervised__555": {
+      "dataset": "celeba",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.06758984001194233,
+        "ROC-AUC": 0.6389447136375062,
+        "PR-AUC": 0.06749756658275897
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03202394176748153,
+        "time_emb_dim": 4,
+        "tau_snr": 0.053909,
+        "contamination_est": 0.0346,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 402.564453125,
+      "vram_mb": 402.564453125,
+      "time": "2026-08-03T21:21:19.508411+00:00"
+    },
+    "census__unsupervised__111": {
+      "dataset": "census",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.0865655878226113,
+        "ROC-AUC": 0.6588692239051113,
+        "PR-AUC": 0.08653746276202143
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.02752841668131862,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 161.4326171875,
+      "vram_mb": 161.4326171875,
+      "time": "2026-08-03T21:29:26.125829+00:00"
+    },
+    "census__unsupervised__222": {
+      "dataset": "census",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.08740856265241903,
+        "ROC-AUC": 0.664430613660618,
+        "PR-AUC": 0.08738140358714691
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.02754309954333831,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 161.4326171875,
+      "vram_mb": 161.4326171875,
+      "time": "2026-08-03T21:37:30.702567+00:00"
+    },
+    "census__unsupervised__333": {
+      "dataset": "census",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.08647761638426785,
+        "ROC-AUC": 0.6604868526585528,
+        "PR-AUC": 0.08645999616231531
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.027528198920334042,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 161.4326171875,
+      "vram_mb": 161.4326171875,
+      "time": "2026-08-03T21:45:33.163365+00:00"
+    },
+    "census__unsupervised__444": {
+      "dataset": "census",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.08912668400830552,
+        "ROC-AUC": 0.6679431576308342,
+        "PR-AUC": 0.08910807691835704
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.027548955506567625,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 161.4326171875,
+      "vram_mb": 161.4326171875,
+      "time": "2026-08-03T21:53:38.334247+00:00"
+    },
+    "census__unsupervised__555": {
+      "dataset": "census",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.08777270004895303,
+        "ROC-AUC": 0.6635293447386407,
+        "PR-AUC": 0.08775362762622538
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.027548089108850385,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 161.4326171875,
+      "vram_mb": 161.4326171875,
+      "time": "2026-08-03T22:01:43.058118+00:00"
+    },
+    "census__semi-supervised__111": {
+      "dataset": "census",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.12741216115381568,
+        "ROC-AUC": 0.5900519544363189,
+        "PR-AUC": 0.12739674342175017
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02753873465946482,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 620.58447265625,
+      "vram_mb": 620.58447265625,
+      "time": "2026-08-03T22:04:47.543281+00:00"
+    },
+    "census__semi-supervised__222": {
+      "dataset": "census",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.12781021093242687,
+        "ROC-AUC": 0.5897486788732209,
+        "PR-AUC": 0.1277910416051958
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02753040051881768,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 620.58447265625,
+      "vram_mb": 620.58447265625,
+      "time": "2026-08-03T22:07:53.308861+00:00"
+    },
+    "census__semi-supervised__333": {
+      "dataset": "census",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.12809059223085997,
+        "ROC-AUC": 0.5893257902009563,
+        "PR-AUC": 0.12807435801346037
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.027544737712863143,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 620.58447265625,
+      "vram_mb": 620.58447265625,
+      "time": "2026-08-03T22:10:57.992047+00:00"
+    },
+    "census__semi-supervised__444": {
+      "dataset": "census",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.12978155796432195,
+        "ROC-AUC": 0.5969091076108926,
+        "PR-AUC": 0.12976371442737117
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.027532088154890683,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 620.58447265625,
+      "vram_mb": 620.58447265625,
+      "time": "2026-08-03T22:14:01.926891+00:00"
+    },
+    "census__semi-supervised__555": {
+      "dataset": "census",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.1274471589768645,
+        "ROC-AUC": 0.5897068921382459,
+        "PR-AUC": 0.12743116328587423
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.027579792291463547,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 620.58447265625,
+      "vram_mb": 620.58447265625,
+      "time": "2026-08-03T22:17:05.916327+00:00"
+    },
+    "cover__unsupervised__111": {
+      "dataset": "cover",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.03254438422629927,
+        "ROC-AUC": 0.845420756962453,
+        "PR-AUC": 0.03251324603074073
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.029604603819470204,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 148.2490234375,
+      "vram_mb": 148.2490234375,
+      "time": "2026-08-03T22:24:23.467753+00:00"
+    },
+    "cover__unsupervised__222": {
+      "dataset": "cover",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.030392107085403137,
+        "ROC-AUC": 0.8316213895388916,
+        "PR-AUC": 0.030363314289802542
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.029537216548373418,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 148.2490234375,
+      "vram_mb": 148.2490234375,
+      "time": "2026-08-03T22:31:41.973593+00:00"
+    },
+    "cover__unsupervised__333": {
+      "dataset": "cover",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.033078481091685166,
+        "ROC-AUC": 0.8452677927624966,
+        "PR-AUC": 0.03305133788221955
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.029611615103593336,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 148.2490234375,
+      "vram_mb": 148.2490234375,
+      "time": "2026-08-03T22:38:57.717471+00:00"
+    },
+    "cover__unsupervised__444": {
+      "dataset": "cover",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.03635617577143794,
+        "ROC-AUC": 0.8559779485762863,
+        "PR-AUC": 0.036319965580266775
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.029597483972033857,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.0498,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 148.2490234375,
+      "vram_mb": 148.2490234375,
+      "time": "2026-08-03T22:46:11.514100+00:00"
+    },
+    "cover__unsupervised__555": {
+      "dataset": "cover",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.028209636799730018,
+        "ROC-AUC": 0.8070295183102076,
+        "PR-AUC": 0.02817344649635705
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.029573047934983436,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.0498,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 148.2490234375,
+      "vram_mb": 148.2490234375,
+      "time": "2026-08-03T22:53:27.727761+00:00"
+    },
+    "cover__semi-supervised__111": {
+      "dataset": "cover",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.026137190129273746,
+        "ROC-AUC": 0.6695208811078943,
+        "PR-AUC": 0.026122702601768067
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02964570178485133,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 529.20654296875,
+      "vram_mb": 529.20654296875,
+      "time": "2026-08-03T22:56:05.173057+00:00"
+    },
+    "cover__semi-supervised__222": {
+      "dataset": "cover",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.032141309536641884,
+        "ROC-AUC": 0.7212979820220226,
+        "PR-AUC": 0.0321224887585052
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.029538925115582593,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 529.20654296875,
+      "vram_mb": 529.20654296875,
+      "time": "2026-08-03T22:58:41.892343+00:00"
+    },
+    "cover__semi-supervised__333": {
+      "dataset": "cover",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.03773172320215857,
+        "ROC-AUC": 0.7693183583579343,
+        "PR-AUC": 0.03770936028624207
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.029557192487960966,
+        "time_emb_dim": 4,
+        "tau_snr": 0.05450900000000001,
+        "contamination_est": 0.0496,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 529.20654296875,
+      "vram_mb": 529.20654296875,
+      "time": "2026-08-03T23:01:19.288872+00:00"
+    },
+    "cover__semi-supervised__444": {
+      "dataset": "cover",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.035676379611214074,
+        "ROC-AUC": 0.7515845117237835,
+        "PR-AUC": 0.035654391707970266
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.029627587024444194,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 529.20654296875,
+      "vram_mb": 529.20654296875,
+      "time": "2026-08-03T23:03:56.538770+00:00"
+    },
+    "cover__semi-supervised__555": {
+      "dataset": "cover",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.053889755149692395,
+        "ROC-AUC": 0.8029465724139856,
+        "PR-AUC": 0.053846678923602335
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.029615043293200215,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 529.20654296875,
+      "vram_mb": 529.20654296875,
+      "time": "2026-08-03T23:07:43.635590+00:00"
+    },
+    "donors__unsupervised__111": {
+      "dataset": "donors",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.1833694036593965,
+        "ROC-AUC": 0.848507668099767,
+        "PR-AUC": 0.18333429269213225
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03317564164175379,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.0496,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 217.08984375,
+      "vram_mb": 217.08984375,
+      "time": "2026-08-03T23:22:36.906822+00:00"
+    },
+    "donors__unsupervised__222": {
+      "dataset": "donors",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.18073702494879795,
+        "ROC-AUC": 0.8469323252198744,
+        "PR-AUC": 0.1807097492376747
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03313354969068368,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.0432,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 217.08984375,
+      "vram_mb": 217.08984375,
+      "time": "2026-08-03T23:37:31.313645+00:00"
+    },
+    "donors__unsupervised__333": {
+      "dataset": "donors",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.12324243646952499,
+        "ROC-AUC": 0.741788610302694,
+        "PR-AUC": 0.12321187001980693
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03322889856830809,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.0418,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 217.08984375,
+      "vram_mb": 217.08984375,
+      "time": "2026-08-03T23:52:28.132897+00:00"
+    },
+    "donors__unsupervised__444": {
+      "dataset": "donors",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.12208989946870799,
+        "ROC-AUC": 0.7417385275999737,
+        "PR-AUC": 0.12206213726055024
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.033238301617340586,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.0418,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 217.08984375,
+      "vram_mb": 217.08984375,
+      "time": "2026-08-04T00:07:25.277636+00:00"
+    },
+    "donors__unsupervised__555": {
+      "dataset": "donors",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.1812730667871892,
+        "ROC-AUC": 0.8372404845593018,
+        "PR-AUC": 0.18124374689443337
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03325143177922198,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.0434,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 217.08984375,
+      "vram_mb": 217.08984375,
+      "time": "2026-08-04T00:22:15.836363+00:00"
+    },
+    "donors__semi-supervised__111": {
+      "dataset": "donors",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.3446678677151529,
+        "ROC-AUC": 0.8901188642419834,
+        "PR-AUC": 0.34464920212745503
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.03327992087621514,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054365000000000004,
+        "contamination_est": 0.046,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1017.30224609375,
+      "vram_mb": 1017.30224609375,
+      "time": "2026-08-04T00:27:42.739998+00:00"
+    },
+    "donors__semi-supervised__222": {
+      "dataset": "donors",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.25190482354068416,
+        "ROC-AUC": 0.8280508367024233,
+        "PR-AUC": 0.25189080444739276
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.033228888578493425,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054381,
+        "contamination_est": 0.0464,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1017.30224609375,
+      "vram_mb": 1017.30224609375,
+      "time": "2026-08-04T00:33:10.322783+00:00"
+    },
+    "donors__semi-supervised__333": {
+      "dataset": "donors",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.41725674659167283,
+        "ROC-AUC": 0.9228250743674207,
+        "PR-AUC": 0.41723332602191415
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.033230709811174555,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054261000000000004,
+        "contamination_est": 0.0434,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1017.30224609375,
+      "vram_mb": 1017.30224609375,
+      "time": "2026-08-04T00:38:41.304621+00:00"
+    },
+    "donors__semi-supervised__444": {
+      "dataset": "donors",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.5258545187018653,
+        "ROC-AUC": 0.9485257993425849,
+        "PR-AUC": 0.5258345466488571
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.033199546479952075,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054269000000000005,
+        "contamination_est": 0.0436,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1017.30224609375,
+      "vram_mb": 1017.30224609375,
+      "time": "2026-08-04T00:44:10.619967+00:00"
+    },
+    "donors__semi-supervised__555": {
+      "dataset": "donors",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.17925503520707908,
+        "ROC-AUC": 0.7483372509780954,
+        "PR-AUC": 0.17924725179140494
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.033326348156905314,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054092999999999995,
+        "contamination_est": 0.0392,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 1017.30224609375,
+      "vram_mb": 1017.30224609375,
+      "time": "2026-08-04T00:49:39.385770+00:00"
+    },
+    "fault__unsupervised__111": {
+      "dataset": "fault",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.4970225948861547,
+        "ROC-AUC": 0.6671080570541996,
+        "PR-AUC": 0.4954738433451648
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.026486332029113636,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 265.47705078125,
+      "vram_mb": 265.47705078125,
+      "time": "2026-08-04T00:49:57.440850+00:00"
+    },
+    "fault__unsupervised__222": {
+      "dataset": "fault",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.5080472194018282,
+        "ROC-AUC": 0.6779357929324414,
+        "PR-AUC": 0.5065500776876253
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.02646553312360799,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 265.47705078125,
+      "vram_mb": 265.47705078125,
+      "time": "2026-08-04T00:50:15.521871+00:00"
+    },
+    "fault__unsupervised__333": {
+      "dataset": "fault",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.5130288494134155,
+        "ROC-AUC": 0.6816048017024388,
+        "PR-AUC": 0.5115392745998864
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.02648555889303327,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 265.47705078125,
+      "vram_mb": 265.47705078125,
+      "time": "2026-08-04T00:50:39.664892+00:00"
+    },
+    "fault__unsupervised__444": {
+      "dataset": "fault",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.5012735053474657,
+        "ROC-AUC": 0.6742691278282187,
+        "PR-AUC": 0.4997611569476085
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.0264920496249094,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 265.47705078125,
+      "vram_mb": 265.47705078125,
+      "time": "2026-08-04T00:51:01.929123+00:00"
+    },
+    "fault__unsupervised__555": {
+      "dataset": "fault",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.493906025355105,
+        "ROC-AUC": 0.6666369802335228,
+        "PR-AUC": 0.49237000513840323
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.026484230533790693,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 265.47705078125,
+      "vram_mb": 265.47705078125,
+      "time": "2026-08-04T00:51:23.040654+00:00"
+    },
+    "fault__semi-supervised__111": {
+      "dataset": "fault",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.7637900706841307,
+        "ROC-AUC": 0.7737682864522055,
+        "PR-AUC": 0.7630169728104639
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.026089841333009733,
+        "time_emb_dim": 4,
+        "tau_snr": 0.052925,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 291.45703125,
+      "vram_mb": 291.45703125,
+      "time": "2026-08-04T00:51:31.247596+00:00"
+    },
+    "fault__semi-supervised__222": {
+      "dataset": "fault",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.7550516087706239,
+        "ROC-AUC": 0.7529354413825753,
+        "PR-AUC": 0.7544613037050932
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02634564377511537,
+        "time_emb_dim": 4,
+        "tau_snr": 0.052925,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 291.45703125,
+      "vram_mb": 291.45703125,
+      "time": "2026-08-04T00:51:39.253402+00:00"
+    },
+    "fault__semi-supervised__333": {
+      "dataset": "fault",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.7619335038149668,
+        "ROC-AUC": 0.758571957570275,
+        "PR-AUC": 0.7612443900889393
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02618046051761169,
+        "time_emb_dim": 4,
+        "tau_snr": 0.052925,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 291.45703125,
+      "vram_mb": 291.45703125,
+      "time": "2026-08-04T00:51:47.147971+00:00"
+    },
+    "fault__semi-supervised__444": {
+      "dataset": "fault",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.7609551068635563,
+        "ROC-AUC": 0.7586399238777357,
+        "PR-AUC": 0.7602663445273907
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.026108858617234536,
+        "time_emb_dim": 4,
+        "tau_snr": 0.052925,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 291.45703125,
+      "vram_mb": 291.45703125,
+      "time": "2026-08-04T00:51:55.014587+00:00"
+    },
+    "fault__semi-supervised__555": {
+      "dataset": "fault",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.7498172383912093,
+        "ROC-AUC": 0.7488973052530925,
+        "PR-AUC": 0.7491803320126447
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.026100349005415566,
+        "time_emb_dim": 4,
+        "tau_snr": 0.052925,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 291.45703125,
+      "vram_mb": 291.45703125,
+      "time": "2026-08-04T00:52:02.878960+00:00"
+    },
+    "fraud__unsupervised__111": {
+      "dataset": "fraud",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.3428916487206828,
+        "ROC-AUC": 0.9612172653170529,
+        "PR-AUC": 0.34101329940678615
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.031188176947774565,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 150.2158203125,
+      "vram_mb": 150.2158203125,
+      "time": "2026-08-04T00:59:20.139939+00:00"
+    },
+    "fraud__unsupervised__222": {
+      "dataset": "fraud",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.10083948756430965,
+        "ROC-AUC": 0.9548900159261691,
+        "PR-AUC": 0.10025442702269668
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.031142789969954607,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 150.2158203125,
+      "vram_mb": 150.2158203125,
+      "time": "2026-08-04T01:06:37.735507+00:00"
+    },
+    "fraud__unsupervised__333": {
+      "dataset": "fraud",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.10735613315092639,
+        "ROC-AUC": 0.9555179765258075,
+        "PR-AUC": 0.10636037726899147
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03111916661021121,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 150.2158203125,
+      "vram_mb": 150.2158203125,
+      "time": "2026-08-04T01:13:55.442928+00:00"
+    },
+    "fraud__unsupervised__444": {
+      "dataset": "fraud",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.08445509475240581,
+        "ROC-AUC": 0.953704818127266,
+        "PR-AUC": 0.08350965852288804
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03119573424343575,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 150.2158203125,
+      "vram_mb": 150.2158203125,
+      "time": "2026-08-04T01:21:12.244237+00:00"
+    },
+    "fraud__unsupervised__555": {
+      "dataset": "fraud",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.08366246702844402,
+        "ROC-AUC": 0.9538079471855689,
+        "PR-AUC": 0.08307770490673598
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.031042609371378524,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 150.2158203125,
+      "vram_mb": 150.2158203125,
+      "time": "2026-08-04T01:28:31.882706+00:00"
+    },
+    "fraud__semi-supervised__111": {
+      "dataset": "fraud",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.01448392263751614,
+        "ROC-AUC": 0.7903251500649054,
+        "PR-AUC": 0.014426395881923177
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.031041394874967848,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 540.0029296875,
+      "vram_mb": 540.0029296875,
+      "time": "2026-08-04T01:32:20.901427+00:00"
+    },
+    "fraud__semi-supervised__222": {
+      "dataset": "fraud",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.009295559973212403,
+        "ROC-AUC": 0.7452441629415663,
+        "PR-AUC": 0.009259040990260313
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.030978351316663624,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 540.0029296875,
+      "vram_mb": 540.0029296875,
+      "time": "2026-08-04T01:36:09.534038+00:00"
+    },
+    "fraud__semi-supervised__333": {
+      "dataset": "fraud",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.015331082674334449,
+        "ROC-AUC": 0.7812119433237974,
+        "PR-AUC": 0.015264729573412222
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.030952054323596337,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 540.0029296875,
+      "vram_mb": 540.0029296875,
+      "time": "2026-08-04T01:39:57.454417+00:00"
+    },
+    "fraud__semi-supervised__444": {
+      "dataset": "fraud",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.01485609832254465,
+        "ROC-AUC": 0.7932962802067138,
+        "PR-AUC": 0.0147980213749259
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.030978134564495267,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054525000000000004,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 540.0029296875,
+      "vram_mb": 540.0029296875,
+      "time": "2026-08-04T01:43:47.577992+00:00"
+    },
+    "fraud__semi-supervised__555": {
+      "dataset": "fraud",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.01215916414152663,
+        "ROC-AUC": 0.7440810305308978,
+        "PR-AUC": 0.012105005364601563
+      },
+      "noise": {
+        "num_timesteps": 80,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.030984547011659497,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054437000000000006,
+        "contamination_est": 0.0478,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 540.0029296875,
+      "vram_mb": 540.0029296875,
+      "time": "2026-08-04T01:47:34.588998+00:00"
+    },
+    "glass__unsupervised__111": {
+      "dataset": "glass",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.11473775326096,
+        "ROC-AUC": 0.8130081300813008,
+        "PR-AUC": 0.09803168407803121
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.029095737893141432,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.011695906432748537,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 89.44287109375,
+      "vram_mb": 89.44287109375,
+      "time": "2026-08-04T01:47:48.844552+00:00"
+    },
+    "glass__unsupervised__222": {
+      "dataset": "glass",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.23287555588654696,
+        "ROC-AUC": 0.8195121951219513,
+        "PR-AUC": 0.2187616667254956
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.029104614556877566,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.023391812865497075,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 89.44287109375,
+      "vram_mb": 89.44287109375,
+      "time": "2026-08-04T01:48:08.201523+00:00"
+    },
+    "glass__unsupervised__333": {
+      "dataset": "glass",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.21034353080301205,
+        "ROC-AUC": 0.8065040650406503,
+        "PR-AUC": 0.1997855884087971
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.02908344478112162,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.017543859649122806,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 89.44287109375,
+      "vram_mb": 89.44287109375,
+      "time": "2026-08-04T01:48:22.358498+00:00"
+    },
+    "glass__unsupervised__444": {
+      "dataset": "glass",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.10916672023395592,
+        "ROC-AUC": 0.7956639566395663,
+        "PR-AUC": 0.09182589308319514
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.029185356788759248,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.023391812865497075,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 89.44287109375,
+      "vram_mb": 89.44287109375,
+      "time": "2026-08-04T01:48:34.800487+00:00"
+    },
+    "glass__unsupervised__555": {
+      "dataset": "glass",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.11598515406768807,
+        "ROC-AUC": 0.8113821138211381,
+        "PR-AUC": 0.09770466604124822
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.029118133428560705,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.017543859649122806,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 89.44287109375,
+      "vram_mb": 89.44287109375,
+      "time": "2026-08-04T01:48:54.363263+00:00"
+    },
+    "glass__semi-supervised__111": {
+      "dataset": "glass",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.2730420634928413,
+        "ROC-AUC": 0.7777777777777778,
+        "PR-AUC": 0.25646132202984817
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.028994121326691796,
+        "time_emb_dim": 4,
+        "tau_snr": 0.053500609756097564,
+        "contamination_est": 0.024390243902439025,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 81.439453125,
+      "vram_mb": 81.439453125,
+      "time": "2026-08-04T01:49:07.523364+00:00"
+    },
+    "glass__semi-supervised__222": {
+      "dataset": "glass",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.325794154759672,
+        "ROC-AUC": 0.7572815533980582,
+        "PR-AUC": 0.30434858871260534
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02885688720628038,
+        "time_emb_dim": 4,
+        "tau_snr": 0.053500609756097564,
+        "contamination_est": 0.024390243902439025,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 81.439453125,
+      "vram_mb": 81.439453125,
+      "time": "2026-08-04T01:49:22.470515+00:00"
+    },
+    "glass__semi-supervised__333": {
+      "dataset": "glass",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.16927246702464704,
+        "ROC-AUC": 0.6558791801510249,
+        "PR-AUC": 0.128948839450094
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02891342793026927,
+        "time_emb_dim": 4,
+        "tau_snr": 0.053500609756097564,
+        "contamination_est": 0.024390243902439025,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 81.439453125,
+      "vram_mb": 81.439453125,
+      "time": "2026-08-04T01:49:37.116439+00:00"
+    },
+    "glass__semi-supervised__444": {
+      "dataset": "glass",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.33605089520417597,
+        "ROC-AUC": 0.8230852211434735,
+        "PR-AUC": 0.3135601445161391
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.028954180373689187,
+        "time_emb_dim": 4,
+        "tau_snr": 0.052925,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 81.439453125,
+      "vram_mb": 81.439453125,
+      "time": "2026-08-04T01:49:55.392877+00:00"
+    },
+    "glass__semi-supervised__555": {
+      "dataset": "glass",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.3132219983244471,
+        "ROC-AUC": 0.8425026968716289,
+        "PR-AUC": 0.2944616690021407
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.028559205097253286,
+        "time_emb_dim": 4,
+        "tau_snr": 0.053500609756097564,
+        "contamination_est": 0.024390243902439025,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 81.439453125,
+      "vram_mb": 81.439453125,
+      "time": "2026-08-04T01:50:10.061161+00:00"
+    },
+    "Hepatitis__unsupervised__111": {
+      "dataset": "Hepatitis",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.24425829734602217,
+        "ROC-AUC": 0.6303099885189438,
+        "PR-AUC": 0.2186408413770252
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.029495708207507215,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 79.05224609375,
+      "vram_mb": 79.05224609375,
+      "time": "2026-08-04T01:50:18.613376+00:00"
+    },
+    "Hepatitis__unsupervised__222": {
+      "dataset": "Hepatitis",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.24782792120960306,
+        "ROC-AUC": 0.6681974741676234,
+        "PR-AUC": 0.2224689763113794
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.02956080163827017,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 79.05224609375,
+      "vram_mb": 79.05224609375,
+      "time": "2026-08-04T01:50:28.346201+00:00"
+    },
+    "Hepatitis__unsupervised__333": {
+      "dataset": "Hepatitis",
+      "setting": "unsupervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.2502334641764891,
+        "ROC-AUC": 0.6785304247990815,
+        "PR-AUC": 0.22512831177461928
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.029499173766928115,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 79.05224609375,
+      "vram_mb": 79.05224609375,
+      "time": "2026-08-04T01:50:40.447727+00:00"
+    },
+    "Hepatitis__unsupervised__444": {
+      "dataset": "Hepatitis",
+      "setting": "unsupervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.4066213704095256,
+        "ROC-AUC": 0.7554535017221584,
+        "PR-AUC": 0.3844155126515635
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.02974263704565152,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 79.05224609375,
+      "vram_mb": 79.05224609375,
+      "time": "2026-08-04T01:50:51.327021+00:00"
+    },
+    "Hepatitis__unsupervised__555": {
+      "dataset": "Hepatitis",
+      "setting": "unsupervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.2660956616746092,
+        "ROC-AUC": 0.7256027554535016,
+        "PR-AUC": 0.24249633686067507
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.02958372981296907,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012775,
+        "contamination_est": 0.01,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 79.05224609375,
+      "vram_mb": 79.05224609375,
+      "time": "2026-08-04T01:51:00.926329+00:00"
+    },
+    "Hepatitis__semi-supervised__111": {
+      "dataset": "Hepatitis",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.2765957446808511,
+        "ROC-AUC": 0.5,
+        "PR-AUC": 0.6382978723404256
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.028382930372003252,
+        "time_emb_dim": 4,
+        "tau_snr": 0.055725000000000004,
+        "contamination_est": 0.08,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 76.24609375,
+      "vram_mb": 76.24609375,
+      "time": "2026-08-04T01:51:05.154091+00:00"
+    },
+    "Hepatitis__semi-supervised__222": {
+      "dataset": "Hepatitis",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.2765957446808511,
+        "ROC-AUC": 0.5,
+        "PR-AUC": 0.6382978723404256
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.028431580705240954,
+        "time_emb_dim": 4,
+        "tau_snr": 0.055725000000000004,
+        "contamination_est": 0.08,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 76.24609375,
+      "vram_mb": 76.24609375,
+      "time": "2026-08-04T01:51:09.299719+00:00"
+    },
+    "Hepatitis__semi-supervised__333": {
+      "dataset": "Hepatitis",
+      "setting": "semi-supervised",
+      "seed": 333,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.2765957446808511,
+        "ROC-AUC": 0.5,
+        "PR-AUC": 0.6382978723404256
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.028467052112341698,
+        "time_emb_dim": 4,
+        "tau_snr": 0.054125000000000006,
+        "contamination_est": 0.04,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 76.24609375,
+      "vram_mb": 76.24609375,
+      "time": "2026-08-04T01:51:13.449058+00:00"
+    },
+    "Hepatitis__semi-supervised__444": {
+      "dataset": "Hepatitis",
+      "setting": "semi-supervised",
+      "seed": 444,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.2765957446808511,
+        "ROC-AUC": 0.5,
+        "PR-AUC": 0.6382978723404256
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.028391353265164183,
+        "time_emb_dim": 4,
+        "tau_snr": 0.055725000000000004,
+        "contamination_est": 0.08,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 76.24609375,
+      "vram_mb": 76.24609375,
+      "time": "2026-08-04T01:51:17.583234+00:00"
+    },
+    "Hepatitis__semi-supervised__555": {
+      "dataset": "Hepatitis",
+      "setting": "semi-supervised",
+      "seed": 555,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.2765957446808511,
+        "ROC-AUC": 0.5,
+        "PR-AUC": 0.6382978723404256
+      },
+      "noise": {
+        "num_timesteps": 45,
+        "scheduler": "linear",
+        "beta_start": 0.0001,
+        "beta_end": 0.02843023267882418,
+        "time_emb_dim": 4,
+        "tau_snr": 0.055725000000000004,
+        "contamination_est": 0.08,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 76.24609375,
+      "vram_mb": 76.24609375,
+      "time": "2026-08-04T01:51:21.686914+00:00"
+    },
+    "http__unsupervised__111": {
+      "dataset": "http",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.19575620269113708,
+        "ROC-AUC": 0.9927769666761581,
+        "PR-AUC": 0.19562314871065586
+      },
+      "noise": {
+        "num_timesteps": 32,
+        "scheduler": "cosine",
+        "beta_start": 0.0001,
+        "beta_end": 0.03475392921494093,
+        "time_emb_dim": 4,
+        "tau_snr": 0.012575,
+        "contamination_est": 0.05,
+        "contamination_mode": "label_free"
+      },
+      "resolved_policy": null,
+      "vram_peak_mb": 205.45361328125,
+      "vram_mb": 205.45361328125,
+      "time": "2026-08-04T02:06:10.091642+00:00"
+    }
+  },
+  "failed": {}
+}

@@ -1,0 +1,25 @@
+{
+  "dataset": "Lymphography",
+  "setting": "semi-supervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.07792207792207792,
+    "ROC-AUC": 0.5,
+    "PR-AUC": 0.538961038961039
+  },
+  "noise": {
+    "num_timesteps": 45,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.028771177825253864,
+    "time_emb_dim": 4,
+    "tau_snr": 0.053226754385964914,
+    "contamination_est": 0.017543859649122806,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 83.35205078125,
+  "vram_mb": 83.35205078125,
+  "time": "2026-08-03T12:50:55.304756+00:00"
+}

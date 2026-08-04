@@ -1,0 +1,25 @@
+{
+  "dataset": "20newsgroups",
+  "setting": "semi-supervised",
+  "seed": 333,
+  "n_splits": 6,
+  "metrics_mean": {
+    "AP": 0.09376194738757272,
+    "ROC-AUC": 0.4718121938718951,
+    "PR-AUC": 0.09097252117083354
+  },
+  "noise": {
+    "num_timesteps": 100,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.023225105831984783,
+    "time_emb_dim": 4,
+    "tau_snr": 0.08402044293015333,
+    "contamination_est": 0.05025553662691652,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 568.85986328125,
+  "vram_mb": 568.85986328125,
+  "time": "2026-08-03T04:01:07.492045+00:00"
+}

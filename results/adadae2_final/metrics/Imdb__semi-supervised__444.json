@@ -1,0 +1,25 @@
+{
+  "dataset": "Imdb",
+  "setting": "semi-supervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.09420585476884497,
+    "ROC-AUC": 0.5171315789473684,
+    "PR-AUC": 0.09384444842270792
+  },
+  "noise": {
+    "num_timesteps": 80,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.024185843949073922,
+    "time_emb_dim": 4,
+    "tau_snr": 0.054525000000000004,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 1613.7734375,
+  "vram_mb": 1613.7734375,
+  "time": "2026-08-03T19:33:08.043123+00:00"
+}

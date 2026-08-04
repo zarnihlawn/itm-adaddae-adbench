@@ -1,0 +1,25 @@
+{
+  "dataset": "vertebral",
+  "setting": "semi-supervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.37553988764674584,
+    "ROC-AUC": 0.6780952380952381,
+    "PR-AUC": 0.36269396015671523
+  },
+  "noise": {
+    "num_timesteps": 45,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02886781100032531,
+    "time_emb_dim": 4,
+    "tau_snr": 0.05490595238095238,
+    "contamination_est": 0.05952380952380952,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 93.02783203125,
+  "vram_mb": 93.02783203125,
+  "time": "2026-08-03T14:52:04.296089+00:00"
+}

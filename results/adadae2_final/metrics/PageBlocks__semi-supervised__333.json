@@ -1,0 +1,25 @@
+{
+  "dataset": "PageBlocks",
+  "setting": "semi-supervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.8607794455669194,
+    "ROC-AUC": 0.9640330169741934,
+    "PR-AUC": 0.8596768354662355
+  },
+  "noise": {
+    "num_timesteps": 80,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.029461177049482406,
+    "time_emb_dim": 4,
+    "tau_snr": 0.054532168458781366,
+    "contamination_est": 0.05017921146953405,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 848.42724609375,
+  "vram_mb": 848.42724609375,
+  "time": "2026-08-03T13:14:02.341404+00:00"
+}

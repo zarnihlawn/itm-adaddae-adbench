@@ -1,0 +1,25 @@
+{
+  "dataset": "backdoor",
+  "setting": "unsupervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.48046355118440714,
+    "ROC-AUC": 0.8753412697313445,
+    "PR-AUC": 0.48017434714784446
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.02747686018964458,
+    "time_emb_dim": 4,
+    "tau_snr": 0.0001,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 273.75732421875,
+  "vram_mb": 273.75732421875,
+  "time": "2026-08-02T21:11:36.106890+00:00"
+}

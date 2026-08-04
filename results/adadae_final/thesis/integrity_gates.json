@@ -1,0 +1,76 @@
+{
+  "G-I1_complete_570": {
+    "pass": true,
+    "n_jobs": 570,
+    "n_dataset_setting_pairs": 114,
+    "expected_jobs": 570,
+    "incomplete_pairs": []
+  },
+  "G-I2_no_routing": {
+    "pass": true,
+    "n_routed": 0,
+    "examples": []
+  },
+  "G-I3_val_only_early_stop": {
+    "pass": false,
+    "n_bad_jobs": 570,
+    "examples": [
+      {
+        "key": "ALOI__unsupervised__111",
+        "reason": "missing early_stop_metric"
+      },
+      {
+        "key": "ALOI__unsupervised__222",
+        "reason": "missing early_stop_metric"
+      },
+      {
+        "key": "ALOI__unsupervised__333",
+        "reason": "missing early_stop_metric"
+      },
+      {
+        "key": "ALOI__unsupervised__444",
+        "reason": "missing early_stop_metric"
+      },
+      {
+        "key": "ALOI__unsupervised__555",
+        "reason": "missing early_stop_metric"
+      },
+      {
+        "key": "ALOI__semi-supervised__111",
+        "reason": "missing early_stop_metric"
+      },
+      {
+        "key": "ALOI__semi-supervised__222",
+        "reason": "missing early_stop_metric"
+      },
+      {
+        "key": "ALOI__semi-supervised__333",
+        "reason": "missing early_stop_metric"
+      },
+      {
+        "key": "ALOI__semi-supervised__444",
+        "reason": "missing early_stop_metric"
+      },
+      {
+        "key": "ALOI__semi-supervised__555",
+        "reason": "missing early_stop_metric"
+      }
+    ],
+    "n_bad_log_events": 0,
+    "log_examples": []
+  },
+  "G-I5_not_guarded_merge": {
+    "pass": true,
+    "content_markers": [],
+    "path_looks_hybrid": false,
+    "merge_audit_present": false,
+    "path": "/workspace/ITM/project/results/adadae_final/metrics/completed.json"
+  },
+  "G-I4_artifact_freshness": {
+    "pass": true,
+    "mismatches": [],
+    "compare_path": "/workspace/ITM/project/results/adadae_final/thesis/compare_to_ddae.json"
+  },
+  "all_pass": false,
+  "n_jobs": 570
+}

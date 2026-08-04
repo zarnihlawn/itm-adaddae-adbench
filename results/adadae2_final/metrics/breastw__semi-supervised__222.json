@@ -1,0 +1,25 @@
+{
+  "dataset": "breastw",
+  "setting": "semi-supervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.9812679711138867,
+    "ROC-AUC": 0.9854121904331109,
+    "PR-AUC": 0.981205719282078
+  },
+  "noise": {
+    "num_timesteps": 45,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.03262136972841839,
+    "time_emb_dim": 4,
+    "tau_snr": 0.05387331460674158,
+    "contamination_est": 0.033707865168539325,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 152.52734375,
+  "vram_mb": 152.52734375,
+  "time": "2026-08-03T04:36:35.994040+00:00"
+}

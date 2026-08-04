@@ -1,0 +1,25 @@
+{
+  "dataset": "shuttle",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.6968830291374156,
+    "ROC-AUC": 0.9845282495713936,
+    "PR-AUC": 0.6965848287255861
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.03180909382061022,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012575,
+    "contamination_est": 0.0468,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 818.60498046875,
+  "vram_mb": 818.60498046875,
+  "time": "2026-08-03T13:29:29.853509+00:00"
+}

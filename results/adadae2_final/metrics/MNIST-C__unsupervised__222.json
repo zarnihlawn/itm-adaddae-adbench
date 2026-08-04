@@ -1,0 +1,25 @@
+{
+  "dataset": "MNIST-C",
+  "setting": "unsupervised",
+  "seed": 222,
+  "n_splits": 16,
+  "metrics_mean": {
+    "AP": 0.1612407682799485,
+    "ROC-AUC": 0.7554261644736842,
+    "PR-AUC": 0.16011190936586722
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.02450185795856621,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 1054.7626953125,
+  "vram_mb": 1054.7626953125,
+  "time": "2026-08-03T16:37:59.111793+00:00"
+}
