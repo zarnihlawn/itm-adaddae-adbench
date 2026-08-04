@@ -1,0 +1,26 @@
+{
+  "dataset": "satellite",
+  "setting": "semi-supervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.8852704580901051,
+    "ROC-AUC": 0.8557804965172353,
+    "PR-AUC": 0.8852473134267691
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_champion_semi",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 928.37548828125,
+  "vram_mb": 928.37548828125,
+  "time": "2026-08-04T18:59:45.753991+00:00"
+}

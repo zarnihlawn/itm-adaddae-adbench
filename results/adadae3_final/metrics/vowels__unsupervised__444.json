@@ -1,0 +1,25 @@
+{
+  "dataset": "vowels",
+  "setting": "unsupervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.3589722968038144,
+    "ROC-AUC": 0.9275106685633001,
+    "PR-AUC": 0.3550275243923891
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.0285407147953314,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.050643776824034335,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 162.53662109375,
+  "vram_mb": 162.53662109375,
+  "time": "2026-08-04T06:54:23.848277+00:00"
+}

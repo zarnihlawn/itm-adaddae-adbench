@@ -1,0 +1,25 @@
+{
+  "dataset": "SVHN",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 10,
+  "metrics_mean": {
+    "AP": 0.08135029614976277,
+    "ROC-AUC": 0.607500782181383,
+    "PR-AUC": 0.0802086411809589
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.024564356769736066,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.05016802688430149,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 1052.8818359375,
+  "vram_mb": 1052.8818359375,
+  "time": "2026-08-04T10:26:10.747744+00:00"
+}

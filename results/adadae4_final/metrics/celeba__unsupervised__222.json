@@ -1,0 +1,25 @@
+{
+  "dataset": "celeba",
+  "setting": "unsupervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.07359332010910616,
+    "ROC-AUC": 0.7547463765072687,
+    "PR-AUC": 0.0734018669386288
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.03199399587145295,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012575,
+    "contamination_est": 0.0428,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 103.2509765625,
+  "vram_mb": 103.2509765625,
+  "time": "2026-08-04T12:37:16.143183+00:00"
+}

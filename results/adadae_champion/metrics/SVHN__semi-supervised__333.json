@@ -1,0 +1,26 @@
+{
+  "dataset": "SVHN",
+  "setting": "semi-supervised",
+  "seed": 333,
+  "n_splits": 10,
+  "metrics_mean": {
+    "AP": 0.15877204954764107,
+    "ROC-AUC": 0.6240527478676424,
+    "PR-AUC": 0.1569658755081093
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_champion_semi",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 1420.21875,
+  "vram_mb": 1420.21875,
+  "time": "2026-08-04T20:39:03.548694+00:00"
+}

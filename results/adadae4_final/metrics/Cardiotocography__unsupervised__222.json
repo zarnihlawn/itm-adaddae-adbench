@@ -1,0 +1,25 @@
+{
+  "dataset": "Cardiotocography",
+  "setting": "unsupervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.3827967911885187,
+    "ROC-AUC": 0.6175426580274178,
+    "PR-AUC": 0.38195224806763
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.03083295601875613,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.04967474866942637,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 229.59130859375,
+  "vram_mb": 229.59130859375,
+  "time": "2026-08-04T12:25:20.879640+00:00"
+}

@@ -64,12 +64,12 @@
     "content_markers": [],
     "path_looks_hybrid": false,
     "merge_audit_present": false,
-    "path": "/workspace/ITM/project/results/adadae_final/metrics/completed.json"
+    "path": "/data/ITM/project/results/adadae_final/metrics/completed.json"
   },
   "G-I4_artifact_freshness": {
     "pass": true,
     "mismatches": [],
-    "compare_path": "/workspace/ITM/project/results/adadae_final/thesis/compare_to_ddae.json"
+    "compare_path": "/data/ITM/project/results/adadae_final/thesis/compare_to_ddae.json"
   },
   "all_pass": false,
   "n_jobs": 570

@@ -1,0 +1,25 @@
+{
+  "dataset": "FashionMNIST",
+  "setting": "semi-supervised",
+  "seed": 555,
+  "n_splits": 10,
+  "metrics_mean": {
+    "AP": 0.5932447647011314,
+    "ROC-AUC": 0.8946528042328042,
+    "PR-AUC": 0.5918936583795086
+  },
+  "noise": {
+    "num_timesteps": 80,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.024566002157747176,
+    "time_emb_dim": 4,
+    "tau_snr": 0.054525000000000004,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 743.744140625,
+  "vram_mb": 743.744140625,
+  "time": "2026-08-04T08:15:56.991074+00:00"
+}

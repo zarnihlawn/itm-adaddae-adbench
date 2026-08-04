@@ -1,0 +1,26 @@
+{
+  "dataset": "landsat",
+  "setting": "semi-supervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.5657012376824575,
+    "ROC-AUC": 0.7190397658215024,
+    "PR-AUC": 0.5649069141001519
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_champion_semi",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 853.5048828125,
+  "vram_mb": 853.5048828125,
+  "time": "2026-08-04T18:49:11.211671+00:00"
+}

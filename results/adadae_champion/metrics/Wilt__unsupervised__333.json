@@ -1,0 +1,26 @@
+{
+  "dataset": "Wilt",
+  "setting": "unsupervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.03688386124422798,
+    "ROC-AUC": 0.34178896210788834,
+    "PR-AUC": 0.0366700820942792
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.03135322298485939,
+    "time_emb_dim": 4,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.05006485084306096,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_unsup_ssts",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 80.65380859375,
+  "vram_mb": 80.65380859375,
+  "time": "2026-08-04T19:19:46.331248+00:00"
+}

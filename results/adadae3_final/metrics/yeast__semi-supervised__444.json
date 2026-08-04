@@ -1,0 +1,25 @@
+{
+  "dataset": "yeast",
+  "setting": "semi-supervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.49734185522661234,
+    "ROC-AUC": 0.46167156738180803,
+    "PR-AUC": 0.49611331968336186
+  },
+  "noise": {
+    "num_timesteps": 45,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.03446912133804105,
+    "time_emb_dim": 4,
+    "tau_snr": 0.05457628205128205,
+    "contamination_est": 0.05128205128205128,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 127.0029296875,
+  "vram_mb": 127.0029296875,
+  "time": "2026-08-04T07:12:52.492886+00:00"
+}

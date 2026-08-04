@@ -1,0 +1,25 @@
+{
+  "dataset": "wine",
+  "setting": "semi-supervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.5481971245129139,
+    "ROC-AUC": 0.9333333333333333,
+    "PR-AUC": 0.5045278551857499
+  },
+  "noise": {
+    "num_timesteps": 45,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.028286680090036313,
+    "time_emb_dim": 4,
+    "tau_snr": 0.0550781914893617,
+    "contamination_est": 0.06382978723404255,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 30.10498046875,
+  "vram_mb": 30.10498046875,
+  "time": "2026-08-04T07:07:28.709843+00:00"
+}

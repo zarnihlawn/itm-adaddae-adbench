@@ -1,0 +1,25 @@
+{
+  "dataset": "Ionosphere",
+  "setting": "semi-supervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.9730408780722373,
+    "ROC-AUC": 0.9648124736620312,
+    "PR-AUC": 0.9729440179395981
+  },
+  "noise": {
+    "num_timesteps": 45,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.024539844693624142,
+    "time_emb_dim": 4,
+    "tau_snr": 0.054747222222222225,
+    "contamination_est": 0.05555555555555555,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 47.69287109375,
+  "vram_mb": 47.69287109375,
+  "time": "2026-08-04T04:56:02.395293+00:00"
+}

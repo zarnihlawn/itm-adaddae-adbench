@@ -1,0 +1,25 @@
+{
+  "dataset": "landsat",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.2243330681528311,
+    "ROC-AUC": 0.5411970887665075,
+    "PR-AUC": 0.2239442617716077
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.02395062282113487,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.0494,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 691.54052734375,
+  "vram_mb": 691.54052734375,
+  "time": "2026-08-04T04:57:26.116666+00:00"
+}

@@ -1,0 +1,25 @@
+{
+  "dataset": "Amazon",
+  "setting": "semi-supervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.12290959736746954,
+    "ROC-AUC": 0.6105174736842104,
+    "PR-AUC": 0.1221747625619371
+  },
+  "noise": {
+    "num_timesteps": 80,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.0240728327935371,
+    "time_emb_dim": 4,
+    "tau_snr": 0.054525000000000004,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 1013.02783203125,
+  "vram_mb": 1013.02783203125,
+  "time": "2026-08-04T11:02:49.112126+00:00"
+}

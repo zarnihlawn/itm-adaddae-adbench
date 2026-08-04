@@ -1,0 +1,26 @@
+{
+  "dataset": "thyroid",
+  "setting": "semi-supervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.8324760974708202,
+    "ROC-AUC": 0.991503038803179,
+    "PR-AUC": 0.8264035119322961
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_champion_semi",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 407.88427734375,
+  "vram_mb": 407.88427734375,
+  "time": "2026-08-04T19:15:13.737420+00:00"
+}

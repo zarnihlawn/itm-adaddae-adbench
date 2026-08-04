@@ -1,0 +1,25 @@
+{
+  "dataset": "magic.gamma",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.6255419613695895,
+    "ROC-AUC": 0.6894910115880883,
+    "PR-AUC": 0.6254040930622048
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.028587382630993093,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012575,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 806.185546875,
+  "vram_mb": 806.185546875,
+  "time": "2026-08-04T05:05:56.032172+00:00"
+}

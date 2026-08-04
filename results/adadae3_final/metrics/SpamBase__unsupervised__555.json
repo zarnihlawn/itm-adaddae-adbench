@@ -1,0 +1,25 @@
+{
+  "dataset": "SpamBase",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.42576579491346006,
+    "ROC-AUC": 0.5647996754397208,
+    "PR-AUC": 0.42513545495667415
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.03013707332603839,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.0481283422459893,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 493.078125,
+  "vram_mb": 493.078125,
+  "time": "2026-08-04T06:41:11.339738+00:00"
+}

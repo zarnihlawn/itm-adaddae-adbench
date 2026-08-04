@@ -48,39 +48,39 @@
   "adadae": [
     {
       "setting": "unsupervised",
-      "AdaDDAE_PR_AUC": 27.871160673822025,
-      "AdaDDAE_PR_std": 23.44021411518181,
-      "AdaDDAE_ROC_AUC": 78.42271150066975,
-      "AdaDDAE_ROC_std": 13.474392240969422,
+      "AdaDDAE_PR_AUC": 30.635667066195843,
+      "AdaDDAE_PR_std": 25.548266806959973,
+      "AdaDDAE_ROC_AUC": 74.08820372465448,
+      "AdaDDAE_ROC_std": 17.221248876684307,
       "DDAE_paper_PR_AUC": 32.77,
       "DDAE_paper_ROC_AUC": 74.08,
       "DDAE_PR_AUC": 32.77,
       "DDAE_ROC_AUC": 74.08,
-      "delta_PR": -4.898839326177978,
-      "delta_ROC": 4.3427115006697505,
-      "n_datasets": 16,
+      "delta_PR": -2.13433293380416,
+      "delta_ROC": 0.008203724654478606,
+      "n_datasets": 57,
       "DDAE_fair_PR_AUC": 25.80741939270241,
       "DDAE_fair_ROC_AUC": 69.55005023225087,
-      "delta_PR_vs_fair": 2.063741281119615,
-      "delta_ROC_vs_fair": 8.87266126841888
+      "delta_PR_vs_fair": 4.828247673493433,
+      "delta_ROC_vs_fair": 4.538153492403609
     },
     {
       "setting": "semi-supervised",
-      "AdaDDAE_PR_AUC": 38.66091956291005,
-      "AdaDDAE_PR_std": 30.894426211260672,
-      "AdaDDAE_ROC_AUC": 74.3438728564204,
-      "AdaDDAE_ROC_std": 13.774347724246596,
+      "AdaDDAE_PR_AUC": 48.78288754162025,
+      "AdaDDAE_PR_std": 30.76800158255283,
+      "AdaDDAE_ROC_AUC": 77.56113523672906,
+      "AdaDDAE_ROC_std": 16.884677582443235,
       "DDAE_paper_PR_AUC": 61.36,
       "DDAE_paper_ROC_AUC": 83.17,
       "DDAE_PR_AUC": 61.36,
       "DDAE_ROC_AUC": 83.17,
-      "delta_PR": -22.699080437089947,
-      "delta_ROC": -8.826127143579598,
-      "n_datasets": 15,
+      "delta_PR": -12.577112458379752,
+      "delta_ROC": -5.608864763270944,
+      "n_datasets": 57,
       "DDAE_fair_PR_AUC": 58.69953928485906,
       "DDAE_fair_ROC_AUC": 82.94020477910878,
-      "delta_PR_vs_fair": -20.038619721949004,
-      "delta_ROC_vs_fair": -8.596331922688378
+      "delta_PR_vs_fair": -9.916651743238809,
+      "delta_ROC_vs_fair": -5.379069542379725
     }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "dataset": "cardio",
+  "setting": "unsupervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.5095390082582976,
+    "ROC-AUC": 0.9056097226036803,
+    "PR-AUC": 0.5054577883726259
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.03275681781885465,
+    "time_emb_dim": 4,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.050511945392491465,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_unsup_ssts",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 44.759765625,
+  "vram_mb": 44.759765625,
+  "time": "2026-08-04T17:01:46.351787+00:00"
+}

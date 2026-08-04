@@ -1,0 +1,26 @@
+{
+  "dataset": "Yelp",
+  "setting": "semi-supervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.16413306461480448,
+    "ROC-AUC": 0.6662669473684212,
+    "PR-AUC": 0.1630868705102111
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_champion_semi",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 1195.361328125,
+  "vram_mb": 1195.361328125,
+  "time": "2026-08-04T20:52:42.849792+00:00"
+}

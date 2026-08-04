@@ -1,0 +1,26 @@
+{
+  "dataset": "Waveform",
+  "setting": "semi-supervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.12321514713447733,
+    "ROC-AUC": 0.7223803827751196,
+    "PR-AUC": 0.11787766985598275
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_champion_semi",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 387.34130859375,
+  "vram_mb": 387.34130859375,
+  "time": "2026-08-04T19:17:46.953638+00:00"
+}

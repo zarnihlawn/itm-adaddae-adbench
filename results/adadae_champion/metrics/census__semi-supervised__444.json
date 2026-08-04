@@ -1,0 +1,26 @@
+{
+  "dataset": "census",
+  "setting": "semi-supervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.21100992297614057,
+    "ROC-AUC": 0.720211143171892,
+    "PR-AUC": 0.21095075639097152
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_champion_semi",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 89.697265625,
+  "vram_mb": 89.697265625,
+  "time": "2026-08-04T17:41:23.379166+00:00"
+}

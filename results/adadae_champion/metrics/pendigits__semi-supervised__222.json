@@ -1,0 +1,26 @@
+{
+  "dataset": "pendigits",
+  "setting": "semi-supervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.9900080092559244,
+    "ROC-AUC": 0.9996295532488562,
+    "PR-AUC": 0.9899640352562359
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_champion_semi",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 737.42041015625,
+  "vram_mb": 737.42041015625,
+  "time": "2026-08-04T17:04:14.282826+00:00"
+}

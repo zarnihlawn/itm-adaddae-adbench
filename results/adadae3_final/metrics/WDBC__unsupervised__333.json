@@ -1,0 +1,25 @@
+{
+  "dataset": "WDBC",
+  "setting": "unsupervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.4634433497536946,
+    "ROC-AUC": 0.9689075630252101,
+    "PR-AUC": 0.4366014694118142
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.025572369564667925,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.05102040816326531,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 59.013671875,
+  "vram_mb": 59.013671875,
+  "time": "2026-08-04T07:01:47.419925+00:00"
+}

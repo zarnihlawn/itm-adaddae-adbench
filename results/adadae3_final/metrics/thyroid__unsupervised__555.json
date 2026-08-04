@@ -1,0 +1,25 @@
+{
+  "dataset": "thyroid",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.44019653176975443,
+    "ROC-AUC": 0.9757034257205236,
+    "PR-AUC": 0.4315537673831754
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.0296699945520272,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.04903909874088801,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 378.9130859375,
+  "vram_mb": 378.9130859375,
+  "time": "2026-08-04T06:49:20.865195+00:00"
+}

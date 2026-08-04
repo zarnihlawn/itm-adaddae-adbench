@@ -1,0 +1,26 @@
+{
+  "dataset": "annthyroid",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.25219163838435105,
+    "ROC-AUC": 0.7103780602779379,
+    "PR-AUC": 0.251526296524028
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.03095994941888408,
+    "time_emb_dim": 4,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.0492,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_unsup_ssts",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 110.64697265625,
+  "vram_mb": 110.64697265625,
+  "time": "2026-08-04T17:08:46.551070+00:00"
+}

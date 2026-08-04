@@ -1,0 +1,25 @@
+{
+  "dataset": "smtp",
+  "setting": "semi-supervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.35673814349802446,
+    "ROC-AUC": 0.8965197036912446,
+    "PR-AUC": 0.3478130288286708
+  },
+  "noise": {
+    "num_timesteps": 80,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.03412017283370702,
+    "time_emb_dim": 4,
+    "tau_snr": 0.054517,
+    "contamination_est": 0.0498,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 1358.81396484375,
+  "vram_mb": 1358.81396484375,
+  "time": "2026-08-04T06:38:46.857836+00:00"
+}

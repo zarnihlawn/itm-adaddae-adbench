@@ -1,0 +1,26 @@
+{
+  "dataset": "speech",
+  "setting": "semi-supervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.028650446454963997,
+    "ROC-AUC": 0.4329116671037046,
+    "PR-AUC": 0.027600470352159172
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_champion_semi",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 521.66064453125,
+  "vram_mb": 521.66064453125,
+  "time": "2026-08-04T17:05:22.304660+00:00"
+}

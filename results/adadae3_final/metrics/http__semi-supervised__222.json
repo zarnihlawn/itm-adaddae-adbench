@@ -1,0 +1,25 @@
+{
+  "dataset": "http",
+  "setting": "semi-supervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.13647914163987984,
+    "ROC-AUC": 0.9778109302958558,
+    "PR-AUC": 0.13640790021016033
+  },
+  "noise": {
+    "num_timesteps": 80,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.03469395342744098,
+    "time_emb_dim": 4,
+    "tau_snr": 0.05450900000000001,
+    "contamination_est": 0.0496,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 934.59814453125,
+  "vram_mb": 934.59814453125,
+  "time": "2026-08-04T04:36:55.486274+00:00"
+}

@@ -1,0 +1,26 @@
+{
+  "dataset": "SpamBase",
+  "setting": "semi-supervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.9254985319631818,
+    "ROC-AUC": 0.8950084249967958,
+    "PR-AUC": 0.92547143483102
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_champion_semi",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 688.0009765625,
+  "vram_mb": 688.0009765625,
+  "time": "2026-08-04T19:12:49.620703+00:00"
+}

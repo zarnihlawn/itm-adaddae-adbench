@@ -1,0 +1,25 @@
+{
+  "dataset": "census",
+  "setting": "unsupervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.08743607021625562,
+    "ROC-AUC": 0.6621328707963534,
+    "PR-AUC": 0.08740401383412837
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.02752789540267108,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012575,
+    "contamination_est": 0.05,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 113.4326171875,
+  "vram_mb": 113.4326171875,
+  "time": "2026-08-04T13:20:13.456368+00:00"
+}

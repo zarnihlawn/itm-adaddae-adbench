@@ -1,0 +1,26 @@
+{
+  "dataset": "magic.gamma",
+  "setting": "semi-supervised",
+  "seed": 111,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.8902591481130357,
+    "ROC-AUC": 0.8623397505536612,
+    "PR-AUC": 0.8902495860325301
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "paradigm_champion_semi",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 1675.63623046875,
+  "vram_mb": 1675.63623046875,
+  "time": "2026-08-04T18:51:56.427972+00:00"
+}

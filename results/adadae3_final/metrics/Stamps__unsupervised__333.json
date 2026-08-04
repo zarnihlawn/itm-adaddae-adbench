@@ -1,0 +1,25 @@
+{
+  "dataset": "Stamps",
+  "setting": "unsupervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.3147993900149059,
+    "ROC-AUC": 0.8905940077252323,
+    "PR-AUC": 0.30094251209617595
+  },
+  "noise": {
+    "num_timesteps": 32,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.028968386193475054,
+    "time_emb_dim": 4,
+    "tau_snr": 0.012775,
+    "contamination_est": 0.051470588235294115,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "vram_peak_mb": 54.537109375,
+  "vram_mb": 54.537109375,
+  "time": "2026-08-04T06:45:13.343189+00:00"
+}
