@@ -1030,7 +1030,9 @@ class AdaDDAE:
                 z = vmf_normalize(z)
             zs.append(z)
         z_all = torch.cat(zs, dim=0)
-        self._dte_memory = build_latent_memory(z_all, max_samples=self.dte_memory_size)
+        # Clone out of inference tensors so later no_grad / train paths can use the bank
+        mem = build_latent_memory(z_all, max_samples=self.dte_memory_size)
+        self._dte_memory = mem.detach().clone()
         self.model.train()
 
     @torch.inference_mode()
@@ -1341,12 +1343,18 @@ class AdaDDAE:
         """Calibrate fusion from training normals (calibrated, SMC, CALIX, ARGOS, LYNX, LEXICON)."""
         self.model.eval()
         if self.fusion_mode == "smc":
-            view_samples = collect_train_view_samples(
-                lambda xb, score_seed=0: self._score_views(xb, vectorized=self.vectorized_scoring, score_seed=score_seed),
-                x_train,
-                n_cal=n_cal,
-                n_draws=max(2, self.uncertainty_draws),
-            )
+            # collect_train_view_samples slices x_train in-place; ensure GPU like calibrated path
+            x_cal = x_train if x_train.device == self.device else x_train.to(self.device)
+            with torch.inference_mode():
+                view_samples = collect_train_view_samples(
+                    lambda xb, score_seed=0: self._score_views(
+                        xb, vectorized=self.vectorized_scoring, score_seed=score_seed
+                    ),
+                    x_cal,
+                    n_cal=n_cal,
+                    n_draws=max(2, self.uncertainty_draws),
+                    device=self.device,
+                )
             active = {k: v for k, v in view_samples.items() if v is not None}
             if not self.use_uncertainty_view:
                 active.pop("uncertainty", None)
@@ -1633,12 +1641,14 @@ class AdaDDAE:
         score_seed: int = 0,
     ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
         """Return per-sample rec, lat, res, var, dte accumulators."""
+        if xb.device != self.device:
+            xb = xb.to(self.device, non_blocking=self.device.type == "cuda")
         b = xb.size(0)
-        rec = torch.zeros(b, device=xb.device, dtype=torch.float32)
-        lat = torch.zeros(b, device=xb.device, dtype=torch.float32)
-        res = torch.zeros(b, device=xb.device, dtype=torch.float32)
-        var = torch.zeros(b, device=xb.device, dtype=torch.float32)
-        dte = torch.zeros(b, device=xb.device, dtype=torch.float32)
+        rec = torch.zeros(b, device=self.device, dtype=torch.float32)
+        lat = torch.zeros(b, device=self.device, dtype=torch.float32)
+        res = torch.zeros(b, device=self.device, dtype=torch.float32)
+        var = torch.zeros(b, device=self.device, dtype=torch.float32)
+        dte = torch.zeros(b, device=self.device, dtype=torch.float32)
 
         ts = self.score_timesteps
         ws = self.score_weights

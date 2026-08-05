@@ -68,11 +68,14 @@ def collect_train_view_samples(
     x_train: torch.Tensor,
     n_cal: int = 256,
     n_draws: int = 2,
+    device: Optional[torch.device] = None,
 ) -> Dict[str, torch.Tensor]:
     """
     Sample training normals for SMC calibration.
     score_fn(xb) -> (rec, lat, res, var, dte) per batch.
     """
+    if device is not None and x_train.device != device:
+        x_train = x_train.to(device)
     n = min(n_cal, x_train.size(0))
     idx = torch.randperm(x_train.size(0), device=x_train.device)[:n]
     xb = x_train[idx]
