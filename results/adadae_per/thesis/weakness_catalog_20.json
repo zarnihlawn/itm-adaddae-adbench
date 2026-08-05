@@ -1,0 +1,206 @@
+{
+  "title": "AdaDDAE-PER 20-loop weakness catalog vs published AnoDDAE",
+  "generated": "2026-08-05",
+  "ship_status": {
+    "semi_PR": 59.18149662278054,
+    "semi_ROC": 83.03665471992059,
+    "unsup_PR": 33.00873799402033,
+    "unsup_ROC": 75.16711181593037,
+    "paper_semi_PR": 61.36,
+    "paper_semi_ROC": 83.17,
+    "fair_semi_PR": 58.69953928485906,
+    "delta_semi_PR_vs_paper": -2.1785033772194566,
+    "delta_semi_PR_vs_fair": 0.4819573379214859,
+    "match_fair_on_losses_ceiling_macro": 59.82,
+    "still_short_of_paper_after_match_fair": 1.54,
+    "hard12_mean_ada": 14.19,
+    "hard12_mean_fair": 14.35,
+    "hard12_mean_needed_for_paper_if_classical_flat": 24.54,
+    "gates": {
+      "G-I1_complete_570": true,
+      "G_AP_PR_consistency": true,
+      "G_paper_both": false,
+      "all_pass": false
+    }
+  },
+  "sets": {
+    "hard_tail_12": [
+      "speech", "ALOI", "celeba", "SVHN", "CIFAR10", "Wilt",
+      "Imdb", "Amazon", "Yelp", "Agnews", "20newsgroups", "census"
+    ],
+    "bleed_cv": ["SVHN", "ALOI", "celeba", "CIFAR10", "speech"],
+    "bleed_classical": ["smtp", "satimage-2", "Pima", "Stamps", "letter", "wine"],
+    "protect_baseline_semi": [
+      "smtp", "donors", "wine", "http", "musk", "breastw", "shuttle",
+      "Ionosphere", "Lymphography", "pendigits", "magic.gamma", "satimage-2",
+      "vowels", "skin", "PageBlocks"
+    ]
+  },
+  "loops": [
+    {
+      "id": 1,
+      "finding": "Semi macro shortfall −2.18 PR, −0.13 ROC vs paper; unsup already clears",
+      "severity": "critical",
+      "mitigation": "expanded val_loss select → freeze → retrain semi"
+    },
+    {
+      "id": 2,
+      "finding": "Fair valstop (58.70) is not paper (61.36); PER only +0.48 vs fair",
+      "severity": "critical",
+      "mitigation": "paper-protocol diagnostic (appendix) + integrity recipe uplift"
+    },
+    {
+      "id": 3,
+      "finding": "Match-fair-on-losses ceiling ~59.82 — still −1.54 vs paper",
+      "severity": "critical",
+      "mitigation": "must beat fair on embeds, not only stop losing"
+    },
+    {
+      "id": 4,
+      "finding": "Val carve: paper 0 vs fair 0.2 / PER semi 0.1 (hard-tails 0.05)",
+      "severity": "high",
+      "mitigation": "integrity constraint — do not revert; quantify via paper-protocol diag"
+    },
+    {
+      "id": 5,
+      "finding": "Early stop: paper fixed 100 ep vs val_loss patience + min_epochs",
+      "severity": "high",
+      "mitigation": "integrity constraint; paper-protocol diag measures tax"
+    },
+    {
+      "id": 6,
+      "finding": "Scoring/scaler protocol differs; paper-protocol diagnostic never completed on GPU",
+      "severity": "high",
+      "mitigation": "scripts/run_paper_protocol_diagnostic.py wired; run on Vast"
+    },
+    {
+      "id": 7,
+      "finding": "Absolute floors: speech 3.86, celeba 5.92, ALOI 6.26, Imdb 9.05, SVHN 11.10",
+      "severity": "critical",
+      "mitigation": "bleed-CV strip-first recipe search"
+    },
+    {
+      "id": 8,
+      "finding": "Hard-12 vs fair: SVHN −4.57, ALOI −2.98, celeba −2.96, CIFAR10 −1.73; Wilt +9.34",
+      "severity": "critical",
+      "mitigation": "ablate kitchen-sink on CV losers; keep Wilt"
+    },
+    {
+      "id": 9,
+      "finding": "Protect still loses: smtp −3.36, satimage-2 −2.53, wine −1.22",
+      "severity": "high",
+      "mitigation": "bleed-classical in select/invalidate; do not re-enable revoked A6"
+    },
+    {
+      "id": 10,
+      "finding": "Outside hard-12 losers ignored: Pima −2.77, Stamps −2.76, letter −2.42, WBC −1.45",
+      "severity": "high",
+      "mitigation": "bleed-classical set in ship path"
+    },
+    {
+      "id": 11,
+      "finding": "Ship freeze is evidence-only, not GPU val_loss select",
+      "severity": "high",
+      "mitigation": "run train_only_recipe_select.py on Vast; apply_hard_tail_freeze.py"
+    },
+    {
+      "id": 12,
+      "finding": "Kitchen-sink on worst CV: SVHN FTP+MCE+orbit+helix; ALOI RDT+MCE+GATE+orbit+locus",
+      "severity": "critical",
+      "mitigation": "strip-first candidates; freeze strips MCE/GATE for winners"
+    },
+    {
+      "id": 13,
+      "finding": "Selector gaps: single overlays only historically; mis-tagged speech/ALOI/celeba as cv; HARD_SEMI≠ship-12",
+      "severity": "high",
+      "mitigation": "fix _category_for via registry; expand presets bleed_cv/ship"
+    },
+    {
+      "id": 14,
+      "finding": "NLP-before-specialists + stale routing_rules.yaml meta landmines",
+      "severity": "medium",
+      "mitigation": "apply_hard_tail_freeze handles NLP list; avoid editing lists without audit"
+    },
+    {
+      "id": 15,
+      "finding": "Fast invalidate hard-12 only leaves protect/classical losers stale",
+      "severity": "high",
+      "mitigation": "invalidate --bleed / --ship-probe then --all-semi for ship"
+    },
+    {
+      "id": 16,
+      "finding": "Bisect/v51 quarantine — never trust hybrid PR",
+      "severity": "medium",
+      "mitigation": "G_AP_PR_consistency gate; quarantine JSON retained"
+    },
+    {
+      "id": 17,
+      "finding": "Docs drift: phase3/loop10 still pending GPU while 570 complete",
+      "severity": "low",
+      "mitigation": "FINAL_RUN + status JSONs refreshed in this pass"
+    },
+    {
+      "id": 18,
+      "finding": "Wilcoxon semi vs fair p≈0.93 — PER not reliably better than fair on semi",
+      "severity": "medium",
+      "mitigation": "need concentrated lifts on bleed sets"
+    },
+    {
+      "id": 19,
+      "finding": "Keep wins: unsup hold; Waveform/Wilt/optdigits/glass/vertebral; protect revokes",
+      "severity": "info",
+      "mitigation": "do_not_break — check_unsup_hold after retrain"
+    },
+    {
+      "id": 20,
+      "finding": "Glue exists but candidate/loser/paper-diag too weak for +2.18",
+      "severity": "high",
+      "mitigation": "this plan: catalog + selector + freeze MCE/GATE + ship script + docs"
+    }
+  ],
+  "worst_semi_vs_fair": [
+    {"dataset": "SVHN", "delta": -4.57},
+    {"dataset": "smtp", "delta": -3.36},
+    {"dataset": "ALOI", "delta": -2.98},
+    {"dataset": "celeba", "delta": -2.96},
+    {"dataset": "Pima", "delta": -2.77},
+    {"dataset": "Stamps", "delta": -2.76},
+    {"dataset": "satimage-2", "delta": -2.53},
+    {"dataset": "letter", "delta": -2.42},
+    {"dataset": "CIFAR10", "delta": -1.73},
+    {"dataset": "WBC", "delta": -1.45},
+    {"dataset": "wine", "delta": -1.22}
+  ],
+  "protocol_differences": {
+    "paper": {
+      "epochs": 100,
+      "val_fraction": 0.0,
+      "early_stop": "none_fixed_100",
+      "scoring": "unweighted_full_sum_L2",
+      "scaler_fit": "full_X_before_split"
+    },
+    "fair_valstop": {
+      "config": "configs/baselines_ddae_valstop.yaml",
+      "val_fraction": 0.2,
+      "early_stop_metric": "val_loss",
+      "patience": 30
+    },
+    "per": {
+      "config": "configs/adadae_per.yaml",
+      "val_fraction_semi": 0.1,
+      "min_epochs": 40,
+      "hard_tail_min_epochs": 60
+    },
+    "paper_protocol_diag": {
+      "config": "configs/ddae_paper_protocol.yaml",
+      "script": "scripts/run_paper_protocol_diagnostic.py",
+      "ship_claim": false
+    }
+  },
+  "artifacts": {
+    "integrity_gates": "results/adadae_per/thesis/integrity_gates.json",
+    "compare": "results/adadae_per/thesis/compare_to_ddae.csv",
+    "winloss_semi": "results/adadae_per/thesis/winloss_semi-supervised.csv",
+    "this_catalog": "results/adadae_per/thesis/weakness_catalog_20.json"
+  }
+}

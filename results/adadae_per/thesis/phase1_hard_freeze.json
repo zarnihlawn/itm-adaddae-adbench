@@ -1,46 +1,44 @@
 {
   "mode": "evidence_freeze",
-  "note": "GPU selector unavailable locally; freeze from winloss+ADBench analysis. Re-run selector on Vast to refine.",
+  "note": "Ablate-first evidence freeze (CV strip MCE/GATE). Re-run --preset ship on Vast GPU for val_loss winners.",
   "winners": {
     "speech": {
       "policy": "semi_rdt_tail",
       "overlays": [
-        "locus",
-        "spiral",
-        "helix"
+        "locus"
       ],
-      "reason": "kitchen-sink failed; RDT designed for speech"
+      "strip_mce_gate": true,
+      "reason": "strip kitchen-sink; RDT+single locus"
     },
     "ALOI": {
       "policy": "semi_rdt_tail",
       "overlays": [
-        "orbit",
-        "locus"
+        "orbit"
       ],
-      "reason": "RDT+orbit for CV embeds"
+      "strip_mce_gate": true,
+      "reason": "strip MCE+GATE multi-A6; RDT+orbit only"
     },
     "celeba": {
       "policy": "semi_cvnlp_ftp",
       "overlays": [
         "orbit"
       ],
-      "reason": "FTP+orbit; drop nlp_baseline misroute"
+      "strip_mce_gate": true,
+      "reason": "FTP+orbit; strip MCE"
     },
     "CIFAR10": {
       "policy": "semi_cvnlp_ftp",
       "overlays": [
-        "orbit",
-        "helix"
+        "orbit"
       ],
-      "reason": "FTP+orbit/helix"
+      "strip_mce_gate": true,
+      "reason": "FTP+orbit; strip GATE/helix stack"
     },
     "SVHN": {
       "policy": "semi_cvnlp_ftp",
-      "overlays": [
-        "orbit",
-        "helix"
-      ],
-      "reason": "FTP+orbit"
+      "overlays": [],
+      "strip_mce_gate": true,
+      "reason": "worst vs fair \u2014 strip MCE+orbit+helix to plain FTP"
     },
     "Wilt": {
       "policy": "semi_rdt_tail",
@@ -49,7 +47,7 @@
         "locus",
         "spiral"
       ],
-      "reason": "robust RDT+extra views"
+      "reason": "keep winning RDT stack"
     },
     "census": {
       "policy": "baseline_ddae",
@@ -82,7 +80,7 @@
       "overlays": [
         "orbit"
       ],
-      "reason": "NLP frozen+unit_norm/orbit"
+      "reason": "NLP frozen+orbit"
     },
     "Amazon": {
       "policy": "semi_nlp_frozen",
@@ -111,6 +109,42 @@
         "orbit"
       ],
       "reason": "NLP frozen+orbit"
+    },
+    "smtp": {
+      "policy": "baseline_ddae",
+      "overlays": [],
+      "strip_mce_gate": true,
+      "reason": "protect loser \u2014 baseline only"
+    },
+    "satimage-2": {
+      "policy": "baseline_ddae",
+      "overlays": [],
+      "strip_mce_gate": true,
+      "reason": "protect loser \u2014 baseline only"
+    },
+    "wine": {
+      "policy": "baseline_ddae",
+      "overlays": [],
+      "strip_mce_gate": true,
+      "reason": "protect loser \u2014 baseline only"
+    },
+    "Pima": {
+      "policy": "baseline_ddae",
+      "overlays": [],
+      "strip_mce_gate": true,
+      "reason": "bleed-classical loser"
+    },
+    "Stamps": {
+      "policy": "baseline_ddae",
+      "overlays": [],
+      "strip_mce_gate": true,
+      "reason": "bleed-classical loser"
+    },
+    "letter": {
+      "policy": "baseline_ddae",
+      "overlays": [],
+      "strip_mce_gate": true,
+      "reason": "bleed-classical loser"
     }
   },
   "protect_baseline_semi": [
@@ -133,6 +167,59 @@
   "revoked": {
     "smtp": "apex (\u221210.3 vs fair)",
     "wine": "nautilus (\u22125.0 vs fair)",
-    "speech": "mce+smc+apex+orbit+delta kitchen-sink"
+    "speech": "mce+smc+apex+orbit+delta kitchen-sink",
+    "SVHN": "mce+orbit+helix kitchen-sink (\u22124.57 vs fair)",
+    "ALOI": "mce+gate+orbit+locus kitchen-sink (\u22122.98 vs fair)"
+  },
+  "sets": {
+    "hard_tail_12": [
+      "speech",
+      "ALOI",
+      "celeba",
+      "SVHN",
+      "CIFAR10",
+      "Wilt",
+      "Imdb",
+      "Amazon",
+      "Yelp",
+      "Agnews",
+      "20newsgroups",
+      "census"
+    ],
+    "bleed_cv": [
+      "SVHN",
+      "ALOI",
+      "celeba",
+      "CIFAR10",
+      "speech"
+    ],
+    "bleed_classical": [
+      "smtp",
+      "satimage-2",
+      "Pima",
+      "Stamps",
+      "letter",
+      "wine"
+    ],
+    "ship_select": [
+      "speech",
+      "ALOI",
+      "celeba",
+      "SVHN",
+      "CIFAR10",
+      "Wilt",
+      "Imdb",
+      "Amazon",
+      "Yelp",
+      "Agnews",
+      "20newsgroups",
+      "census",
+      "smtp",
+      "satimage-2",
+      "Pima",
+      "Stamps",
+      "letter",
+      "wine"
+    ]
   }
 }

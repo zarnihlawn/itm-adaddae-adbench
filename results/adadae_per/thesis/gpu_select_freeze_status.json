@@ -1,0 +1,21 @@
+{
+  "status": "glue_ready_pending_vast_gpu",
+  "note": "Select/freeze/invalidate/ship orchestration is ready locally. Run GPU steps on Vast — cannot complete val_loss select or paper-protocol training without CUDA.",
+  "local_done": [
+    "weakness_catalog_20.json",
+    "train_only_recipe_select.py presets + strip-first + category fix",
+    "apply_hard_tail_freeze.py MCE/GATE/SMC strip",
+    "invalidate --ship-probe",
+    "run_paper_protocol_diagnostic.py --wire-only",
+    "run_hard_tail_ship_path.sh",
+    "FINAL_RUN.md"
+  ],
+  "vast_commands": [
+    "bash scripts/run_hard_tail_ship_path.sh paper-diag 16gb",
+    "bash scripts/run_hard_tail_ship_path.sh select 16gb",
+    "bash scripts/run_hard_tail_ship_path.sh freeze",
+    "bash scripts/run_hard_tail_ship_path.sh probe 16gb",
+    "bash scripts/run_hard_tail_ship_path.sh ship 16gb"
+  ],
+  "evidence_freeze_local": "results/adadae_per/thesis/phase1_hard_freeze.json (ablate-first; replace with GPU winners on Vast)"
+}

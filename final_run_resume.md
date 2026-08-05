@@ -106,23 +106,20 @@ Every assert must print **`INTEGRITY OK`**.
 
 ## 4. Production sequence
 
+**Preferred (close ~2.18 semi PR):** ablate-first GPU select → freeze (strip MCE/GATE) → invalidate → retrain — full sheet in [`FINAL_RUN.md`](FINAL_RUN.md).
+
 ```bash
-cd /workspace/ITM/project
-source .venv/bin/activate
+# Appendix: protocol tax
+bash scripts/run_hard_tail_ship_path.sh paper-diag 16gb
 
-python scripts/phase0_revoke_audit.py
-python scripts/train_only_recipe_select.py --dry-run
-
-bash scripts/run_adadae_per_protocol.sh dump_routing
-bash scripts/run_adadae_per_protocol.sh invalidate   # after beat-paper YAML freeze
-bash scripts/run_adadae_per_protocol.sh smoke 16gb
-bash scripts/run_adadae_per_protocol.sh ddae 16gb
-bash scripts/run_adadae_per_protocol.sh final 16gb
-bash scripts/run_adadae_per_protocol.sh compare
-bash scripts/run_adadae_per_protocol.sh gates
+# Ship glue
+bash scripts/run_hard_tail_ship_path.sh select 16gb
+bash scripts/run_hard_tail_ship_path.sh freeze
+bash scripts/run_hard_tail_ship_path.sh probe 16gb   # sanity
+bash scripts/run_hard_tail_ship_path.sh ship 16gb    # --all-semi + 570 + gates
 ```
 
-Or:
+Legacy kitchen-sink:
 
 ```bash
 bash scripts/run_adadae_per_protocol.sh all 16gb
@@ -131,9 +128,7 @@ bash scripts/run_adadae_per_protocol.sh all 16gb
 **Ship gate:** `results/adadae_per/thesis/integrity_gates.json` → `all_pass: true`
 (`G-I1_complete_570` + `G_AP_PR_consistency` + `G_paper_both`).
 
-**Beat-paper freeze:** smtp/wine A6 revoked; hard tails use RDT/FTP/orbit; see `FINAL_RUN.md`.
-
----
+Weakness catalog: `results/adadae_per/thesis/weakness_catalog_20.json`.---
 
 ## 5. Resume
 

@@ -1,9 +1,24 @@
 {
   "phase": 4,
-  "status": "config_ready_pending_gpu",
+  "status": "wired_pending_gpu",
   "config": "configs/ddae_paper_protocol.yaml",
   "script": "scripts/run_paper_protocol_diagnostic.py",
-  "purpose": "Appendix fairness: AnoDDAE-faithful 100ep / no val carve / full-sum vs integrity PER. Not a ship claim.",
-  "command": "python scripts/run_paper_protocol_diagnostic.py --datasets Wilt glass cardio speech CIFAR10 --seeds 111 222 --hardware 16gb",
-  "hypothesis": "Paper semi 61.36 is closer to paper-protocol DDAE than to fair valstop (~58.7); PER should beat paper under integrity after hard-tail freeze."
+  "command": "python scripts/run_paper_protocol_diagnostic.py --datasets speech ALOI celeba SVHN CIFAR10 Wilt Imdb Agnews cardio glass WBC vertebral smtp Pima --seeds 111 222 --hardware 16gb",
+  "hypothesis": "Paper semi 61.36 may be closer to paper-protocol DDAE (100ep, no val carve, full-sum) than to fair valstop (~58.7); quantify tax before attributing all gap to PER recipes.",
+  "paper_semi": {
+    "PR": 61.36,
+    "ROC": 83.17
+  },
+  "fair_valstop_semi": {
+    "PR": 31.02450314526971,
+    "ROC": 70.44037849820526,
+    "n": 14
+  },
+  "paper_protocol": {
+    "PR": null,
+    "ROC": null,
+    "n": 0,
+    "datasets": []
+  },
+  "interpretation": "pending_gpu: run diagnostic on Vast. If paper_protocol\u224861.36, remaining ship gap is integrity tax; if \u2248fair (~58.7), focus 100% on recipe wins."
 }

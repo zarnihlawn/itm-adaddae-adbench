@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Train-only multi-recipe arbitration for hard semi datasets (beat-paper Phase 1).
+"""Train-only multi-recipe arbitration (val_loss only — never test PR).
 
-Picks winners by **val_loss** (never test PR). Supports base policies plus
-A6 overlays (orbit/locus/spiral/helix). Can emit a freeze YAML patch.
+Strip-first ablations for bleed-CV (plain bases + at most one A6 overlay).
+Presets: ship (hard-12 + bleed-classical), bleed-cv, bleed-classical, hard-12.
 
 Usage:
   python scripts/train_only_recipe_select.py --dry-run
-  python scripts/train_only_recipe_select.py --datasets speech Wilt CIFAR10 --seeds 111 222 --hardware 16gb
-  python scripts/train_only_recipe_select.py --apply-evidence-freeze  # no GPU: write evidence freeze JSON
+  python scripts/train_only_recipe_select.py --preset ship --seeds 111 222 333 --hardware 16gb
+  python scripts/train_only_recipe_select.py --apply-evidence-freeze
 """
 from __future__ import annotations
 
@@ -16,32 +16,46 @@ import copy
 import json
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional
-
-import yaml
+from typing import Any, Dict, List, Optional, Sequence
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
 
-HARD_SEMI_DEFAULT = [
+# Ship hard-tail set (12) — matches invalidate --hard-tails / apply freeze default
+HARD_TAIL_12 = [
     "speech",
-    "celeba",
-    "Imdb",
     "ALOI",
-    "Amazon",
-    "Wilt",
+    "celeba",
     "SVHN",
-    "Yelp",
-    "20newsgroups",
     "CIFAR10",
-    "census",
+    "Wilt",
+    "Imdb",
+    "Amazon",
+    "Yelp",
     "Agnews",
-    "vertebral",
-    "glass",
-    "WPBC",
+    "20newsgroups",
+    "census",
 ]
 
-# Base policy ids in POLICY_REGISTRY
+# Worst CV / embed stacks (kitchen-sink ablate-first)
+BLEED_CV = ["SVHN", "ALOI", "celeba", "CIFAR10", "speech"]
+
+# Protect / classical losers outside hard-12
+BLEED_CLASSICAL = ["smtp", "satimage-2", "Pima", "Stamps", "letter", "wine"]
+
+# Default GPU select = hard-12 ∪ bleed-classical (unique, hard-12 order first)
+SHIP_SELECT_DEFAULT: List[str] = list(
+    dict.fromkeys(HARD_TAIL_12 + BLEED_CLASSICAL)
+)
+
+# Legacy dry-run list (includes glass/vertebral/WPBC for routing dump)
+HARD_SEMI_DEFAULT = HARD_TAIL_12 + ["vertebral", "glass", "WPBC"]
+
+# ADBench NLP names
+_NLP = {"Agnews", "Amazon", "Imdb", "Yelp", "20newsgroups"}
+# True CV embeds in ADBench CV_by_ResNet18 (NOT Classical speech/ALOI/celeba)
+_CV = {"CIFAR10", "SVHN", "MNIST-C", "FashionMNIST", "MVTec-AD"}
+
 BASE_CANDIDATES = [
     "baseline_ddae",
     "semi_cvnlp_ftp",
@@ -51,53 +65,171 @@ BASE_CANDIDATES = [
     "semi_speech_specialist",
 ]
 
-# Overlay flags applied on top of a base (static)
+# Single-overlay only (strip-first; no multi-A6 kitchen-sink in search)
 OVERLAY_CANDIDATES: Dict[str, Dict[str, Any]] = {
     "orbit": {"adadae": {"use_orbit": True, "use_multiview": True}},
     "locus": {"adadae": {"use_locus": True, "use_multiview": True}},
-    "spiral": {"adadae": {"use_spiral": True}},
     "helix": {"adadae": {"use_helix": True}},
 }
 
-# Evidence freeze when GPU selection cannot run (from winloss + ADBench analysis)
+# Default search: plain bases + base+one overlay (no MCE/GATE — static cfg)
+STRIP_FIRST_CANDIDATES = [
+    "baseline_ddae",
+    "semi_cvnlp_ftp",
+    "semi_rdt_tail",
+    "champion_semi",
+    "baseline_ddae+orbit",
+    "baseline_ddae+locus",
+    "baseline_ddae+helix",
+    "semi_rdt_tail+orbit",
+    "semi_rdt_tail+locus",
+    "semi_rdt_tail+helix",
+    "semi_cvnlp_ftp+orbit",
+    "semi_cvnlp_ftp+locus",
+    "semi_cvnlp_ftp+helix",
+]
+
+# Evidence freeze when GPU selection cannot run (ablate-first revision for CV)
 EVIDENCE_FREEZE: Dict[str, Dict[str, Any]] = {
-    "speech": {"policy": "semi_rdt_tail", "overlays": ["locus", "spiral", "helix"], "reason": "kitchen-sink failed; RDT designed for speech"},
-    "ALOI": {"policy": "semi_rdt_tail", "overlays": ["orbit", "locus"], "reason": "RDT+orbit for CV embeds"},
-    "celeba": {"policy": "semi_cvnlp_ftp", "overlays": ["orbit"], "reason": "FTP+orbit; drop nlp_baseline misroute"},
-    "CIFAR10": {"policy": "semi_cvnlp_ftp", "overlays": ["orbit", "helix"], "reason": "FTP+orbit/helix"},
-    "SVHN": {"policy": "semi_cvnlp_ftp", "overlays": ["orbit", "helix"], "reason": "FTP+orbit"},
-    "Wilt": {"policy": "semi_rdt_tail", "overlays": ["orbit", "locus", "spiral"], "reason": "robust RDT+extra views"},
+    "speech": {
+        "policy": "semi_rdt_tail",
+        "overlays": ["locus"],
+        "strip_mce_gate": True,
+        "reason": "strip kitchen-sink; RDT+single locus",
+    },
+    "ALOI": {
+        "policy": "semi_rdt_tail",
+        "overlays": ["orbit"],
+        "strip_mce_gate": True,
+        "reason": "strip MCE+GATE multi-A6; RDT+orbit only",
+    },
+    "celeba": {
+        "policy": "semi_cvnlp_ftp",
+        "overlays": ["orbit"],
+        "strip_mce_gate": True,
+        "reason": "FTP+orbit; strip MCE",
+    },
+    "CIFAR10": {
+        "policy": "semi_cvnlp_ftp",
+        "overlays": ["orbit"],
+        "strip_mce_gate": True,
+        "reason": "FTP+orbit; strip GATE/helix stack",
+    },
+    "SVHN": {
+        "policy": "semi_cvnlp_ftp",
+        "overlays": [],
+        "strip_mce_gate": True,
+        "reason": "worst vs fair — strip MCE+orbit+helix to plain FTP",
+    },
+    "Wilt": {
+        "policy": "semi_rdt_tail",
+        "overlays": ["orbit", "locus", "spiral"],
+        "reason": "keep winning RDT stack",
+    },
     "census": {"policy": "baseline_ddae", "overlays": ["locus"], "reason": "baseline+locus"},
-    "vertebral": {"policy": "baseline_ddae", "overlays": ["nautilus"], "reason": "keep nautilus win vs fair"},
-    "glass": {"policy": "baseline_ddae", "overlays": ["nautilus"], "reason": "keep nautilus win vs fair"},
+    "vertebral": {
+        "policy": "baseline_ddae",
+        "overlays": ["nautilus"],
+        "reason": "keep nautilus win vs fair",
+    },
+    "glass": {
+        "policy": "baseline_ddae",
+        "overlays": ["nautilus"],
+        "reason": "keep nautilus win vs fair",
+    },
     "WPBC": {"policy": "semi_speech_specialist", "overlays": [], "reason": "existing specialist"},
-    "Imdb": {"policy": "semi_nlp_frozen", "overlays": ["orbit"], "reason": "NLP frozen+unit_norm/orbit"},
+    "Imdb": {"policy": "semi_nlp_frozen", "overlays": ["orbit"], "reason": "NLP frozen+orbit"},
     "Amazon": {"policy": "semi_nlp_frozen", "overlays": ["orbit"], "reason": "NLP frozen+orbit"},
     "Yelp": {"policy": "semi_nlp_frozen", "overlays": ["orbit"], "reason": "NLP frozen+orbit"},
     "Agnews": {"policy": "semi_nlp_frozen", "overlays": ["orbit"], "reason": "NLP frozen+orbit"},
-    "20newsgroups": {"policy": "semi_nlp_frozen", "overlays": ["orbit"], "reason": "NLP frozen+orbit"},
+    "20newsgroups": {
+        "policy": "semi_nlp_frozen",
+        "overlays": ["orbit"],
+        "reason": "NLP frozen+orbit",
+    },
+    # Bleed-classical: force baseline (protect-compatible); strip upgrades via freeze
+    "smtp": {
+        "policy": "baseline_ddae",
+        "overlays": [],
+        "strip_mce_gate": True,
+        "reason": "protect loser — baseline only",
+    },
+    "satimage-2": {
+        "policy": "baseline_ddae",
+        "overlays": [],
+        "strip_mce_gate": True,
+        "reason": "protect loser — baseline only",
+    },
+    "wine": {
+        "policy": "baseline_ddae",
+        "overlays": [],
+        "strip_mce_gate": True,
+        "reason": "protect loser — baseline only",
+    },
+    "Pima": {
+        "policy": "baseline_ddae",
+        "overlays": [],
+        "strip_mce_gate": True,
+        "reason": "bleed-classical loser",
+    },
+    "Stamps": {
+        "policy": "baseline_ddae",
+        "overlays": [],
+        "strip_mce_gate": True,
+        "reason": "bleed-classical loser",
+    },
+    "letter": {
+        "policy": "baseline_ddae",
+        "overlays": [],
+        "strip_mce_gate": True,
+        "reason": "bleed-classical loser",
+    },
 }
 
 
-def _category_for(name: str) -> str:
-    cv = {"CIFAR10", "SVHN", "MNIST-C", "FashionMNIST", "MVTec-AD", "celeba", "ALOI", "speech"}
-    nlp = {"Agnews", "Amazon", "Imdb", "Yelp", "20newsgroups"}
-    if name in cv:
-        return "cv"
-    if name in nlp:
+def _category_for(name: str, registry_by_name: Optional[Dict[str, Any]] = None) -> str:
+    """Match ADBench registry categories (speech/ALOI/celeba are Classical)."""
+    if registry_by_name and name in registry_by_name:
+        return str(registry_by_name[name].category)
+    if name in _NLP:
         return "nlp"
+    if name in _CV:
+        return "cv"
     return "classical"
+
+
+def _preset_datasets(preset: str) -> List[str]:
+    if preset == "ship":
+        return list(SHIP_SELECT_DEFAULT)
+    if preset == "hard-12":
+        return list(HARD_TAIL_12)
+    if preset == "bleed-cv":
+        return list(BLEED_CV)
+    if preset == "bleed-classical":
+        return list(BLEED_CLASSICAL)
+    if preset == "legacy":
+        return list(HARD_SEMI_DEFAULT)
+    raise ValueError(f"unknown preset {preset!r}")
 
 
 def dry_run_resolve() -> Dict[str, Any]:
     from src.config import load_yaml
+    from src.data.datasets import build_registry
     from src.policy_per import apply_per_config, clear_per_upgrades_cache
 
     clear_per_upgrades_cache()
     cfg = load_yaml(PROJECT_ROOT / "configs" / "adadae_per.yaml")
+    registry_by_name: Dict[str, Any] = {}
+    try:
+        root = cfg.get("paths", {}).get("adbench_root")
+        if root:
+            registry_by_name = {e.name: e for e in build_registry(root)}
+    except Exception:  # noqa: BLE001
+        registry_by_name = {}
+
     rows = []
     for ds in HARD_SEMI_DEFAULT:
-        cat = _category_for(ds)
+        cat = _category_for(ds, registry_by_name)
         out = apply_per_config(
             cfg, "semi-supervised", cat, ds, meta={"n": 800.0, "d": 32.0}
         )
@@ -121,34 +253,59 @@ def dry_run_resolve() -> Dict[str, Any]:
                 },
             }
         )
-    return {"mode": "dry_run", "base_candidates": BASE_CANDIDATES, "current_per": rows}
+    return {
+        "mode": "dry_run",
+        "base_candidates": BASE_CANDIDATES,
+        "strip_first_candidates": STRIP_FIRST_CANDIDATES,
+        "presets": {
+            "ship": SHIP_SELECT_DEFAULT,
+            "hard-12": HARD_TAIL_12,
+            "bleed-cv": BLEED_CV,
+            "bleed-classical": BLEED_CLASSICAL,
+        },
+        "current_per": rows,
+    }
 
 
 def evidence_freeze_report() -> Dict[str, Any]:
     return {
         "mode": "evidence_freeze",
-        "note": "GPU selector unavailable locally; freeze from winloss+ADBench analysis. Re-run selector on Vast to refine.",
+        "note": (
+            "Ablate-first evidence freeze (CV strip MCE/GATE). "
+            "Re-run --preset ship on Vast GPU for val_loss winners."
+        ),
         "winners": EVIDENCE_FREEZE,
         "protect_baseline_semi": [
-            "smtp", "donors", "wine", "http", "musk", "breastw", "shuttle",
-            "Ionosphere", "Lymphography", "pendigits", "magic.gamma", "satimage-2",
-            "vowels", "skin", "PageBlocks",
+            "smtp",
+            "donors",
+            "wine",
+            "http",
+            "musk",
+            "breastw",
+            "shuttle",
+            "Ionosphere",
+            "Lymphography",
+            "pendigits",
+            "magic.gamma",
+            "satimage-2",
+            "vowels",
+            "skin",
+            "PageBlocks",
         ],
         "revoked": {
             "smtp": "apex (−10.3 vs fair)",
             "wine": "nautilus (−5.0 vs fair)",
             "speech": "mce+smc+apex+orbit+delta kitchen-sink",
+            "SVHN": "mce+orbit+helix kitchen-sink (−4.57 vs fair)",
+            "ALOI": "mce+gate+orbit+locus kitchen-sink (−2.98 vs fair)",
+        },
+        "sets": {
+            "hard_tail_12": HARD_TAIL_12,
+            "bleed_cv": BLEED_CV,
+            "bleed_classical": BLEED_CLASSICAL,
+            "ship_select": SHIP_SELECT_DEFAULT,
         },
     }
-
-
-def _candidate_names() -> List[str]:
-    names = list(BASE_CANDIDATES)
-    for ov in OVERLAY_CANDIDATES:
-        names.append(f"baseline_ddae+{ov}")
-        names.append(f"semi_cvnlp_ftp+{ov}")
-        names.append(f"semi_rdt_tail+{ov}")
-    return names
 
 
 def _build_candidate_cfg(base_cfg: Dict[str, Any], cand: str) -> Dict[str, Any]:
@@ -161,12 +318,19 @@ def _build_candidate_cfg(base_cfg: Dict[str, Any], cand: str) -> Dict[str, Any]:
     cfg["adadae"]["policy"] = "static"
     cfg["adadae"].pop("exceptions_file", None)
     cfg["adadae"].pop("upgrades_file", None)
+    # Explicit strip: no MCE/GATE/SMC from PER upgrades (static)
+    cfg["adadae"]["use_mce"] = False
+    cfg["adadae"]["use_gate"] = False
     cfg = _deep_update(cfg, policy_overrides(base))
+    cfg.setdefault("adadae", {})["use_mce"] = False
+    cfg["adadae"]["use_gate"] = False
     for ov in parts[1:]:
         if ov in OVERLAY_CANDIDATES:
             cfg = _deep_update(cfg, OVERLAY_CANDIDATES[ov])
         elif ov == "nautilus":
             cfg.setdefault("adadae", {})["use_nautilus"] = True
+        elif ov == "spiral":
+            cfg.setdefault("adadae", {})["use_spiral"] = True
     cfg["adadae"]["resolved_policy"] = f"select:{cand}"
     cfg["paths"] = dict(cfg["paths"])
     cfg["paths"]["results_dir"] = "results/adadae_per_select"
@@ -187,31 +351,26 @@ def run_selection(
     base = load_config(str(PROJECT_ROOT / "configs" / "adadae_per.yaml"))
     if hardware:
         hw = hardware if hardware.endswith(".yaml") else f"hardware_{hardware}.yaml"
-        # detect_hardware style keys: 16gb -> hardware_rtx5070ti via --hardware in protocol
         base["hardware"] = hw if "hardware_" in hw else f"hardware_{hardware}.yaml"
 
-    cands = candidates or [
-        "baseline_ddae",
-        "semi_cvnlp_ftp",
-        "semi_rdt_tail",
-        "champion_semi",
-        "baseline_ddae+orbit",
-        "semi_rdt_tail+orbit",
-        "semi_rdt_tail+locus",
-        "semi_cvnlp_ftp+orbit",
-        "semi_cvnlp_ftp+helix",
-    ]
-
+    cands = candidates or list(STRIP_FIRST_CANDIDATES)
     registry = build_registry(base["paths"]["adbench_root"])
     by_name = {e.name: e for e in registry}
-    results: Dict[str, Any] = {"winners": {}, "jobs": [], "candidates": cands}
+    results: Dict[str, Any] = {
+        "mode": "gpu_val_loss_select",
+        "selection_metric": "val_loss",
+        "winners": {},
+        "jobs": [],
+        "candidates": cands,
+        "datasets": datasets,
+    }
 
     for ds in datasets:
         if ds not in by_name:
             print(f"SKIP missing dataset {ds}")
             continue
         entry = by_name[ds]
-        cat = entry.category
+        cat = entry.category  # registry truth
         ds_votes: Dict[str, List[float]] = {c: [] for c in cands}
         for seed in seeds:
             best_name = None
@@ -251,17 +410,34 @@ def run_selection(
 
         means = {c: (sum(v) / len(v) if v else float("inf")) for c, v in ds_votes.items()}
         winner = min(means, key=means.get) if means else "baseline_ddae"
-        results["winners"][ds] = {"policy": winner, "mean_val_loss": means}
+        results["winners"][ds] = {
+            "policy": winner,
+            "mean_val_loss": means,
+            "strip_mce_gate": True,
+            "category": cat,
+        }
     return results
 
 
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--datasets", nargs="*", default=HARD_SEMI_DEFAULT)
+    p.add_argument(
+        "--preset",
+        choices=["ship", "hard-12", "bleed-cv", "bleed-classical", "legacy"],
+        default=None,
+        help="Dataset preset (default ship when --datasets omitted and not dry-run)",
+    )
+    p.add_argument("--datasets", nargs="*", default=None)
     p.add_argument("--seeds", nargs="*", type=int, default=[111, 222, 333])
     p.add_argument("--hardware", default=None)
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--apply-evidence-freeze", action="store_true")
+    p.add_argument(
+        "--candidates",
+        nargs="*",
+        default=None,
+        help="Override strip-first candidate list",
+    )
     args = p.parse_args()
 
     if args.dry_run:
@@ -271,7 +447,13 @@ def main() -> int:
         report = evidence_freeze_report()
         out = PROJECT_ROOT / "results/adadae_per/thesis/phase1_hard_freeze.json"
     else:
-        report = run_selection(args.datasets, args.seeds, args.hardware)
+        if args.datasets:
+            datasets = list(args.datasets)
+        elif args.preset:
+            datasets = _preset_datasets(args.preset)
+        else:
+            datasets = _preset_datasets("ship")
+        report = run_selection(datasets, args.seeds, args.hardware, args.candidates)
         out = PROJECT_ROOT / "results/adadae_per/thesis/phase1_hard_freeze.json"
 
     out.parent.mkdir(parents=True, exist_ok=True)

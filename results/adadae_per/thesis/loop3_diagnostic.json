@@ -1,10 +1,56 @@
 {
   "loop": 3,
-  "status": "pending_gpu",
-  "note": "Paper-protocol diagnostic requires CUDA. Config ready: configs/ddae_paper_protocol.yaml (100 epochs, val_fraction=0, train_loss, full-sum score).",
-  "command": "python scripts/run_paper_protocol_diagnostic.py --datasets Wilt glass cardio WBC vertebral --seeds 111 222 --hardware 16gb",
-  "hypothesis": "Fair valstop underfits vs AnoDDAE full-100 protocol; paper semi 61.36 may be largely recoverable under paper protocol while integrity valstop stays ~58.7.",
-  "paper_semi": {"PR": 61.36, "ROC": 83.17},
-  "fair_valstop_semi": {"PR": 58.70, "ROC": 82.94},
-  "feeds": "Loop 4 min_epochs=40, early_stop_patience=40, val_fraction_semi=0.1 already applied to PER shell."
+  "status": "wired_pending_gpu",
+  "timestamp": "2026-08-05T11:06:22.599769+00:00",
+  "note": "Diagnostic only \u2014 paper protocol (100ep, no val carve, full-sum). Not ship claim.",
+  "command": "python scripts/run_paper_protocol_diagnostic.py --datasets speech ALOI celeba SVHN CIFAR10 Wilt Imdb Agnews cardio glass WBC vertebral smtp Pima --seeds 111 222 --hardware 16gb",
+  "hypothesis": "Paper semi 61.36 may be closer to paper-protocol DDAE (100ep, no val carve, full-sum) than to fair valstop (~58.7); quantify tax before attributing all gap to PER recipes.",
+  "paper_semi": {
+    "PR": 61.36,
+    "ROC": 83.17
+  },
+  "fair_valstop": {
+    "PR": 31.02450314526971,
+    "ROC": 70.44037849820526,
+    "n": 14,
+    "datasets": [
+      "ALOI",
+      "Agnews",
+      "CIFAR10",
+      "Imdb",
+      "Pima",
+      "SVHN",
+      "WBC",
+      "Wilt",
+      "cardio",
+      "celeba",
+      "glass",
+      "smtp",
+      "speech",
+      "vertebral"
+    ]
+  },
+  "paper_protocol": {
+    "PR": null,
+    "ROC": null,
+    "n": 0,
+    "datasets": []
+  },
+  "probe_datasets": [
+    "speech",
+    "ALOI",
+    "celeba",
+    "SVHN",
+    "CIFAR10",
+    "Wilt",
+    "Imdb",
+    "Agnews",
+    "cardio",
+    "glass",
+    "WBC",
+    "vertebral",
+    "smtp",
+    "Pima"
+  ],
+  "feeds": "Appendix only \u2014 not a ship claim. Ship stays integrity valstop + PER."
 }

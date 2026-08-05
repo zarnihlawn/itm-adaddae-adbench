@@ -160,8 +160,8 @@ PY
 }
 
 run_invalidate() {
-  echo "=== Invalidate stale PER semi jobs (Loop 2/4/7 config drift) ==="
-  "$PYTHON" scripts/invalidate_per_semi_jobs.py
+  echo "=== Invalidate all PER semi jobs (full wipe; use selective CLI for hard-tails) ==="
+  "$PYTHON" scripts/invalidate_per_semi_jobs.py --all-semi
 }
 
 case "$MODE" in

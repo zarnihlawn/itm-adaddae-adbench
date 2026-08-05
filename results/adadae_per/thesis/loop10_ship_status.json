@@ -1,27 +1,18 @@
 {
   "loop": 10,
-  "status": "pending_gpu_ship",
-  "cuda_available_locally": false,
-  "implemented": [
-    "G_AP_PR_consistency gate",
-    "Loop 2 routing surgery (Wilt/glass/vertebral/CIFAR10)",
-    "Loop 4 min_epochs + val_fraction_semi",
-    "Loop 5 full-sum baseline scoring",
-    "Loop 6 train-only selector script",
-    "Loop 7 selective A6 upgrades",
-    "Loop 8 normals-only confirm",
-    "Loop 9 unsup hold script",
-    "invalidate_per_semi_jobs + protocol invalidate mode"
+  "status": "semi_gap_open_glue_ready",
+  "note": "570/570 complete; ship glue for ablate-first select→freeze→invalidate ready. Run on Vast.",
+  "gates": {
+    "G-I1": true,
+    "G_AP_PR": true,
+    "G_paper_both": false,
+    "all_pass": false
+  },
+  "commands": [
+    "bash scripts/run_hard_tail_ship_path.sh wire",
+    "bash scripts/run_hard_tail_ship_path.sh select 16gb",
+    "bash scripts/run_hard_tail_ship_path.sh freeze",
+    "bash scripts/run_hard_tail_ship_path.sh ship 16gb"
   ],
-  "next_on_vast": [
-    "bash scripts/run_adadae_per_protocol.sh invalidate",
-    "bash scripts/run_adadae_per_protocol.sh all 16gb"
-  ],
-  "ship_require": ["G-I1_complete_570", "G_AP_PR_consistency", "G_paper_both"],
-  "targets": {
-    "semi_PR": 62.0,
-    "semi_ROC": 83.5,
-    "unsup_PR_floor": 33.0,
-    "unsup_ROC_floor": 75.0
-  }
+  "weakness_catalog": "results/adadae_per/thesis/weakness_catalog_20.json"
 }

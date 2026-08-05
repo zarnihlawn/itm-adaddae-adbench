@@ -1,20 +1,18 @@
 {
   "phase": 3,
-  "status": "invalidated_pending_gpu_full570",
-  "cuda_available_locally": false,
-  "completed_after_invalidate": "285/570 (unsup kept; all semi cleared)",
-  "ship_command": "bash scripts/run_adadae_per_protocol.sh all 16gb",
-  "require_gates": ["G-I1_complete_570", "G_AP_PR_consistency", "G_paper_both"],
-  "targets": {
-    "semi_PR": 61.36,
-    "semi_ROC": 83.17,
-    "unsup_PR": 32.77,
-    "unsup_ROC": 74.08
+  "status": "570_complete_semi_gap_open",
+  "note": "Full 570 complete; G_paper_both FAIL (semi −2.18 PR). Next: ablate-first GPU select → freeze → retrain.",
+  "current": {
+    "semi_PR": 59.18,
+    "paper_semi_PR": 61.36,
+    "unsup_holds": true
   },
-  "freeze_summary": {
-    "revoked": ["smtp:apex", "wine:nautilus", "speech:kitchen-sink"],
-    "hard_tails": ["speech/ALOI/Wilt:rdt", "CIFAR/SVHN/celeba:ftp+orbit", "NLP:frozen+orbit"],
-    "protect_classical": 15
-  },
-  "note": "Full 570 retrain requires Vast GPU. Configs + invalidate are ready; unsup jobs retained to preserve paper-beat floor."
+  "next": [
+    "bash scripts/run_hard_tail_ship_path.sh paper-diag 16gb",
+    "bash scripts/run_hard_tail_ship_path.sh select 16gb",
+    "bash scripts/run_hard_tail_ship_path.sh freeze",
+    "bash scripts/run_hard_tail_ship_path.sh probe 16gb",
+    "bash scripts/run_hard_tail_ship_path.sh ship 16gb"
+  ],
+  "catalog": "results/adadae_per/thesis/weakness_catalog_20.json"
 }
