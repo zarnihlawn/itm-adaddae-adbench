@@ -343,34 +343,54 @@ def run_selection(
     seeds: List[int],
     hardware: Optional[str],
     candidates: Optional[List[str]] = None,
+    max_splits: int = 1,
 ) -> Dict[str, Any]:
     from src.config import load_config
     from src.data.datasets import build_registry
+    from src.memory import cleanup_memory
     from src.train.experiment import run_single_file, set_seed
 
-    base = load_config(str(PROJECT_ROOT / "configs" / "adadae_per.yaml"))
-    if hardware:
-        hw = hardware if hardware.endswith(".yaml") else f"hardware_{hardware}.yaml"
-        base["hardware"] = hw if "hardware_" in hw else f"hardware_{hardware}.yaml"
+    # CRITICAL: pass hardware into load_config so cfg["hardware"] is a dict
+    # (never assign the string "hardware_16gb.yaml" — that file does not exist).
+    base = load_config(
+        str(PROJECT_ROOT / "configs" / "adadae_per.yaml"),
+        hardware=hardware,
+    )
+    if not isinstance(base.get("hardware"), dict):
+        raise TypeError(
+            f"config['hardware'] must be a dict after load_config, got {type(base.get('hardware'))}"
+        )
 
     cands = candidates or list(STRIP_FIRST_CANDIDATES)
-    registry = build_registry(base["paths"]["adbench_root"])
+    adbench = Path(base["paths"]["adbench_root"])
+    registry = build_registry(adbench)
     by_name = {e.name: e for e in registry}
     results: Dict[str, Any] = {
         "mode": "gpu_val_loss_select",
         "selection_metric": "val_loss",
         "winners": {},
         "jobs": [],
+        "failures": [],
         "candidates": cands,
         "datasets": datasets,
+        "hardware_profile": (base.get("hardware") or {}).get("hardware_profile"),
+        "n_ok": 0,
+        "n_fail": 0,
     }
 
     for ds in datasets:
         if ds not in by_name:
             print(f"SKIP missing dataset {ds}")
+            results["failures"].append({"dataset": ds, "error": "missing_from_registry"})
             continue
         entry = by_name[ds]
         cat = entry.category  # registry truth
+        rels = list(entry.relative_paths)[: max(1, max_splits)]
+        if not rels:
+            print(f"SKIP {ds}: no relative_paths")
+            results["failures"].append({"dataset": ds, "error": "no_relative_paths"})
+            continue
+
         ds_votes: Dict[str, List[float]] = {c: [] for c in cands}
         for seed in seeds:
             best_name = None
@@ -378,20 +398,53 @@ def run_selection(
             for cand in cands:
                 cfg = _build_candidate_cfg(base, cand)
                 set_seed(seed)
-                try:
-                    out = run_single_file(
-                        entry.path,
-                        entry.name,
-                        entry.split,
-                        "semi-supervised",
-                        seed,
-                        cfg,
-                        category=cat,
-                    )
-                except Exception as exc:  # noqa: BLE001
-                    print(f"FAIL {ds} {cand} seed={seed}: {exc}")
+                split_vals: List[float] = []
+                split_prs: List[float] = []
+                last_exc: Optional[str] = None
+                for rel in rels:
+                    try:
+                        out = run_single_file(
+                            npz_path=adbench / rel,
+                            setting="semi-supervised",
+                            seed=seed,
+                            config=cfg,
+                            dataset_name=entry.name,
+                            split_name=rel,
+                            category=cat,
+                        )
+                    except Exception as exc:  # noqa: BLE001
+                        last_exc = f"{type(exc).__name__}: {exc}"
+                        print(f"FAIL {ds} {cand} seed={seed} split={rel}: {last_exc}")
+                        results["failures"].append(
+                            {
+                                "dataset": ds,
+                                "candidate": cand,
+                                "seed": seed,
+                                "split": rel,
+                                "error": last_exc,
+                            }
+                        )
+                        results["n_fail"] += 1
+                        cleanup_memory()
+                        continue
+                    raw = out.get("best_val_metric")
+                    if raw is None:
+                        last_exc = "best_val_metric is None"
+                        print(f"FAIL {ds} {cand} seed={seed}: {last_exc}")
+                        results["n_fail"] += 1
+                        cleanup_memory()
+                        continue
+                    val = float(raw)
+                    split_vals.append(val)
+                    pr = (out.get("metrics") or {}).get("PR-AUC")
+                    if pr is not None:
+                        split_prs.append(float(pr))
+                    results["n_ok"] += 1
+                    cleanup_memory()
+
+                if not split_vals:
                     continue
-                val = float(out.get("best_val_metric", float("inf")))
+                val = sum(split_vals) / len(split_vals)
                 ds_votes[cand].append(val)
                 results["jobs"].append(
                     {
@@ -399,7 +452,8 @@ def run_selection(
                         "seed": seed,
                         "candidate": cand,
                         "val_loss": val,
-                        "PR": (out.get("metrics") or {}).get("PR-AUC"),
+                        "PR": (sum(split_prs) / len(split_prs)) if split_prs else None,
+                        "n_splits": len(split_vals),
                     }
                 )
                 if val < best_val:
@@ -409,7 +463,18 @@ def run_selection(
                 results.setdefault("_seed_winners", {}).setdefault(ds, []).append(best_name)
 
         means = {c: (sum(v) / len(v) if v else float("inf")) for c, v in ds_votes.items()}
-        winner = min(means, key=means.get) if means else "baseline_ddae"
+        finite = {c: m for c, m in means.items() if m != float("inf")}
+        if not finite:
+            print(f"ERROR {ds}: all candidates failed (no finite val_loss)")
+            results["winners"][ds] = {
+                "policy": None,
+                "mean_val_loss": means,
+                "strip_mce_gate": True,
+                "category": cat,
+                "error": "all_candidates_failed",
+            }
+            continue
+        winner = min(finite, key=finite.get)
         results["winners"][ds] = {
             "policy": winner,
             "mean_val_loss": means,
@@ -430,6 +495,12 @@ def main() -> int:
     p.add_argument("--datasets", nargs="*", default=None)
     p.add_argument("--seeds", nargs="*", type=int, default=[111, 222, 333])
     p.add_argument("--hardware", default=None)
+    p.add_argument(
+        "--max-splits",
+        type=int,
+        default=1,
+        help="Max NPZ splits per CV/NLP family (default 1 for speed; protocol uses all)",
+    )
     p.add_argument("--dry-run", action="store_true")
     p.add_argument("--apply-evidence-freeze", action="store_true")
     p.add_argument(
@@ -443,9 +514,11 @@ def main() -> int:
     if args.dry_run:
         report = dry_run_resolve()
         out = PROJECT_ROOT / "results/adadae_per/thesis/loop6_train_only_select.json"
+        rc = 0
     elif args.apply_evidence_freeze:
         report = evidence_freeze_report()
         out = PROJECT_ROOT / "results/adadae_per/thesis/phase1_hard_freeze.json"
+        rc = 0
     else:
         if args.datasets:
             datasets = list(args.datasets)
@@ -453,15 +526,62 @@ def main() -> int:
             datasets = _preset_datasets(args.preset)
         else:
             datasets = _preset_datasets("ship")
-        report = run_selection(datasets, args.seeds, args.hardware, args.candidates)
+        report = run_selection(
+            datasets,
+            args.seeds,
+            args.hardware,
+            args.candidates,
+            max_splits=args.max_splits,
+        )
         out = PROJECT_ROOT / "results/adadae_per/thesis/phase1_hard_freeze.json"
+        n_winners = sum(
+            1
+            for w in (report.get("winners") or {}).values()
+            if isinstance(w, dict) and w.get("policy")
+        )
+        n_fail_ds = sum(
+            1
+            for w in (report.get("winners") or {}).values()
+            if isinstance(w, dict) and w.get("error")
+        )
+        report["n_winners"] = n_winners
+        report["n_failed_datasets"] = n_fail_ds
+        if n_winners == 0:
+            report["status"] = "FAILED_all_infinity"
+            rc = 2
+        elif n_fail_ds:
+            report["status"] = "partial"
+            rc = 1
+        else:
+            report["status"] = "ok"
+            rc = 0
 
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    # JSON cannot encode Inf; replace for readability
+    def _sanitize(obj: Any) -> Any:
+        if isinstance(obj, float) and (obj == float("inf") or obj != obj):
+            return None
+        if isinstance(obj, dict):
+            return {k: _sanitize(v) for k, v in obj.items()}
+        if isinstance(obj, list):
+            return [_sanitize(v) for v in obj]
+        return obj
+
+    out.write_text(json.dumps(_sanitize(report), indent=2), encoding="utf-8")
     printable = {k: report[k] for k in report if k != "jobs"}
-    print(json.dumps(printable, indent=2)[:4000])
-    print(f"Wrote {out}")
-    return 0
+    print(json.dumps(_sanitize(printable), indent=2)[:4000])
+    print(f"Wrote {out} status={report.get('status', 'ok')} n_ok={report.get('n_ok')} n_fail={report.get('n_fail')}")
+    if rc != 0:
+        print(
+            "ERROR: selection produced no usable winners (check FAIL lines / hardware / ADBench paths).",
+            file=sys.stderr,
+        )
+        print(
+            "Delete bogus Infinity freeze before apply_hard_tail_freeze; "
+            "fix then re-run: python scripts/train_only_recipe_select.py --preset ship --hardware 16gb",
+            file=sys.stderr,
+        )
+    return rc
 
 
 if __name__ == "__main__":

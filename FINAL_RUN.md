@@ -84,6 +84,7 @@ Success criteria for interpretation (`loop3_diagnostic.json`):
 
 ```bash
 tmux new -s per_select
+# pull latest first if you hit all-Infinity winners (bug: wrong DatasetSpec API + hardware string)
 bash scripts/run_hard_tail_ship_path.sh select 16gb
 # equivalent:
 python scripts/train_only_recipe_select.py --preset ship --seeds 111 222 333 --hardware 16gb
@@ -92,6 +93,8 @@ python scripts/train_only_recipe_select.py --preset ship --seeds 111 222 333 --h
 - Metric: **val_loss** only (test PR logged, not used to pick).
 - Candidates: plain `baseline_ddae` / `semi_cvnlp_ftp` / `semi_rdt_tail` / `champion_semi` + **at most one** of orbit|locus|helix (no MCE/GATE).
 - Writes: `results/adadae_per/thesis/phase1_hard_freeze.json`
+- If every `mean_val_loss` is null/Infinity → **do not freeze**; exit code ≠ 0. Delete bogus JSON and re-run after pulling the fix.
+- Do **not** `apply_hard_tail_freeze` on an all-Infinity file.
 
 ### 2. Freeze winners (specialists + A6 + strip MCE/GATE)
 

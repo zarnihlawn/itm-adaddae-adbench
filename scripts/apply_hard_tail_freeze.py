@@ -306,6 +306,25 @@ def main() -> int:
     if not winners:
         print("ERROR: no winners in JSON", file=sys.stderr)
         return 2
+    if payload.get("status") == "FAILED_all_infinity":
+        print(
+            "ERROR: source is FAILED_all_infinity — re-run GPU select; do not freeze",
+            file=sys.stderr,
+        )
+        return 3
+    # Drop failed / null policies (bogus Infinity select)
+    usable = {}
+    for ds, entry in winners.items():
+        if isinstance(entry, dict) and (
+            entry.get("error") or entry.get("policy") in (None, "", "None")
+        ):
+            print(f"SKIP {ds}: no usable policy ({entry.get('error') or 'null policy'})")
+            continue
+        usable[ds] = entry
+    winners = usable
+    if not winners:
+        print("ERROR: no usable winners after filtering failures", file=sys.stderr)
+        return 4
 
     if args.datasets:
         datasets = list(args.datasets)
