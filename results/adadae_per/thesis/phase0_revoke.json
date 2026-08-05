@@ -24,7 +24,7 @@
     },
     {
       "dataset": "wine",
-      "resolved_policy": "per:semi_rdt_tail+protect",
+      "resolved_policy": "per:champion_semi+protect",
       "use_apex": false,
       "use_nautilus": false,
       "use_mce": false,
@@ -32,7 +32,7 @@
     },
     {
       "dataset": "speech",
-      "resolved_policy": "per:semi_rdt_tail+helix+ftp_ov+train_ov",
+      "resolved_policy": "per:semi_rdt_tail+ftp_ov+train_ov",
       "use_apex": false,
       "use_nautilus": false,
       "use_mce": false,
@@ -40,7 +40,7 @@
     },
     {
       "dataset": "glass",
-      "resolved_policy": "per:baseline_ddae+nautilus",
+      "resolved_policy": "per:baseline_ddae+nautilus+cal_fuse",
       "use_apex": false,
       "use_nautilus": true,
       "use_mce": false,

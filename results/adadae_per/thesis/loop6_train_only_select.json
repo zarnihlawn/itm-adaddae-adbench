@@ -81,7 +81,7 @@
     {
       "dataset": "speech",
       "category": "classical",
-      "resolved_policy": "per:semi_rdt_tail+helix+ftp_ov+train_ov",
+      "resolved_policy": "per:semi_rdt_tail+ftp_ov+train_ov",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -263,7 +263,7 @@
     {
       "dataset": "Amazon",
       "category": "nlp",
-      "resolved_policy": "per:baseline_ddae+helix+ftp_ov+taps",
+      "resolved_policy": "per:baseline_ddae+ftp_ov+taps",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -289,7 +289,7 @@
     {
       "dataset": "Yelp",
       "category": "nlp",
-      "resolved_policy": "per:baseline_ddae+helix+ftp_ov+taps",
+      "resolved_policy": "per:baseline_ddae+ftp_ov+taps",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -315,7 +315,7 @@
     {
       "dataset": "Agnews",
       "category": "nlp",
-      "resolved_policy": "per:baseline_ddae+helix+ftp_ov+taps",
+      "resolved_policy": "per:baseline_ddae+ftp_ov+taps",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -341,7 +341,7 @@
     {
       "dataset": "20newsgroups",
       "category": "nlp",
-      "resolved_policy": "per:baseline_ddae+helix+ftp_ov+taps",
+      "resolved_policy": "per:baseline_ddae+ftp_ov+taps",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -367,7 +367,7 @@
     {
       "dataset": "census",
       "category": "classical",
-      "resolved_policy": "per:baseline_ddae+protect+ftp_ov",
+      "resolved_policy": "per:semi_rdt_tail+protect+ftp_ov",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,

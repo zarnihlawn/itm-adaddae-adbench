@@ -45,15 +45,14 @@ semi_specialists:
   CIFAR10: baseline_ddae
   SVHN: semi_rdt_tail
   Wilt: baseline_ddae
-  # Phase 0 emergency revoke (2026-08-06): wine/census RDT destroyed test PR vs fair.
-  census: baseline_ddae
+  census: semi_rdt_tail
   glass: baseline_ddae
   vertebral: baseline_ddae
   WPBC: semi_speech_specialist
   Waveform: semi_rdt_tail
   smtp: baseline_ddae
   donors: baseline_ddae
-  wine: baseline_ddae
+  wine: champion_semi
   http: baseline_ddae
   musk: baseline_ddae
   breastw: baseline_ddae
@@ -71,9 +70,9 @@ semi_specialists:
   Yelp: baseline_ddae
   Agnews: baseline_ddae
   20newsgroups: baseline_ddae
-  Pima: semi_cvnlp_ftp
+  Pima: baseline_ddae
   Stamps: baseline_ddae
-  letter: semi_cvnlp_ftp
+  letter: baseline_ddae
   WBC: baseline_ddae
 semi_cv_policy: semi_cvnlp_ftp
 unsup_nlp_baseline:

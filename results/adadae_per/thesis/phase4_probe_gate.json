@@ -1,0 +1,8 @@
+{
+  "semi_PR": 59.09315919048331,
+  "semi_ROC": 82.97609273790489,
+  "floor": 60.5,
+  "pass": false,
+  "ship_allowed": false,
+  "note": "Full ship only if pass; else iterate selector/method lifts"
+}

@@ -1,9 +1,7 @@
 version: 5.3-phase0-revoke
-description: >-
-  Classical protect + hard-tail specialists. Phase 0 (2026-08-06): wine/census
-  forced baseline_ddae (RDT −12/−4 vs fair); helix stripped from celeba/smtp.
-  A6 only on proven sets. speech uses RDT specialist base (not kitchen-sink).
-
+description: 'Classical protect + hard-tail specialists. Phase 0 (2026-08-06): wine/census
+  forced baseline_ddae (RDT −12/−4 vs fair); helix stripped from celeba/smtp. A6 only
+  on proven sets. speech uses RDT specialist base (not kitchen-sink).'
 mce:
   cv: []
   nlp: []
@@ -53,15 +51,7 @@ a6:
     semi-supervised: []
     unsupervised: []
   helix:
-    semi-supervised:
-    # Phase 0: dropped celeba/smtp (val_loss helix hurt or unprotected).
-    - speech
-    - Amazon
-    - Yelp
-    - Agnews
-    - 20newsgroups
-    - Pima
-    - letter
+    semi-supervised: []
     unsupervised: []
 protect_baseline_semi:
 - smtp
@@ -82,11 +72,8 @@ protect_baseline_semi:
 - Stamps
 - WBC
 - census
-
-# Phase 3 — gated method lifts (integrity: never on protect_baseline_semi)
 method_lifts:
   contrastive_alpha: 0.2
-  # TAPS / DDAE-C-style contrastive on NLP mid-tier (synth-val gated later)
   contrastive_taps_semi:
   - Agnews
   - Amazon
@@ -96,14 +83,12 @@ method_lifts:
   - thyroid
   - optdigits
   - backdoor
-  # Calibrated fusion on proven Waveform-class / mid-tier wins
   calibrated_fusion_semi:
   - Waveform
   - optdigits
   - thyroid
   - glass
   - vertebral
-  # RDT only as promotion allowlist (wine/census explicitly excluded)
   rdt_promotion_semi:
   - Waveform
   - Wilt
