@@ -1,15 +1,15 @@
 {
   "G-I1_complete_570": {
-    "pass": false,
-    "n_jobs": 285,
-    "n_dataset_setting_pairs": 57,
+    "pass": true,
+    "n_jobs": 570,
+    "n_dataset_setting_pairs": 114,
     "expected_jobs": 570,
     "incomplete_pairs": []
   },
   "G_AP_PR_consistency": {
     "pass": true,
     "max_gap_pp": 6.0,
-    "n_checked": 285,
+    "n_checked": 570,
     "n_bad": 0,
     "examples": [],
     "n_bisect_markers": 0,
@@ -30,12 +30,12 @@
       },
       "semi-supervised": {
         "pass": false,
-        "AdaDDAE_PR_AUC": 58.70450992726189,
-        "AdaDDAE_ROC_AUC": 82.93142847096411,
+        "AdaDDAE_PR_AUC": 58.889329640962536,
+        "AdaDDAE_ROC_AUC": 83.02998822762169,
         "paper_PR_AUC": 61.36,
         "paper_ROC_AUC": 83.17,
-        "delta_PR": -2.655490072738111,
-        "delta_ROC": -0.23857152903589451
+        "delta_PR": -2.470670359037463,
+        "delta_ROC": -0.1400117723783154
       }
     }
   },

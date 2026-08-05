@@ -1,0 +1,26 @@
+{
+  "dataset": "optdigits",
+  "setting": "semi-supervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.3883235869899588,
+    "ROC-AUC": 0.9593630740886958,
+    "PR-AUC": 0.3856057597965095
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "per:semi_cvnlp_ftp+mce_classical",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 639.48486328125,
+  "vram_mb": 639.48486328125,
+  "time": "2026-08-05T06:45:00.208310+00:00"
+}

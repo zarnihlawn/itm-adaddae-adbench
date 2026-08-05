@@ -18,19 +18,19 @@
   },
   "semi-supervised": {
     "n_datasets": 57,
-    "macro_ada_pr": 58.70450992726189,
+    "macro_ada_pr": 58.88932964096253,
     "macro_ddae_pr": 58.69953928485905,
-    "macro_delta_pr": 0.004970642402838449,
+    "macro_delta_pr": 0.18979035610348385,
     "bootstrap_ci95_delta": [
-      -0.42814753711683856,
-      0.46831751576587477
+      -0.7047619428831594,
+      1.172510025947197
     ],
-    "wins": 29,
+    "wins": 28,
     "ties": 1,
-    "losses": 27,
+    "losses": 28,
     "wilcoxon": {
-      "statistic": 758.0,
-      "pvalue": 0.7442099635730646
+      "statistic": 770.0,
+      "pvalue": 0.819336561040986
     }
   }
 }
