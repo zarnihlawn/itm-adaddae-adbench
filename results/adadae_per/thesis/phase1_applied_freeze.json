@@ -1,0 +1,325 @@
+{
+  "timestamp": "2026-08-05T17:01:30.335304+00:00",
+  "source": "results/adadae_per/thesis/phase1_hard_freeze.json",
+  "mode": "gpu_val_loss_select",
+  "datasets": [
+    "speech",
+    "ALOI",
+    "celeba",
+    "SVHN",
+    "CIFAR10",
+    "Wilt",
+    "Imdb",
+    "Amazon",
+    "Yelp",
+    "Agnews",
+    "20newsgroups",
+    "census",
+    "smtp",
+    "satimage-2",
+    "Pima",
+    "Stamps",
+    "letter",
+    "wine"
+  ],
+  "n_applied": 18,
+  "applied": {
+    "speech": {
+      "base": "semi_rdt_tail",
+      "overlays": [
+        "helix"
+      ],
+      "policy_string": "semi_rdt_tail+helix",
+      "strip_mce_gate": true
+    },
+    "ALOI": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true
+    },
+    "celeba": {
+      "base": "baseline_ddae",
+      "overlays": [
+        "helix"
+      ],
+      "policy_string": "baseline_ddae+helix",
+      "strip_mce_gate": true
+    },
+    "SVHN": {
+      "base": "semi_rdt_tail",
+      "overlays": [],
+      "policy_string": "semi_rdt_tail",
+      "strip_mce_gate": true
+    },
+    "CIFAR10": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true
+    },
+    "Wilt": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true
+    },
+    "Imdb": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true
+    },
+    "Amazon": {
+      "base": "baseline_ddae",
+      "overlays": [
+        "helix"
+      ],
+      "policy_string": "baseline_ddae+helix",
+      "strip_mce_gate": true
+    },
+    "Yelp": {
+      "base": "baseline_ddae",
+      "overlays": [
+        "helix"
+      ],
+      "policy_string": "baseline_ddae+helix",
+      "strip_mce_gate": true
+    },
+    "Agnews": {
+      "base": "baseline_ddae",
+      "overlays": [
+        "helix"
+      ],
+      "policy_string": "baseline_ddae+helix",
+      "strip_mce_gate": true
+    },
+    "20newsgroups": {
+      "base": "baseline_ddae",
+      "overlays": [
+        "helix"
+      ],
+      "policy_string": "baseline_ddae+helix",
+      "strip_mce_gate": true
+    },
+    "census": {
+      "base": "semi_rdt_tail",
+      "overlays": [],
+      "policy_string": "semi_rdt_tail",
+      "strip_mce_gate": true
+    },
+    "smtp": {
+      "base": "baseline_ddae",
+      "overlays": [
+        "helix"
+      ],
+      "policy_string": "baseline_ddae+helix",
+      "strip_mce_gate": true
+    },
+    "satimage-2": {
+      "base": "semi_rdt_tail",
+      "overlays": [],
+      "policy_string": "semi_rdt_tail",
+      "strip_mce_gate": true
+    },
+    "Pima": {
+      "base": "semi_cvnlp_ftp",
+      "overlays": [
+        "helix"
+      ],
+      "policy_string": "semi_cvnlp_ftp+helix",
+      "strip_mce_gate": true
+    },
+    "Stamps": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true
+    },
+    "letter": {
+      "base": "semi_cvnlp_ftp",
+      "overlays": [
+        "helix"
+      ],
+      "policy_string": "semi_cvnlp_ftp+helix",
+      "strip_mce_gate": true
+    },
+    "wine": {
+      "base": "semi_rdt_tail",
+      "overlays": [],
+      "policy_string": "semi_rdt_tail",
+      "strip_mce_gate": true
+    }
+  },
+  "skipped": [],
+  "pre": {
+    "semi_specialists": {
+      "speech": "semi_rdt_tail",
+      "ALOI": "semi_rdt_tail",
+      "celeba": "semi_cvnlp_ftp",
+      "CIFAR10": "semi_cvnlp_ftp",
+      "SVHN": "semi_cvnlp_ftp",
+      "Wilt": "semi_rdt_tail",
+      "census": "baseline_ddae",
+      "glass": "baseline_ddae",
+      "vertebral": "baseline_ddae",
+      "WPBC": "semi_speech_specialist",
+      "Waveform": "semi_rdt_tail",
+      "smtp": "baseline_ddae",
+      "donors": "baseline_ddae",
+      "wine": "baseline_ddae",
+      "http": "baseline_ddae",
+      "musk": "baseline_ddae",
+      "breastw": "baseline_ddae",
+      "shuttle": "baseline_ddae",
+      "Ionosphere": "baseline_ddae",
+      "Lymphography": "baseline_ddae",
+      "pendigits": "baseline_ddae",
+      "magic.gamma": "baseline_ddae",
+      "satimage-2": "baseline_ddae",
+      "vowels": "baseline_ddae",
+      "skin": "baseline_ddae",
+      "PageBlocks": "baseline_ddae"
+    },
+    "a6_semi": {
+      "orbit": [
+        "SVHN",
+        "CIFAR10",
+        "ALOI",
+        "celeba",
+        "Agnews",
+        "Amazon",
+        "Imdb",
+        "Yelp",
+        "20newsgroups",
+        "Wilt"
+      ],
+      "locus": [
+        "speech",
+        "Wilt",
+        "census",
+        "ALOI"
+      ],
+      "spiral": [
+        "speech",
+        "Wilt"
+      ],
+      "helix": [
+        "speech",
+        "CIFAR10",
+        "SVHN"
+      ],
+      "nautilus": [
+        "glass",
+        "Hepatitis",
+        "vertebral"
+      ]
+    },
+    "mce": {
+      "cv": [
+        "ALOI",
+        "celeba",
+        "SVHN"
+      ],
+      "nlp": [
+        "Imdb",
+        "Agnews",
+        "Amazon",
+        "Yelp",
+        "20newsgroups"
+      ],
+      "classical": [
+        "optdigits",
+        "cover"
+      ]
+    },
+    "gate": {
+      "semi-supervised": [
+        "speech",
+        "ALOI",
+        "CIFAR10"
+      ],
+      "unsupervised": [
+        "speech",
+        "ALOI",
+        "optdigits"
+      ]
+    }
+  },
+  "post": {
+    "semi_specialists": {
+      "speech": "semi_rdt_tail",
+      "ALOI": "baseline_ddae",
+      "celeba": "baseline_ddae",
+      "CIFAR10": "baseline_ddae",
+      "SVHN": "semi_rdt_tail",
+      "Wilt": "baseline_ddae",
+      "census": "semi_rdt_tail",
+      "glass": "baseline_ddae",
+      "vertebral": "baseline_ddae",
+      "WPBC": "semi_speech_specialist",
+      "Waveform": "semi_rdt_tail",
+      "smtp": "baseline_ddae",
+      "donors": "baseline_ddae",
+      "wine": "semi_rdt_tail",
+      "http": "baseline_ddae",
+      "musk": "baseline_ddae",
+      "breastw": "baseline_ddae",
+      "shuttle": "baseline_ddae",
+      "Ionosphere": "baseline_ddae",
+      "Lymphography": "baseline_ddae",
+      "pendigits": "baseline_ddae",
+      "magic.gamma": "baseline_ddae",
+      "satimage-2": "semi_rdt_tail",
+      "vowels": "baseline_ddae",
+      "skin": "baseline_ddae",
+      "PageBlocks": "baseline_ddae",
+      "Imdb": "baseline_ddae",
+      "Amazon": "baseline_ddae",
+      "Yelp": "baseline_ddae",
+      "Agnews": "baseline_ddae",
+      "20newsgroups": "baseline_ddae",
+      "Pima": "semi_cvnlp_ftp",
+      "Stamps": "baseline_ddae",
+      "letter": "semi_cvnlp_ftp"
+    },
+    "semi_nlp_baseline": [],
+    "a6_semi": {
+      "orbit": [],
+      "locus": [],
+      "spiral": [],
+      "helix": [
+        "speech",
+        "celeba",
+        "Amazon",
+        "Yelp",
+        "Agnews",
+        "20newsgroups",
+        "smtp",
+        "Pima",
+        "letter"
+      ],
+      "nautilus": [
+        "glass",
+        "Hepatitis",
+        "vertebral"
+      ]
+    },
+    "mce": {
+      "cv": [],
+      "nlp": [],
+      "classical": [
+        "optdigits",
+        "cover"
+      ]
+    },
+    "gate": {
+      "semi-supervised": [],
+      "unsupervised": [
+        "speech",
+        "ALOI",
+        "optdigits"
+      ]
+    }
+  }
+}

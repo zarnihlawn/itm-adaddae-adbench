@@ -335,6 +335,10 @@ def _build_candidate_cfg(base_cfg: Dict[str, Any], cand: str) -> Dict[str, Any]:
     cfg["paths"] = dict(cfg["paths"])
     cfg["paths"]["results_dir"] = "results/adadae_per_select"
     cfg["paths"]["run_id"] = "adadae_per_select"
+    hw = dict(cfg.get("hardware") or {})
+    hw["dataloader_num_workers"] = 0
+    hw["pin_memory"] = False
+    cfg["hardware"] = hw
     return cfg
 
 

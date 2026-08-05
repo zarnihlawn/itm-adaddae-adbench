@@ -4,9 +4,9 @@
   "seed": 444,
   "n_splits": 10,
   "metrics_mean": {
-    "AP": 0.1799441861710022,
-    "ROC-AUC": 0.6457342965779468,
-    "PR-AUC": 0.17753937430400768
+    "AP": 0.20090727418178322,
+    "ROC-AUC": 0.6884071482889733,
+    "PR-AUC": 0.1986170030162146
   },
   "noise": {
     "num_timesteps": 50,
@@ -18,9 +18,9 @@
     "contamination_est": null,
     "contamination_mode": "label_free"
   },
-  "resolved_policy": "per:semi_cvnlp_ftp+gate+orbit+helix+ftp_ov+train_ov",
+  "resolved_policy": "per:baseline_ddae+ftp_ov+train_ov",
   "early_stop_metric": "val_loss",
-  "vram_peak_mb": 764.09765625,
-  "vram_mb": 764.09765625,
-  "time": "2026-08-05T09:34:56.629503+00:00"
+  "vram_peak_mb": 1378.525390625,
+  "vram_mb": 1378.525390625,
+  "time": "2026-08-05T17:26:10.650528+00:00"
 }

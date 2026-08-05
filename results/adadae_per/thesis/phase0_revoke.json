@@ -24,7 +24,7 @@
     },
     {
       "dataset": "wine",
-      "resolved_policy": "per:baseline_ddae+protect",
+      "resolved_policy": "per:semi_rdt_tail+protect",
       "use_apex": false,
       "use_nautilus": false,
       "use_mce": false,
@@ -32,7 +32,7 @@
     },
     {
       "dataset": "speech",
-      "resolved_policy": "per:semi_rdt_tail+gate+locus+spiral+helix+ftp_ov+train_ov",
+      "resolved_policy": "per:semi_rdt_tail+helix+ftp_ov+train_ov",
       "use_apex": false,
       "use_nautilus": false,
       "use_mce": false,
@@ -48,7 +48,7 @@
     },
     {
       "dataset": "Wilt",
-      "resolved_policy": "per:semi_rdt_tail+orbit+locus+spiral+ftp_ov+train_ov",
+      "resolved_policy": "per:baseline_ddae+ftp_ov+train_ov",
       "use_apex": false,
       "use_nautilus": false,
       "use_mce": false,

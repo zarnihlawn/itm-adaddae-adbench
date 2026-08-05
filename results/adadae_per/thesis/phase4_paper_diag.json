@@ -1,6 +1,6 @@
 {
   "phase": 4,
-  "status": "wired_pending_gpu",
+  "status": "complete",
   "config": "configs/ddae_paper_protocol.yaml",
   "script": "scripts/run_paper_protocol_diagnostic.py",
   "command": "python scripts/run_paper_protocol_diagnostic.py --datasets speech ALOI celeba SVHN CIFAR10 Wilt Imdb Agnews cardio glass WBC vertebral smtp Pima --seeds 111 222 --hardware 16gb",
@@ -15,10 +15,25 @@
     "n": 14
   },
   "paper_protocol": {
-    "PR": null,
-    "ROC": null,
-    "n": 0,
-    "datasets": []
+    "PR": 31.05081991144041,
+    "ROC": 71.41227649239201,
+    "n": 14,
+    "datasets": [
+      "ALOI",
+      "Agnews",
+      "CIFAR10",
+      "Imdb",
+      "Pima",
+      "SVHN",
+      "WBC",
+      "Wilt",
+      "cardio",
+      "celeba",
+      "glass",
+      "smtp",
+      "speech",
+      "vertebral"
+    ]
   },
-  "interpretation": "pending_gpu: run diagnostic on Vast. If paper_protocol\u224861.36, remaining ship gap is integrity tax; if \u2248fair (~58.7), focus 100% on recipe wins."
+  "interpretation": "paper_protocol PR=31.05 \u2248 fair \u2014 published table may differ for other reasons; focus on recipe wins under integrity."
 }

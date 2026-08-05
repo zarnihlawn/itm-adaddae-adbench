@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-05T11:06:22.599769+00:00",
+  "timestamp": "2026-08-05T11:59:43.914220+00:00",
   "note": "Diagnostic only \u2014 paper protocol (100ep, no val carve, full-sum). Not ship claim.",
   "hypothesis": "Paper semi 61.36 may be closer to paper-protocol DDAE (100ep, no val carve, full-sum) than to fair valstop (~58.7); quantify tax before attributing all gap to PER recipes.",
   "command": "python scripts/run_paper_protocol_diagnostic.py --datasets speech ALOI celeba SVHN CIFAR10 Wilt Imdb Agnews cardio glass WBC vertebral smtp Pima --seeds 111 222 --hardware 16gb",
@@ -23,7 +23,6 @@
     "PR": 61.36,
     "ROC": 83.17
   },
-  "status": "wired_pending_gpu",
   "fair_valstop": {
     "PR": 31.02450314526971,
     "ROC": 70.44037849820526,
@@ -110,10 +109,26 @@
     ]
   },
   "paper_protocol": {
-    "PR": null,
-    "ROC": null,
-    "n": 0,
-    "datasets": []
+    "PR": 31.05081991144041,
+    "ROC": 71.41227649239201,
+    "n": 14,
+    "datasets": [
+      "ALOI",
+      "Agnews",
+      "CIFAR10",
+      "Imdb",
+      "Pima",
+      "SVHN",
+      "WBC",
+      "Wilt",
+      "cardio",
+      "celeba",
+      "glass",
+      "smtp",
+      "speech",
+      "vertebral"
+    ]
   },
-  "interpretation": "pending_gpu: run diagnostic on Vast. If paper_protocol\u224861.36, remaining ship gap is integrity tax; if \u2248fair (~58.7), focus 100% on recipe wins."
+  "status": "complete",
+  "interpretation": "paper_protocol PR=31.05 \u2248 fair \u2014 published table may differ for other reasons; focus on recipe wins under integrity."
 }

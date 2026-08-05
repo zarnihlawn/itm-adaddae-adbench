@@ -1,114 +1,81 @@
-# AdaDDAE-PER additive upgrades — beat-paper phase0/1 freeze.
-# Revokes: smtp apex, wine nautilus; speech stripped of failing MCE+SMC+A6 stack.
-version: "5.2-beat-paper"
-description: >
-  Classical protect + hard-tail specialists. A6 only on proven winloss>=0 sets.
-  smtp/wine A6 revoked. speech uses RDT specialist base (not kitchen-sink).
+version: 5.2-beat-paper
+description: 'Classical protect + hard-tail specialists. A6 only on proven winloss>=0
+  sets. smtp/wine A6 revoked. speech uses RDT specialist base (not kitchen-sink).
 
+  '
 mce:
-  cv:
-    - ALOI
-    - celeba
-    - SVHN
-    # speech MCE revoked (kitchen-sink failed ~3 PR)
-    # CIFAR10 remains off
-  nlp:
-    - Imdb
-    - Agnews
-    - Amazon
-    - Yelp
-    - 20newsgroups
+  cv: []
+  nlp: []
   classical:
-    - optdigits
-    - cover
+  - optdigits
+  - cover
   block_semi_nlp: true
-
 smc:
   semi:
-    - Waveform
-    # speech SMC revoked
-
+  - Waveform
 gate:
   unsupervised:
-    - speech
-    - ALOI
-    - optdigits
-  semi-supervised:
-    - speech
-    - ALOI
-    - CIFAR10
-
+  - speech
+  - ALOI
+  - optdigits
+  semi-supervised: []
 a6:
   nautilus:
     semi-supervised:
-      - glass
-      # wine REVOKED (−5 vs fair)
-      - Hepatitis
-      - vertebral
+    - glass
+    - Hepatitis
+    - vertebral
     unsupervised: []
   apex:
     semi-supervised:
-      # smtp REVOKED (−10 vs fair)
-      - fraud
-      - cover
+    - fraud
+    - cover
     unsupervised: []
   orbit:
-    semi-supervised:
-      - SVHN
-      - CIFAR10
-      - ALOI
-      - celeba
-      - Agnews
-      - Amazon
-      - Imdb
-      - Yelp
-      - 20newsgroups
-      - Wilt
+    semi-supervised: []
     unsupervised: []
   ridge:
     semi-supervised:
-      - SpamBase
-      - satellite
-      - yeast
+    - SpamBase
+    - satellite
+    - yeast
     unsupervised: []
   delta:
     semi-supervised:
-      - fraud
-      - cover
+    - fraud
+    - cover
     unsupervised: []
   locus:
-    semi-supervised:
-      - speech
-      - Wilt
-      - census
-      - ALOI
+    semi-supervised: []
     unsupervised: []
   spiral:
-    semi-supervised:
-      - speech
-      - Wilt
+    semi-supervised: []
     unsupervised: []
   helix:
     semi-supervised:
-      - speech
-      - CIFAR10
-      - SVHN
+    - speech
+    - celeba
+    - Amazon
+    - Yelp
+    - Agnews
+    - 20newsgroups
+    - smtp
+    - Pima
+    - letter
     unsupervised: []
-
-# Classical protect: never apply MCE/SMC/GATE/A6 overlays on these (semi)
 protect_baseline_semi:
-  - smtp
-  - donors
-  - wine
-  - http
-  - musk
-  - breastw
-  - shuttle
-  - Ionosphere
-  - Lymphography
-  - pendigits
-  - magic.gamma
-  - satimage-2
-  - vowels
-  - skin
-  - PageBlocks
+- smtp
+- donors
+- wine
+- http
+- musk
+- breastw
+- shuttle
+- Ionosphere
+- Lymphography
+- pendigits
+- magic.gamma
+- satimage-2
+- vowels
+- skin
+- PageBlocks

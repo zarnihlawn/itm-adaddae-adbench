@@ -18,9 +18,9 @@
     "contamination_est": null,
     "contamination_mode": "label_free"
   },
-  "resolved_policy": "per:semi_nlp_frozen+orbit+ftp_ov",
+  "resolved_policy": "per:baseline_ddae+ftp_ov",
   "early_stop_metric": "val_loss",
-  "vram_peak_mb": 3866.56005859375,
-  "vram_mb": 3866.56005859375,
-  "time": "2026-08-05T10:15:11.282285+00:00"
+  "vram_peak_mb": 3867.17919921875,
+  "vram_mb": 3867.17919921875,
+  "time": "2026-08-05T17:39:39.529677+00:00"
 }

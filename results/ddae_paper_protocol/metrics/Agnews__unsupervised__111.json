@@ -1,0 +1,26 @@
+{
+  "dataset": "Agnews",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 4,
+  "metrics_mean": {
+    "AP": 0.11007843264958549,
+    "ROC-AUC": 0.7099027631578948,
+    "PR-AUC": 0.10930090888594383
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": null,
+  "early_stop_metric": "train_loss",
+  "vram_peak_mb": 6019.8935546875,
+  "vram_mb": 6019.8935546875,
+  "time": "2026-08-05T11:33:16.710880+00:00"
+}
