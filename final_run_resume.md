@@ -110,6 +110,8 @@ Every assert must print **`INTEGRITY OK`**.
 cd /workspace/ITM/project
 source .venv/bin/activate
 
+bash scripts/run_adadae_per_protocol.sh dump_routing
+bash scripts/run_adadae_per_protocol.sh invalidate   # after Loop 2–7 config changes
 bash scripts/run_adadae_per_protocol.sh smoke 16gb
 bash scripts/run_adadae_per_protocol.sh ddae 16gb    # skip if already 570/570
 bash scripts/run_adadae_per_protocol.sh final 16gb   # THE one model, full 570
@@ -123,7 +125,8 @@ Or:
 bash scripts/run_adadae_per_protocol.sh all 16gb
 ```
 
-**Ship gate:** `results/adadae_per/thesis/integrity_gates.json` → `all_pass: true` (`G_paper_both`).
+**Ship gate:** `results/adadae_per/thesis/integrity_gates.json` → `all_pass: true`
+(`G-I1_complete_570` + `G_AP_PR_consistency` + `G_paper_both`).
 
 ---
 

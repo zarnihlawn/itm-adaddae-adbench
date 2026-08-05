@@ -1,18 +1,16 @@
-# AdaDDAE-PER v5.1 additive upgrades (applied on top of routed base policy).
-# Source: configs/policy_registry_v5.yaml + scripts/run_gate_protocol.sh +
-#         scripts/run_adadae_v51_protocol.sh (MCE/SMC/GATE tracks).
-version: "5.1"
+# AdaDDAE-PER additive upgrades (applied on top of routed base policy).
+# Source: v5.1 MCE/SMC/GATE + Loop-2 surgery + Loop-7 selective A6.
+version: "5.1-loop2"
 description: >
-  Single-pass encoding of the v5.1 hybrid rule stack: v4.1 routed base
-  + MCE modality targets + SMC semi tails + GATE v2 winners.
-  Semi-NLP MCE is blocked (historical regressions).
+  Single-pass PER stack: routed base + selective MCE/SMC/GATE + optional A6.
+  Semi-NLP MCE blocked. Loop-2: glass/vertebral removed from SMC (hurt vs fair);
+  CIFAR10 removed from MCE CV (hurt vs fair). Loop-7: A6 flags per-dataset.
 
 mce:
-  # dataset -> modality (classical | cv | nlp)
   cv:
     - ALOI
     - celeba
-    - CIFAR10
+    # CIFAR10 removed — blind mce_cv regressed vs fair DDAE on semi
     - SVHN
     - speech
   nlp:
@@ -24,21 +22,52 @@ mce:
   classical:
     - optdigits
     - cover
-  # Never enable MCE on semi-supervised NLP (mce_block_semi_nlp)
   block_semi_nlp: true
 
 smc:
-  # semi-supervised only
+  # semi-supervised only — glass/vertebral removed (PER mean < fair)
   semi:
-    - glass
-    - vertebral
     - Waveform
     - speech
 
 gate:
-  # GATE v2: proven unsup winners only (exclude cover/celeba disasters)
   unsupervised:
     - speech
     - ALOI
     - optdigits
   semi-supervised: []
+
+# Loop 7: selective A6 modules (default off unless listed).
+# Applied only when dataset is listed under the module key for that setting.
+a6:
+  nautilus:
+    # tiny-n classical
+    semi-supervised:
+      - glass
+      - wine
+      - Hepatitis
+      - vertebral
+    unsupervised: []
+  apex:
+    semi-supervised:
+      - speech
+      - fraud
+      - smtp
+      - cover
+    unsupervised: []
+  orbit:
+    semi-supervised:
+      - SVHN
+      - speech
+    unsupervised: []
+  ridge:
+    semi-supervised:
+      - SpamBase
+      - satellite
+      - yeast
+    unsupervised: []
+  delta:
+    semi-supervised:
+      - speech
+      - fraud
+    unsupervised: []

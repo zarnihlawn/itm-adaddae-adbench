@@ -1,0 +1,11 @@
+{
+  "pass": true,
+  "max_gap_pp": 6.0,
+  "n_checked": 570,
+  "n_bad": 0,
+  "examples": [],
+  "n_bisect_markers": 0,
+  "bisect_examples": [],
+  "note": "Quarantine |AP-PR|>6pp and v31_bisect_* fields; do not trust inflated hybrid PR. 6pp allows small sklearn-AP vs trapezoid-PR differences.",
+  "completed_path": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_per/metrics/completed.json"
+}

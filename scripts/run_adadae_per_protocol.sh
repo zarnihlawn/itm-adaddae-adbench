@@ -8,6 +8,7 @@
 #   bash scripts/run_adadae_per_protocol.sh compare
 #   bash scripts/run_adadae_per_protocol.sh gates              # paper-both ship gate
 #   bash scripts/run_adadae_per_protocol.sh dump_routing       # print policy map
+#   bash scripts/run_adadae_per_protocol.sh invalidate         # drop stale semi jobs
 #   bash scripts/run_adadae_per_protocol.sh all [hardware]
 #
 set -euo pipefail
@@ -123,7 +124,11 @@ run_gates() {
 import json, sys
 from pathlib import Path
 sys.path.insert(0, ".")
-from scripts.validate_gates import check_paper_both, check_gi1_complete_570
+from scripts.validate_gates import (
+    check_paper_both,
+    check_gi1_complete_570,
+    check_ap_pr_consistency,
+)
 
 completed_path = Path("results/adadae_per/metrics/completed.json")
 compare = Path("results/adadae_per/thesis/compare_to_ddae.json")
@@ -132,14 +137,21 @@ out = Path("results/adadae_per/thesis/integrity_gates.json")
 completed = json.loads(completed_path.read_text())["completed"]
 gates = {
     "G-I1_complete_570": check_gi1_complete_570(completed),
+    "G_AP_PR_consistency": check_ap_pr_consistency(completed),
     "G_paper_both": check_paper_both(compare),
     "model": "adadae_per",
-    "note": "Routing/MCE/SMC/GATE are intentional (frozen v5.1 rules); G-I2 skipped.",
+    "note": "Routing/MCE/SMC/GATE are intentional (frozen PER rules); G-I2 skipped. "
+            "G_AP_PR_consistency quarantines bisect-inflated PR fields.",
 }
-gates["all_pass"] = bool(gates["G-I1_complete_570"]["pass"] and gates["G_paper_both"]["pass"])
+gates["all_pass"] = bool(
+    gates["G-I1_complete_570"]["pass"]
+    and gates["G_AP_PR_consistency"]["pass"]
+    and gates["G_paper_both"]["pass"]
+)
 out.parent.mkdir(parents=True, exist_ok=True)
 out.write_text(json.dumps(gates, indent=2), encoding="utf-8")
 print(f"G-I1_complete_570: {'PASS' if gates['G-I1_complete_570']['pass'] else 'FAIL'}")
+print(f"G_AP_PR_consistency: {'PASS' if gates['G_AP_PR_consistency']['pass'] else 'FAIL'}")
 print(f"G_paper_both: {'PASS' if gates['G_paper_both']['pass'] else 'FAIL'}")
 print(f"ALL PASS: {gates['all_pass']}")
 print(f"Wrote {out}")
@@ -147,8 +159,14 @@ sys.exit(0 if gates["all_pass"] else 1)
 PY
 }
 
+run_invalidate() {
+  echo "=== Invalidate stale PER semi jobs (Loop 2/4/7 config drift) ==="
+  "$PYTHON" scripts/invalidate_per_semi_jobs.py
+}
+
 case "$MODE" in
   dump_routing) run_dump_routing ;;
+  invalidate) run_invalidate ;;
   smoke) run_smoke ;;
   ddae) run_ddae ;;
   final) run_final ;;
@@ -156,6 +174,7 @@ case "$MODE" in
   gates) run_gates ;;
   all)
     run_dump_routing
+    run_invalidate
     run_smoke
     run_ddae
     run_final
@@ -164,7 +183,7 @@ case "$MODE" in
     ;;
   *)
     echo "Unknown mode: $MODE"
-    echo "Use: dump_routing|smoke|ddae|final|compare|gates|all"
+    echo "Use: dump_routing|invalidate|smoke|ddae|final|compare|gates|all"
     exit 1
     ;;
 esac

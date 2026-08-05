@@ -1,0 +1,66 @@
+# Diagnostic only — paper-faithful DDAE protocol (NOT a ship claim).
+# Matches AnoDDAE: 100 epochs, no early stop, no val carve, full-sum L2 score.
+# Loop 3: measure how much of published semi 61.36 is recoverable vs integrity valstop.
+seed: 111
+seeds: [111, 222, 333, 444, 555]
+
+paths:
+  adbench_root: ../ADBench/adbench/datasets
+  results_dir: results/ddae_paper_protocol
+  run_id: ddae_paper_protocol
+
+train:
+  setting: semi-supervised
+  lr: 0.001
+  epochs: 100
+  eval_every: 10
+  # Effectively disable early stop (patience > epochs)
+  early_stop_patience: 1000
+  min_epochs: 100
+  val_fraction: 0.0
+  early_stop_metric: train_loss
+  contrastive: false
+  contrastive_alpha: 0.0
+  hard_negative_mining: false
+
+model:
+  hidden_dims: [512, 512]
+  latent_dim: 32
+  activation: lrelu
+
+diffusion:
+  num_timesteps: 50
+  beta_start: 0.0001
+  beta_end: 0.02
+  scheduler: linear
+  time_emb_dim: 4
+  time_emb_type: sinusoidal
+
+adadae:
+  policy: static
+  use_danc: false
+  use_scs: false
+  use_ftp: false
+  use_multiview: false
+  scs_mode: full_sum
+  scs_full_sum_ablation: true
+  use_uncertainty_view: false
+  use_dte_view: false
+  use_rejection_training: false
+  use_mce: false
+  use_gate: false
+  fusion_mode: fixed
+  fusion_weights:
+    reconstruction: 1.0
+    latent: 0.0
+    residual: 0.0
+
+features:
+  scaler: standard
+  pca_dim_threshold: 99999
+  pca_max_components: 128
+  pca_variance: 0.95
+  clip_outliers: false
+  clip_sigma: 5.0
+
+hardware: hardware_rtx5070ti.yaml

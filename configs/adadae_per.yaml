@@ -1,5 +1,5 @@
-# AdaDDAE-PER — primary single-pass model (frozen v2→v5.1 hybrid rules).
-# policy: per → dataset/family routing + MCE + SMC + GATE in one job (no merge tracks).
+# AdaDDAE-PER — primary single-pass model (frozen v2→v5.1 hybrid rules + Loop 2–7).
+# policy: per → dataset/family routing + MCE + SMC + GATE + selective A6 in one job.
 # Ship gate: beat published DDAE PR+ROC on both unsupervised and semi-supervised.
 seed: 111
 seeds: [111, 222, 333, 444, 555]
@@ -14,8 +14,12 @@ train:
   lr: 0.001
   epochs: 100
   eval_every: 10
-  early_stop_patience: 30
+  early_stop_patience: 40
+  # Loop 4: do not stop before this many epochs (val_loss still selects checkpoint)
+  min_epochs: 40
   val_fraction: 0.2
+  # Loop 4: smaller semi carve → more train normals (paper uses 0 carve)
+  val_fraction_semi: 0.1
   early_stop_metric: val_loss
   contrastive: false
   contrastive_alpha: 0.0
@@ -60,6 +64,17 @@ adadae:
   use_geode: false
   use_aether: false
   use_nexus: false
+  # A6 shell defaults off; upgrades enable per-dataset
+  use_helix: false
+  use_delta: false
+  use_apex: false
+  use_nautilus: false
+  use_torque: false
+  use_orbit: false
+  use_kale: false
+  use_ridge: false
+  use_locus: false
+  use_spiral: false
   fusion_mode: fixed
   fusion_weights:
     reconstruction: 1.0

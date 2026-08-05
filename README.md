@@ -20,7 +20,7 @@ AdaDDAE is a **named component framework** — each piece has an equation and an
 
 Full showcase: [`thesis/novelty.md`](thesis/novelty.md) · Equations: [`thesis/method.md`](thesis/method.md) · Claims map: [`thesis/claims_code_map.md`](thesis/claims_code_map.md)
 
-**Primary thesis result** = **AdaDDAE-PER** (`configs/adadae_per.yaml`, `policy: per`) — frozen v2→v5.1 hybrid rules in **one** full 570-job run (routing + MCE + SMC + GATE, no multi-track merge). Ship gate: beat published DDAE PR+ROC on **both** settings. Setting-only `adadae_champion` and legacy Tables 1–6 are archived.
+**Primary thesis result** = **AdaDDAE-PER** (`configs/adadae_per.yaml`, `policy: per`) — frozen v2→v5.1 hybrid rules in **one** full 570-job run (routing + MCE + SMC + GATE + selective A6; Loop 2–7 semi lifts). Ship gate: beat published DDAE PR+ROC on **both** settings **and** AP≈PR consistency. Do not trust bisect-inflated v5.1 hybrid PR fields.
 
 **Canonical final-run commands:** [`FINAL_RUN.md`](FINAL_RUN.md)
 

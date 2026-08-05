@@ -1,0 +1,183 @@
+{
+  "pass": false,
+  "max_gap_pp": 5.0,
+  "n_checked": 570,
+  "n_bad": 24,
+  "examples": [
+    {
+      "key": "glass__semi-supervised__222",
+      "AP": 41.77445648033883,
+      "PR-AUC": 35.73357997829102,
+      "gap_pp": 6.040876502047809,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "ftp"
+    },
+    {
+      "key": "glass__semi-supervised__555",
+      "AP": 33.29991645781119,
+      "PR-AUC": 39.33623212465699,
+      "gap_pp": 6.036315666845795,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "ftp"
+    },
+    {
+      "key": "optdigits__semi-supervised__222",
+      "AP": 31.296083899516336,
+      "PR-AUC": 42.58188037912626,
+      "gap_pp": 11.285796479609925,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "semi_cvnlp_ftp"
+    },
+    {
+      "key": "optdigits__semi-supervised__444",
+      "AP": 32.39109840144187,
+      "PR-AUC": 40.26086217744627,
+      "gap_pp": 7.8697637760043975,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "semi_cvnlp_ftp"
+    },
+    {
+      "key": "vertebral__semi-supervised__222",
+      "AP": 23.86222337850829,
+      "PR-AUC": 38.11781494069621,
+      "gap_pp": 14.255591562187924,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "semi_cvnlp_taps_004"
+    },
+    {
+      "key": "WDBC__semi-supervised__444",
+      "AP": 62.530303030303024,
+      "PR-AUC": 57.28625541125542,
+      "gap_pp": 5.244047619047606,
+      "v31_source": null,
+      "v31_bisect_candidate": null
+    },
+    {
+      "key": "Wilt__semi-supervised__111",
+      "AP": 15.90850192435567,
+      "PR-AUC": 52.796796679489624,
+      "gap_pp": 36.888294755133956,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "semi_nlp_danc"
+    },
+    {
+      "key": "Wilt__semi-supervised__222",
+      "AP": 18.627899822424492,
+      "PR-AUC": 55.64475829602294,
+      "gap_pp": 37.01685847359845,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "semi_nlp_danc"
+    },
+    {
+      "key": "Wilt__semi-supervised__333",
+      "AP": 15.475807373472097,
+      "PR-AUC": 47.20437653082541,
+      "gap_pp": 31.72856915735331,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "semi_nlp_danc"
+    },
+    {
+      "key": "Wilt__semi-supervised__444",
+      "AP": 15.178857338905658,
+      "PR-AUC": 61.73857156010156,
+      "gap_pp": 46.559714221195904,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "semi_nlp_danc"
+    },
+    {
+      "key": "Wilt__semi-supervised__555",
+      "AP": 13.153893050350012,
+      "PR-AUC": 58.99920627632862,
+      "gap_pp": 45.84531322597861,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "semi_nlp_danc"
+    },
+    {
+      "key": "CIFAR10__semi-supervised__111",
+      "AP": 21.137226946308697,
+      "PR-AUC": 26.175705657437163,
+      "gap_pp": 5.038478711128466,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "baseline_ddae"
+    },
+    {
+      "key": "CIFAR10__semi-supervised__444",
+      "AP": 20.307347379234166,
+      "PR-AUC": 25.607354292585804,
+      "gap_pp": 5.300006913351638,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "baseline_ddae"
+    },
+    {
+      "key": "20newsgroups__semi-supervised__111",
+      "AP": 18.731695798996796,
+      "PR-AUC": 29.705682549270023,
+      "gap_pp": 10.973986750273227,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "baseline_ddae"
+    },
+    {
+      "key": "20newsgroups__semi-supervised__222",
+      "AP": 18.779848902866622,
+      "PR-AUC": 28.52733036358425,
+      "gap_pp": 9.74748146071763,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "baseline_ddae"
+    },
+    {
+      "key": "20newsgroups__semi-supervised__333",
+      "AP": 18.820122325183807,
+      "PR-AUC": 30.421382703371446,
+      "gap_pp": 11.60126037818764,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "baseline_ddae"
+    },
+    {
+      "key": "20newsgroups__semi-supervised__444",
+      "AP": 18.520666133514364,
+      "PR-AUC": 26.2259722354242,
+      "gap_pp": 7.705306101909837,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "baseline_ddae"
+    },
+    {
+      "key": "20newsgroups__semi-supervised__555",
+      "AP": 18.530757879259422,
+      "PR-AUC": 28.657680825221583,
+      "gap_pp": 10.12692294596216,
+      "v31_source": "v31",
+      "v31_bisect_candidate": "baseline_ddae"
+    },
+    {
+      "key": "wine__unsupervised__444",
+      "AP": 40.60770975056689,
+      "PR-AUC": 35.47259535587959,
+      "gap_pp": 5.1351143946872995,
+      "v31_source": "v3",
+      "v31_bisect_candidate": null
+    },
+    {
+      "key": "MVTec-AD__unsupervised__111",
+      "AP": 58.593963791141825,
+      "PR-AUC": 94.0066914569804,
+      "gap_pp": 35.41272766583858,
+      "v31_source": null,
+      "v31_bisect_candidate": "unsup_baseline"
+    }
+  ],
+  "n_bisect_markers": 200,
+  "bisect_examples": [
+    "ALOI__semi-supervised__111",
+    "ALOI__semi-supervised__222",
+    "ALOI__semi-supervised__333",
+    "ALOI__semi-supervised__444",
+    "ALOI__semi-supervised__555",
+    "celeba__semi-supervised__111",
+    "celeba__semi-supervised__333",
+    "celeba__semi-supervised__444",
+    "celeba__semi-supervised__555",
+    "census__semi-supervised__111"
+  ],
+  "note": "Quarantine |AP-PR|>5pp and v31_bisect_* fields; do not trust inflated hybrid PR.",
+  "completed_path": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_v51_hybrid/metrics/completed.json"
+}

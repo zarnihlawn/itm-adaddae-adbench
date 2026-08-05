@@ -1,0 +1,141 @@
+{
+  "mode": "dry_run",
+  "candidates": [
+    "baseline_ddae",
+    "semi_cvnlp_ftp",
+    "semi_rdt_tail",
+    "semi_smc_tail"
+  ],
+  "current_per": [
+    {
+      "dataset": "glass",
+      "category": "classical",
+      "resolved_policy": "per:baseline_ddae+nautilus",
+      "use_scs": false,
+      "use_mce": false,
+      "use_nautilus": true,
+      "use_apex": false,
+      "fusion_mode": "fixed"
+    },
+    {
+      "dataset": "CIFAR10",
+      "category": "cv",
+      "resolved_policy": "per:baseline_ddae",
+      "use_scs": false,
+      "use_mce": false,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed"
+    },
+    {
+      "dataset": "WBC",
+      "category": "classical",
+      "resolved_policy": "per:baseline_ddae",
+      "use_scs": false,
+      "use_mce": false,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed"
+    },
+    {
+      "dataset": "Wilt",
+      "category": "classical",
+      "resolved_policy": "per:baseline_ddae",
+      "use_scs": false,
+      "use_mce": false,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed"
+    },
+    {
+      "dataset": "vertebral",
+      "category": "classical",
+      "resolved_policy": "per:baseline_ddae+nautilus",
+      "use_scs": false,
+      "use_mce": false,
+      "use_nautilus": true,
+      "use_apex": false,
+      "fusion_mode": "fixed"
+    },
+    {
+      "dataset": "Hepatitis",
+      "category": "classical",
+      "resolved_policy": "per:baseline_ddae+nautilus",
+      "use_scs": false,
+      "use_mce": false,
+      "use_nautilus": true,
+      "use_apex": false,
+      "fusion_mode": "fixed"
+    },
+    {
+      "dataset": "mammography",
+      "category": "classical",
+      "resolved_policy": "per:baseline_ddae",
+      "use_scs": false,
+      "use_mce": false,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed"
+    },
+    {
+      "dataset": "fraud",
+      "category": "classical",
+      "resolved_policy": "per:baseline_ddae+apex+delta",
+      "use_scs": false,
+      "use_mce": false,
+      "use_nautilus": false,
+      "use_apex": true,
+      "fusion_mode": "fixed"
+    },
+    {
+      "dataset": "Waveform",
+      "category": "classical",
+      "resolved_policy": "per:semi_rdt_tail+smc",
+      "use_scs": false,
+      "use_mce": false,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "smc"
+    },
+    {
+      "dataset": "speech",
+      "category": "cv",
+      "resolved_policy": "per:baseline_ddae+mce_cv+smc+apex+orbit+delta",
+      "use_scs": false,
+      "use_mce": true,
+      "use_nautilus": false,
+      "use_apex": true,
+      "fusion_mode": "smc"
+    },
+    {
+      "dataset": "20newsgroups",
+      "category": "nlp",
+      "resolved_policy": "per:semi_nlp_frozen",
+      "use_scs": false,
+      "use_mce": false,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed"
+    },
+    {
+      "dataset": "cover",
+      "category": "classical",
+      "resolved_policy": "per:baseline_ddae+mce_classical+apex",
+      "use_scs": false,
+      "use_mce": true,
+      "use_nautilus": false,
+      "use_apex": true,
+      "fusion_mode": "fixed"
+    },
+    {
+      "dataset": "optdigits",
+      "category": "classical",
+      "resolved_policy": "per:semi_cvnlp_ftp+mce_classical",
+      "use_scs": false,
+      "use_mce": true,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed"
+    }
+  ]
+}

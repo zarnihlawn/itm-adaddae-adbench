@@ -1,0 +1,14 @@
+{
+  "pass": true,
+  "unsupervised": {
+    "PR-AUC": 33.008737994020336,
+    "ROC-AUC": 75.16711181593035,
+    "n_jobs": 285,
+    "n_datasets": 57
+  },
+  "floor_PR": 32.77,
+  "floor_ROC": 74.08,
+  "delta_PR": 0.23873799402033313,
+  "delta_ROC": 1.0871118159303563,
+  "note": "Reject any change that drops unsup below paper."
+}

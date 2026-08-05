@@ -1,0 +1,6 @@
+{
+  "pass": true,
+  "errors": [],
+  "ano_ddae_predict": "sum L2 over t=1..T-1 (AnoDDAE/src/model.py predict)",
+  "note": "PER baseline_ddae / nlp_frozen paths force use_scs=False + scs_full_sum_ablation"
+}

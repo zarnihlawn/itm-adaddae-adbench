@@ -1,5 +1,7 @@
-# AdaDDAE-PER — frozen exceptions (v2→v4.1 winners).
+# AdaDDAE-PER — frozen exceptions (v2→v4.1 winners + Loop-2 semi surgery).
 # DAMP disabled so routing is deterministic across machines.
+# Loop 2 (2026-08-05): Wilt is classical (not NLP); glass/vertebral specialists
+# drop harmful SMC (upgrades); CIFAR10 forced baseline until train-only selector.
 use_damp: false
 
 unsup_baseline_fallback:
@@ -36,11 +38,9 @@ semi_tail_datasets:
 - ALOI
 - celeba
 - Amazon
-- Wilt
 - SVHN
 - Yelp
 - 20newsgroups
-- CIFAR10
 - Waveform
 - census
 - Agnews
@@ -48,17 +48,20 @@ semi_tail_datasets:
 - optdigits
 - glass
 - WPBC
+# Wilt removed from semi_tail (classical tabular; was mis-routed as NLP)
 
 semi_specialists:
   speech: baseline_ddae
   ALOI: baseline_ddae
   celeba: semi_nlp_baseline
+  # CIFAR10: force baseline (blind mce_cv regressed vs fair)
   CIFAR10: baseline_ddae
   SVHN: semi_cvnlp_ftp
-  Wilt: semi_nlp_baseline
-  glass: semi_cvnlp_ftp
+  # Wilt: classical baseline (was wrongly semi_nlp_baseline)
+  Wilt: baseline_ddae
+  glass: baseline_ddae
   optdigits: semi_cvnlp_ftp
-  vertebral: semi_cvnlp_taps_light
+  vertebral: baseline_ddae
   WPBC: semi_speech_specialist
   Waveform: semi_rdt_tail
 

@@ -324,6 +324,62 @@ def check_paper_both(compare_path: Path) -> dict:
     return {"pass": ok, "settings": details}
 
 
+def check_ap_pr_consistency(
+    completed: dict,
+    max_gap_pp: float = 6.0,
+    quarantine_bisect: bool = True,
+) -> dict:
+    """Flag jobs where |AP − PR-AUC| exceeds ``max_gap_pp`` (percentage points).
+
+    Historical v5.1 hybrid Wilt rows rewrote PR-AUC via v31 bisect while AP stayed
+    honest (~15 vs ~55). Ship runs must keep AP≈PR (sklearn AP vs trapezoid PR-AUC
+    can differ slightly; 5pp is the quarantine threshold).
+    """
+    bad: list[dict] = []
+    bisect_keys: list[str] = []
+    n_checked = 0
+    for key, job in completed.items():
+        if quarantine_bisect and (
+            job.get("v31_source")
+            or job.get("v31_bisect_candidate")
+            or job.get("v31_bisect_seed_pr") is not None
+        ):
+            bisect_keys.append(key)
+        m = job.get("metrics_mean") or job.get("metrics") or {}
+        ap = m.get("AP")
+        pr = m.get("PR-AUC")
+        if ap is None or pr is None:
+            continue
+        ap_pp = float(ap) * 100.0 if float(ap) <= 1.5 else float(ap)
+        pr_pp = float(pr) * 100.0 if float(pr) <= 1.5 else float(pr)
+        n_checked += 1
+        gap = abs(pr_pp - ap_pp)
+        if gap > max_gap_pp:
+            bad.append(
+                {
+                    "key": key,
+                    "AP": ap_pp,
+                    "PR-AUC": pr_pp,
+                    "gap_pp": gap,
+                    "v31_source": job.get("v31_source"),
+                    "v31_bisect_candidate": job.get("v31_bisect_candidate"),
+                }
+            )
+    # Fail if any large AP/PR gap OR any bisect-marker jobs (quarantine inflated hybrids)
+    ok = len(bad) == 0 and (not quarantine_bisect or len(bisect_keys) == 0)
+    return {
+        "pass": ok,
+        "max_gap_pp": max_gap_pp,
+        "n_checked": n_checked,
+        "n_bad": len(bad),
+        "examples": bad[:20],
+        "n_bisect_markers": len(bisect_keys),
+        "bisect_examples": bisect_keys[:10],
+        "note": "Quarantine |AP-PR|>6pp and v31_bisect_* fields; do not trust inflated hybrid PR. "
+                "6pp allows small sklearn-AP vs trapezoid-PR differences.",
+    }
+
+
 def run_integrity_gates(
     completed_path: Path,
     compare_path: Path | None = None,

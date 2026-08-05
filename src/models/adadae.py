@@ -176,6 +176,7 @@ class AdaDDAE:
         score_batch_size: int = 1024,
         memory_guard: Optional[GuardType] = None,
         early_stop_patience: int = 20,
+        min_epochs: int = 0,
         use_amp: bool = False,
         amp_dtype: str = "bfloat16",
         pin_memory: bool = False,
@@ -318,6 +319,7 @@ class AdaDDAE:
         self.score_batch_size = score_batch_size
         self.memory_guard = memory_guard or MemoryGuard()
         self.early_stop_patience = early_stop_patience
+        self.min_epochs = max(0, int(min_epochs))
         self.use_amp = use_amp and self.device.type == "cuda"
         self.amp_dtype = resolve_amp_dtype(amp_dtype) if self.use_amp else torch.float32
         self.pin_memory = pin_memory and self.device.type == "cuda"
@@ -1277,13 +1279,18 @@ class AdaDDAE:
                     **{k: v for k, v in row.items() if v is not None},
                 )
 
-            if patience >= max(1, self.early_stop_patience // max(1, self.eval_every)):
+            reached_min = (epoch + 1) >= max(0, int(getattr(self, "min_epochs", 0) or 0))
+            if (
+                reached_min
+                and patience >= max(1, self.early_stop_patience // max(1, self.eval_every))
+            ):
                 if logger:
                     logger.log(
                         "early_stop",
                         epoch=epoch + 1,
                         best_val_metric=best_metric,
                         early_stop_metric=metric_name,
+                        min_epochs=int(getattr(self, "min_epochs", 0) or 0),
                     )
                 break
 

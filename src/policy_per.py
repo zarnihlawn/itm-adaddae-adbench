@@ -85,7 +85,7 @@ def apply_per_upgrades(
     base_policy: str,
     upgrades: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
-    """Layer v5.1 MCE / SMC / GATE flags onto a routed config copy."""
+    """Layer v5.1 MCE / SMC / GATE / selective A6 flags onto a routed config copy."""
     upgrades = upgrades or load_per_upgrades()
     out = copy.deepcopy(config)
     adadae = out.setdefault("adadae", {})
@@ -119,6 +119,32 @@ def apply_per_upgrades(
     if dataset_name in gate_list:
         out.setdefault("adadae", {})["use_gate"] = True
         tags.append("gate")
+
+    # Loop 7: selective A6 (nautilus / apex / orbit / ridge / delta)
+    a6 = upgrades.get("a6") or {}
+    a6_flag_map = {
+        "nautilus": "use_nautilus",
+        "apex": "use_apex",
+        "orbit": "use_orbit",
+        "ridge": "use_ridge",
+        "delta": "use_delta",
+    }
+    for mod, flag in a6_flag_map.items():
+        ds_list = (a6.get(mod) or {}).get(setting) or []
+        if dataset_name in ds_list:
+            out.setdefault("adadae", {})[flag] = True
+            tags.append(mod)
+
+    # Loop 5: baseline / champion-style recipes must full-sum score like AnoDDAE
+    if base_policy in (
+        "baseline_ddae",
+        "semi_nlp_baseline",
+        "semi_nlp_frozen",
+        "champion_semi",
+    ):
+        out.setdefault("adadae", {})["use_scs"] = False
+        out["adadae"]["scs_mode"] = "full_sum"
+        out["adadae"]["scs_full_sum_ablation"] = True
 
     out.setdefault("adadae", {})["policy"] = "per"
     out["adadae"]["resolved_policy"] = "per:" + "+".join(tags)

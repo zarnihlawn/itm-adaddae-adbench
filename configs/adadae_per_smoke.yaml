@@ -13,7 +13,9 @@ train:
   epochs: 3
   eval_every: 1
   early_stop_patience: 2
+  min_epochs: 0
   val_fraction: 0.2
+  val_fraction_semi: 0.1
   early_stop_metric: val_loss
   contrastive: false
   contrastive_alpha: 0.0

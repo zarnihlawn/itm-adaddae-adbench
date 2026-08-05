@@ -1,0 +1,9 @@
+{
+  "pass": true,
+  "train_n": 90,
+  "test_n": 110,
+  "train_anomaly_rate": 0.0,
+  "test_anomalies": 20,
+  "all_anomalies_in_test": true,
+  "conclusion": "Semi train is normals-only (paper-faithful). No labeled anomalies in train; do not invent semi-supervised losses on train labels. Improve via better normal modeling (horizon, robust scaler, RDT, selective A6)."
+}

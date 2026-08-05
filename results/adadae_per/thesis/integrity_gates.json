@@ -1,10 +1,20 @@
 {
   "G-I1_complete_570": {
-    "pass": true,
-    "n_jobs": 570,
-    "n_dataset_setting_pairs": 114,
+    "pass": false,
+    "n_jobs": 285,
+    "n_dataset_setting_pairs": 57,
     "expected_jobs": 570,
     "incomplete_pairs": []
+  },
+  "G_AP_PR_consistency": {
+    "pass": true,
+    "max_gap_pp": 6.0,
+    "n_checked": 285,
+    "n_bad": 0,
+    "examples": [],
+    "n_bisect_markers": 0,
+    "bisect_examples": [],
+    "note": "Quarantine |AP-PR|>6pp and v31_bisect_* fields; do not trust inflated hybrid PR. 6pp allows small sklearn-AP vs trapezoid-PR differences."
   },
   "G_paper_both": {
     "pass": false,
@@ -30,6 +40,6 @@
     }
   },
   "model": "adadae_per",
-  "note": "Routing/MCE/SMC/GATE are intentional (frozen v5.1 rules); G-I2 skipped.",
+  "note": "Routing/MCE/SMC/GATE are intentional (frozen PER rules); G-I2 skipped. G_AP_PR_consistency quarantines bisect-inflated PR fields.",
   "all_pass": false
 }

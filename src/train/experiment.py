@@ -101,6 +101,7 @@ def _fit_baseline_ddae(
         score_batch_size=score_bs,
         memory_guard=guard,
         early_stop_patience=int(train_cfg.get("early_stop_patience", 20)),
+        min_epochs=int(train_cfg.get("min_epochs", 0) or 0),
         use_amp=bool(hw.get("use_amp", False)),
         amp_dtype=str(hw.get("amp_dtype", "bfloat16")),
         pin_memory=bool(hw.get("pin_memory", False)),
@@ -166,6 +167,9 @@ def run_single_file(
 
     train_cfg = config.get("train", {})
     val_fraction = float(train_cfg.get("val_fraction", 0.2))
+    # Loop 4: optional smaller carve on semi so more normals train (paper uses none).
+    if setting == "semi-supervised" and train_cfg.get("val_fraction_semi") is not None:
+        val_fraction = float(train_cfg["val_fraction_semi"])
     early_stop_metric = str(train_cfg.get("early_stop_metric", "val_loss"))
     X_fit, X_val, y_fit, y_val = carve_val_from_train(
         X_train,
@@ -413,6 +417,7 @@ def run_single_file(
         score_batch_size=score_bs,
         memory_guard=guard,
         early_stop_patience=int(train_cfg.get("early_stop_patience", 20)),
+        min_epochs=int(train_cfg.get("min_epochs", 0) or 0),
         use_amp=bool(hw.get("use_amp", False)),
         amp_dtype=str(hw.get("amp_dtype", "bfloat16")),
         pin_memory=bool(hw.get("pin_memory", False)),
