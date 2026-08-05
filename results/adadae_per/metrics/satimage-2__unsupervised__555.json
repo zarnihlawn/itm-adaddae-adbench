@@ -1,0 +1,26 @@
+{
+  "dataset": "satimage-2",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.898368986845479,
+    "ROC-AUC": 0.992331167746184,
+    "PR-AUC": 0.8979622840982187
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.02183170546709694,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.049547608789314954,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "per:unsup_ssts",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 102.75927734375,
+  "vram_mb": 102.75927734375,
+  "time": "2026-08-05T02:10:54.284990+00:00"
+}

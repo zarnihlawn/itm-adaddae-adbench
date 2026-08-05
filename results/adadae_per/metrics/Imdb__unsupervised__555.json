@@ -1,0 +1,26 @@
+{
+  "dataset": "Imdb",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.046762247902548765,
+    "ROC-AUC": 0.4965014736842105,
+    "PR-AUC": 0.04653272555608723
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "per:unsup_baseline_fallback+mce_nlp",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 2202.9501953125,
+  "vram_mb": 2202.9501953125,
+  "time": "2026-08-05T04:07:17.279353+00:00"
+}

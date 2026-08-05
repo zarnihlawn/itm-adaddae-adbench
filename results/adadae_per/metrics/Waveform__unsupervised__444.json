@@ -1,0 +1,26 @@
+{
+  "dataset": "Waveform",
+  "setting": "unsupervised",
+  "seed": 444,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.051831340364066114,
+    "ROC-AUC": 0.6662907568052647,
+    "PR-AUC": 0.04891365060178517
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.028159305988312254,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.05010893246187364,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "per:unsup_ssts",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 66.51611328125,
+  "vram_mb": 66.51611328125,
+  "time": "2026-08-05T02:30:44.164311+00:00"
+}

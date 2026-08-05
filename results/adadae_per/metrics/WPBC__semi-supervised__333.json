@@ -1,0 +1,26 @@
+{
+  "dataset": "WPBC",
+  "setting": "semi-supervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.36494042906771007,
+    "ROC-AUC": 0.5148376259798433,
+    "PR-AUC": 0.355388081608482
+  },
+  "noise": {
+    "num_timesteps": 80,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "per:semi_speech_specialist",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 62.8427734375,
+  "vram_mb": 62.8427734375,
+  "time": "2026-08-05T02:35:33.107443+00:00"
+}

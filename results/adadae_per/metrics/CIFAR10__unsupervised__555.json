@@ -1,0 +1,26 @@
+{
+  "dataset": "CIFAR10",
+  "setting": "unsupervised",
+  "seed": 555,
+  "n_splits": 10,
+  "metrics_mean": {
+    "AP": 0.06742654252011175,
+    "ROC-AUC": 0.5880544106463879,
+    "PR-AUC": 0.06645568904839014
+  },
+  "noise": {
+    "num_timesteps": 5,
+    "scheduler": "cosine",
+    "beta_start": 0.0001,
+    "beta_end": 0.023424723301228936,
+    "time_emb_dim": 8,
+    "tau_snr": 0.0005,
+    "contamination_est": 0.0501187648456057,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "per:unsup_ssts+mce_cv",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 113.36572265625,
+  "vram_mb": 113.36572265625,
+  "time": "2026-08-05T02:42:32.753821+00:00"
+}

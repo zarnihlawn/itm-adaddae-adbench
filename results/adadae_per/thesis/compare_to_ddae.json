@@ -1,0 +1,86 @@
+{
+  "published": {
+    "unsupervised": {
+      "DAE": {
+        "PR-AUC": 19.85,
+        "ROC-AUC": 63.73
+      },
+      "DDPM": {
+        "PR-AUC": 30.09,
+        "ROC-AUC": 70.01
+      },
+      "DTE-NP": {
+        "PR-AUC": 29.47,
+        "ROC-AUC": 72.15
+      },
+      "DDAE-C": {
+        "PR-AUC": 31.97,
+        "ROC-AUC": 73.72
+      },
+      "DDAE": {
+        "PR-AUC": 32.77,
+        "ROC-AUC": 74.08
+      }
+    },
+    "semi-supervised": {
+      "DAE": {
+        "PR-AUC": 59.6,
+        "ROC-AUC": 81.02
+      },
+      "DDPM": {
+        "PR-AUC": 52.41,
+        "ROC-AUC": 77.92
+      },
+      "DTE-NP": {
+        "PR-AUC": 57.13,
+        "ROC-AUC": 81.49
+      },
+      "DDAE-C": {
+        "PR-AUC": 59.48,
+        "ROC-AUC": 81.54
+      },
+      "DDAE": {
+        "PR-AUC": 61.36,
+        "ROC-AUC": 83.17
+      }
+    }
+  },
+  "adadae": [
+    {
+      "setting": "unsupervised",
+      "AdaDDAE_PR_AUC": 33.00873799402033,
+      "AdaDDAE_PR_std": 26.025525899760947,
+      "AdaDDAE_ROC_AUC": 75.16711181593037,
+      "AdaDDAE_ROC_std": 17.74237182993204,
+      "DDAE_paper_PR_AUC": 32.77,
+      "DDAE_paper_ROC_AUC": 74.08,
+      "DDAE_PR_AUC": 32.77,
+      "DDAE_ROC_AUC": 74.08,
+      "delta_PR": 0.23873799402032603,
+      "delta_ROC": 1.0871118159303705,
+      "n_datasets": 57,
+      "DDAE_fair_PR_AUC": 25.80741939270241,
+      "DDAE_fair_ROC_AUC": 69.55005023225087,
+      "delta_PR_vs_fair": 7.201318601317919,
+      "delta_ROC_vs_fair": 5.617061583679501
+    },
+    {
+      "setting": "semi-supervised",
+      "AdaDDAE_PR_AUC": 58.70450992726189,
+      "AdaDDAE_PR_std": 30.360791743590752,
+      "AdaDDAE_ROC_AUC": 82.93142847096411,
+      "AdaDDAE_ROC_std": 15.691144830768433,
+      "DDAE_paper_PR_AUC": 61.36,
+      "DDAE_paper_ROC_AUC": 83.17,
+      "DDAE_PR_AUC": 61.36,
+      "DDAE_ROC_AUC": 83.17,
+      "delta_PR": -2.655490072738111,
+      "delta_ROC": -0.23857152903589451,
+      "n_datasets": 57,
+      "DDAE_fair_PR_AUC": 58.69953928485906,
+      "DDAE_fair_ROC_AUC": 82.94020477910878,
+      "delta_PR_vs_fair": 0.0049706424028315155,
+      "delta_ROC_vs_fair": -0.008776308144675227
+    }
+  ]
+}

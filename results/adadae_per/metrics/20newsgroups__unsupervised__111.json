@@ -1,0 +1,26 @@
+{
+  "dataset": "20newsgroups",
+  "setting": "unsupervised",
+  "seed": 111,
+  "n_splits": 6,
+  "metrics_mean": {
+    "AP": 0.07223308447679877,
+    "ROC-AUC": 0.5869476629245969,
+    "PR-AUC": 0.0692906422384879
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "per:unsup_baseline_fallback+mce_nlp",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 846.64892578125,
+  "vram_mb": 846.64892578125,
+  "time": "2026-08-05T04:10:31.040126+00:00"
+}

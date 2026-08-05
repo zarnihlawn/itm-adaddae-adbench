@@ -1,0 +1,26 @@
+{
+  "dataset": "InternetAds",
+  "setting": "semi-supervised",
+  "seed": 333,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.8152068264668222,
+    "ROC-AUC": 0.8655758556891767,
+    "PR-AUC": 0.8148826073269995
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "per:baseline_ddae",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 1755.22998046875,
+  "vram_mb": 1755.22998046875,
+  "time": "2026-08-05T01:54:10.844597+00:00"
+}

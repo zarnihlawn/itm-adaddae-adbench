@@ -1,0 +1,35 @@
+{
+  "G-I1_complete_570": {
+    "pass": true,
+    "n_jobs": 570,
+    "n_dataset_setting_pairs": 114,
+    "expected_jobs": 570,
+    "incomplete_pairs": []
+  },
+  "G_paper_both": {
+    "pass": false,
+    "settings": {
+      "unsupervised": {
+        "pass": true,
+        "AdaDDAE_PR_AUC": 33.00873799402033,
+        "AdaDDAE_ROC_AUC": 75.16711181593037,
+        "paper_PR_AUC": 32.77,
+        "paper_ROC_AUC": 74.08,
+        "delta_PR": 0.23873799402032603,
+        "delta_ROC": 1.0871118159303705
+      },
+      "semi-supervised": {
+        "pass": false,
+        "AdaDDAE_PR_AUC": 58.70450992726189,
+        "AdaDDAE_ROC_AUC": 82.93142847096411,
+        "paper_PR_AUC": 61.36,
+        "paper_ROC_AUC": 83.17,
+        "delta_PR": -2.655490072738111,
+        "delta_ROC": -0.23857152903589451
+      }
+    }
+  },
+  "model": "adadae_per",
+  "note": "Routing/MCE/SMC/GATE are intentional (frozen v5.1 rules); G-I2 skipped.",
+  "all_pass": false
+}

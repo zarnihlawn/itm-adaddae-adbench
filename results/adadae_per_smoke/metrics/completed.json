@@ -1,0 +1,185 @@
+{
+  "completed": {
+    "cardio__unsupervised__111": {
+      "dataset": "cardio",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.5694846873711619,
+        "ROC-AUC": 0.9309736336171383,
+        "PR-AUC": 0.5673671603654276
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.4538348385545074,
+      "resolved_policy": "per:unsup_ssts",
+      "n_val": 366
+    },
+    "cardio__unsupervised__222": {
+      "dataset": "cardio",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.5335829025992168,
+        "ROC-AUC": 0.9166712441636913,
+        "PR-AUC": 0.53146986811926
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.5141514419206504,
+      "resolved_policy": "per:unsup_ssts",
+      "n_val": 366
+    },
+    "cardio__semi-supervised__111": {
+      "dataset": "cardio",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.7683077871285386,
+        "ROC-AUC": 0.9203035792709706,
+        "PR-AUC": 0.7677225763529694
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.14397481205788526,
+      "resolved_policy": "per:baseline_ddae",
+      "n_val": 165
+    },
+    "cardio__semi-supervised__222": {
+      "dataset": "cardio",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.7444112249436605,
+        "ROC-AUC": 0.9250452898550724,
+        "PR-AUC": 0.7433610194631922
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.14091646400364963,
+      "resolved_policy": "per:baseline_ddae",
+      "n_val": 165
+    },
+    "glass__unsupervised__111": {
+      "dataset": "glass",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.14039415200405891,
+        "ROC-AUC": 0.82710027100271,
+        "PR-AUC": 0.11477784603627009
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.128885880112648,
+      "resolved_policy": "per:unsup_baseline_fallback",
+      "n_val": 43
+    },
+    "glass__unsupervised__222": {
+      "dataset": "glass",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.24060948996752368,
+        "ROC-AUC": 0.8346883468834688,
+        "PR-AUC": 0.2261481570782272
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.1768111749443897,
+      "resolved_policy": "per:unsup_baseline_fallback",
+      "n_val": 43
+    },
+    "glass__semi-supervised__111": {
+      "dataset": "glass",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.20597172842510003,
+        "ROC-AUC": 0.7950377562028048,
+        "PR-AUC": 0.17158179070321333
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.28102047443389894,
+      "resolved_policy": "per:semi_cvnlp_ftp+smc",
+      "n_val": 20
+    },
+    "glass__semi-supervised__222": {
+      "dataset": "glass",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.35652498373086605,
+        "ROC-AUC": 0.8500539374325782,
+        "PR-AUC": 0.33262695043591833
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.38829263746738435,
+      "resolved_policy": "per:semi_cvnlp_ftp+smc",
+      "n_val": 20
+    },
+    "vertebral__unsupervised__111": {
+      "dataset": "vertebral",
+      "setting": "unsupervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.11065934689235297,
+        "ROC-AUC": 0.45904761904761904,
+        "PR-AUC": 0.10539360185900165
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.12024084975322087,
+      "resolved_policy": "per:unsup_baseline_fallback",
+      "n_val": 48
+    },
+    "vertebral__unsupervised__222": {
+      "dataset": "vertebral",
+      "setting": "unsupervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.14019415018081655,
+        "ROC-AUC": 0.44730158730158726,
+        "PR-AUC": 0.12489842080972809
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.16231598456700644,
+      "resolved_policy": "per:unsup_baseline_fallback",
+      "n_val": 48
+    },
+    "vertebral__semi-supervised__111": {
+      "dataset": "vertebral",
+      "setting": "semi-supervised",
+      "seed": 111,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.1652550749423101,
+        "ROC-AUC": 0.33999999999999997,
+        "PR-AUC": 0.1589555825984666
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.20272007087866464,
+      "resolved_policy": "per:semi_cvnlp_taps_light+smc",
+      "n_val": 21
+    },
+    "vertebral__semi-supervised__222": {
+      "dataset": "vertebral",
+      "setting": "semi-supervised",
+      "seed": 222,
+      "n_splits": 1,
+      "metrics_mean": {
+        "AP": 0.2971530965560686,
+        "ROC-AUC": 0.5895238095238095,
+        "PR-AUC": 0.28222322685662105
+      },
+      "early_stop_metric": "val_loss",
+      "best_val_metric": 0.1561211652698971,
+      "resolved_policy": "per:semi_cvnlp_taps_light+smc",
+      "n_val": 21
+    }
+  },
+  "failed": {}
+}
