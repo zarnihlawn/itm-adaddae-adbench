@@ -1,6 +1,13 @@
 {
   "pass": true,
   "errors": [],
-  "ano_ddae_predict": "sum L2 over t=1..T-1 (AnoDDAE/src/model.py predict)",
-  "note": "PER baseline_ddae / nlp_frozen paths force use_scs=False + scs_full_sum_ablation"
+  "ano_ddae_predict": {
+    "t_range": "sum L2 over t=1..T-1 (AnoDDAE/src/model.py predict)",
+    "time_emb_dim": 4,
+    "scaler": "paper fits StandardScaler on full X BEFORE split \u2014 FORBIDDEN for ship",
+    "epochs": "paper fixed 100, no val carve \u2014 FORBIDDEN as ship protocol",
+    "our_upgrade": "deterministic multi-\u03b5 mean (score_noise_draws) vs paper single stochastic draw",
+    "batch": "choose_train_batch_size \u2248 AnoDDAE get_batch_size (N/10 power-of-2)"
+  },
+  "note": "PER baseline_ddae / nlp_frozen / protect paths force use_scs=False + scs_full_sum_ablation + score_noise_draws=3 + time_emb_dim=4"
 }

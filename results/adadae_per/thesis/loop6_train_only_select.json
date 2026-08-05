@@ -10,6 +10,9 @@
   ],
   "strip_first_candidates": [
     "baseline_ddae",
+    "baseline_ddae+full_sum",
+    "baseline_ddae+contrastive",
+    "baseline_ddae+cosine",
     "semi_cvnlp_ftp",
     "semi_rdt_tail",
     "champion_semi",
@@ -130,7 +133,7 @@
     {
       "dataset": "celeba",
       "category": "classical",
-      "resolved_policy": "per:baseline_ddae+helix+ftp_ov",
+      "resolved_policy": "per:baseline_ddae+ftp_ov",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -234,7 +237,7 @@
     {
       "dataset": "Imdb",
       "category": "nlp",
-      "resolved_policy": "per:baseline_ddae+ftp_ov",
+      "resolved_policy": "per:baseline_ddae+ftp_ov+taps",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -260,7 +263,7 @@
     {
       "dataset": "Amazon",
       "category": "nlp",
-      "resolved_policy": "per:baseline_ddae+helix+ftp_ov",
+      "resolved_policy": "per:baseline_ddae+helix+ftp_ov+taps",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -286,7 +289,7 @@
     {
       "dataset": "Yelp",
       "category": "nlp",
-      "resolved_policy": "per:baseline_ddae+helix+ftp_ov",
+      "resolved_policy": "per:baseline_ddae+helix+ftp_ov+taps",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -312,7 +315,7 @@
     {
       "dataset": "Agnews",
       "category": "nlp",
-      "resolved_policy": "per:baseline_ddae+helix+ftp_ov",
+      "resolved_policy": "per:baseline_ddae+helix+ftp_ov+taps",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -338,7 +341,7 @@
     {
       "dataset": "20newsgroups",
       "category": "nlp",
-      "resolved_policy": "per:baseline_ddae+helix+ftp_ov",
+      "resolved_policy": "per:baseline_ddae+helix+ftp_ov+taps",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -364,7 +367,7 @@
     {
       "dataset": "census",
       "category": "classical",
-      "resolved_policy": "per:semi_rdt_tail+ftp_ov",
+      "resolved_policy": "per:baseline_ddae+protect+ftp_ov",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -389,14 +392,14 @@
     {
       "dataset": "vertebral",
       "category": "classical",
-      "resolved_policy": "per:baseline_ddae+nautilus",
+      "resolved_policy": "per:baseline_ddae+nautilus+cal_fuse",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
       "use_locus": false,
       "use_nautilus": true,
       "use_apex": false,
-      "fusion_mode": "fixed",
+      "fusion_mode": "calibrated",
       "features": {
         "scaler": "standard",
         "pca_dim_threshold": 99999,
@@ -414,14 +417,14 @@
     {
       "dataset": "glass",
       "category": "classical",
-      "resolved_policy": "per:baseline_ddae+nautilus",
+      "resolved_policy": "per:baseline_ddae+nautilus+cal_fuse",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
       "use_locus": false,
       "use_nautilus": true,
       "use_apex": false,
-      "fusion_mode": "fixed",
+      "fusion_mode": "calibrated",
       "features": {
         "scaler": "standard",
         "pca_dim_threshold": 99999,

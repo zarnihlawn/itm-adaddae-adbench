@@ -1,0 +1,18 @@
+{
+  "phase": 0,
+  "title": "Emergency revoke — wine/census RDT + helix strip",
+  "timestamp": "2026-08-06",
+  "reason": "val_loss-selected RDT on wine (−12.0 PR vs fair) and census (−4.0); helix on celeba/smtp hurt or unprotected",
+  "actions": {
+    "wine": "semi_rdt_tail → baseline_ddae; protect retained",
+    "census": "semi_rdt_tail → baseline_ddae; added to protect_baseline_semi",
+    "smtp": "baseline_ddae retained; helix removed; Stamps/WBC protect",
+    "Stamps": "baseline_ddae; added to protect_baseline_semi",
+    "celeba": "baseline_ddae; helix removed from upgrades",
+    "WBC": "specialist baseline_ddae; protect"
+  },
+  "invalidate_datasets": ["wine", "census", "smtp", "Stamps", "celeba", "WBC"],
+  "expected_macro_lift": "0.3–0.6 if wine+census+smtp/Stamps move toward fair",
+  "next": "Phase 1 selector reform (ε-ball + complexity + synth-val) before re-select/freeze",
+  "vast_retrain": "python scripts/run_full_protocol.py --config configs/adadae_per.yaml --hardware 16gb --datasets wine census smtp Stamps celeba WBC && bash scripts/run_adadae_per_protocol.sh compare && bash scripts/run_adadae_per_protocol.sh gates"
+}

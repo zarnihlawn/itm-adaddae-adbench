@@ -40,6 +40,37 @@ def _deep_update(base: Dict[str, Any], overrides: Dict[str, Any]) -> Dict[str, A
     return out
 
 
+def synth_val_pr_proxy(
+    model: AdaDDAE,
+    X_val: np.ndarray,
+    seed: int = 0,
+    n_synth: Optional[int] = None,
+    noise_scale: float = 3.0,
+) -> Optional[float]:
+    """Integrity-safe selection proxy: PR on val normals + synthetic anomalies.
+
+    Never uses test labels. Synthetic anomalies = val normals + Gaussian noise
+    (DIR-style perturbation). Returns PR-AUC in [0, 1] or None if val too small.
+    """
+    if X_val is None or len(X_val) < 4:
+        return None
+    rng = np.random.RandomState(int(seed) + 4242)
+    n = int(X_val.shape[0])
+    k = int(n_synth) if n_synth is not None else max(4, min(n, n // 2))
+    idx = rng.choice(n, size=min(k, n), replace=False)
+    normals = X_val[idx]
+    std = np.std(X_val, axis=0, keepdims=True) + 1e-6
+    synth = normals + rng.randn(*normals.shape).astype(np.float32) * (noise_scale * std)
+    X = np.concatenate([normals, synth], axis=0).astype(np.float32)
+    y = np.concatenate([np.zeros(len(normals)), np.ones(len(synth))]).astype(np.float32)
+    with torch.no_grad():
+        scores = model.predict(torch.tensor(X, dtype=torch.float32), score_seed=int(seed))
+    metrics = evaluate_anomaly_detection(scores.detach().cpu().numpy(), y)
+    pr = metrics.get("PR-AUC")
+    if pr is None or not np.isfinite(pr):
+        return None
+    return float(pr)
+
 def _fit_baseline_ddae(
     X_train: np.ndarray,
     X_val: np.ndarray,
@@ -402,6 +433,7 @@ def run_single_file(
         use_multiview=bool(adadae_cfg.get("use_multiview", True)),
         use_uncertainty_view=bool(adadae_cfg.get("use_uncertainty_view", False)),
         uncertainty_draws=int(adadae_cfg.get("uncertainty_draws", 3)),
+        score_noise_draws=int(adadae_cfg.get("score_noise_draws", 1)),
         use_dte_view=bool(adadae_cfg.get("use_dte_view", True)),
         dte_knn=int(adadae_cfg.get("dte_knn", 5)),
         dte_memory_size=int(adadae_cfg.get("dte_memory_size", 4096)),
@@ -524,6 +556,13 @@ def run_single_file(
     scores = model.predict(x_test_t)
     metrics = evaluate_anomaly_detection(scores.detach().cpu().numpy(), y_test)
 
+    synth_val_pr: Optional[float] = None
+    if bool(adadae_cfg.get("synth_val_proxy", False)) and X_val.size:
+        try:
+            synth_val_pr = synth_val_pr_proxy(model, X_val, seed=seed)
+        except Exception:  # noqa: BLE001
+            synth_val_pr = None
+
     gate_summary: Dict[str, Any] = {"use_gate": False}
     if adadae_cfg.get("use_gate", False):
         from ..ensemble.gate import (
@@ -599,6 +638,7 @@ def run_single_file(
         "gate": gate_summary,
         "best_val_metric": fit_info.get("best_val_metric"),
         "best_pr_auc": fit_info.get("best_pr_auc"),
+        "synth_val_pr": synth_val_pr,
         "early_stop_metric": fit_info.get("early_stop_metric", early_stop_metric),
         "rss_mb": guard.rss_mb() if hasattr(guard, "rss_mb") else None,
         "vram_mb": mem if device.type == "cuda" else None,

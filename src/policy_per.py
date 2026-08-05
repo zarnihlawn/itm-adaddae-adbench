@@ -185,6 +185,39 @@ def apply_per_upgrades(
         out.setdefault("adadae", {})["use_scs"] = False
         out["adadae"]["scs_mode"] = "full_sum"
         out["adadae"]["scs_full_sum_ablation"] = True
+        out["adadae"]["score_noise_draws"] = int(
+            out["adadae"].get("score_noise_draws") or 3
+        )
+        out.setdefault("diffusion", {})
+        if "time_emb_dim" not in out["diffusion"]:
+            out["diffusion"]["time_emb_dim"] = 4
+
+    # Phase 3 method lifts (gated lists in upgrades.yaml — never on protect)
+    lifts = upgrades.get("method_lifts") or {}
+    if not is_protected and setting == "semi-supervised":
+        if dataset_name in (lifts.get("contrastive_taps_semi") or []):
+            out.setdefault("train", {})
+            out["train"]["contrastive"] = True
+            out["train"]["contrastive_alpha"] = float(
+                lifts.get("contrastive_alpha", 0.2)
+            )
+            out["train"]["hard_negative_mining"] = False
+            out.setdefault("adadae", {})["contrastive_pairing"] = "taps"
+            tags.append("taps")
+        if dataset_name in (lifts.get("calibrated_fusion_semi") or []):
+            out.setdefault("adadae", {})["fusion_mode"] = "calibrated"
+            out["adadae"]["use_multiview"] = True
+            fw = out["adadae"].setdefault("fusion_weights", {})
+            fw.setdefault("reconstruction", 0.5)
+            fw.setdefault("residual", 0.3)
+            fw.setdefault("latent", 0.2)
+            tags.append("cal_fuse")
+        # RDT promotion allowlist only (Waveform-class); never auto-promote wine/census
+        rdt_ok = set(lifts.get("rdt_promotion_semi") or [])
+        if base_policy == "semi_rdt_tail" and dataset_name not in rdt_ok:
+            # Force off rejection for datasets not explicitly promoted
+            if dataset_name in ("wine", "census"):
+                out.setdefault("adadae", {})["use_rejection_training"] = False
 
     out.setdefault("adadae", {})["policy"] = "per"
     out["adadae"]["resolved_policy"] = "per:" + "+".join(tags)

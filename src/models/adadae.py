@@ -162,6 +162,7 @@ class AdaDDAE:
         use_multiview: bool = True,
         use_uncertainty_view: bool = False,
         uncertainty_draws: int = 3,
+        score_noise_draws: int = 1,
         use_dte_view: bool = True,
         dte_knn: int = 5,
         dte_memory_size: int = 4096,
@@ -294,6 +295,8 @@ class AdaDDAE:
             (device or torch.device("cpu")).type == "cuda" or bool(use_mirage)
         )
         self.uncertainty_draws = max(2, int(uncertainty_draws))
+        # Phase 2: multi-ε mean when uncertainty view is off (deterministic seeds).
+        self.score_noise_draws = max(1, int(score_noise_draws))
         self.use_dte_view = use_dte_view
         self.dte_knn = max(1, int(dte_knn))
         self.dte_memory_size = int(dte_memory_size)
@@ -1665,7 +1668,7 @@ class AdaDDAE:
         self._clean_x0_hat = x0_clean
         self._clean_z0 = vmf_normalize(z0) if self.use_vmf_z else z0
 
-        M = self.uncertainty_draws if self.use_uncertainty_view else 1
+        M = self.uncertainty_draws if self.use_uncertainty_view else max(1, self.score_noise_draws)
         t_grid = self._cached_t_grid if self._cached_t_grid is not None else torch.tensor(
             ts, device=self.device, dtype=torch.long
         )

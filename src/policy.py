@@ -9,7 +9,9 @@ import yaml
 
 from .config import PROJECT_ROOT
 
-# DDAE-faithful baseline (semi classical + fallbacks)
+# DDAE-faithful baseline (semi classical + fallbacks).
+# Phase 2 paper-parity (integrity-safe): time_emb_dim=4, full_sum scoring,
+# multi-ε mean (score_noise_draws), AnoDDAE-like batch via choose_train_batch_size.
 BASELINE_DDAE: Dict[str, Any] = {
     "train": {
         "contrastive": False,
@@ -32,6 +34,10 @@ BASELINE_DDAE: Dict[str, Any] = {
         "use_uncertainty_view": False,
         "use_dte_view": False,
         "use_rejection_training": False,
+        "scs_mode": "full_sum",
+        "scs_full_sum_ablation": True,
+        # Average K deterministic noise draws (AnoDDAE uses 1 stochastic draw).
+        "score_noise_draws": 3,
         "fusion_mode": "fixed",
         "fusion_weights": {
             "reconstruction": 1.0,
@@ -110,6 +116,9 @@ CHAMPION_SEMI: Dict[str, Any] = {
         "use_uncertainty_view": False,
         "use_dte_view": False,
         "use_rejection_training": False,
+        "scs_mode": "full_sum",
+        "scs_full_sum_ablation": True,
+        "score_noise_draws": 3,
         "use_chronos": False,
         "use_geode": False,
         "use_aether": False,

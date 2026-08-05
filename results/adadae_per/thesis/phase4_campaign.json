@@ -1,0 +1,23 @@
+{
+  "phase": 4,
+  "title": "Vast campaign order after local ultimate-plan implementation",
+  "timestamp": "2026-08-06",
+  "probe_semi_floor": 60.5,
+  "do_not_full_ship_until_probe_clears_floor": true,
+  "vast_commands": [
+    "cd /data/ITM/project || cd /workspace/ITM/project",
+    "git pull origin main   # stash local select edits first if needed",
+    "source .venv/bin/activate",
+    "bash scripts/run_hard_tail_ship_path.sh phase0 16gb",
+    "bash scripts/run_hard_tail_ship_path.sh select 16gb",
+    "bash scripts/run_hard_tail_ship_path.sh freeze",
+    "bash scripts/run_hard_tail_ship_path.sh probe 16gb",
+    "bash scripts/run_hard_tail_ship_path.sh ship 16gb   # only if probe floor PASS",
+    "bash scripts/run_hard_tail_ship_path.sh paper-diag 16gb   # appendix, optional parallel"
+  ],
+  "mid_tier_expand_if_probe_ge_60.5": [
+    "WBC", "annthyroid", "campaign", "yeast", "MVTec-AD", "cardio"
+  ],
+  "ship_pass": "results/adadae_per/thesis/integrity_gates.json all_pass true",
+  "thesis_fallback": "If plateau 60.0–60.8 under integrity: claim beat-fair + ablations; paper gap as protocol-tax appendix — never cheat with full-X scaler or test-PR stop"
+}

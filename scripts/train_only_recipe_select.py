@@ -70,11 +70,31 @@ OVERLAY_CANDIDATES: Dict[str, Dict[str, Any]] = {
     "orbit": {"adadae": {"use_orbit": True, "use_multiview": True}},
     "locus": {"adadae": {"use_locus": True, "use_multiview": True}},
     "helix": {"adadae": {"use_helix": True}},
+    "contrastive": {
+        "train": {
+            "contrastive": True,
+            "contrastive_alpha": 0.2,
+            "hard_negative_mining": False,
+        },
+        "adadae": {"contrastive_pairing": "taps"},
+    },
+    "full_sum": {
+        "adadae": {
+            "use_scs": False,
+            "scs_mode": "full_sum",
+            "scs_full_sum_ablation": True,
+            "score_noise_draws": 3,
+        }
+    },
+    "cosine": {"diffusion": {"scheduler": "cosine"}},
 }
 
 # Default search: plain bases + base+one overlay (no MCE/GATE — static cfg)
 STRIP_FIRST_CANDIDATES = [
     "baseline_ddae",
+    "baseline_ddae+full_sum",
+    "baseline_ddae+contrastive",
+    "baseline_ddae+cosine",
     "semi_cvnlp_ftp",
     "semi_rdt_tail",
     "champion_semi",
@@ -88,6 +108,109 @@ STRIP_FIRST_CANDIDATES = [
     "semi_cvnlp_ftp+locus",
     "semi_cvnlp_ftp+helix",
 ]
+
+# Complexity prior: lower is preferred within ε-ball of best val_loss
+_BASE_COMPLEXITY = {
+    "baseline_ddae": 0,
+    "champion_semi": 1,
+    "semi_cvnlp_ftp": 2,
+    "semi_smc_tail": 3,
+    "semi_rdt_tail": 4,
+    "semi_speech_specialist": 4,
+}
+_OVERLAY_COMPLEXITY = {
+    "full_sum": 0,
+    "cosine": 1,
+    "contrastive": 2,
+    "helix": 3,
+    "orbit": 4,
+    "locus": 4,
+    "spiral": 4,
+    "nautilus": 5,
+}
+_RISKY_BASES = {"semi_rdt_tail", "semi_smc_tail", "semi_speech_specialist"}
+_RISKY_TOKENS = {"mce", "gate", "rdt"}
+
+
+def recipe_complexity(cand: str) -> int:
+    parts = [p for p in cand.split("+") if p]
+    if not parts:
+        return 99
+    base = parts[0]
+    score = _BASE_COMPLEXITY.get(base, 5)
+    for ov in parts[1:]:
+        score += _OVERLAY_COMPLEXITY.get(ov, 3)
+    return score
+
+
+def is_risky_recipe(cand: str) -> bool:
+    parts = cand.split("+")
+    if parts and parts[0] in _RISKY_BASES:
+        return True
+    return any(tok in _RISKY_TOKENS for tok in parts)
+
+
+def pick_winner_with_proxies(
+    means_val: Dict[str, float],
+    means_synth: Dict[str, float],
+    eps_rel: float = 0.05,
+    rdt_veto_margin: float = 0.05,
+) -> tuple[str, Dict[str, Any]]:
+    """Primary: min val_loss. Secondary: ε-ball → complexity → synth-val PR.
+
+    Hard veto: risky recipes whose synth-val PR is worse than best baseline_*
+    by ``rdt_veto_margin`` are discarded even if val_loss wins.
+    """
+    finite = {c: m for c, m in means_val.items() if m != float("inf")}
+    if not finite:
+        raise ValueError("no finite val_loss")
+
+    baseline_synths = [
+        means_synth[c]
+        for c in finite
+        if c.startswith("baseline_ddae") and c in means_synth and means_synth[c] is not None
+    ]
+    best_baseline_synth = max(baseline_synths) if baseline_synths else None
+
+    eligible = dict(finite)
+    vetoed: List[str] = []
+    if best_baseline_synth is not None:
+        for c in list(eligible):
+            if not is_risky_recipe(c):
+                continue
+            syn = means_synth.get(c)
+            if syn is None:
+                continue
+            if syn + rdt_veto_margin < best_baseline_synth:
+                vetoed.append(c)
+                eligible.pop(c, None)
+    if not eligible:
+        eligible = dict(finite)
+
+    best_val = min(eligible.values())
+    ball = [
+        c
+        for c, v in eligible.items()
+        if v <= best_val * (1.0 + eps_rel) or abs(v - best_val) <= 1e-9
+    ]
+    # Prefer lower complexity; break ties with higher synth-val PR, then lower val_loss
+    def sort_key(c: str) -> tuple:
+        syn = means_synth.get(c)
+        syn_rank = -(syn if syn is not None else -1.0)
+        return (recipe_complexity(c), syn_rank, eligible[c], c)
+
+    ball.sort(key=sort_key)
+    winner = ball[0]
+    return winner, {
+        "eps_rel": eps_rel,
+        "best_val_loss": best_val,
+        "epsilon_ball": ball,
+        "vetoed_risky": vetoed,
+        "best_baseline_synth_pr": best_baseline_synth,
+        "winner_complexity": recipe_complexity(winner),
+        "winner_synth_val_pr": means_synth.get(winner),
+    }
+
 
 # Evidence freeze when GPU selection cannot run (ablate-first revision for CV)
 EVIDENCE_FREEZE: Dict[str, Dict[str, Any]] = {
@@ -126,7 +249,12 @@ EVIDENCE_FREEZE: Dict[str, Dict[str, Any]] = {
         "overlays": ["orbit", "locus", "spiral"],
         "reason": "keep winning RDT stack",
     },
-    "census": {"policy": "baseline_ddae", "overlays": ["locus"], "reason": "baseline+locus"},
+    "census": {
+        "policy": "baseline_ddae",
+        "overlays": [],
+        "strip_mce_gate": True,
+        "reason": "Phase0: RDT hurt test PR — baseline only until synth-val clears",
+    },
     "vertebral": {
         "policy": "baseline_ddae",
         "overlays": ["nautilus"],
@@ -164,7 +292,7 @@ EVIDENCE_FREEZE: Dict[str, Dict[str, Any]] = {
         "policy": "baseline_ddae",
         "overlays": [],
         "strip_mce_gate": True,
-        "reason": "protect loser — baseline only",
+        "reason": "Phase0: RDT −12 PR vs fair — never re-select RDT by val_loss alone",
     },
     "Pima": {
         "policy": "baseline_ddae",
@@ -272,7 +400,7 @@ def evidence_freeze_report() -> Dict[str, Any]:
         "mode": "evidence_freeze",
         "note": (
             "Ablate-first evidence freeze (CV strip MCE/GATE). "
-            "Re-run --preset ship on Vast GPU for val_loss winners."
+            "Re-run --preset ship on Vast GPU for val_loss+synth winners."
         ),
         "winners": EVIDENCE_FREEZE,
         "protect_baseline_semi": [
@@ -291,13 +419,23 @@ def evidence_freeze_report() -> Dict[str, Any]:
             "vowels",
             "skin",
             "PageBlocks",
+            "Stamps",
+            "WBC",
+            "census",
         ],
         "revoked": {
-            "smtp": "apex (−10.3 vs fair)",
-            "wine": "nautilus (−5.0 vs fair)",
+            "smtp": "apex (−10.3 vs fair); helix stripped Phase0",
+            "wine": "nautilus (−5.0) + RDT Phase0 (−12.0 vs fair) → baseline_ddae",
+            "census": "RDT Phase0 (−4.0 vs fair) → baseline_ddae",
             "speech": "mce+smc+apex+orbit+delta kitchen-sink",
             "SVHN": "mce+orbit+helix kitchen-sink (−4.57 vs fair)",
             "ALOI": "mce+gate+orbit+locus kitchen-sink (−2.98 vs fair)",
+            "celeba": "helix stripped Phase0",
+        },
+        "selection_contract": {
+            "primary": "val_loss",
+            "secondary": "eps_ball + complexity + synth_val_pr",
+            "never": "test-PR",
         },
         "sets": {
             "hard_tail_12": HARD_TAIL_12,
@@ -321,9 +459,12 @@ def _build_candidate_cfg(base_cfg: Dict[str, Any], cand: str) -> Dict[str, Any]:
     # Explicit strip: no MCE/GATE/SMC from PER upgrades (static)
     cfg["adadae"]["use_mce"] = False
     cfg["adadae"]["use_gate"] = False
+    # Phase 1: enable integrity-safe synth-val PR proxy for ranking
+    cfg["adadae"]["synth_val_proxy"] = True
     cfg = _deep_update(cfg, policy_overrides(base))
     cfg.setdefault("adadae", {})["use_mce"] = False
     cfg["adadae"]["use_gate"] = False
+    cfg["adadae"]["synth_val_proxy"] = True
     for ov in parts[1:]:
         if ov in OVERLAY_CANDIDATES:
             cfg = _deep_update(cfg, OVERLAY_CANDIDATES[ov])
@@ -348,6 +489,8 @@ def run_selection(
     hardware: Optional[str],
     candidates: Optional[List[str]] = None,
     max_splits: int = 1,
+    eps_rel: float = 0.05,
+    rdt_veto_margin: float = 0.05,
 ) -> Dict[str, Any]:
     from src.config import load_config
     from src.data.datasets import build_registry
@@ -371,7 +514,14 @@ def run_selection(
     by_name = {e.name: e for e in registry}
     results: Dict[str, Any] = {
         "mode": "gpu_val_loss_select",
-        "selection_metric": "val_loss",
+        "selection_metric": "val_loss+eps_complexity+synth_val_pr",
+        "selection_contract": {
+            "primary": "minimize val_loss",
+            "epsilon_ball_rel": eps_rel,
+            "secondary": ["complexity_prior", "maximize synth_val_pr"],
+            "hard_veto": "risky RDT/MCE/GATE if synth_val_pr << baseline",
+            "never": "test-PR selection",
+        },
         "winners": {},
         "jobs": [],
         "failures": [],
@@ -396,14 +546,16 @@ def run_selection(
             continue
 
         ds_votes: Dict[str, List[float]] = {c: [] for c in cands}
+        ds_synths: Dict[str, List[float]] = {c: [] for c in cands}
         for seed in seeds:
-            best_name = None
-            best_val = float("inf")
+            seed_vals: Dict[str, float] = {}
+            seed_synths: Dict[str, float] = {}
             for cand in cands:
                 cfg = _build_candidate_cfg(base, cand)
                 set_seed(seed)
                 split_vals: List[float] = []
                 split_prs: List[float] = []
+                split_synths: List[float] = []
                 last_exc: Optional[str] = None
                 for rel in rels:
                     try:
@@ -443,6 +595,9 @@ def run_selection(
                     pr = (out.get("metrics") or {}).get("PR-AUC")
                     if pr is not None:
                         split_prs.append(float(pr))
+                    syn = out.get("synth_val_pr")
+                    if syn is not None:
+                        split_synths.append(float(syn))
                     results["n_ok"] += 1
                     cleanup_memory()
 
@@ -450,41 +605,72 @@ def run_selection(
                     continue
                 val = sum(split_vals) / len(split_vals)
                 ds_votes[cand].append(val)
+                seed_vals[cand] = val
+                syn_mean = (
+                    sum(split_synths) / len(split_synths) if split_synths else None
+                )
+                if syn_mean is not None:
+                    ds_synths[cand].append(syn_mean)
+                    seed_synths[cand] = syn_mean
                 results["jobs"].append(
                     {
                         "dataset": ds,
                         "seed": seed,
                         "candidate": cand,
                         "val_loss": val,
+                        "synth_val_pr": syn_mean,
                         "PR": (sum(split_prs) / len(split_prs)) if split_prs else None,
                         "n_splits": len(split_vals),
+                        "complexity": recipe_complexity(cand),
                     }
                 )
-                if val < best_val:
-                    best_val = val
-                    best_name = cand
-            if best_name:
-                results.setdefault("_seed_winners", {}).setdefault(ds, []).append(best_name)
+
+            if seed_vals:
+                try:
+                    seed_winner, _meta = pick_winner_with_proxies(
+                        {c: seed_vals.get(c, float("inf")) for c in cands},
+                        {c: seed_synths.get(c) for c in cands},  # type: ignore[arg-type]
+                        eps_rel=eps_rel,
+                        rdt_veto_margin=rdt_veto_margin,
+                    )
+                    results.setdefault("_seed_winners", {}).setdefault(ds, []).append(
+                        seed_winner
+                    )
+                except ValueError:
+                    pass
 
         means = {c: (sum(v) / len(v) if v else float("inf")) for c, v in ds_votes.items()}
+        means_synth = {
+            c: (sum(v) / len(v) if v else None) for c, v in ds_synths.items()
+        }
         finite = {c: m for c, m in means.items() if m != float("inf")}
         if not finite:
             print(f"ERROR {ds}: all candidates failed (no finite val_loss)")
             results["winners"][ds] = {
                 "policy": None,
                 "mean_val_loss": means,
+                "mean_synth_val_pr": means_synth,
                 "strip_mce_gate": True,
                 "category": cat,
                 "error": "all_candidates_failed",
             }
             continue
-        winner = min(finite, key=finite.get)
+        winner, pick_meta = pick_winner_with_proxies(
+            means, means_synth, eps_rel=eps_rel, rdt_veto_margin=rdt_veto_margin
+        )
         results["winners"][ds] = {
             "policy": winner,
             "mean_val_loss": means,
+            "mean_synth_val_pr": means_synth,
             "strip_mce_gate": True,
             "category": cat,
+            "selection": pick_meta,
         }
+        print(
+            f"WINNER {ds}: {winner} val={means[winner]:.6g} "
+            f"synth={means_synth.get(winner)} complexity={recipe_complexity(winner)} "
+            f"vetoed={pick_meta.get('vetoed_risky')}"
+        )
     return results
 
 
@@ -513,6 +699,18 @@ def main() -> int:
         default=None,
         help="Override strip-first candidate list",
     )
+    p.add_argument(
+        "--eps-rel",
+        type=float,
+        default=0.05,
+        help="Relative ε-ball around best val_loss for secondary ranking (default 0.05)",
+    )
+    p.add_argument(
+        "--rdt-veto-margin",
+        type=float,
+        default=0.05,
+        help="Synth-val PR margin: veto risky recipes this far below baseline",
+    )
     args = p.parse_args()
 
     if args.dry_run:
@@ -536,6 +734,8 @@ def main() -> int:
             args.hardware,
             args.candidates,
             max_splits=args.max_splits,
+            eps_rel=float(args.eps_rel),
+            rdt_veto_margin=float(args.rdt_veto_margin),
         )
         out = PROJECT_ROOT / "results/adadae_per/thesis/phase1_hard_freeze.json"
         n_winners = sum(

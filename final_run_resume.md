@@ -106,17 +106,20 @@ Every assert must print **`INTEGRITY OK`**.
 
 ## 4. Production sequence
 
-**Preferred (close ~2.18 semi PR):** ablate-first GPU select → freeze (strip MCE/GATE) → invalidate → retrain — full sheet in [`FINAL_RUN.md`](FINAL_RUN.md).
+**Preferred (close ~2.18 semi PR):** Phase0 revoke → GPU select (val_loss+synth) → freeze → probe (≥60.5) → ship — full sheet in [`FINAL_RUN.md`](FINAL_RUN.md).
 
 ```bash
-# Appendix: protocol tax
+# Phase 0: wine/census RDT revoke + cheap retrain
+bash scripts/run_hard_tail_ship_path.sh phase0 16gb
+
+# Appendix: protocol tax (not ship)
 bash scripts/run_hard_tail_ship_path.sh paper-diag 16gb
 
 # Ship glue
 bash scripts/run_hard_tail_ship_path.sh select 16gb
 bash scripts/run_hard_tail_ship_path.sh freeze
-bash scripts/run_hard_tail_ship_path.sh probe 16gb   # sanity
-bash scripts/run_hard_tail_ship_path.sh ship 16gb    # --all-semi + 570 + gates
+bash scripts/run_hard_tail_ship_path.sh probe 16gb   # exits 1 if semi PR < 60.5
+bash scripts/run_hard_tail_ship_path.sh ship 16gb    # refuses if probe floor fails
 ```
 
 Legacy kitchen-sink:
@@ -128,7 +131,11 @@ bash scripts/run_adadae_per_protocol.sh all 16gb
 **Ship gate:** `results/adadae_per/thesis/integrity_gates.json` → `all_pass: true`
 (`G-I1_complete_570` + `G_AP_PR_consistency` + `G_paper_both`).
 
-Weakness catalog: `results/adadae_per/thesis/weakness_catalog_20.json`.---
+**Probe floor:** `results/adadae_per/thesis/phase4_probe_gate.json` (semi PR ≥ 60.5).
+
+Weakness catalog: `results/adadae_per/thesis/weakness_catalog_20.json`.
+
+---
 
 ## 5. Resume
 
