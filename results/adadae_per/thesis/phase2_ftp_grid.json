@@ -1,0 +1,20 @@
+{
+  "phase": 2,
+  "pass": true,
+  "note": "Feature/train overrides encoded in configs/adadae_per_exceptions.yaml (feature_overrides, train_overrides). unit_norm supported in FTP pipeline.",
+  "overrides": {
+    "speech": {"scaler": "robust", "unit_norm": true, "min_epochs": 60, "val_fraction_semi": 0.05},
+    "ALOI": {"scaler": "robust", "unit_norm": true, "min_epochs": 60, "val_fraction_semi": 0.05},
+    "Wilt": {"scaler": "robust", "clip_sigma": 3.0, "min_epochs": 60},
+    "CIFAR10": {"pca_variance": 0.90, "unit_norm": true, "min_epochs": 60, "val_fraction_semi": 0.05},
+    "SVHN": {"pca_variance": 0.90, "unit_norm": true, "min_epochs": 60, "val_fraction_semi": 0.05},
+    "celeba": {"pca_variance": 0.90, "unit_norm": true},
+    "NLP_*": {"unit_norm": true, "pca_variance": 0.95},
+    "donors_smtp": {"val_fraction_semi": 0.2, "protect": true}
+  },
+  "code": [
+    "src/features/pipeline.py (unit_norm)",
+    "src/policy_per.py (feature_overrides/train_overrides)",
+    "src/train/experiment.py (route before carve)"
+  ]
+}

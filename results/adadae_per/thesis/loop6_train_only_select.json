@@ -1,51 +1,324 @@
 {
   "mode": "dry_run",
-  "candidates": [
+  "base_candidates": [
     "baseline_ddae",
     "semi_cvnlp_ftp",
     "semi_rdt_tail",
-    "semi_smc_tail"
+    "semi_smc_tail",
+    "champion_semi",
+    "semi_speech_specialist"
   ],
   "current_per": [
     {
-      "dataset": "glass",
-      "category": "classical",
-      "resolved_policy": "per:baseline_ddae+nautilus",
-      "use_scs": false,
-      "use_mce": false,
-      "use_nautilus": true,
-      "use_apex": false,
-      "fusion_mode": "fixed"
-    },
-    {
-      "dataset": "CIFAR10",
+      "dataset": "speech",
       "category": "cv",
-      "resolved_policy": "per:baseline_ddae",
+      "resolved_policy": "per:semi_rdt_tail+gate+locus+spiral+helix+ftp_ov+train_ov",
       "use_scs": false,
       "use_mce": false,
+      "use_orbit": false,
+      "use_locus": true,
       "use_nautilus": false,
       "use_apex": false,
-      "fusion_mode": "fixed"
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "robust",
+        "pca_dim_threshold": 128,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": true,
+        "clip_sigma": 5.0,
+        "unit_norm": true
+      },
+      "train_ov": {
+        "min_epochs": 60,
+        "val_fraction_semi": 0.05,
+        "early_stop_patience": 50
+      }
     },
     {
-      "dataset": "WBC",
-      "category": "classical",
-      "resolved_policy": "per:baseline_ddae",
+      "dataset": "celeba",
+      "category": "cv",
+      "resolved_policy": "per:semi_cvnlp_ftp+mce_cv+orbit+ftp_ov",
       "use_scs": false,
-      "use_mce": false,
+      "use_mce": true,
+      "use_orbit": true,
+      "use_locus": false,
       "use_nautilus": false,
       "use_apex": false,
-      "fusion_mode": "fixed"
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "standard",
+        "pca_dim_threshold": 128,
+        "pca_max_components": 128,
+        "pca_variance": 0.9,
+        "clip_outliers": true,
+        "clip_sigma": 5.0,
+        "unit_norm": true
+      },
+      "train_ov": {
+        "min_epochs": 40,
+        "val_fraction_semi": 0.1,
+        "early_stop_patience": 40
+      }
+    },
+    {
+      "dataset": "Imdb",
+      "category": "nlp",
+      "resolved_policy": "per:semi_nlp_frozen+orbit+ftp_ov",
+      "use_scs": false,
+      "use_mce": false,
+      "use_orbit": true,
+      "use_locus": false,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "standard",
+        "pca_dim_threshold": 128,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": false,
+        "clip_sigma": 5.0,
+        "unit_norm": true
+      },
+      "train_ov": {
+        "min_epochs": 40,
+        "val_fraction_semi": 0.1,
+        "early_stop_patience": 40
+      }
+    },
+    {
+      "dataset": "ALOI",
+      "category": "cv",
+      "resolved_policy": "per:semi_rdt_tail+mce_cv+gate+orbit+locus+ftp_ov+train_ov",
+      "use_scs": false,
+      "use_mce": true,
+      "use_orbit": true,
+      "use_locus": true,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "robust",
+        "pca_dim_threshold": 128,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": true,
+        "clip_sigma": 5.0,
+        "unit_norm": true
+      },
+      "train_ov": {
+        "min_epochs": 60,
+        "val_fraction_semi": 0.05,
+        "early_stop_patience": 40
+      }
+    },
+    {
+      "dataset": "Amazon",
+      "category": "nlp",
+      "resolved_policy": "per:semi_nlp_frozen+orbit+ftp_ov",
+      "use_scs": false,
+      "use_mce": false,
+      "use_orbit": true,
+      "use_locus": false,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "standard",
+        "pca_dim_threshold": 128,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": false,
+        "clip_sigma": 5.0,
+        "unit_norm": true
+      },
+      "train_ov": {
+        "min_epochs": 40,
+        "val_fraction_semi": 0.1,
+        "early_stop_patience": 40
+      }
     },
     {
       "dataset": "Wilt",
       "category": "classical",
-      "resolved_policy": "per:baseline_ddae",
+      "resolved_policy": "per:semi_rdt_tail+orbit+locus+spiral+ftp_ov+train_ov",
       "use_scs": false,
       "use_mce": false,
+      "use_orbit": true,
+      "use_locus": true,
       "use_nautilus": false,
       "use_apex": false,
-      "fusion_mode": "fixed"
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "robust",
+        "pca_dim_threshold": 99999,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": true,
+        "clip_sigma": 3.0,
+        "unit_norm": false
+      },
+      "train_ov": {
+        "min_epochs": 60,
+        "val_fraction_semi": 0.1,
+        "early_stop_patience": 40
+      }
+    },
+    {
+      "dataset": "SVHN",
+      "category": "cv",
+      "resolved_policy": "per:semi_cvnlp_ftp+mce_cv+orbit+helix+ftp_ov+train_ov",
+      "use_scs": false,
+      "use_mce": true,
+      "use_orbit": true,
+      "use_locus": false,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "standard",
+        "pca_dim_threshold": 128,
+        "pca_max_components": 128,
+        "pca_variance": 0.9,
+        "clip_outliers": true,
+        "clip_sigma": 5.0,
+        "unit_norm": true
+      },
+      "train_ov": {
+        "min_epochs": 60,
+        "val_fraction_semi": 0.05,
+        "early_stop_patience": 40
+      }
+    },
+    {
+      "dataset": "Yelp",
+      "category": "nlp",
+      "resolved_policy": "per:semi_nlp_frozen+orbit+ftp_ov",
+      "use_scs": false,
+      "use_mce": false,
+      "use_orbit": true,
+      "use_locus": false,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "standard",
+        "pca_dim_threshold": 128,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": false,
+        "clip_sigma": 5.0,
+        "unit_norm": true
+      },
+      "train_ov": {
+        "min_epochs": 40,
+        "val_fraction_semi": 0.1,
+        "early_stop_patience": 40
+      }
+    },
+    {
+      "dataset": "20newsgroups",
+      "category": "nlp",
+      "resolved_policy": "per:semi_nlp_frozen+orbit+ftp_ov",
+      "use_scs": false,
+      "use_mce": false,
+      "use_orbit": true,
+      "use_locus": false,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "standard",
+        "pca_dim_threshold": 128,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": false,
+        "clip_sigma": 5.0,
+        "unit_norm": true
+      },
+      "train_ov": {
+        "min_epochs": 40,
+        "val_fraction_semi": 0.1,
+        "early_stop_patience": 40
+      }
+    },
+    {
+      "dataset": "CIFAR10",
+      "category": "cv",
+      "resolved_policy": "per:semi_cvnlp_ftp+gate+orbit+helix+ftp_ov+train_ov",
+      "use_scs": false,
+      "use_mce": false,
+      "use_orbit": true,
+      "use_locus": false,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "standard",
+        "pca_dim_threshold": 128,
+        "pca_max_components": 128,
+        "pca_variance": 0.9,
+        "clip_outliers": true,
+        "clip_sigma": 5.0,
+        "unit_norm": true
+      },
+      "train_ov": {
+        "min_epochs": 60,
+        "val_fraction_semi": 0.05,
+        "early_stop_patience": 40
+      }
+    },
+    {
+      "dataset": "census",
+      "category": "classical",
+      "resolved_policy": "per:baseline_ddae+locus+ftp_ov",
+      "use_scs": false,
+      "use_mce": false,
+      "use_orbit": false,
+      "use_locus": true,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "robust",
+        "pca_dim_threshold": 99999,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": true,
+        "clip_sigma": 5.0
+      },
+      "train_ov": {
+        "min_epochs": 40,
+        "val_fraction_semi": 0.1,
+        "early_stop_patience": 40
+      }
+    },
+    {
+      "dataset": "Agnews",
+      "category": "nlp",
+      "resolved_policy": "per:semi_nlp_frozen+orbit+ftp_ov",
+      "use_scs": false,
+      "use_mce": false,
+      "use_orbit": true,
+      "use_locus": false,
+      "use_nautilus": false,
+      "use_apex": false,
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "standard",
+        "pca_dim_threshold": 128,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": false,
+        "clip_sigma": 5.0,
+        "unit_norm": true
+      },
+      "train_ov": {
+        "min_epochs": 40,
+        "val_fraction_semi": 0.1,
+        "early_stop_patience": 40
+      }
     },
     {
       "dataset": "vertebral",
@@ -53,89 +326,74 @@
       "resolved_policy": "per:baseline_ddae+nautilus",
       "use_scs": false,
       "use_mce": false,
+      "use_orbit": false,
+      "use_locus": false,
       "use_nautilus": true,
       "use_apex": false,
-      "fusion_mode": "fixed"
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "standard",
+        "pca_dim_threshold": 99999,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": false,
+        "clip_sigma": 5.0
+      },
+      "train_ov": {
+        "min_epochs": 40,
+        "val_fraction_semi": 0.1,
+        "early_stop_patience": 40
+      }
     },
     {
-      "dataset": "Hepatitis",
+      "dataset": "glass",
       "category": "classical",
       "resolved_policy": "per:baseline_ddae+nautilus",
       "use_scs": false,
       "use_mce": false,
+      "use_orbit": false,
+      "use_locus": false,
       "use_nautilus": true,
       "use_apex": false,
-      "fusion_mode": "fixed"
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "standard",
+        "pca_dim_threshold": 99999,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": false,
+        "clip_sigma": 5.0
+      },
+      "train_ov": {
+        "min_epochs": 40,
+        "val_fraction_semi": 0.1,
+        "early_stop_patience": 40
+      }
     },
     {
-      "dataset": "mammography",
+      "dataset": "WPBC",
       "category": "classical",
-      "resolved_policy": "per:baseline_ddae",
+      "resolved_policy": "per:semi_speech_specialist",
       "use_scs": false,
       "use_mce": false,
+      "use_orbit": false,
+      "use_locus": false,
       "use_nautilus": false,
       "use_apex": false,
-      "fusion_mode": "fixed"
-    },
-    {
-      "dataset": "fraud",
-      "category": "classical",
-      "resolved_policy": "per:baseline_ddae+apex+delta",
-      "use_scs": false,
-      "use_mce": false,
-      "use_nautilus": false,
-      "use_apex": true,
-      "fusion_mode": "fixed"
-    },
-    {
-      "dataset": "Waveform",
-      "category": "classical",
-      "resolved_policy": "per:semi_rdt_tail+smc",
-      "use_scs": false,
-      "use_mce": false,
-      "use_nautilus": false,
-      "use_apex": false,
-      "fusion_mode": "smc"
-    },
-    {
-      "dataset": "speech",
-      "category": "cv",
-      "resolved_policy": "per:baseline_ddae+mce_cv+smc+apex+orbit+delta",
-      "use_scs": false,
-      "use_mce": true,
-      "use_nautilus": false,
-      "use_apex": true,
-      "fusion_mode": "smc"
-    },
-    {
-      "dataset": "20newsgroups",
-      "category": "nlp",
-      "resolved_policy": "per:semi_nlp_frozen",
-      "use_scs": false,
-      "use_mce": false,
-      "use_nautilus": false,
-      "use_apex": false,
-      "fusion_mode": "fixed"
-    },
-    {
-      "dataset": "cover",
-      "category": "classical",
-      "resolved_policy": "per:baseline_ddae+mce_classical+apex",
-      "use_scs": false,
-      "use_mce": true,
-      "use_nautilus": false,
-      "use_apex": true,
-      "fusion_mode": "fixed"
-    },
-    {
-      "dataset": "optdigits",
-      "category": "classical",
-      "resolved_policy": "per:semi_cvnlp_ftp+mce_classical",
-      "use_scs": false,
-      "use_mce": true,
-      "use_nautilus": false,
-      "use_apex": false,
-      "fusion_mode": "fixed"
+      "fusion_mode": "fixed",
+      "features": {
+        "scaler": "robust",
+        "pca_dim_threshold": 99999,
+        "pca_max_components": 128,
+        "pca_variance": 0.95,
+        "clip_outliers": false,
+        "clip_sigma": 5.0
+      },
+      "train_ov": {
+        "min_epochs": 40,
+        "val_fraction_semi": 0.1,
+        "early_stop_patience": 40
+      }
     }
   ]
 }

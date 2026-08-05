@@ -1,10 +1,12 @@
-"""AdaDDAE-PER: single-pass frozen stack of v2→v5.1 hybrid rules.
+"""AdaDDAE-PER: single-pass frozen stack of v2→v5.1 hybrid rules + beat-paper freezes.
 
 Combines:
   - v4.1 routed exceptions + meta routing_rules (DAMP off)
   - v5.1 MCE modality targets
   - v5.1 SMC semi-tail fusion
   - GATE v2 selective ensemble
+  - selective A6 (orbit/locus/spiral/helix/…)
+  - protect_baseline_semi + feature/train overrides
 into one ``policy: per`` resolve step (no post-hoc guarded merge).
 """
 from __future__ import annotations
@@ -25,25 +27,33 @@ from .policy import (
 )
 
 _UPGRADES_CACHE: Optional[Dict[str, Any]] = None
+_UPGRADES_CACHE_PATH: Optional[str] = None
 
 
 def load_per_upgrades(path: Optional[str | Path] = None) -> Dict[str, Any]:
-    global _UPGRADES_CACHE
-    if path is None and _UPGRADES_CACHE is not None:
-        return _UPGRADES_CACHE
+    global _UPGRADES_CACHE, _UPGRADES_CACHE_PATH
     if path is None:
         path = PROJECT_ROOT / "configs" / "adadae_per_upgrades.yaml"
     p = Path(path)
     if not p.is_absolute():
         p = PROJECT_ROOT / p
+    key = str(p.resolve())
+    if _UPGRADES_CACHE is not None and _UPGRADES_CACHE_PATH == key:
+        return _UPGRADES_CACHE
     if not p.exists():
         data: Dict[str, Any] = {}
     else:
         with open(p, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f) or {}
-    if path is None or p == PROJECT_ROOT / "configs" / "adadae_per_upgrades.yaml":
-        _UPGRADES_CACHE = data
+    _UPGRADES_CACHE = data
+    _UPGRADES_CACHE_PATH = key
     return data
+
+
+def clear_per_upgrades_cache() -> None:
+    global _UPGRADES_CACHE, _UPGRADES_CACHE_PATH
+    _UPGRADES_CACHE = None
+    _UPGRADES_CACHE_PATH = None
 
 
 def _mce_modality(dataset_name: str, upgrades: Dict[str, Any]) -> Optional[str]:
@@ -84,16 +94,20 @@ def apply_per_upgrades(
     dataset_name: str,
     base_policy: str,
     upgrades: Optional[Dict[str, Any]] = None,
+    exceptions: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
-    """Layer v5.1 MCE / SMC / GATE / selective A6 flags onto a routed config copy."""
+    """Layer MCE / SMC / GATE / selective A6 + feature/train overrides."""
     upgrades = upgrades or load_per_upgrades()
     out = copy.deepcopy(config)
     adadae = out.setdefault("adadae", {})
     tags: list[str] = [base_policy]
 
+    protected = set(upgrades.get("protect_baseline_semi") or [])
+    is_protected = setting == "semi-supervised" and dataset_name in protected
+
     modality = _mce_modality(dataset_name, upgrades)
     block_semi_nlp = bool((upgrades.get("mce") or {}).get("block_semi_nlp", True))
-    mce_ok = modality is not None
+    mce_ok = modality is not None and not is_protected
     if mce_ok and block_semi_nlp and setting == "semi-supervised" and (
         category == "nlp" or modality == "nlp"
     ):
@@ -105,9 +119,12 @@ def apply_per_upgrades(
         tags.append(f"mce_{modality}")
 
     smc_semi = (upgrades.get("smc") or {}).get("semi") or []
-    if setting == "semi-supervised" and dataset_name in smc_semi:
+    if (
+        not is_protected
+        and setting == "semi-supervised"
+        and dataset_name in smc_semi
+    ):
         out = _deep_update(out, SEMI_SMC_TAIL)
-        # keep MCE flags if already set
         if mce_ok:
             out.setdefault("adadae", {})["use_mce"] = True
             out["adadae"]["mce_modality"] = modality
@@ -116,11 +133,10 @@ def apply_per_upgrades(
 
     gate_cfg = upgrades.get("gate") or {}
     gate_list = gate_cfg.get(setting) or []
-    if dataset_name in gate_list:
+    if not is_protected and dataset_name in gate_list:
         out.setdefault("adadae", {})["use_gate"] = True
         tags.append("gate")
 
-    # Loop 7: selective A6 (nautilus / apex / orbit / ridge / delta)
     a6 = upgrades.get("a6") or {}
     a6_flag_map = {
         "nautilus": "use_nautilus",
@@ -128,14 +144,38 @@ def apply_per_upgrades(
         "orbit": "use_orbit",
         "ridge": "use_ridge",
         "delta": "use_delta",
+        "locus": "use_locus",
+        "spiral": "use_spiral",
+        "helix": "use_helix",
     }
-    for mod, flag in a6_flag_map.items():
-        ds_list = (a6.get(mod) or {}).get(setting) or []
-        if dataset_name in ds_list:
-            out.setdefault("adadae", {})[flag] = True
-            tags.append(mod)
+    if not is_protected:
+        for mod, flag in a6_flag_map.items():
+            ds_list = (a6.get(mod) or {}).get(setting) or []
+            if dataset_name in ds_list:
+                out.setdefault("adadae", {})[flag] = True
+                tags.append(mod)
+    else:
+        # Hard strip overlays on protected classical
+        for flag in a6_flag_map.values():
+            out.setdefault("adadae", {})[flag] = False
+        out["adadae"]["use_mce"] = False
+        out["adadae"]["use_gate"] = False
+        tags = [base_policy, "protect"]
 
-    # Loop 5: baseline / champion-style recipes must full-sum score like AnoDDAE
+    # Feature / train overrides from exceptions
+    exc = exceptions or {}
+    feat_ov = (exc.get("feature_overrides") or {}).get(dataset_name)
+    if isinstance(feat_ov, dict):
+        out.setdefault("features", {})
+        out["features"] = _deep_update(out.get("features") or {}, feat_ov)
+        tags.append("ftp_ov")
+    train_ov = (exc.get("train_overrides") or {}).get(dataset_name)
+    if isinstance(train_ov, dict):
+        out.setdefault("train", {})
+        out["train"] = _deep_update(out.get("train") or {}, train_ov)
+        tags.append("train_ov")
+
+    # Baseline / champion-style recipes must full-sum score like AnoDDAE
     if base_policy in (
         "baseline_ddae",
         "semi_nlp_baseline",
@@ -158,7 +198,7 @@ def apply_per_config(
     dataset_name: str = "",
     meta: Optional[Dict[str, float]] = None,
 ) -> Dict[str, Any]:
-    """Full PER resolve: routed base + v5.1 upgrades."""
+    """Full PER resolve: routed base + upgrades + overrides."""
     adadae_cfg = config.get("adadae", {})
     exc_path = adadae_cfg.get("exceptions_file") or "configs/adadae_per_exceptions.yaml"
     exceptions = load_policy_exceptions(exc_path)
@@ -184,4 +224,5 @@ def apply_per_config(
         dataset_name=dataset_name,
         base_policy=base_name,
         upgrades=upgrades,
+        exceptions=exceptions,
     )

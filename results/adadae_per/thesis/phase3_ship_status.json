@@ -1,0 +1,20 @@
+{
+  "phase": 3,
+  "status": "invalidated_pending_gpu_full570",
+  "cuda_available_locally": false,
+  "completed_after_invalidate": "285/570 (unsup kept; all semi cleared)",
+  "ship_command": "bash scripts/run_adadae_per_protocol.sh all 16gb",
+  "require_gates": ["G-I1_complete_570", "G_AP_PR_consistency", "G_paper_both"],
+  "targets": {
+    "semi_PR": 61.36,
+    "semi_ROC": 83.17,
+    "unsup_PR": 32.77,
+    "unsup_ROC": 74.08
+  },
+  "freeze_summary": {
+    "revoked": ["smtp:apex", "wine:nautilus", "speech:kitchen-sink"],
+    "hard_tails": ["speech/ALOI/Wilt:rdt", "CIFAR/SVHN/celeba:ftp+orbit", "NLP:frozen+orbit"],
+    "protect_classical": 15
+  },
+  "note": "Full 570 retrain requires Vast GPU. Configs + invalidate are ready; unsup jobs retained to preserve paper-beat floor."
+}

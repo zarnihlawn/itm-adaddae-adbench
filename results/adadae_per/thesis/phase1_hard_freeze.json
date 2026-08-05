@@ -1,0 +1,138 @@
+{
+  "mode": "evidence_freeze",
+  "note": "GPU selector unavailable locally; freeze from winloss+ADBench analysis. Re-run selector on Vast to refine.",
+  "winners": {
+    "speech": {
+      "policy": "semi_rdt_tail",
+      "overlays": [
+        "locus",
+        "spiral",
+        "helix"
+      ],
+      "reason": "kitchen-sink failed; RDT designed for speech"
+    },
+    "ALOI": {
+      "policy": "semi_rdt_tail",
+      "overlays": [
+        "orbit",
+        "locus"
+      ],
+      "reason": "RDT+orbit for CV embeds"
+    },
+    "celeba": {
+      "policy": "semi_cvnlp_ftp",
+      "overlays": [
+        "orbit"
+      ],
+      "reason": "FTP+orbit; drop nlp_baseline misroute"
+    },
+    "CIFAR10": {
+      "policy": "semi_cvnlp_ftp",
+      "overlays": [
+        "orbit",
+        "helix"
+      ],
+      "reason": "FTP+orbit/helix"
+    },
+    "SVHN": {
+      "policy": "semi_cvnlp_ftp",
+      "overlays": [
+        "orbit",
+        "helix"
+      ],
+      "reason": "FTP+orbit"
+    },
+    "Wilt": {
+      "policy": "semi_rdt_tail",
+      "overlays": [
+        "orbit",
+        "locus",
+        "spiral"
+      ],
+      "reason": "robust RDT+extra views"
+    },
+    "census": {
+      "policy": "baseline_ddae",
+      "overlays": [
+        "locus"
+      ],
+      "reason": "baseline+locus"
+    },
+    "vertebral": {
+      "policy": "baseline_ddae",
+      "overlays": [
+        "nautilus"
+      ],
+      "reason": "keep nautilus win vs fair"
+    },
+    "glass": {
+      "policy": "baseline_ddae",
+      "overlays": [
+        "nautilus"
+      ],
+      "reason": "keep nautilus win vs fair"
+    },
+    "WPBC": {
+      "policy": "semi_speech_specialist",
+      "overlays": [],
+      "reason": "existing specialist"
+    },
+    "Imdb": {
+      "policy": "semi_nlp_frozen",
+      "overlays": [
+        "orbit"
+      ],
+      "reason": "NLP frozen+unit_norm/orbit"
+    },
+    "Amazon": {
+      "policy": "semi_nlp_frozen",
+      "overlays": [
+        "orbit"
+      ],
+      "reason": "NLP frozen+orbit"
+    },
+    "Yelp": {
+      "policy": "semi_nlp_frozen",
+      "overlays": [
+        "orbit"
+      ],
+      "reason": "NLP frozen+orbit"
+    },
+    "Agnews": {
+      "policy": "semi_nlp_frozen",
+      "overlays": [
+        "orbit"
+      ],
+      "reason": "NLP frozen+orbit"
+    },
+    "20newsgroups": {
+      "policy": "semi_nlp_frozen",
+      "overlays": [
+        "orbit"
+      ],
+      "reason": "NLP frozen+orbit"
+    }
+  },
+  "protect_baseline_semi": [
+    "smtp",
+    "donors",
+    "wine",
+    "http",
+    "musk",
+    "breastw",
+    "shuttle",
+    "Ionosphere",
+    "Lymphography",
+    "pendigits",
+    "magic.gamma",
+    "satimage-2",
+    "vowels",
+    "skin",
+    "PageBlocks"
+  ],
+  "revoked": {
+    "smtp": "apex (\u221210.3 vs fair)",
+    "wine": "nautilus (\u22125.0 vs fair)",
+    "speech": "mce+smc+apex+orbit+delta kitchen-sink"
+  }
+}

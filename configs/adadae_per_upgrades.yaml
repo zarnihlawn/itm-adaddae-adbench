@@ -1,18 +1,17 @@
-# AdaDDAE-PER additive upgrades (applied on top of routed base policy).
-# Source: v5.1 MCE/SMC/GATE + Loop-2 surgery + Loop-7 selective A6.
-version: "5.1-loop2"
+# AdaDDAE-PER additive upgrades — beat-paper phase0/1 freeze.
+# Revokes: smtp apex, wine nautilus; speech stripped of failing MCE+SMC+A6 stack.
+version: "5.2-beat-paper"
 description: >
-  Single-pass PER stack: routed base + selective MCE/SMC/GATE + optional A6.
-  Semi-NLP MCE blocked. Loop-2: glass/vertebral removed from SMC (hurt vs fair);
-  CIFAR10 removed from MCE CV (hurt vs fair). Loop-7: A6 flags per-dataset.
+  Classical protect + hard-tail specialists. A6 only on proven winloss>=0 sets.
+  smtp/wine A6 revoked. speech uses RDT specialist base (not kitchen-sink).
 
 mce:
   cv:
     - ALOI
     - celeba
-    # CIFAR10 removed — blind mce_cv regressed vs fair DDAE on semi
     - SVHN
-    - speech
+    # speech MCE revoked (kitchen-sink failed ~3 PR)
+    # CIFAR10 remains off
   nlp:
     - Imdb
     - Agnews
@@ -25,40 +24,46 @@ mce:
   block_semi_nlp: true
 
 smc:
-  # semi-supervised only — glass/vertebral removed (PER mean < fair)
   semi:
     - Waveform
-    - speech
+    # speech SMC revoked
 
 gate:
   unsupervised:
     - speech
     - ALOI
     - optdigits
-  semi-supervised: []
+  semi-supervised:
+    - speech
+    - ALOI
+    - CIFAR10
 
-# Loop 7: selective A6 modules (default off unless listed).
-# Applied only when dataset is listed under the module key for that setting.
 a6:
   nautilus:
-    # tiny-n classical
     semi-supervised:
       - glass
-      - wine
+      # wine REVOKED (−5 vs fair)
       - Hepatitis
       - vertebral
     unsupervised: []
   apex:
     semi-supervised:
-      - speech
+      # smtp REVOKED (−10 vs fair)
       - fraud
-      - smtp
       - cover
     unsupervised: []
   orbit:
     semi-supervised:
       - SVHN
-      - speech
+      - CIFAR10
+      - ALOI
+      - celeba
+      - Agnews
+      - Amazon
+      - Imdb
+      - Yelp
+      - 20newsgroups
+      - Wilt
     unsupervised: []
   ridge:
     semi-supervised:
@@ -68,6 +73,42 @@ a6:
     unsupervised: []
   delta:
     semi-supervised:
-      - speech
       - fraud
+      - cover
     unsupervised: []
+  locus:
+    semi-supervised:
+      - speech
+      - Wilt
+      - census
+      - ALOI
+    unsupervised: []
+  spiral:
+    semi-supervised:
+      - speech
+      - Wilt
+    unsupervised: []
+  helix:
+    semi-supervised:
+      - speech
+      - CIFAR10
+      - SVHN
+    unsupervised: []
+
+# Classical protect: never apply MCE/SMC/GATE/A6 overlays on these (semi)
+protect_baseline_semi:
+  - smtp
+  - donors
+  - wine
+  - http
+  - musk
+  - breastw
+  - shuttle
+  - Ionosphere
+  - Lymphography
+  - pendigits
+  - magic.gamma
+  - satimage-2
+  - vowels
+  - skin
+  - PageBlocks

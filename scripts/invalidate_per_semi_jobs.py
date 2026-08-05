@@ -13,27 +13,15 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
-# Datasets whose semi (and sometimes unsup) recipes changed in Loop 2/7
-INVALIDATE_SEMI = {
-    "Wilt",
-    "glass",
-    "vertebral",
-    "CIFAR10",
-    "Waveform",
-    "speech",
-    "cover",
-    "optdigits",
-    "wine",
-    "Hepatitis",
-    "fraud",
-    "smtp",
-    "SVHN",
-    "SpamBase",
-    "satellite",
-    "yeast",
-}
-# Horizon / val_fraction_semi affects ALL semi jobs — invalidate all semi
+# Invalidate PER completed jobs whose routing/upgrades/features changed.
+# Beat-paper Phase 3: all semi jobs + unsup keys touched by GATE/specialists if needed.
+
 INVALIDATE_ALL_SEMI = True
+
+# Also refresh unsup for datasets whose GATE/MCE lists changed (speech/ALOI/optdigits unchanged GATE)
+INVALIDATE_UNSUP = {
+    # keep empty unless unsup recipes change; unsup hold must stay above paper
+}
 
 
 def main() -> int:
@@ -59,13 +47,10 @@ def main() -> int:
         if len(parts) < 3:
             continue
         ds, setting, _seed = parts[0], parts[1], parts[2]
-        if setting == "semi-supervised" and (
-            INVALIDATE_ALL_SEMI or ds in INVALIDATE_SEMI
-        ):
+        if setting == "semi-supervised" and INVALIDATE_ALL_SEMI:
             remove_keys.append(key)
-        elif setting == "unsupervised" and ds in {"speech", "ALOI", "optdigits"}:
-            # GATE unchanged; keep unless we want full refresh — skip
-            pass
+        elif setting == "unsupervised" and ds in INVALIDATE_UNSUP:
+            remove_keys.append(key)
 
     print(f"Will invalidate {len(remove_keys)} / {len(completed)} jobs")
     if args.dry_run:

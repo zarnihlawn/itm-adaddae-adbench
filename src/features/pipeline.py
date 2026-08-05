@@ -17,6 +17,7 @@ class FeaturePolicy:
     pca_variance: float
     clip_outliers: bool
     clip_sigma: float
+    unit_norm: bool = False
 
 
 def infer_policy(
@@ -28,6 +29,7 @@ def infer_policy(
     pca_variance: float = 0.95,
     clip_outliers: bool = True,
     clip_sigma: float = 5.0,
+    unit_norm: bool = False,
 ) -> FeaturePolicy:
     if scaler == "auto":
         # Unsupervised / high-d: StandardScaler (matches DDAE paper).
@@ -43,6 +45,7 @@ def infer_policy(
         pca_variance=pca_variance,
         clip_outliers=clip_outliers and n_features <= 64,
         clip_sigma=clip_sigma,
+        unit_norm=bool(unit_norm),
     )
 
 
@@ -86,6 +89,10 @@ class FeatureTuningPipeline:
                 self.pca.fit(Xs)
             Xs = self.pca.transform(Xs).astype(np.float32)
 
+        if self.policy.unit_norm:
+            norms = np.linalg.norm(Xs, axis=1, keepdims=True) + 1e-8
+            Xs = (Xs / norms).astype(np.float32)
+
         self.n_features_out_ = Xs.shape[1]
         return self
 
@@ -97,6 +104,9 @@ class FeatureTuningPipeline:
         Xs = self.scaler.transform(X).astype(np.float32)
         if self.pca is not None:
             Xs = self.pca.transform(Xs).astype(np.float32)
+        if self.policy.unit_norm:
+            norms = np.linalg.norm(Xs, axis=1, keepdims=True) + 1e-8
+            Xs = (Xs / norms).astype(np.float32)
         return Xs
 
     def fit_transform(self, X_train: np.ndarray) -> np.ndarray:
@@ -110,4 +120,5 @@ class FeatureTuningPipeline:
             "n_features_out": self.n_features_out_,
             "pca_components": None if self.pca is None else int(self.pca.n_components_),
             "clip_outliers": self.policy.clip_outliers,
+            "unit_norm": bool(self.policy.unit_norm),
         }

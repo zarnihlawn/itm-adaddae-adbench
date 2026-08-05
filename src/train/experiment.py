@@ -166,8 +166,18 @@ def run_single_file(
         y_train = y_train[idx]
 
     train_cfg = config.get("train", {})
+    # Route BEFORE val carve so feature/train overrides (val_fraction_semi, min_epochs) apply.
+    route_meta = {
+        "n": float(X_train.shape[0]),
+        "d": float(X_train.shape[1]),
+    }
+    config = apply_routed_config(
+        config, setting, category, dataset_name=dataset_name, meta=route_meta
+    )
+    config = dict(config)
+    config["_setting"] = setting
+    train_cfg = config.get("train", {})
     val_fraction = float(train_cfg.get("val_fraction", 0.2))
-    # Loop 4: optional smaller carve on semi so more normals train (paper uses none).
     if setting == "semi-supervised" and train_cfg.get("val_fraction_semi") is not None:
         val_fraction = float(train_cfg["val_fraction_semi"])
     early_stop_metric = str(train_cfg.get("early_stop_metric", "val_loss"))
@@ -179,22 +189,10 @@ def run_single_file(
     )
     X_train, y_train = X_fit, y_fit
 
-    # v3 routing uses train shape meta before FTP/DANC (no-op when policy != routed)
-    route_meta = {
-        "n": float(X_train.shape[0]),
-        "d": float(X_train.shape[1]),
-    }
-    config = apply_routed_config(
-        config, setting, category, dataset_name=dataset_name, meta=route_meta
-    )
-    config = dict(config)
-    config["_setting"] = setting
     adadae_cfg = config.get("adadae", {})
     feat_cfg = config.get("features", {})
     use_ftp = bool(adadae_cfg.get("use_ftp", True))
     use_mce = bool(adadae_cfg.get("use_mce", False))
-    # Re-read after routing (static final config keeps these unchanged)
-    train_cfg = config.get("train", {})
     early_stop_metric = str(train_cfg.get("early_stop_metric", early_stop_metric))
 
     t_ftp_start = time.perf_counter()
@@ -219,6 +217,7 @@ def run_single_file(
             pca_variance=float(feat_cfg.get("pca_variance", 0.95)),
             clip_outliers=bool(feat_cfg.get("clip_outliers", True)),
             clip_sigma=float(feat_cfg.get("clip_sigma", 5.0)),
+            unit_norm=bool(feat_cfg.get("unit_norm", False)),
         )
         ftp = FeatureTuningPipeline(policy)
         X_train = ftp.fit_transform(X_train)

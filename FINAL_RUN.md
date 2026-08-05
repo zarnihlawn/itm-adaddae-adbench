@@ -1,31 +1,25 @@
-# Final run — AdaDDAE-PER (frozen v2→v5.1 hybrid rules + Loop 2–7 improvements)
+# Final run — AdaDDAE-PER (beat-paper freeze: classical protect + hard-tail specialists)
 
-**Last updated:** 2026-08-05 — Primary path is **AdaDDAE-PER**: one runnable model that encodes the rule stack which historically beat published DDAE (v5.1 hybrid), plus integrity-preserving semi lifts (routing surgery, train horizon, selective A6).
+**Last updated:** 2026-08-05 — Primary path is **AdaDDAE-PER** with Phase0–2 beat-paper freezes (revoke A6 regressions, hard-tail recipes, FTP overrides).
 
-This is the **canonical** command sheet for the thesis primary claim: beat published DDAE on **both** unsupervised and semi-supervised. Keep in sync when configs/protocol change (see [`.cursor/rules/final-run-md.mdc`](.cursor/rules/final-run-md.mdc)).
+Canonical ship claim: beat published DDAE on **both** unsupervised and semi-supervised under integrity protocol. See [`.cursor/rules/final-run-md.mdc`](.cursor/rules/final-run-md.mdc).
 
 ---
 
-## What is AdaDDAE-PER?
+## What changed (beat-paper)
 
-**One job → one recipe.** No multi-track MCE/SMC/GATE runs and no post-hoc guarded merge.
+| Change | Detail |
+|--------|--------|
+| **Revoke** | smtp: apex; wine: nautilus; speech: MCE+SMC+apex kitchen-sink |
+| **Protect** | High classical forced `baseline_ddae` + no A6/MCE/SMC (`protect_baseline_semi`) |
+| **Hard tails** | speech/ALOI/Wilt → `semi_rdt_tail`; CIFAR/SVHN/celeba → `semi_cvnlp_ftp`; NLP → frozen + orbit |
+| **A6 selective** | orbit/locus/spiral/helix on embeds only; nautilus kept on glass/Hepatitis/vertebral |
+| **FTP** | per-dataset scaler/PCA/unit_norm/clip in `feature_overrides` |
+| **Train** | hard-tail `min_epochs: 60`, smaller `val_fraction_semi`; donors/smtp `val_fraction_semi: 0.2` |
 
-| Layer | Source | Behavior |
-|-------|--------|----------|
-| Base routing | v2→v4.1 + Loop 2 | [`configs/adadae_per_exceptions.yaml`](configs/adadae_per_exceptions.yaml) + [`configs/routing_rules.yaml`](configs/routing_rules.yaml) (DAMP **off**). Wilt classical; glass/vertebral/CIFAR10 → baseline |
-| MCE | v5.1 − CIFAR | Modality encoder on CV/NLP/classical targets; **blocked** on semi-NLP; CIFAR10 MCE off |
-| SMC | v5.1 − glass/vertebral | SNR-calibrated multiview on semi: Waveform, speech only |
-| GATE | v5.1 v2 | Train-normal WTA ensemble on unsup: speech, ALOI, optdigits |
-| Horizon | Loop 4 | `min_epochs: 40`, `early_stop_patience: 40`, `val_fraction_semi: 0.1` |
-| Scoring | Loop 5 | baseline/nlp policies force **full-sum** L2 over `t=1..T-1` (AnoDDAE) |
-| A6 | Loop 7 | Selective nautilus/apex/orbit/ridge/delta via upgrades lists |
+Configs: [`configs/adadae_per.yaml`](configs/adadae_per.yaml), [`configs/adadae_per_exceptions.yaml`](configs/adadae_per_exceptions.yaml), [`configs/adadae_per_upgrades.yaml`](configs/adadae_per_upgrades.yaml).
 
-Shell config: `configs/adadae_per.yaml` with `adadae.policy: per`.
-
-**Do not trust** inflated v5.1 hybrid PR fields with `v31_bisect_*` markers (Wilt AP≈15 vs rewritten PR≈55). Ship gate includes `G_AP_PR_consistency`.
-
-Historical reference (exploration only; partially bisect-inflated):
-`results/adadae_v51_hybrid` ≈ unsup **37.89/78.57**, semi **62.34/85.19** vs paper **32.77/74.08** and **61.36/83.17**.
+**Do not trust** inflated v5.1 hybrid PR with `v31_bisect_*` markers.
 
 ---
 
@@ -34,19 +28,16 @@ Historical reference (exploration only; partially bisect-inflated):
 | Rule | Value |
 |------|--------|
 | Recipe | **One** YAML: `configs/adadae_per.yaml` with `policy: per` |
-| Protocol size | **570 jobs** = 57 datasets × 2 settings × seeds `{111,222,333,444,555}` |
-| Early stop | `val_loss` on train-carved val (`val_fraction` / `val_fraction_semi`); never test-PR; `min_epochs` floor |
-| Ship gate | PR **and** ROC **>** published paper means on **both** settings + AP≈PR consistency |
-| Routing | **Allowed** (this is the model); G-I2 no-routing does **not** apply |
-| Hardware | Pass **`16gb`** on RTX 4060 Ti / 5070 Ti class (15–16 GB VRAM) |
-
-**Frozen configs**
+| Protocol | **570** = 57 × 2 × seeds `{111,222,333,444,555}` |
+| Early stop | `val_loss` (+ `min_epochs`); never test-PR |
+| Ship gate | PR **and** ROC **>** paper on **both** settings + `G_AP_PR_consistency` |
+| Hardware | **`16gb`** |
 
 | Track | Config | Results |
 |-------|--------|---------|
-| Fair DDAE (optional compare) | `configs/baselines_ddae_valstop.yaml` | `results/ddae_baseline_valstop/` |
-| Paper-protocol DDAE (diagnostic) | `configs/ddae_paper_protocol.yaml` | `results/ddae_paper_protocol/` |
-| **AdaDDAE-PER (primary)** | `configs/adadae_per.yaml` | `results/adadae_per/` |
+| Fair DDAE | `configs/baselines_ddae_valstop.yaml` | `results/ddae_baseline_valstop/` |
+| Paper-protocol DDAE (appendix) | `configs/ddae_paper_protocol.yaml` | `results/ddae_paper_protocol/` |
+| **AdaDDAE-PER** | `configs/adadae_per.yaml` | `results/adadae_per/` |
 
 ---
 
@@ -56,45 +47,37 @@ Historical reference (exploration only; partially bisect-inflated):
 cd /workspace/ITM/project
 source .venv/bin/activate
 
-# Inspect frozen routing (optional)
+python scripts/phase0_revoke_audit.py
+python scripts/train_only_recipe_select.py --dry-run
+# Optional GPU refine (else evidence freeze already in YAML):
+# python scripts/train_only_recipe_select.py --datasets speech Wilt CIFAR10 ALOI --seeds 111 222 333 --hardware 16gb
+
 bash scripts/run_adadae_per_protocol.sh dump_routing
-
-# After Loop 2–7 config changes: invalidate stale semi jobs
-python scripts/invalidate_per_semi_jobs.py
-
-# Smoke → full 570 → compare → paper gates
+bash scripts/run_adadae_per_protocol.sh invalidate
 bash scripts/run_adadae_per_protocol.sh smoke 16gb
-bash scripts/run_adadae_per_protocol.sh ddae 16gb    # skip if already 570/570
+bash scripts/run_adadae_per_protocol.sh ddae 16gb
 bash scripts/run_adadae_per_protocol.sh final 16gb
 bash scripts/run_adadae_per_protocol.sh compare
 bash scripts/run_adadae_per_protocol.sh gates
 ```
 
-Or end-to-end:
+Or: `bash scripts/run_adadae_per_protocol.sh all 16gb`
 
-```bash
-bash scripts/run_adadae_per_protocol.sh all 16gb
-```
-
-**Pass when** `results/adadae_per/thesis/integrity_gates.json` has `all_pass: true`
+**Pass when** `results/adadae_per/thesis/integrity_gates.json` → `all_pass: true`
 (`G-I1_complete_570` + `G_AP_PR_consistency` + `G_paper_both`).
 
-### Research loop helpers
+### Helpers
 
 ```bash
 python scripts/audit_ap_pr_consistency.py --completed results/adadae_per/metrics/completed.json
-python scripts/run_paper_protocol_diagnostic.py --compare-only   # after GPU run
-python scripts/verify_scoring_parity.py
-python scripts/train_only_recipe_select.py --dry-run
-python scripts/confirm_semi_normals_only.py
 python scripts/check_unsup_hold.py
+python scripts/run_paper_protocol_diagnostic.py --datasets Wilt glass cardio --seeds 111 --hardware 16gb
+python scripts/verify_scoring_parity.py
 ```
 
 ---
 
 ## Resume
-
-Jobs skip keys in `results/adadae_per/metrics/completed.json`. Re-run the same mode:
 
 ```bash
 bash scripts/run_adadae_per_protocol.sh final 16gb
@@ -113,13 +96,12 @@ PY
 
 ---
 
-## Archived tracks (not primary)
+## Archived
 
 | Track | Notes |
 |-------|-------|
-| `adadae_champion` | Setting-only paradigm; did **not** clear paper-both |
-| `adadae_v51_hybrid` | Multi-track + guarded merge; **bisect-inflated** PR on some jobs — quarantine |
-| `adadae_final` … `adadae6_final` | Old Table 1–6 development finals |
-| `adadae_v*_hybrid` | Intermediate hybrids |
+| `adadae_champion` | Setting-only; did not clear paper-both |
+| `adadae_v51_hybrid` | Bisect-inflated — quarantine |
+| Tables 1–6 / v\* hybrids | Exploration only |
 
-Setup / env / ADBench clone steps: see [`final_run_resume.md`](final_run_resume.md).
+Setup: [`final_run_resume.md`](final_run_resume.md).

@@ -1,7 +1,5 @@
-# AdaDDAE-PER — frozen exceptions (v2→v4.1 winners + Loop-2 semi surgery).
-# DAMP disabled so routing is deterministic across machines.
-# Loop 2 (2026-08-05): Wilt is classical (not NLP); glass/vertebral specialists
-# drop harmful SMC (upgrades); CIFAR10 forced baseline until train-only selector.
+# AdaDDAE-PER — exceptions (beat-paper freeze).
+# DAMP off. Phase0: classical protect. Phase1: hard-tail specialists (train-only / evidence).
 use_damp: false
 
 unsup_baseline_fallback:
@@ -48,22 +46,40 @@ semi_tail_datasets:
 - optdigits
 - glass
 - WPBC
-# Wilt removed from semi_tail (classical tabular; was mis-routed as NLP)
+- Wilt
+- CIFAR10
 
+# Hard-tail + protect specialists (frozen for full-570 ship)
 semi_specialists:
-  speech: baseline_ddae
-  ALOI: baseline_ddae
-  celeba: semi_nlp_baseline
-  # CIFAR10: force baseline (blind mce_cv regressed vs fair)
-  CIFAR10: baseline_ddae
+  # Hard embeds / tails
+  speech: semi_rdt_tail
+  ALOI: semi_rdt_tail
+  celeba: semi_cvnlp_ftp
+  CIFAR10: semi_cvnlp_ftp
   SVHN: semi_cvnlp_ftp
-  # Wilt: classical baseline (was wrongly semi_nlp_baseline)
-  Wilt: baseline_ddae
+  Wilt: semi_rdt_tail
+  census: baseline_ddae
   glass: baseline_ddae
-  optdigits: semi_cvnlp_ftp
   vertebral: baseline_ddae
   WPBC: semi_speech_specialist
   Waveform: semi_rdt_tail
+  # Classical protect (force baseline; strip upgrades via protect list)
+  smtp: baseline_ddae
+  donors: baseline_ddae
+  wine: baseline_ddae
+  http: baseline_ddae
+  musk: baseline_ddae
+  breastw: baseline_ddae
+  shuttle: baseline_ddae
+  Ionosphere: baseline_ddae
+  Lymphography: baseline_ddae
+  pendigits: baseline_ddae
+  magic.gamma: baseline_ddae
+  satimage-2: baseline_ddae
+  vowels: baseline_ddae
+  skin: baseline_ddae
+  PageBlocks: baseline_ddae
+  # NLP stays frozen baseline path (semi_nlp_baseline list → semi_nlp_frozen)
 
 semi_cv_policy: semi_cvnlp_ftp
 
@@ -79,5 +95,118 @@ unsup_nlp_specialists: {}
 unsup_classical_plus:
 - Imdb
 - yeast
+
+# Phase2: per-dataset feature / train overrides (applied after policy merge)
+feature_overrides:
+  speech:
+    scaler: robust
+    pca_dim_threshold: 128
+    pca_max_components: 128
+    pca_variance: 0.95
+    clip_outliers: true
+    clip_sigma: 5.0
+    unit_norm: true
+  ALOI:
+    scaler: robust
+    pca_dim_threshold: 128
+    pca_variance: 0.95
+    clip_outliers: true
+    clip_sigma: 5.0
+    unit_norm: true
+  Wilt:
+    scaler: robust
+    pca_dim_threshold: 99999
+    clip_outliers: true
+    clip_sigma: 3.0
+    unit_norm: false
+  CIFAR10:
+    scaler: standard
+    pca_dim_threshold: 128
+    pca_variance: 0.90
+    clip_outliers: true
+    clip_sigma: 5.0
+    unit_norm: true
+  SVHN:
+    scaler: standard
+    pca_dim_threshold: 128
+    pca_variance: 0.90
+    clip_outliers: true
+    clip_sigma: 5.0
+    unit_norm: true
+  celeba:
+    scaler: standard
+    pca_dim_threshold: 128
+    pca_variance: 0.90
+    clip_outliers: true
+    clip_sigma: 5.0
+    unit_norm: true
+  Agnews:
+    scaler: standard
+    pca_dim_threshold: 128
+    pca_variance: 0.95
+    clip_outliers: false
+    unit_norm: true
+  Amazon:
+    scaler: standard
+    pca_dim_threshold: 128
+    pca_variance: 0.95
+    clip_outliers: false
+    unit_norm: true
+  Imdb:
+    scaler: standard
+    pca_dim_threshold: 128
+    pca_variance: 0.95
+    clip_outliers: false
+    unit_norm: true
+  Yelp:
+    scaler: standard
+    pca_dim_threshold: 128
+    pca_variance: 0.95
+    clip_outliers: false
+    unit_norm: true
+  20newsgroups:
+    scaler: standard
+    pca_dim_threshold: 128
+    pca_variance: 0.95
+    clip_outliers: false
+    unit_norm: true
+  census:
+    scaler: robust
+    pca_dim_threshold: 99999
+    clip_outliers: true
+    clip_sigma: 5.0
+  donors:
+    scaler: standard
+    pca_dim_threshold: 99999
+    clip_outliers: false
+  smtp:
+    scaler: standard
+    pca_dim_threshold: 99999
+    clip_outliers: false
+
+train_overrides:
+  speech:
+    min_epochs: 60
+    val_fraction_semi: 0.05
+    early_stop_patience: 50
+  ALOI:
+    min_epochs: 60
+    val_fraction_semi: 0.05
+  Wilt:
+    min_epochs: 60
+    val_fraction_semi: 0.1
+  CIFAR10:
+    min_epochs: 60
+    val_fraction_semi: 0.05
+  SVHN:
+    min_epochs: 60
+    val_fraction_semi: 0.05
+  donors:
+    # match fair carve more closely on huge-n
+    val_fraction_semi: 0.2
+    min_epochs: 40
+  smtp:
+    val_fraction_semi: 0.2
+    min_epochs: 40
 
 routing_rules_file: configs/routing_rules.yaml

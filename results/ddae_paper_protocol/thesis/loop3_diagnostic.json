@@ -1,0 +1,12 @@
+{
+  "note": "Diagnostic only \u2014 paper protocol (100ep, no val carve, full-sum). Not ship claim.",
+  "paper_semi": {
+    "PR": 61.36,
+    "ROC": 83.17
+  },
+  "fair_valstop": {
+    "PR": 58.69953928485905,
+    "ROC": 82.94020477910875,
+    "n": 57
+  }
+}

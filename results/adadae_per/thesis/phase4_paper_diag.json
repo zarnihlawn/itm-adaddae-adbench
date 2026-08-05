@@ -1,0 +1,9 @@
+{
+  "phase": 4,
+  "status": "config_ready_pending_gpu",
+  "config": "configs/ddae_paper_protocol.yaml",
+  "script": "scripts/run_paper_protocol_diagnostic.py",
+  "purpose": "Appendix fairness: AnoDDAE-faithful 100ep / no val carve / full-sum vs integrity PER. Not a ship claim.",
+  "command": "python scripts/run_paper_protocol_diagnostic.py --datasets Wilt glass cardio speech CIFAR10 --seeds 111 222 --hardware 16gb",
+  "hypothesis": "Paper semi 61.36 is closer to paper-protocol DDAE than to fair valstop (~58.7); PER should beat paper under integrity after hard-tail freeze."
+}
