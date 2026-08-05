@@ -1,0 +1,26 @@
+{
+  "dataset": "Wilt",
+  "setting": "semi-supervised",
+  "seed": 222,
+  "n_splits": 1,
+  "metrics_mean": {
+    "AP": 0.2131489784009786,
+    "ROC-AUC": 0.7892998667728844,
+    "PR-AUC": 0.2119927541989895
+  },
+  "noise": {
+    "num_timesteps": 80,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "per:semi_rdt_tail+orbit+locus+spiral+ftp_ov+train_ov",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 839.60302734375,
+  "vram_mb": 839.60302734375,
+  "time": "2026-08-05T09:23:20.337018+00:00"
+}

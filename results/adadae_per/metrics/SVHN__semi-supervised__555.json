@@ -1,0 +1,26 @@
+{
+  "dataset": "SVHN",
+  "setting": "semi-supervised",
+  "seed": 555,
+  "n_splits": 10,
+  "metrics_mean": {
+    "AP": 0.11279642737606324,
+    "ROC-AUC": 0.5454365869087077,
+    "PR-AUC": 0.11179069930949692
+  },
+  "noise": {
+    "num_timesteps": 50,
+    "scheduler": "linear",
+    "beta_start": 0.0001,
+    "beta_end": 0.02,
+    "time_emb_dim": 4,
+    "tau_snr": null,
+    "contamination_est": null,
+    "contamination_mode": "label_free"
+  },
+  "resolved_policy": "per:semi_cvnlp_ftp+mce_cv+orbit+helix+ftp_ov+train_ov",
+  "early_stop_metric": "val_loss",
+  "vram_peak_mb": 1420.255859375,
+  "vram_mb": 1420.255859375,
+  "time": "2026-08-05T10:10:19.506265+00:00"
+}
