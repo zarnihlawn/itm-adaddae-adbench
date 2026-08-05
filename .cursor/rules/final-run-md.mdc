@@ -6,15 +6,16 @@ alwaysApply: false
 
 # FINAL_RUN.md must stay current
 
-[`FINAL_RUN.md`](FINAL_RUN.md) is the canonical command sheet for primary Table 1–4 runs.
+[`FINAL_RUN.md`](FINAL_RUN.md) is the canonical command sheet for the primary AdaDDAE-PER full run.
 
 ## When editing matched files
 
 In the **same** change set, update `FINAL_RUN.md` if any of the following drift:
 
-- Protocol script modes, usage, or order (Table 1 before 2→3→4)
-- Config paths / `run_id` / results directories
-- Shared fair-DDAE knobs (`early_stop_patience`, `time_emb_dim`, seeds, epochs, val stop)
+- Protocol script modes, usage, or order (`adadae_per` smoke → ddae → final → compare → gates)
+- Config paths / `run_id` / results directories (`adadae_per`, fair DDAE)
+- PER routing files (`adadae_per_exceptions.yaml`, `adadae_per_upgrades.yaml`)
+- Shared early-stop / seed / epoch knobs when they affect PER
 - Assert / smoke / Vast setup / sync / hardware tier commands
 - Artifact paths (`completed.json`, thesis compare/gates)
 
@@ -23,5 +24,5 @@ Also bump the **Last updated** date at the top of `FINAL_RUN.md`.
 ## Do not
 
 - Leave stale commands after renaming scripts or configs
-- Document demoted hybrids (v2–v5.1 routed/GATE/merges) as primary final runs
+- Document demoted hybrids (v2–v5.1 multi-track merges) as the primary runnable path without pointing to PER
 - Skip updating `FINAL_RUN.md` because “README already mentions it”

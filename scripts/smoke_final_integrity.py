@@ -54,6 +54,8 @@ def _allowed_smoke_policy(pol) -> bool:
         return True
     if isinstance(pol, str) and pol.startswith("paradigm_"):
         return True
+    if isinstance(pol, str) and pol.startswith("per"):
+        return True
     return False
 
 
@@ -246,9 +248,9 @@ def main() -> int:
     # Still require val_loss / static / no MCE-GATE (audit already does)
     if raw.get("adadae", {}).get("policy") == "routed":
         cfg_errs.append("smoke config must not use routed policy")
-    if raw.get("adadae", {}).get("policy") not in ("static", "paradigm", None):
+    if raw.get("adadae", {}).get("policy") not in ("static", "paradigm", "per", None):
         cfg_errs.append(
-            f"smoke config policy must be static or paradigm "
+            f"smoke config policy must be static, paradigm, or per "
             f"(got {raw.get('adadae', {}).get('policy')!r})"
         )
     if cfg_errs:

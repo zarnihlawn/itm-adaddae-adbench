@@ -573,6 +573,7 @@ def apply_routed_config(
 
     - ``static``: no-op
     - ``paradigm``: setting-only (unsup_ssts / champion_semi); no dataset routing
+    - ``per``: AdaDDAE-PER — frozen v2→v5.1 hybrid rules in one pass
     - ``routed``: legacy per-dataset / family routing (appendix only)
     """
     adadae_cfg = config.get("adadae", {})
@@ -587,6 +588,17 @@ def apply_routed_config(
         out.setdefault("adadae", {})["policy"] = "paradigm"
         out["adadae"]["resolved_policy"] = f"paradigm_{name}"
         return out
+
+    if policy == "per":
+        from .policy_per import apply_per_config
+
+        return apply_per_config(
+            config,
+            setting=setting,
+            category=category,
+            dataset_name=dataset_name,
+            meta=meta,
+        )
 
     if policy != "routed":
         return config

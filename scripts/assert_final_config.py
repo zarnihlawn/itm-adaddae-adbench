@@ -115,6 +115,7 @@ def audit_primary_config(
     errs: List[str] = []
     run_id = str(_get(cfg, "paths", "run_id", default="") or "")
     allowed_final = {
+        "adadae_per",
         "adadae_champion",
         "adadae_final",
         "adadae2_final",
@@ -129,18 +130,29 @@ def audit_primary_config(
         )
 
     policy = str(_get(cfg, "adadae", "policy", default="static") or "static")
-    if policy == "routed":
+    is_per = policy == "per" or run_id.startswith("adadae_per")
+    if policy == "routed" and not is_per:
         errs.append("adadae.policy must not be 'routed' for the primary recipe")
-    if policy not in ("static", "paradigm"):
-        errs.append(f"adadae.policy must be 'static' or 'paradigm' (got {policy!r})")
+    if policy not in ("static", "paradigm", "per"):
+        errs.append(f"adadae.policy must be 'static', 'paradigm', or 'per' (got {policy!r})")
 
-    if _get(cfg, "adadae", "exceptions_file"):
+    if _get(cfg, "adadae", "exceptions_file") and not is_per:
         errs.append("adadae.exceptions_file must be unset for the primary recipe")
 
-    if bool(_get(cfg, "adadae", "use_mce", default=False)):
+    if bool(_get(cfg, "adadae", "use_mce", default=False)) and not is_per:
         errs.append("adadae.use_mce must be false for the primary recipe")
-    if bool(_get(cfg, "adadae", "use_gate", default=False)):
+    if bool(_get(cfg, "adadae", "use_gate", default=False)) and not is_per:
         errs.append("adadae.use_gate must be false for the primary recipe")
+
+    if is_per:
+        if policy != "per":
+            errs.append("adadae_per requires adadae.policy == 'per'")
+        exc = _get(cfg, "adadae", "exceptions_file")
+        if not exc:
+            errs.append("adadae_per requires adadae.exceptions_file")
+        upg = _get(cfg, "adadae", "upgrades_file")
+        if not upg:
+            errs.append("adadae_per requires adadae.upgrades_file")
 
     if run_id.startswith("adadae_champion"):
         if bool(_get(cfg, "adadae", "use_uncertainty_view", default=False)):
@@ -159,7 +171,7 @@ def audit_primary_config(
                 errs.append(f"champion: adadae.{flag} must be false (kitchen-sink ban)")
 
     fusion = str(_get(cfg, "adadae", "fusion_mode", default="fixed") or "fixed")
-    if fusion == "smc" and run_id in allowed_final:
+    if fusion == "smc" and run_id in allowed_final and not is_per:
         errs.append(f"adadae.fusion_mode 'smc' is appendix-only for {run_id}")
     if fusion not in ("fixed", "calibrated", "calix", "smc", "argos", "lynx", "quell", "lexicon", "kale"):
         errs.append(f"unknown fusion_mode {fusion!r}")
@@ -187,7 +199,12 @@ def audit_primary_config(
             errs.append("adadae.fusion_weights must be numeric")
 
     # Smoke configs intentionally use short epochs/patience; skip protocol lock.
-    if check_protocol_vs_baseline and not run_id.endswith("_smoke"):
+    # PER uses v5.1 shell (time_emb_dim 8) — not locked to fair DDAE knobs.
+    if (
+        check_protocol_vs_baseline
+        and not run_id.endswith("_smoke")
+        and not is_per
+    ):
         errs.extend(audit_protocol_vs_baseline(cfg, baseline=baseline))
 
     return errs

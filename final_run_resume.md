@@ -1,8 +1,8 @@
-# Final run + resume — Vast champion (one recipe)
+# Final run + resume — Vast AdaDDAE-PER
 
 **Offer:** Ohio, US · 1× RTX 4060 Ti **16 GB** · AMD EPYC 7K62 · **16 CPU** · **~43 GB RAM** · ~$0.152/hr  
 **Hardware flag everywhere:** `16gb`  
-**Canonical protocol:** [`FINAL_RUN.md`](FINAL_RUN.md) — **champion only** (not Tables 1–6)
+**Canonical protocol:** [`FINAL_RUN.md`](FINAL_RUN.md) — **AdaDDAE-PER only** (frozen v2→v5.1 rules)
 
 Replace `PORT` / `sshN` with values from the Vast instance SSH button.
 
@@ -95,8 +95,9 @@ Confirm CUDA, then:
 
 ```bash
 python scripts/detect_hardware.py
-python scripts/assert_final_config.py --config configs/adadae_champion.yaml
+python scripts/assert_final_config.py --config configs/adadae_per.yaml
 python scripts/assert_final_config.py --config configs/baselines_ddae_valstop.yaml --allow-nonfinal-run-id
+bash scripts/run_adadae_per_protocol.sh dump_routing
 ```
 
 Every assert must print **`INTEGRITY OK`**.
@@ -109,15 +110,20 @@ Every assert must print **`INTEGRITY OK`**.
 cd /workspace/ITM/project
 source .venv/bin/activate
 
-bash scripts/run_adadae_champion_protocol.sh smoke 16gb
-bash scripts/run_adadae_champion_protocol.sh ddae 16gb
-bash scripts/run_adadae_champion_protocol.sh hard_subset 16gb
-bash scripts/run_adadae_champion_protocol.sh final 16gb
-bash scripts/run_adadae_champion_protocol.sh compare
-bash scripts/run_adadae_champion_protocol.sh gates
+bash scripts/run_adadae_per_protocol.sh smoke 16gb
+bash scripts/run_adadae_per_protocol.sh ddae 16gb    # skip if already 570/570
+bash scripts/run_adadae_per_protocol.sh final 16gb   # THE one model, full 570
+bash scripts/run_adadae_per_protocol.sh compare
+bash scripts/run_adadae_per_protocol.sh gates
 ```
 
-**Ship gate:** `results/adadae_champion/thesis/integrity_gates.json` → `G_paper_both.pass == true`.
+Or:
+
+```bash
+bash scripts/run_adadae_per_protocol.sh all 16gb
+```
+
+**Ship gate:** `results/adadae_per/thesis/integrity_gates.json` → `all_pass: true` (`G_paper_both`).
 
 ---
 
@@ -126,8 +132,7 @@ bash scripts/run_adadae_champion_protocol.sh gates
 ```bash
 tmux attach -t adadae || tmux new -s adadae
 cd /workspace/ITM/project && source .venv/bin/activate && source ~/.bashrc
-# Re-run the SAME mode you were on, e.g.:
-bash scripts/run_adadae_champion_protocol.sh final 16gb
+bash scripts/run_adadae_per_protocol.sh final 16gb
 ```
 
 ### Progress
@@ -136,7 +141,7 @@ bash scripts/run_adadae_champion_protocol.sh final 16gb
 python - <<'PY'
 import json
 from pathlib import Path
-for t in ["ddae_baseline_valstop", "adadae_champion"]:
+for t in ["ddae_baseline_valstop", "adadae_per"]:
     p = Path(f"results/{t}/metrics/completed.json")
     if not p.exists():
         print(f"{t}: MISSING"); continue
@@ -160,9 +165,9 @@ rsync -avz --progress -e 'ssh -p PORT' \
 
 | Step | Command |
 |------|---------|
-| Smoke | `bash scripts/run_adadae_champion_protocol.sh smoke 16gb` |
+| Dump routing | `bash scripts/run_adadae_per_protocol.sh dump_routing` |
+| Smoke | `… smoke 16gb` |
 | Fair DDAE | `… ddae 16gb` |
-| Hard subset | `… hard_subset 16gb` |
-| Champion 570 | `… final 16gb` |
+| **PER 570** | `… final 16gb` |
 | Compare + paper gate | `… compare` then `… gates` |
 | Hardware | Always **`16gb`** on this box |

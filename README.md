@@ -20,19 +20,19 @@ AdaDDAE is a **named component framework** — each piece has an equation and an
 
 Full showcase: [`thesis/novelty.md`](thesis/novelty.md) · Equations: [`thesis/method.md`](thesis/method.md) · Claims map: [`thesis/claims_code_map.md`](thesis/claims_code_map.md)
 
-**Primary thesis result** = `configs/adadae_champion.yaml` (`policy: paradigm`, val-only early stop). Ship gate: beat published DDAE PR+ROC on **both** settings. Legacy Tables 1–6 / hybrids / routed specialists are appendix only.
+**Primary thesis result** = **AdaDDAE-PER** (`configs/adadae_per.yaml`, `policy: per`) — frozen v2→v5.1 hybrid rules in **one** full 570-job run (routing + MCE + SMC + GATE, no multi-track merge). Ship gate: beat published DDAE PR+ROC on **both** settings. Setting-only `adadae_champion` and legacy Tables 1–6 are archived.
 
 **Canonical final-run commands:** [`FINAL_RUN.md`](FINAL_RUN.md)
 
 ```bash
 # Integrity lock before any primary run
-python scripts/assert_final_config.py --config configs/adadae_champion.yaml
+python scripts/assert_final_config.py --config configs/adadae_per.yaml
 
-# Smoke (3 datasets × 2 settings × 2 seeds) — works on CPU
-bash scripts/run_adadae_champion_protocol.sh smoke
+# Smoke (3 datasets × 2 settings × 2 seeds)
+bash scripts/run_adadae_per_protocol.sh smoke 16gb
 
-# Full path on Vast GPU (fair DDAE + champion 570 + paper-both gate)
-bash scripts/run_adadae_champion_protocol.sh all 16gb
+# Full path on Vast GPU (fair DDAE + PER 570 + paper-both gate)
+bash scripts/run_adadae_per_protocol.sh all 16gb
 ```
 
 ```bash

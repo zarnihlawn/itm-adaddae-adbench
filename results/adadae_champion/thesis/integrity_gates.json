@@ -1,0 +1,58 @@
+{
+  "G-I1_complete_570": {
+    "pass": true,
+    "n_jobs": 570,
+    "n_dataset_setting_pairs": 114,
+    "expected_jobs": 570,
+    "incomplete_pairs": []
+  },
+  "G-I2_no_routing": {
+    "pass": true,
+    "n_routed": 0,
+    "examples": []
+  },
+  "G-I3_val_only_early_stop": {
+    "pass": true,
+    "n_bad_jobs": 0,
+    "examples": [],
+    "n_bad_log_events": 0,
+    "log_examples": []
+  },
+  "G-I5_not_guarded_merge": {
+    "pass": true,
+    "content_markers": [],
+    "path_looks_hybrid": false,
+    "merge_audit_present": false,
+    "path": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_champion/metrics/completed.json"
+  },
+  "G-I4_artifact_freshness": {
+    "pass": true,
+    "mismatches": [],
+    "compare_path": "/home/zarnihlawn/Desktop/ITM/project/results/adadae_champion/thesis/compare_to_ddae.json"
+  },
+  "G_paper_both": {
+    "pass": false,
+    "settings": {
+      "unsupervised": {
+        "pass": false,
+        "AdaDDAE_PR_AUC": 31.179626963369472,
+        "AdaDDAE_ROC_AUC": 72.49901809651558,
+        "paper_PR_AUC": 32.77,
+        "paper_ROC_AUC": 74.08,
+        "delta_PR": -1.590373036630531,
+        "delta_ROC": -1.580981903484414
+      },
+      "semi-supervised": {
+        "pass": false,
+        "AdaDDAE_PR_AUC": 57.082257761060454,
+        "AdaDDAE_ROC_AUC": 82.28886437876176,
+        "paper_PR_AUC": 61.36,
+        "paper_ROC_AUC": 83.17,
+        "delta_PR": -4.277742238939545,
+        "delta_ROC": -0.8811356212382435
+      }
+    }
+  },
+  "all_pass": false,
+  "n_jobs": 570
+}
