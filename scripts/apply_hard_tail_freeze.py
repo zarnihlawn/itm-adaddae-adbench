@@ -65,11 +65,43 @@ KNOWN_BASES = {
     "semi_nlp_baseline",
 }
 
-# Phase0 emergency revoke — never let val_loss select undo these (wine/census RDT
-# anti-correlated with test PR). Overlays cleared; protect list keeps A6/MCE off.
+# Phase0 emergency revoke — never let val_loss select undo these.
+# wine/census: prior RDT/champion anti-correlated with test PR.
+# FashionMNIST/MNIST-C/InternetAds/optdigits: full-57 adaptive RDT disasters
+# (2026-08-06: −22 / −8.5 / −5.6 / −14 vs fair). Overlays cleared.
 PHASE0_LOCKS = {
     "wine": "baseline_ddae",
     "census": "baseline_ddae",
+    "FashionMNIST": "baseline_ddae",
+    "MNIST-C": "baseline_ddae",
+    "InternetAds": "baseline_ddae",
+    "optdigits": "baseline_ddae",
+}
+
+# Strip these method-lift / A6 memberships when PHASE0-locking or last-shot freeze.
+PHASE0_STRIP_METHOD_LIFTS = {
+    "contrastive_taps_semi": (
+        "optdigits",
+        "backdoor",
+        "thyroid",
+        "Amazon",
+        "Yelp",
+        "20newsgroups",
+        "Agnews",
+    ),
+    "calibrated_fusion_semi": (
+        "optdigits",
+        "backdoor",
+        "thyroid",
+        "vertebral",
+    ),
+}
+
+# A6 modules that must not list these datasets on semi-supervised.
+PHASE0_STRIP_A6_SEMI = {
+    "apex": ("fraud",),
+    "delta": ("fraud",),
+    "helix": ("WPBC",),
 }
 
 
@@ -295,6 +327,32 @@ def apply_freeze(
             "forced_protect": forced_protect,
         }
 
+    # Always enforce PHASE0 method-lift strips (even if ds not in this freeze batch)
+    lifts = dict(upgrades.get("method_lifts") or {})
+    for lift_key, ds_names in PHASE0_STRIP_METHOD_LIFTS.items():
+        lst = list(lifts.get(lift_key) or [])
+        before = list(lst)
+        for name in ds_names:
+            lst = _list_remove(lst, name)
+        if lst != before:
+            print(f"PHASE0_STRIP {lift_key}: removed {[n for n in ds_names if n in before]}")
+        lifts[lift_key] = lst
+    upgrades["method_lifts"] = lifts
+
+    # Enforce A6 last-shot strips (fraud apex/delta, WPBC helix)
+    for mod, ds_names in PHASE0_STRIP_A6_SEMI.items():
+        bucket = dict(a6.get(mod) or {})
+        semi = list(bucket.get("semi-supervised") or [])
+        before = list(semi)
+        for name in ds_names:
+            semi = _list_remove(semi, name)
+        if semi != before:
+            print(f"PHASE0_STRIP a6.{mod}: removed {[n for n in ds_names if n in before]}")
+        bucket["semi-supervised"] = semi
+        if "unsupervised" not in bucket:
+            bucket["unsupervised"] = list(bucket.get("unsupervised") or [])
+        a6[mod] = bucket
+
     new_nlp = [x for x in nlp_list if x in nlp_set]
     for x in sorted(nlp_set):
         if x not in new_nlp:
@@ -313,6 +371,12 @@ def apply_freeze(
         ],
         "n_applied": len(applied),
         "phase0_locks": dict(PHASE0_LOCKS),
+        "phase0_strip_method_lifts": {
+            k: list(v) for k, v in PHASE0_STRIP_METHOD_LIFTS.items()
+        },
+        "phase0_strip_a6_semi": {
+            k: list(v) for k, v in PHASE0_STRIP_A6_SEMI.items()
+        },
     }
 
 

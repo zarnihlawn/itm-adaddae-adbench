@@ -159,6 +159,42 @@
         "forced_protect": true,
         "reason": "PHASE0_LOCK \u2014 never re-enable RDT/champion via val_loss"
       },
+      "FashionMNIST": {
+        "policy": "baseline_ddae",
+        "overlays": [],
+        "strip_mce_gate": true,
+        "phase0_lock": true,
+        "forced": true,
+        "forced_protect": false,
+        "reason": "PHASE0_LOCK \u2014 never re-enable RDT/champion via val_loss"
+      },
+      "MNIST-C": {
+        "policy": "baseline_ddae",
+        "overlays": [],
+        "strip_mce_gate": true,
+        "phase0_lock": true,
+        "forced": true,
+        "forced_protect": false,
+        "reason": "PHASE0_LOCK \u2014 never re-enable RDT/champion via val_loss"
+      },
+      "InternetAds": {
+        "policy": "baseline_ddae",
+        "overlays": [],
+        "strip_mce_gate": true,
+        "phase0_lock": true,
+        "forced": true,
+        "forced_protect": false,
+        "reason": "PHASE0_LOCK \u2014 never re-enable RDT/champion via val_loss"
+      },
+      "optdigits": {
+        "policy": "baseline_ddae",
+        "overlays": [],
+        "strip_mce_gate": true,
+        "phase0_lock": true,
+        "forced": true,
+        "forced_protect": false,
+        "reason": "PHASE0_LOCK \u2014 never re-enable RDT/champion via val_loss"
+      },
       "Ionosphere": {
         "policy": "baseline_ddae",
         "overlays": [],
@@ -305,8 +341,11 @@
       }
     },
     "forced_datasets": [
+      "FashionMNIST",
+      "InternetAds",
       "Ionosphere",
       "Lymphography",
+      "MNIST-C",
       "PageBlocks",
       "Pima",
       "Stamps",
@@ -318,6 +357,7 @@
       "letter",
       "magic.gamma",
       "musk",
+      "optdigits",
       "pendigits",
       "satimage-2",
       "shuttle",
@@ -326,7 +366,7 @@
       "vowels",
       "wine"
     ],
-    "n_forced": 20,
+    "n_forced": 24,
     "search_datasets": [
       "ALOI",
       "annthyroid",
@@ -340,11 +380,9 @@
       "fraud",
       "glass",
       "Hepatitis",
-      "InternetAds",
       "landsat",
       "mammography",
       "mnist",
-      "optdigits",
       "satellite",
       "SpamBase",
       "speech",
@@ -356,8 +394,6 @@
       "WPBC",
       "yeast",
       "CIFAR10",
-      "FashionMNIST",
-      "MNIST-C",
       "MVTec-AD",
       "SVHN",
       "Agnews",
@@ -366,10 +402,14 @@
       "Yelp",
       "20newsgroups"
     ],
-    "n_search": 37,
+    "n_search": 33,
     "phase0_locks": {
       "wine": "baseline_ddae",
-      "census": "baseline_ddae"
+      "census": "baseline_ddae",
+      "FashionMNIST": "baseline_ddae",
+      "MNIST-C": "baseline_ddae",
+      "InternetAds": "baseline_ddae",
+      "optdigits": "baseline_ddae"
     },
     "protect_baseline_semi": [
       "Ionosphere",
@@ -721,12 +761,12 @@
     {
       "dataset": "vertebral",
       "category": "classical",
-      "resolved_policy": "per:baseline_ddae+nautilus+cal_fuse",
+      "resolved_policy": "per:baseline_ddae+cal_fuse",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
       "use_locus": false,
-      "use_nautilus": true,
+      "use_nautilus": false,
       "use_apex": false,
       "fusion_mode": "calibrated",
       "features": {
@@ -746,20 +786,20 @@
     {
       "dataset": "glass",
       "category": "classical",
-      "resolved_policy": "per:baseline_ddae+nautilus+cal_fuse",
+      "resolved_policy": "per:champion_semi+cal_fuse",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
       "use_locus": false,
-      "use_nautilus": true,
+      "use_nautilus": false,
       "use_apex": false,
       "fusion_mode": "calibrated",
       "features": {
-        "scaler": "standard",
-        "pca_dim_threshold": 99999,
+        "scaler": "auto",
+        "pca_dim_threshold": 128,
         "pca_max_components": 128,
         "pca_variance": 0.95,
-        "clip_outliers": false,
+        "clip_outliers": true,
         "clip_sigma": 5.0
       },
       "train_ov": {
@@ -771,7 +811,7 @@
     {
       "dataset": "WPBC",
       "category": "classical",
-      "resolved_policy": "per:semi_speech_specialist",
+      "resolved_policy": "per:baseline_ddae+helix",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -780,7 +820,7 @@
       "use_apex": false,
       "fusion_mode": "fixed",
       "features": {
-        "scaler": "robust",
+        "scaler": "standard",
         "pca_dim_threshold": 99999,
         "pca_max_components": 128,
         "pca_variance": 0.95,

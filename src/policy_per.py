@@ -212,12 +212,24 @@ def apply_per_upgrades(
             fw.setdefault("residual", 0.3)
             fw.setdefault("latent", 0.2)
             tags.append("cal_fuse")
-        # RDT promotion allowlist only (Waveform-class); never auto-promote wine/census
+        # Force off rejection on PHASE0-locked disasters even if specialist leaks RDT
         rdt_ok = set(lifts.get("rdt_promotion_semi") or [])
-        if base_policy == "semi_rdt_tail" and dataset_name not in rdt_ok:
-            # Force off rejection for datasets not explicitly promoted
-            if dataset_name in ("wine", "census"):
-                out.setdefault("adadae", {})["use_rejection_training"] = False
+        phase0_rdt_block = {
+            "wine",
+            "census",
+            "FashionMNIST",
+            "MNIST-C",
+            "InternetAds",
+            "optdigits",
+        }
+        if base_policy == "semi_rdt_tail" and dataset_name in phase0_rdt_block:
+            out.setdefault("adadae", {})["use_rejection_training"] = False
+        elif (
+            base_policy == "semi_rdt_tail"
+            and dataset_name not in rdt_ok
+            and dataset_name in ("wine", "census")
+        ):
+            out.setdefault("adadae", {})["use_rejection_training"] = False
 
     out.setdefault("adadae", {})["policy"] = "per"
     out["adadae"]["resolved_policy"] = "per:" + "+".join(tags)

@@ -1,0 +1,41 @@
+{
+  "title": "Post full-57 emergency revoke (2026-08-06)",
+  "generated": "2026-08-06",
+  "trigger": "full57 all → semi 57.52; probe floor 60.5 FAIL; ship blocked",
+  "pre_run_semi_PR": 59.09315919048331,
+  "post_full57_semi_PR": 57.516558866065765,
+  "fair_semi_PR": 58.69953928485906,
+  "paper_semi_PR": 61.36,
+  "smoking_guns": [
+    {"dataset": "FashionMNIST", "delta_vs_fair": -22.04, "freeze": "semi_rdt_tail", "live": "semi_rdt_tail"},
+    {"dataset": "backdoor", "delta_vs_fair": -20.69, "freeze": "baseline_ddae", "live": "baseline_ddae+taps+cal_fuse"},
+    {"dataset": "optdigits", "delta_vs_fair": -13.92, "freeze": "semi_rdt_tail", "live": "semi_rdt_tail+taps+cal_fuse"},
+    {"dataset": "MNIST-C", "delta_vs_fair": -8.54, "freeze": "semi_rdt_tail", "live": "semi_rdt_tail"},
+    {"dataset": "InternetAds", "delta_vs_fair": -5.57, "freeze": "semi_rdt_tail", "live": "semi_rdt_tail"}
+  ],
+  "actions": {
+    "PHASE0_LOCKS": {
+      "wine": "baseline_ddae",
+      "census": "baseline_ddae",
+      "FashionMNIST": "baseline_ddae",
+      "MNIST-C": "baseline_ddae",
+      "InternetAds": "baseline_ddae",
+      "optdigits": "baseline_ddae"
+    },
+    "strip_contrastive_taps_semi": ["backdoor", "thyroid", "optdigits"],
+    "strip_calibrated_fusion_semi": ["backdoor", "optdigits"],
+    "keep_proven_lifts": {
+      "Hepatitis": "semi_rdt_tail+cal_fuse",
+      "cover": "baseline_ddae+apex+delta+cal_fuse"
+    },
+    "selector": {
+      "compose_upgrades": true,
+      "max_val_loss_ratio": 2.5
+    },
+    "retrain": "bash scripts/run_phase0_lock_retrain.sh disasters 16gb"
+  },
+  "do_not": [
+    "CONFIRM_FULL57_ALL without disasters+residuals+midtier first",
+    "re-add stripped taps/cal_fuse without composed select evidence"
+  ]
+}

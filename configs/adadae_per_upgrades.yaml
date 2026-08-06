@@ -1,8 +1,10 @@
-version: 5.4-phase0-lock
-description: 'Classical protect + hard-tail specialists. Phase 0 lock (2026-08-06):
-  wine/census forced baseline_ddae (RDT/champion cannot be re-selected); helix stripped;
-  Agnews TAPS removed (−3.2 vs fair). A6 only on proven sets. Mid-tier calibrated
-  fusion expanded on Waveform-class winners.'
+version: 5.6-lastshot
+description: 'Last-shot adaptive PER (2026-08-06). PHASE0 locks: wine/census +
+  FashionMNIST/MNIST-C/InternetAds/optdigits → baseline_ddae. Strip harmful
+  taps (Amazon/Yelp/20newsgroups/backdoor/thyroid/optdigits), cal_fuse
+  (thyroid/vertebral/backdoor/optdigits), fraud apex/delta, WPBC helix.
+  Keep proven lifts: Hepatitis RDT+cal_fuse, cover apex+delta+cal_fuse,
+  glass champion+cal_fuse, Waveform cal_fuse, Imdb taps only. No MCE/SMC/GATE semi.'
 mce:
   cv: []
   nlp: []
@@ -22,7 +24,6 @@ a6:
     unsupervised: []
   apex:
     semi-supervised:
-    - fraud
     - cover
     unsupervised: []
   orbit:
@@ -36,7 +37,6 @@ a6:
     unsupervised: []
   delta:
     semi-supervised:
-    - fraud
     - cover
     unsupervised: []
   locus:
@@ -46,8 +46,7 @@ a6:
     semi-supervised: []
     unsupervised: []
   helix:
-    semi-supervised:
-    - WPBC
+    semi-supervised: []
     unsupervised: []
 protect_baseline_semi:
 - smtp
@@ -73,20 +72,10 @@ protect_baseline_semi:
 method_lifts:
   contrastive_alpha: 0.2
   contrastive_taps_semi:
-  - Amazon
   - Imdb
-  - Yelp
-  - 20newsgroups
-  - thyroid
-  - optdigits
-  - backdoor
   calibrated_fusion_semi:
   - Waveform
-  - optdigits
-  - thyroid
   - glass
-  - vertebral
-  - backdoor
   - Hepatitis
   - cover
   rdt_promotion_semi:
@@ -95,3 +84,5 @@ method_lifts:
   - speech
   - SVHN
   - satimage-2
+  - Hepatitis
+  - satellite

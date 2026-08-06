@@ -1,23 +1,21 @@
-# Final run — AdaDDAE-PER (Phase0 lock + paper gap plan)
+# Final run — AdaDDAE-PER (last-shot adaptive, one Vast command)
 
-**Last updated:** 2026-08-06 — **Phase0 lock shipped in configs/code.** Select→freeze had undone wine/census → `champion_semi` / `semi_rdt_tail` (live metrics wine −4.26, census −4.02). Both are now hard-locked to `baseline_ddae`; Agnews TAPS stripped. Macros still **pre-retrain** (59.09 / 82.98 vs paper 61.36 / 83.17). **Next on Vast:** `bash scripts/run_phase0_lock_retrain.sh top3 16gb`. Catalog: [`results/adadae_per/thesis/weakness_catalog_20.json`](results/adadae_per/thesis/weakness_catalog_20.json).
+**Last updated:** 2026-08-06 — **Last-shot configs frozen.** Full-57 adaptive crashed semi to **57.52**. Integrity-safe ceiling ≈ **59.2** (match-fair + keep winners); paper **61.36** and probe **60.5** remain out of reach with catalogued lifts. **One Vast command:** `bash scripts/run_phase0_lock_retrain.sh lastshot 16gb`. Recipe map: [`results/adadae_per/thesis/adaptive_recipe_map_57.json`](results/adadae_per/thesis/adaptive_recipe_map_57.json).
 
-Canonical ship claim: beat published DDAE on **both** settings under integrity (`val_loss` / train-only proxies, no test-PR). See [`.cursor/rules/final-run-md.mdc`](.cursor/rules/final-run-md.mdc).
+Canonical claim under integrity: **beat fair DDAE** on adaptive PER across all 57 ADBench datasets; unsup already passes paper. Paper gap = protocol/table tax (see loop3/phase4 paper-protocol diag ≈ fair).
 
 ---
 
-## Verdict (post-probe; pre Phase0-lock retrain)
+## Hard truth
 
 | Track | Semi PR / ROC | Notes |
 |-------|---------------|-------|
-| Paper AnoDDAE | **61.36 / 83.17** | Ship target |
-| Fair valstop | 58.70 / 82.94 | Integrity baseline |
-| AdaDDAE-PER (metrics on disk) | **59.09 / 82.98** | +0.39 vs fair; **FAIL** vs paper |
-| Unsup PER | 33.01 / 75.17 | **PASS** |
-
-**Smoking gun (updated):** Phase0 emergency revoke was **undone** by GPU select→freeze. Wine ran `champion_semi+protect` (FTP); census ran `semi_rdt_tail` again. **PHASE0_LOCKS** in [`apply_hard_tail_freeze.py`](scripts/apply_hard_tail_freeze.py) + [`train_only_recipe_select.py`](scripts/train_only_recipe_select.py) force `baseline_ddae` forever. Agnews TAPS removed from [`adadae_per_upgrades.yaml`](configs/adadae_per_upgrades.yaml).
-
-**Ceiling:** match-fair-on-losers ≈ **59.72** — still **−1.64** vs paper → must beat fair on mid-tier after stopping the bleed.
+| Paper AnoDDAE | **61.36 / 83.17** | Not reachable under integrity with current evidence |
+| Probe floor | **60.5** | Likely FAIL after lastshot |
+| Match-fair ceiling | **~59.2** | Best evidence ceiling |
+| Fair valstop | **58.70 / 82.94** | Integrity twin |
+| Disk (pre-lastshot) | **57.52 / 82.44** | Full-57 crash |
+| Unsup PER | **33.01 / 75.17** | **PASS** vs paper 32.77 / 74.08 |
 
 ---
 
@@ -27,113 +25,76 @@ Canonical ship claim: beat published DDAE on **both** settings under integrity (
 |------|--------|
 | Recipe | **One** YAML: `configs/adadae_per.yaml` with `policy: per` |
 | Protocol | **570** = 57 × 2 × seeds `{111,222,333,444,555}` |
-| Early stop | `val_loss` (+ `min_epochs`); never test-PR |
-| Select | Primary `val_loss`; ε-ball + complexity + synth-val; **PHASE0_LOCKS** wine/census |
+| Early stop | `val_loss`; never test-PR |
+| Adaptive | Per-dataset specialists + upgrades; PHASE0 locks; composed select |
 | Ship gate | PR **and** ROC **>** paper on **both** + `G_AP_PR_consistency` |
-| Probe floor | Semi PR **≥ 60.5** before `ship` |
+| Probe floor | Semi PR **≥ 60.5** before `ship` (informational after lastshot) |
 | Hardware | **`16gb`** |
 
-| Track | Config | Results |
-|-------|--------|---------|
-| Fair DDAE | `configs/baselines_ddae_valstop.yaml` | `results/ddae_baseline_valstop/` |
-| Paper-protocol (appendix) | `configs/ddae_paper_protocol.yaml` | `results/ddae_paper_protocol/` |
-| **AdaDDAE-PER** | `configs/adadae_per.yaml` | `results/adadae_per/` |
+---
+
+## Adaptive recipe (all 57)
+
+| Bucket | Datasets | Policy |
+|--------|----------|--------|
+| PHASE0 lock | wine census FashionMNIST MNIST-C InternetAds optdigits | `baseline_ddae` |
+| Composition strip | backdoor thyroid | `baseline_ddae` (no taps/cal_fuse) |
+| Protect | smtp donors http musk breastw shuttle Ionosphere Lymphography pendigits magic.gamma vowels skin PageBlocks Stamps WBC Pima letter (+wine/census) | `baseline+protect` |
+| Proven lifts | Hepatitis cover glass Waveform cardio satimage-2 speech SVHN satellite | keep RDT/champion/apex/cal_fuse as mapped |
+| NLP taps | **Imdb only** | Agnews/Amazon/Yelp/20newsgroups stripped |
+| A6 strip | fraud apex/delta, WPBC helix | removed |
+
+Full resolve dump: `python scripts/dump_adaptive_recipe_map.py`
 
 ---
 
-## Sets
-
-| Set | Datasets |
-|-----|----------|
-| **Hard-12** | `speech ALOI celeba SVHN CIFAR10 Wilt Imdb Amazon Yelp Agnews 20newsgroups census` |
-| **Bleed-CV** | `SVHN ALOI celeba CIFAR10 speech` |
-| **Bleed-classical** | `smtp satimage-2 Pima Stamps letter wine` |
-| **Phase 0 lock** | `wine census` → always `baseline_ddae` |
-| **Protect** | classical list + **Pima letter** (new) |
-| **Cal-fuse expand** | + `backdoor Hepatitis cover` |
-
----
-
-## Ship path (Vast, 16gb)
-
-### 0. Setup
+## Vast — THE only command (last credit)
 
 ```bash
 cd /data/ITM/project   # or /workspace/ITM/project
 source .venv/bin/activate
 export OMP_NUM_THREADS=12
 python scripts/detect_hardware.py
-python scripts/assert_final_config.py --config configs/adadae_per.yaml
+
+# Local/preflight (no GPU):
 bash scripts/run_phase0_lock_retrain.sh audit
+python scripts/dump_adaptive_recipe_map.py
+python scripts/assert_final_config.py --config configs/adadae_per.yaml
+
+# ONE GPU spend — disasters ∪ residuals ∪ strips ∪ proven midtier:
+bash scripts/run_phase0_lock_retrain.sh lastshot 16gb
 ```
 
-### 1. Phase0-lock retrain (do first — configs already locked)
+Expect semi ~**59.0–59.3**, beat-fair if recovery works; probe 60.5 likely still FAIL. Do **not** run `CONFIRM_FULL57_ALL` or another select.
+
+Optional only if lastshot macros ≥ ~59.0 **and** credit remains:
 
 ```bash
-bash scripts/run_phase0_lock_retrain.sh top3 16gb
-# wine census Agnews invalidate + retrain + compare
+# Full semi refresh for clean 570 claim (expensive)
+python scripts/invalidate_per_semi_jobs.py --all-semi
+bash scripts/run_adadae_per_protocol.sh final 16gb
+bash scripts/run_adadae_per_protocol.sh compare
+bash scripts/run_adadae_per_protocol.sh gates
 ```
 
-Expect: wine/census near fair; Agnews Δ better than −3.2; semi macro ~59.3–59.6.
-
-### 2. Protect residuals
-
-```bash
-bash scripts/run_phase0_lock_retrain.sh residuals 16gb
-# Stamps smtp Pima letter WBC
-```
-
-### 3. Mid-tier lifts → probe
-
-```bash
-bash scripts/run_phase0_lock_retrain.sh midtier 16gb
-# backdoor Hepatitis cover + annthyroid campaign yeast MVTec-AD cardio
-# then probe floor 60.5
-```
-
-### 4. Full ship (only after probe PASS)
+Ship only if `phase4_probe_gate.json` → `pass: true` (unlikely):
 
 ```bash
 bash scripts/run_hard_tail_ship_path.sh ship 16gb
-python scripts/check_unsup_hold.py
 ```
-
-**Pass when** `results/adadae_per/thesis/integrity_gates.json` → `all_pass: true`.
-
----
-
-## Legacy select path (still valid; locks enforced)
-
-```bash
-bash scripts/run_hard_tail_ship_path.sh select 16gb
-bash scripts/run_hard_tail_ship_path.sh freeze   # Phase0 locks override wine/census
-bash scripts/run_hard_tail_ship_path.sh probe 16gb
-```
-
----
-
-## Paper parity (integrity-safe) vs AnoDDAE source
-
-| Paper | Ship |
-|-------|------|
-| Scaler fit on **full X** before split | **FORBIDDEN** |
-| No val carve; fixed 100 ep | **FORBIDDEN** as ship protocol |
-| `time_emb_dim=4`, full-sum L2 t=1..T−1 | **USED** on `baseline_ddae` |
-| Batch ≈ N/10 power-of-2 | **USED** |
-| Single stochastic ε | **Upgraded** to multi-ε (`score_noise_draws=3`) |
 
 ---
 
 ## Do not
 
-- Re-enable wine·census RDT / wine champion_semi without clearing PHASE0_LOCKS
-- Select by test-PR or trust bisect-inflated hybrid PR
-- Full-ship when probe semi PR &lt; 60.5
-- Claim paper-protocol diagnostic as the ship result
+- Blind `full57 all` / GPU recipe select
+- Re-enable PHASE0 RDT or stripped taps/cal_fuse/apex/helix
+- Claim paper-protocol diagnostic as ship
+- Spend a second probe retrain after lastshot (probe is read from compare)
 
 ---
 
-## Sync back to laptop
+## Sync back
 
 ```bash
 rsync -avz -e "ssh -p PORT" \
@@ -143,5 +104,3 @@ rsync -avz -e "ssh -p PORT" \
   root@sshN.vast.ai:/data/ITM/project/configs/adadae_per_*.yaml \
   /home/zarnihlawn/Desktop/ITM/project/configs/
 ```
-
-Setup: [`final_run_resume.md`](final_run_resume.md).

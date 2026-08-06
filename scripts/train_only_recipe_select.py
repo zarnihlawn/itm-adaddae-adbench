@@ -158,11 +158,16 @@ def pick_winner_with_proxies(
     means_synth: Dict[str, float],
     eps_rel: float = 0.05,
     rdt_veto_margin: float = 0.05,
+    max_val_loss_ratio: float = 2.5,
+    synth_saturation: float = 0.999,
 ) -> tuple[str, Dict[str, Any]]:
     """Primary: min val_loss. Secondary: ε-ball → complexity → synth-val PR.
 
-    Hard veto: risky recipes whose synth-val PR is worse than best baseline_*
-    by ``rdt_veto_margin`` are discarded even if val_loss wins.
+    Hard veto (risky RDT/MCE/GATE):
+      1. synth-val PR worse than best baseline_* by ``rdt_veto_margin``
+      2. val_loss ratio ``best_baseline / risky`` exceeds ``max_val_loss_ratio``
+         unless synth clearly beats baseline by margin AND not both saturated
+         (RDT often compresses val_loss 3–50× while test PR collapses)
     """
     finite = {c: m for c, m in means_val.items() if m != float("inf")}
     if not finite:
@@ -174,19 +179,50 @@ def pick_winner_with_proxies(
         if c.startswith("baseline_ddae") and c in means_synth and means_synth[c] is not None
     ]
     best_baseline_synth = max(baseline_synths) if baseline_synths else None
+    baseline_vals = [
+        finite[c] for c in finite if c.startswith("baseline_ddae")
+    ]
+    best_baseline_val = min(baseline_vals) if baseline_vals else None
 
     eligible = dict(finite)
     vetoed: List[str] = []
-    if best_baseline_synth is not None:
-        for c in list(eligible):
-            if not is_risky_recipe(c):
-                continue
-            syn = means_synth.get(c)
-            if syn is None:
-                continue
-            if syn + rdt_veto_margin < best_baseline_synth:
-                vetoed.append(c)
-                eligible.pop(c, None)
+    veto_reasons: Dict[str, str] = {}
+
+    for c in list(eligible):
+        if not is_risky_recipe(c):
+            continue
+        syn = means_synth.get(c)
+        # Synth-gap veto
+        if (
+            best_baseline_synth is not None
+            and syn is not None
+            and syn + rdt_veto_margin < best_baseline_synth
+        ):
+            vetoed.append(c)
+            veto_reasons[c] = "synth_gap"
+            eligible.pop(c, None)
+            continue
+        # Val-loss scale veto (incomparable RDT loss)
+        if best_baseline_val is not None and eligible.get(c, 0) > 0:
+            ratio = best_baseline_val / float(eligible[c])
+            if ratio > max_val_loss_ratio:
+                both_sat = (
+                    syn is not None
+                    and best_baseline_synth is not None
+                    and syn >= synth_saturation
+                    and best_baseline_synth >= synth_saturation
+                )
+                clear_synth_win = (
+                    syn is not None
+                    and best_baseline_synth is not None
+                    and syn > best_baseline_synth + rdt_veto_margin
+                    and not both_sat
+                )
+                if not clear_synth_win:
+                    vetoed.append(c)
+                    veto_reasons[c] = f"val_loss_ratio={ratio:.2f}"
+                    eligible.pop(c, None)
+
     if not eligible:
         eligible = dict(finite)
 
@@ -206,9 +242,12 @@ def pick_winner_with_proxies(
     winner = ball[0]
     return winner, {
         "eps_rel": eps_rel,
+        "max_val_loss_ratio": max_val_loss_ratio,
         "best_val_loss": best_val,
+        "best_baseline_val_loss": best_baseline_val,
         "epsilon_ball": ball,
         "vetoed_risky": vetoed,
+        "veto_reasons": veto_reasons,
         "best_baseline_synth_pr": best_baseline_synth,
         "winner_complexity": recipe_complexity(winner),
         "winner_synth_val_pr": means_synth.get(winner),
@@ -562,8 +601,20 @@ def evidence_freeze_report() -> Dict[str, Any]:
     }
 
 
-def _build_candidate_cfg(base_cfg: Dict[str, Any], cand: str) -> Dict[str, Any]:
-    from src.policy import policy_overrides, _deep_update
+def _build_candidate_cfg(
+    base_cfg: Dict[str, Any],
+    cand: str,
+    dataset_name: Optional[str] = None,
+    category: str = "classical",
+) -> Dict[str, Any]:
+    """Build select cfg for ``cand``, composing live PER upgrades for the dataset.
+
+    Naked static candidates previously ignored upgrades (taps/cal_fuse/protect/A6),
+    so select winners diverged from final 570 resolved_policy (e.g. backdoor
+    selected as baseline_ddae but ran baseline_ddae+taps+cal_fuse).
+    """
+    from src.policy import policy_overrides, _deep_update, load_policy_exceptions
+    from src.policy_per import apply_per_upgrades, load_per_upgrades
 
     parts = cand.split("+")
     base = parts[0]
@@ -572,7 +623,7 @@ def _build_candidate_cfg(base_cfg: Dict[str, Any], cand: str) -> Dict[str, Any]:
     cfg["adadae"]["policy"] = "static"
     cfg["adadae"].pop("exceptions_file", None)
     cfg["adadae"].pop("upgrades_file", None)
-    # Explicit strip: no MCE/GATE/SMC from PER upgrades (static)
+    # Explicit strip: no MCE/GATE/SMC from PER upgrades (static strip-first)
     cfg["adadae"]["use_mce"] = False
     cfg["adadae"]["use_gate"] = False
     # Phase 1: enable integrity-safe synth-val PR proxy for ranking
@@ -588,7 +639,35 @@ def _build_candidate_cfg(base_cfg: Dict[str, Any], cand: str) -> Dict[str, Any]:
             cfg.setdefault("adadae", {})["use_nautilus"] = True
         elif ov == "spiral":
             cfg.setdefault("adadae", {})["use_spiral"] = True
-    cfg["adadae"]["resolved_policy"] = f"select:{cand}"
+
+    composed_tag = f"select:{cand}"
+    if dataset_name:
+        upgrades_path = (base_cfg.get("adadae") or {}).get("upgrades_file") or (
+            "configs/adadae_per_upgrades.yaml"
+        )
+        exc_path = (base_cfg.get("adadae") or {}).get("exceptions_file") or (
+            "configs/adadae_per_exceptions.yaml"
+        )
+        upgrades = load_per_upgrades(upgrades_path)
+        exceptions = load_policy_exceptions(exc_path)
+        cfg = apply_per_upgrades(
+            cfg,
+            setting="semi-supervised",
+            category=category,
+            dataset_name=dataset_name,
+            base_policy=base,
+            upgrades=upgrades,
+            exceptions=exceptions,
+        )
+        # Keep strip-first MCE/GATE off for select ablations; keep synth proxy
+        cfg.setdefault("adadae", {})["use_mce"] = False
+        cfg["adadae"]["use_gate"] = False
+        cfg["adadae"]["synth_val_proxy"] = True
+        live = str(cfg["adadae"].get("resolved_policy") or "")
+        composed_tag = f"select:{cand}|{live}"
+
+    cfg["adadae"]["resolved_policy"] = composed_tag
+    cfg["adadae"]["policy"] = "static"
     cfg["paths"] = dict(cfg["paths"])
     cfg["paths"]["results_dir"] = "results/adadae_per_select"
     cfg["paths"]["run_id"] = "adadae_per_select"
@@ -607,6 +686,7 @@ def run_selection(
     max_splits: int = 1,
     eps_rel: float = 0.05,
     rdt_veto_margin: float = 0.05,
+    max_val_loss_ratio: float = 2.5,
 ) -> Dict[str, Any]:
     from src.config import load_config
     from src.data.datasets import build_registry
@@ -630,12 +710,16 @@ def run_selection(
     by_name = {e.name: e for e in registry}
     results: Dict[str, Any] = {
         "mode": "gpu_val_loss_select",
-        "selection_metric": "val_loss+eps_complexity+synth_val_pr",
+        "selection_metric": "val_loss+eps_complexity+synth_val_pr+composed_upgrades",
         "selection_contract": {
             "primary": "minimize val_loss",
             "epsilon_ball_rel": eps_rel,
             "secondary": ["complexity_prior", "maximize synth_val_pr"],
-            "hard_veto": "risky RDT/MCE/GATE if synth_val_pr << baseline",
+            "hard_veto": (
+                "risky RDT/MCE/GATE if synth_val_pr << baseline OR "
+                f"baseline_val/risky_val > {max_val_loss_ratio} without clear unsaturated synth win"
+            ),
+            "compose": "apply_per_upgrades for dataset (taps/cal_fuse/protect/A6) while scoring",
             "never": "test-PR selection",
         },
         "winners": {},
@@ -644,6 +728,7 @@ def run_selection(
         "candidates": cands,
         "datasets": datasets,
         "hardware_profile": (base.get("hardware") or {}).get("hardware_profile"),
+        "max_val_loss_ratio": max_val_loss_ratio,
         "n_ok": 0,
         "n_fail": 0,
     }
@@ -667,7 +752,9 @@ def run_selection(
             seed_vals: Dict[str, float] = {}
             seed_synths: Dict[str, float] = {}
             for cand in cands:
-                cfg = _build_candidate_cfg(base, cand)
+                cfg = _build_candidate_cfg(
+                    base, cand, dataset_name=ds, category=cat
+                )
                 set_seed(seed)
                 split_vals: List[float] = []
                 split_prs: List[float] = []
@@ -738,6 +825,7 @@ def run_selection(
                         "PR": (sum(split_prs) / len(split_prs)) if split_prs else None,
                         "n_splits": len(split_vals),
                         "complexity": recipe_complexity(cand),
+                        "composed_policy": cfg["adadae"].get("resolved_policy"),
                     }
                 )
 
@@ -748,6 +836,7 @@ def run_selection(
                         {c: seed_synths.get(c) for c in cands},  # type: ignore[arg-type]
                         eps_rel=eps_rel,
                         rdt_veto_margin=rdt_veto_margin,
+                        max_val_loss_ratio=max_val_loss_ratio,
                     )
                     results.setdefault("_seed_winners", {}).setdefault(ds, []).append(
                         seed_winner
@@ -772,7 +861,11 @@ def run_selection(
             }
             continue
         winner, pick_meta = pick_winner_with_proxies(
-            means, means_synth, eps_rel=eps_rel, rdt_veto_margin=rdt_veto_margin
+            means,
+            means_synth,
+            eps_rel=eps_rel,
+            rdt_veto_margin=rdt_veto_margin,
+            max_val_loss_ratio=max_val_loss_ratio,
         )
         results["winners"][ds] = {
             "policy": winner,
@@ -785,7 +878,7 @@ def run_selection(
         print(
             f"WINNER {ds}: {winner} val={means[winner]:.6g} "
             f"synth={means_synth.get(winner)} complexity={recipe_complexity(winner)} "
-            f"vetoed={pick_meta.get('vetoed_risky')}"
+            f"vetoed={pick_meta.get('vetoed_risky')} reasons={pick_meta.get('veto_reasons')}"
         )
 
     apply_phase0_locks_to_winners(results["winners"])
@@ -793,7 +886,7 @@ def run_selection(
 
 
 def apply_phase0_locks_to_winners(winners: Dict[str, Any]) -> None:
-    """Force Phase0 emergency revoke policies (wine/census → baseline_ddae)."""
+    """Force Phase0 locks (wine/census + full-57 RDT disasters → baseline_ddae)."""
     for ds, locked in PHASE0_LOCKS.items():
         entry = winners.get(ds)
         if entry is None:
@@ -895,6 +988,15 @@ def main() -> int:
         default=0.05,
         help="Synth-val PR margin: veto risky recipes this far below baseline",
     )
+    p.add_argument(
+        "--max-val-loss-ratio",
+        type=float,
+        default=2.5,
+        help=(
+            "Veto risky recipes when best_baseline_val/risky_val exceeds this "
+            "unless unsaturated synth clearly wins (default 2.5)"
+        ),
+    )
     args = p.parse_args()
 
     if args.dry_run:
@@ -946,6 +1048,7 @@ def main() -> int:
             max_splits=args.max_splits,
             eps_rel=float(args.eps_rel),
             rdt_veto_margin=float(args.rdt_veto_margin),
+            max_val_loss_ratio=float(args.max_val_loss_ratio),
         )
         if tiering is not None:
             merge_forced_winners(report["winners"], tiering["forced"])

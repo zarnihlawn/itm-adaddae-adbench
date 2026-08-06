@@ -83,18 +83,18 @@ semi_specialists:
   fault: baseline_ddae
   fraud: baseline_ddae
   Hepatitis: semi_rdt_tail
-  InternetAds: semi_rdt_tail
+  InternetAds: baseline_ddae
   landsat: baseline_ddae
   mammography: baseline_ddae
   mnist: baseline_ddae
-  optdigits: semi_rdt_tail
+  optdigits: baseline_ddae
   satellite: semi_rdt_tail
   SpamBase: baseline_ddae
   thyroid: baseline_ddae
   WDBC: baseline_ddae
   yeast: baseline_ddae
-  FashionMNIST: semi_rdt_tail
-  MNIST-C: semi_rdt_tail
+  FashionMNIST: baseline_ddae
+  MNIST-C: baseline_ddae
   MVTec-AD: baseline_ddae
 semi_cv_policy: semi_cvnlp_ftp
 unsup_nlp_baseline:
@@ -216,4 +216,46 @@ train_overrides:
   smtp:
     val_fraction_semi: 0.2
     min_epochs: 40
+  # Last-shot residual protect fine-tunes
+  Stamps:
+    val_fraction_semi: 0.2
+    min_epochs: 50
+    early_stop_patience: 40
+  Pima:
+    val_fraction_semi: 0.2
+    min_epochs: 50
+    early_stop_patience: 40
+  letter:
+    val_fraction_semi: 0.2
+    min_epochs: 50
+    early_stop_patience: 40
+  WBC:
+    val_fraction_semi: 0.2
+    min_epochs: 50
+    early_stop_patience: 40
+  # Last-shot disaster / composition victims after PHASE0 lock
+  FashionMNIST:
+    val_fraction_semi: 0.15
+    min_epochs: 50
+    early_stop_patience: 40
+  MNIST-C:
+    val_fraction_semi: 0.15
+    min_epochs: 50
+    early_stop_patience: 40
+  optdigits:
+    val_fraction_semi: 0.2
+    min_epochs: 50
+    early_stop_patience: 40
+  InternetAds:
+    val_fraction_semi: 0.2
+    min_epochs: 50
+    early_stop_patience: 40
+  backdoor:
+    val_fraction_semi: 0.2
+    min_epochs: 50
+    early_stop_patience: 40
+  thyroid:
+    val_fraction_semi: 0.2
+    min_epochs: 50
+    early_stop_patience: 40
 routing_rules_file: configs/routing_rules.yaml

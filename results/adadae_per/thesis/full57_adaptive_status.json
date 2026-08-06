@@ -1,25 +1,31 @@
 {
-  "title": "Full-57 adaptive select — implementation status",
+  "title": "Full-57 / last-shot adaptive — status",
   "timestamp": "2026-08-06",
-  "local_implementation": "complete",
-  "vast_gpu_execution": "pending",
-  "tier_plan": {
-    "n_all": 57,
-    "n_forced": 20,
-    "n_search": 37,
-    "artifact": "results/adadae_per/thesis/phase1_all_semi_tier_plan.json"
+  "vast_gpu_execution": "awaiting_lastshot",
+  "last_run": {
+    "command": "top3 && full57 all && ship",
+    "semi_PR": 57.516558866065765,
+    "semi_ROC": 82.4369676042487,
+    "probe_pass": false,
+    "ship_ran": false
   },
-  "gates": {
-    "top3_retrain": "FAIL on disk metrics (wine champion / census RDT / Agnews taps) — must run before select",
-    "probe_floor": 60.5,
-    "G_paper_both": "pending post-final"
+  "lastshot": {
+    "command": "bash scripts/run_phase0_lock_retrain.sh lastshot 16gb",
+    "expected_semi_PR": "59.0-59.3",
+    "ceiling_vs_fair": 59.22,
+    "paper_61_36_reachable": false,
+    "probe_60_5_reachable": false,
+    "recipe_map": "results/adadae_per/thesis/adaptive_recipe_map_57.json",
+    "preflight": [
+      "bash scripts/run_phase0_lock_retrain.sh audit",
+      "python scripts/dump_adaptive_recipe_map.py",
+      "python scripts/assert_final_config.py --config configs/adadae_per.yaml"
+    ]
   },
-  "commands": {
-    "plan": "bash scripts/run_full57_adaptive_select.sh plan",
-    "top3": "bash scripts/run_phase0_lock_retrain.sh top3 16gb",
-    "check": "bash scripts/run_full57_adaptive_select.sh check-top3",
-    "all": "bash scripts/run_full57_adaptive_select.sh all 16gb",
-    "ship": "bash scripts/run_full57_adaptive_select.sh ship 16gb"
-  },
-  "fairness": "Integrity-safe adaptive: val_loss selection only; fair twin baselines_ddae_valstop; paper Table 1 ship target"
+  "forbid": [
+    "CONFIRM_FULL57_ALL=1 without lastshot recovery",
+    "GPU recipe select",
+    "second probe retrain after lastshot"
+  ],
+  "fairness": "Integrity-safe adaptive per 57 ADBench datasets; claim beat-fair; paper gap = protocol/table tax"
 }

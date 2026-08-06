@@ -2,14 +2,49 @@
   "pass": true,
   "revoked": [
     "smtp:apex",
-    "wine:nautilus+champion/RDT\u2192baseline_ddae",
-    "census:RDT\u2192baseline_ddae",
-    "Agnews:taps stripped",
-    "speech:mce+smc+apex kitchen-sink"
+    "wine/census:RDT\u2192baseline_ddae",
+    "FashionMNIST/MNIST-C/InternetAds/optdigits:RDT\u2192baseline_ddae",
+    "Agnews/Amazon/Yelp/20newsgroups:taps stripped (Imdb taps kept)",
+    "backdoor/thyroid/optdigits/vertebral:cal_fuse stripped",
+    "fraud:apex+delta stripped",
+    "WPBC:helix stripped",
+    "keep: Hepatitis RDT+cal_fuse, cover apex+delta+cal_fuse"
   ],
   "phase0_locks": {
     "wine": "baseline_ddae",
-    "census": "baseline_ddae"
+    "census": "baseline_ddae",
+    "FashionMNIST": "baseline_ddae",
+    "MNIST-C": "baseline_ddae",
+    "InternetAds": "baseline_ddae",
+    "optdigits": "baseline_ddae"
+  },
+  "phase0_strip_method_lifts": {
+    "contrastive_taps_semi": [
+      "optdigits",
+      "backdoor",
+      "thyroid",
+      "Amazon",
+      "Yelp",
+      "20newsgroups",
+      "Agnews"
+    ],
+    "calibrated_fusion_semi": [
+      "optdigits",
+      "backdoor",
+      "thyroid",
+      "vertebral"
+    ]
+  },
+  "phase0_strip_a6_semi": {
+    "apex": [
+      "fraud"
+    ],
+    "delta": [
+      "fraud"
+    ],
+    "helix": [
+      "WPBC"
+    ]
   },
   "checks": [
     {
@@ -17,10 +52,13 @@
       "resolved_policy": "per:baseline_ddae+protect+ftp_ov+train_ov",
       "use_apex": false,
       "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
       "use_mce": false,
       "use_rejection_training": false,
       "use_ftp": false,
       "contrastive": false,
+      "cal_fuse": false,
       "protected": true
     },
     {
@@ -28,10 +66,13 @@
       "resolved_policy": "per:baseline_ddae+protect+ftp_ov+train_ov",
       "use_apex": false,
       "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
       "use_mce": false,
       "use_rejection_training": false,
       "use_ftp": false,
       "contrastive": false,
+      "cal_fuse": false,
       "protected": true
     },
     {
@@ -39,10 +80,13 @@
       "resolved_policy": "per:baseline_ddae+protect",
       "use_apex": false,
       "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
       "use_mce": false,
       "use_rejection_training": false,
       "use_ftp": false,
       "contrastive": false,
+      "cal_fuse": false,
       "protected": true
     },
     {
@@ -50,10 +94,13 @@
       "resolved_policy": "per:baseline_ddae+protect+ftp_ov",
       "use_apex": false,
       "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
       "use_mce": false,
       "use_rejection_training": false,
       "use_ftp": false,
       "contrastive": false,
+      "cal_fuse": false,
       "protected": true
     },
     {
@@ -61,10 +108,13 @@
       "resolved_policy": "per:semi_rdt_tail+ftp_ov+train_ov",
       "use_apex": false,
       "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
       "use_mce": false,
       "use_rejection_training": true,
       "use_ftp": true,
       "contrastive": false,
+      "cal_fuse": false,
       "protected": false
     },
     {
@@ -72,10 +122,13 @@
       "resolved_policy": "per:champion_semi+cal_fuse",
       "use_apex": false,
       "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
       "use_mce": false,
       "use_rejection_training": false,
       "use_ftp": true,
       "contrastive": false,
+      "cal_fuse": true,
       "protected": false
     },
     {
@@ -83,10 +136,13 @@
       "resolved_policy": "per:baseline_ddae+ftp_ov+train_ov",
       "use_apex": false,
       "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
       "use_mce": false,
       "use_rejection_training": false,
       "use_ftp": false,
       "contrastive": false,
+      "cal_fuse": false,
       "protected": false
     },
     {
@@ -94,10 +150,223 @@
       "resolved_policy": "per:baseline_ddae+ftp_ov",
       "use_apex": false,
       "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
       "use_mce": false,
       "use_rejection_training": false,
       "use_ftp": false,
       "contrastive": false,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "FashionMNIST",
+      "resolved_policy": "per:baseline_ddae+train_ov",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "MNIST-C",
+      "resolved_policy": "per:baseline_ddae+train_ov",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "InternetAds",
+      "resolved_policy": "per:baseline_ddae+train_ov",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "optdigits",
+      "resolved_policy": "per:baseline_ddae+train_ov",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "backdoor",
+      "resolved_policy": "per:baseline_ddae+train_ov",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "thyroid",
+      "resolved_policy": "per:baseline_ddae+train_ov",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "vertebral",
+      "resolved_policy": "per:baseline_ddae",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "Amazon",
+      "resolved_policy": "per:baseline_ddae+ftp_ov",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "Yelp",
+      "resolved_policy": "per:baseline_ddae+ftp_ov",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "20newsgroups",
+      "resolved_policy": "per:baseline_ddae+ftp_ov",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "Imdb",
+      "resolved_policy": "per:baseline_ddae+ftp_ov+taps",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": true,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "fraud",
+      "resolved_policy": "per:baseline_ddae",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "WPBC",
+      "resolved_policy": "per:baseline_ddae",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "cal_fuse": false,
+      "protected": false
+    },
+    {
+      "dataset": "cover",
+      "resolved_policy": "per:baseline_ddae+apex+delta+cal_fuse",
+      "use_apex": true,
+      "use_nautilus": false,
+      "use_delta": true,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "cal_fuse": true,
+      "protected": false
+    },
+    {
+      "dataset": "Hepatitis",
+      "resolved_policy": "per:semi_rdt_tail+cal_fuse",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_delta": false,
+      "use_helix": false,
+      "use_mce": false,
+      "use_rejection_training": true,
+      "use_ftp": true,
+      "contrastive": false,
+      "cal_fuse": true,
       "protected": false
     }
   ]
