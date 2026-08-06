@@ -20,6 +20,9 @@ def test_scale_hparams_branches():
     big_d = scale_hparams(1000, 512)
     assert small["hidden"] <= big_d["hidden"]
     assert big_d["latent"] >= 64
+    assert big_d["score_k"] >= 12
+    assert big_d["high_mask_cap"] <= 0.6
+    assert big_d["dropout"] <= 0.05
 
 
 def test_sample_masks_shape():
@@ -40,6 +43,49 @@ def test_axion_fit_score_toy():
     s = model.score(X)
     assert s.shape == (120,)
     assert np.all(np.isfinite(s))
+
+
+def test_train_anchored_score_and_semi_latch():
+    rng = np.random.RandomState(2)
+    Xn = rng.randn(80, 8).astype(np.float32)
+    Xa = rng.randn(20, 8).astype(np.float32) + 3.0
+    X = np.vstack([Xn, Xa])
+    y_all_normal = np.zeros(80, dtype=np.int64)
+
+    model = build_model(
+        "axion",
+        epochs=12,
+        patience=4,
+        batch_size=32,
+        seed=3,
+        latch_alpha=0.4,
+        latch_alpha_semi=0.25,
+    )
+    model.fit(Xn, y_all_normal)
+    assert model.mcs_mean_ is not None
+    assert model.mcs_std_ is not None and model.mcs_std_ > 0
+    assert model.latch_score_mean_ is not None
+    assert abs(model.active_latch_alpha_ - 0.25) < 1e-9
+
+    s = model.score(X)
+    assert s.shape == (100,)
+    # Anomalies should rank higher on average under train-anchored scores
+    assert float(s[80:].mean()) > float(s[:80].mean())
+
+    # Unsupervised-like train (mixed labels) keeps full latch_alpha
+    y_mixed = np.zeros(100, dtype=np.int64)
+    y_mixed[80:] = 1
+    model2 = build_model(
+        "axion",
+        epochs=8,
+        patience=3,
+        batch_size=32,
+        seed=4,
+        latch_alpha=0.4,
+        latch_alpha_semi=0.25,
+    )
+    model2.fit(X, y_mixed)
+    assert abs(model2.active_latch_alpha_ - 0.4) < 1e-9
 
 
 def test_axion_run_one_array_smoke():

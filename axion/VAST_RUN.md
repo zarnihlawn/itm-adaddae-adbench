@@ -31,6 +31,10 @@ bash scripts/vast_probe.sh smoke
 bash scripts/vast_probe.sh classical
 bash scripts/vast_probe.sh g2
 
+# Phase-3 close-the-gate (after G2 fail):
+bash scripts/vast_probe.sh g3-classical configs/gpu.yaml
+bash scripts/vast_probe.sh g3 configs/gpu.yaml
+
 # Optional:
 bash scripts/vast_probe.sh g2-fast
 bash scripts/vast_probe.sh g2 configs/gpu.yaml
@@ -39,23 +43,24 @@ bash scripts/vast_probe.sh g2 configs/gpu.yaml
 Or raw:
 
 ```bash
-python scripts/run_probe.py --all-probe --model axion --loop-log --run-id axion_g2
+python scripts/run_probe.py --all-probe --model axion --loop-log --run-id axion_g3
 ```
 
 ## Sync results back (laptop)
 
 ```bash
 rsync -avz -e "ssh -p PORT" \
-  root@sshN.vast.ai:/workspace/ITM/project/axion/results/ \
+  root@HOST:/data/ITM/project/axion/results/ \
   /home/zarnihlawn/Desktop/ITM/project/axion/results/
 ```
 
-## G2 pass rule
+## G2 / G3 pass rule
 
 Both settings: PR ≥ paper+2 and ROC ≥ paper+1  
 Paper: unsup **32.77 / 74.08**, semi **61.36 / 83.17**
 
-Check: `results/axion_g2/probe_summary.json` → `probe_macro.*.pass_probe_margin`
+Check: `results/axion_g3/probe_summary.json` → `probe_macro.*.pass_probe_margin`  
+(Do **not** run `full57` until both settings pass.)
 
 ## Local note
 

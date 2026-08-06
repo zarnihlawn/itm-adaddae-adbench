@@ -34,6 +34,7 @@ class AxionModel:
         patience: int = 12,
         val_fraction: float = 0.15,
         latch_alpha: float = 0.4,
+        latch_alpha_semi: Optional[float] = 0.25,
         mae_weight: float = 0.6,
         nll_weight: float = 0.4,
         device: Optional[str] = None,
@@ -53,6 +54,7 @@ class AxionModel:
         self.patience = patience
         self.val_fraction = val_fraction
         self.latch_alpha = latch_alpha
+        self.latch_alpha_semi = latch_alpha_semi
         self.mae_weight = mae_weight
         self.nll_weight = nll_weight
         self.seed = seed
@@ -68,6 +70,11 @@ class AxionModel:
         self.z_inv_var_: Optional[np.ndarray] = None
         self.resolved_: Dict[str, Any] = {}
         self.best_val_loss_: float = float("inf")
+        self.active_latch_alpha_: float = float(latch_alpha)
+        self.mcs_mean_: Optional[float] = None
+        self.mcs_std_: Optional[float] = None
+        self.latch_score_mean_: Optional[float] = None
+        self.latch_score_std_: Optional[float] = None
 
     def get_params(self) -> Dict[str, Any]:
         return {
@@ -77,10 +84,13 @@ class AxionModel:
             "batch_size": self.batch_size,
             "lr": self.lr,
             "latch_alpha": self.latch_alpha,
+            "latch_alpha_semi": self.latch_alpha_semi,
+            "active_latch_alpha": self.active_latch_alpha_,
             "mae_weight": self.mae_weight,
             "nll_weight": self.nll_weight,
             "device": str(self.device),
             "best_val_loss": self.best_val_loss_,
+            "train_anchored": self.mcs_mean_ is not None,
         }
 
     def _resolve_scale(self, n: int, d: int) -> Dict[str, Any]:
@@ -92,12 +102,30 @@ class AxionModel:
             "mask_rates": tuple(self.mask_rates if self.mask_rates is not None else base["mask_rates"]),
             "score_k": int(self.score_k if self.score_k is not None else base["score_k"]),
             "dropout": float(self.dropout if self.dropout is not None else base["dropout"]),
+            "high_mask_delta": float(base.get("high_mask_delta", 0.25)),
+            "high_mask_cap": float(base.get("high_mask_cap", 0.85)),
         }
 
     def _torch_gen(self) -> torch.Generator:
         g = torch.Generator(device="cpu")
         g.manual_seed(int(self.seed))
         return g
+
+    def _rate_banks(self) -> List[Tuple[float, ...]]:
+        rates = tuple(self.resolved_.get("mask_rates", (0.2, 0.35, 0.5)))
+        delta = float(self.resolved_.get("high_mask_delta", 0.25))
+        cap = float(self.resolved_.get("high_mask_cap", 0.85))
+        high = float(min(cap, max(rates) + delta))
+        return [rates, (high,)]
+
+    def _resolve_active_latch(self, y_train: Optional[np.ndarray]) -> None:
+        """Use lower LATCH weight when train is all-normal (paper semi split)."""
+        self.active_latch_alpha_ = float(self.latch_alpha)
+        if self.latch_alpha_semi is None or y_train is None:
+            return
+        y = np.asarray(y_train).reshape(-1)
+        if y.size > 0 and np.all(y == 0):
+            self.active_latch_alpha_ = float(self.latch_alpha_semi)
 
     def fit(self, X_train: np.ndarray, y_train: Optional[np.ndarray] = None) -> "AxionModel":
         torch.manual_seed(self.seed)
@@ -108,6 +136,8 @@ class AxionModel:
             rng = np.random.RandomState(self.seed)
             idx = rng.choice(X.shape[0], size=self.max_train_samples, replace=False)
             X = X[idx]
+            if y_train is not None:
+                y_train = np.asarray(y_train)[idx]
 
         n, d = X.shape
         hp = self._resolve_scale(n, d)
@@ -214,6 +244,8 @@ class AxionModel:
 
         # LATCH: fit diagonal Mahalanobis on unmasked (mask=0) latents of train
         self._fit_latch(X_fit)
+        self._resolve_active_latch(y_train)
+        self._fit_score_anchors(X_fit)
         return self
 
     @torch.no_grad()
@@ -260,17 +292,14 @@ class AxionModel:
         return np.sum((diff ** 2) * self.z_inv_var_, axis=1)
 
     @torch.no_grad()
-    def score(self, X: np.ndarray) -> np.ndarray:
-        """MCS: hybrid MAE+NLL over K masks (dual rate banks) + α · LATCH."""
-        if self.net is None:
-            raise RuntimeError("AxionModel not fitted")
+    def _mcs_scores(self, X: np.ndarray) -> np.ndarray:
+        """Raw MCS: hybrid MAE+NLL over K masks × dual rate banks."""
+        assert self.net is not None
         self.net.eval()
         X = np.asarray(X, dtype=np.float32)
         n, d = X.shape
         k = int(self.resolved_.get("score_k", 8))
-        rates = tuple(self.resolved_.get("mask_rates", (0.2, 0.35, 0.5)))
-        # Dual banks: curriculum rates + a high-mask bank (harder dependency test)
-        rate_banks = [rates, (min(0.85, max(rates) + 0.25),)]
+        rate_banks = self._rate_banks()
 
         xb = torch.from_numpy(X).to(self.device)
         acc = np.zeros(n, dtype=np.float64)
@@ -293,10 +322,44 @@ class AxionModel:
                     hybrid = self.mae_weight * mae + self.nll_weight * nll
                     acc[i : i + chunk.shape[0]] += hybrid.cpu().numpy()
 
-        mcs = acc / float(max(1, n_passes))
+        return acc / float(max(1, n_passes))
+
+    def _fit_score_anchors(self, X: np.ndarray) -> None:
+        """Train-only mean/std for MCS and LATCH (avoid test-batch z-norm)."""
+        X = np.asarray(X, dtype=np.float32)
+        n = X.shape[0]
+        # Cap anchor compute on huge tables
+        if n > 8000:
+            rng = np.random.RandomState(self.seed + 7)
+            idx = rng.choice(n, size=8000, replace=False)
+            X = X[idx]
+        mcs = self._mcs_scores(X)
         latch = self._latch_score(X)
+        self.mcs_mean_ = float(mcs.mean())
+        self.mcs_std_ = float(max(float(mcs.std()), 1e-8))
+        self.latch_score_mean_ = float(latch.mean())
+        self.latch_score_std_ = float(max(float(latch.std()), 1e-8))
+
+    @torch.no_grad()
+    def score(self, X: np.ndarray) -> np.ndarray:
+        """MCS + α · LATCH with train-anchored normalization when available."""
+        if self.net is None:
+            raise RuntimeError("AxionModel not fitted")
+        X = np.asarray(X, dtype=np.float32)
+        mcs = self._mcs_scores(X)
+        latch = self._latch_score(X)
+        alpha = float(self.active_latch_alpha_)
+
+        if self.mcs_mean_ is not None and self.mcs_std_ is not None:
+            mcs_n = (mcs - self.mcs_mean_) / (self.mcs_std_ + 1e-8)
+            latch_n = (latch - float(self.latch_score_mean_ or 0.0)) / (
+                float(self.latch_score_std_ or 1.0) + 1e-8
+            )
+            return (mcs_n + alpha * latch_n).astype(np.float64)
+
+        # Fallback: batch z-norm (legacy; should not run after fit)
         if latch.std() > 1e-8 and mcs.std() > 1e-8:
             latch_n = (latch - latch.mean()) / (latch.std() + 1e-8)
             mcs_n = (mcs - mcs.mean()) / (mcs.std() + 1e-8)
-            return (mcs_n + self.latch_alpha * latch_n).astype(np.float64)
-        return (mcs + self.latch_alpha * latch).astype(np.float64)
+            return (mcs_n + alpha * latch_n).astype(np.float64)
+        return (mcs + alpha * latch).astype(np.float64)

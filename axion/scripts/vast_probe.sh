@@ -4,6 +4,8 @@
 #   bash scripts/vast_probe.sh smoke
 #   bash scripts/vast_probe.sh classical
 #   bash scripts/vast_probe.sh g2
+#   bash scripts/vast_probe.sh g3              # Phase-3 close-the-gate re-probe
+#   bash scripts/vast_probe.sh g3 configs/gpu.yaml
 #   bash scripts/vast_probe.sh full57   # later phase — all 57 × 2 × 5
 set -euo pipefail
 
@@ -45,11 +47,23 @@ case "$MODE" in
     python scripts/run_probe.py --config "$CFG" --model axion --loop-log --run-id axion_g2_fast \
       --all-probe --seeds 111 --max-train-samples 15000 --max-variants 3
     ;;
+  g3)
+    # Phase-3: train-anchored score + v1-balanced hparams; prefer gpu.yaml
+    python scripts/run_probe.py --config "$CFG" --model axion --loop-log --run-id axion_g3 \
+      --all-probe --max-train-samples 20000 --max-variants 0
+    ;;
+  g3-classical)
+    # Cheap classical gate before full G3 (8 × 2 × seed 111)
+    python scripts/run_probe.py --config "$CFG" --model axion --loop-log --run-id axion_g3_classical \
+      --datasets breastw cardio glass thyroid satimage-2 cover fraud backdoor \
+      --seeds 111 \
+      --max-train-samples 20000
+    ;;
   full57)
     python scripts/run_full57.py --config "$CFG" --model axion --run-id axion_full57
     ;;
   *)
-    echo "Unknown mode: $MODE (smoke|classical|g2|g2-fast|full57)" >&2
+    echo "Unknown mode: $MODE (smoke|classical|g2|g2-fast|g3|g3-classical|full57)" >&2
     exit 2
     ;;
 esac

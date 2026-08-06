@@ -35,9 +35,11 @@ axion:
   weight_decay: 0.00001
   patience: 15
   val_fraction: 0.15
-  latch_alpha: 0.55
-  mae_weight: 0.75
-  nll_weight: 0.25
+  # v1-balanced defaults (G2 latch=0.55/mae=0.75 hurt semi)
+  latch_alpha: 0.40
+  latch_alpha_semi: 0.25
+  mae_weight: 0.60
+  nll_weight: 0.40
   # hidden/latent/depth/mask_rates/score_k: null → SCALE auto
 
 probe:

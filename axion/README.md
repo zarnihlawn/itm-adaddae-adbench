@@ -7,16 +7,17 @@ Location: `ITM/project/axion/` (same git repo as `project`). Does not reuse AdaD
 ## Status
 
 - **Phase 0–1:** protocol + harness — done  
-- **Phase 2:** AXION model + Vast runners — current  
+- **Phase 2:** AXION model + Vast runners — done (G2 FAIL; see `results/axion_g2/`)  
+- **Phase 3:** train-anchored score + v1-balanced hparams — current (re-probe as `axion_g3`)  
 
 **Vast:** [`VAST_RUN.md`](VAST_RUN.md) · **Protocol:** [`PROTOCOL.md`](PROTOCOL.md)
 
 ```bash
-cd /workspace/ITM/project/axion   # after git pull
+cd /data/ITM/project/axion   # or /workspace/...
 bash scripts/vast_setup.sh
-bash scripts/vast_probe.sh smoke
-bash scripts/vast_probe.sh classical
-bash scripts/vast_probe.sh g2
+bash scripts/vast_probe.sh g3-classical configs/gpu.yaml   # gate: semi PR ≥ 60
+bash scripts/vast_probe.sh g3 configs/gpu.yaml             # full 12-ds probe
+# full57 only after both settings pass margin
 ```
 
 ## Layout

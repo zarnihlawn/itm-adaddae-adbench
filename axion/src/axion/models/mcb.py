@@ -53,17 +53,27 @@ def sample_masks(
 def scale_hparams(n: int, d: int) -> dict:
     """SCALE: train-only size/d routing for architecture knobs."""
     if d >= 400:
+        # Embedding / high-d: more score passes, softer high-mask bank, lighter dropout
         hidden, latent, depth = 384, 96, 3
         mask_rates = (0.1, 0.2, 0.35)
-        score_k = 10
+        score_k = 16
+        dropout = 0.05
+        high_mask_delta = 0.15
+        high_mask_cap = 0.6
     elif d >= 64:
         hidden, latent, depth = 256, 64, 3
         mask_rates = (0.15, 0.3, 0.5)
         score_k = 16
+        dropout = 0.1 if n >= 500 else 0.05
+        high_mask_delta = 0.25
+        high_mask_cap = 0.85
     else:
         hidden, latent, depth = 128, 32, 2
         mask_rates = (0.2, 0.35, 0.5)
         score_k = 20
+        dropout = 0.1 if n >= 500 else 0.05
+        high_mask_delta = 0.25
+        high_mask_cap = 0.85
 
     if n < 200:
         depth = max(1, depth - 1)
@@ -78,5 +88,7 @@ def scale_hparams(n: int, d: int) -> dict:
         "depth": depth,
         "mask_rates": mask_rates,
         "score_k": score_k,
-        "dropout": 0.1 if n >= 500 else 0.05,
+        "dropout": dropout,
+        "high_mask_delta": high_mask_delta,
+        "high_mask_cap": high_mask_cap,
     }

@@ -1,0 +1,10 @@
+breastw          unsupervised       seed=111 PR=84.52 ROC=96.33 vars=1 t=5.0s
+breastw          semi-supervised    seed=111 PR=95.12 ROC=98.15 vars=1 t=1.2s
+cardio           unsupervised       seed=111 PR=52.64 ROC=89.88 vars=1 t=9.5s
+cardio           semi-supervised    seed=111 PR=67.02 ROC=86.93 vars=1 t=4.1s
+glass            unsupervised       seed=111 PR=9.08 ROC=74.63 vars=1 t=1.0s
+glass            semi-supervised    seed=111 PR=18.81 ROC=78.21 vars=1 t=0.6s
+thyroid          unsupervised       seed=111 PR=41.34 ROC=97.48 vars=1 t=15.8s
+thyroid          semi-supervised    seed=111 PR=72.21 ROC=98.42 vars=1 t=8.1s
+satimage-2       unsupervised       seed=111 PR=90.83 ROC=99.85 vars=1 t=33.5s
+satimage-2       semi-supervised    seed=111 PR=97.90 ROC=99.89 vars=1 t=20.3s
