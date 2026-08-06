@@ -30,12 +30,12 @@
       },
       "semi-supervised": {
         "pass": false,
-        "AdaDDAE_PR_AUC": 57.516558866065765,
-        "AdaDDAE_ROC_AUC": 82.4369676042487,
+        "AdaDDAE_PR_AUC": 59.00870762573856,
+        "AdaDDAE_ROC_AUC": 83.08244562985509,
         "paper_PR_AUC": 61.36,
         "paper_ROC_AUC": 83.17,
-        "delta_PR": -3.8434411339342347,
-        "delta_ROC": -0.7330323957513087
+        "delta_PR": -2.3512923742614404,
+        "delta_ROC": -0.08755437014491463
       }
     }
   },

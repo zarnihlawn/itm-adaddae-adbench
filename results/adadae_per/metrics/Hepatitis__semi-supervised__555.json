@@ -20,7 +20,7 @@
   },
   "resolved_policy": "per:semi_rdt_tail+cal_fuse",
   "early_stop_metric": "val_loss",
-  "vram_peak_mb": 36.84912109375,
-  "vram_mb": 36.84912109375,
-  "time": "2026-08-06T07:56:48.261595+00:00"
+  "vram_peak_mb": 36.22607421875,
+  "vram_mb": 36.22607421875,
+  "time": "2026-08-06T12:46:47.314449+00:00"
 }

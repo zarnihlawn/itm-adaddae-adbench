@@ -20,7 +20,7 @@
   },
   "resolved_policy": "per:champion_semi",
   "early_stop_metric": "val_loss",
-  "vram_peak_mb": 242.146484375,
-  "vram_mb": 242.146484375,
-  "time": "2026-08-06T07:24:28.358212+00:00"
+  "vram_peak_mb": 242.83837890625,
+  "vram_mb": 242.83837890625,
+  "time": "2026-08-06T12:36:15.831946+00:00"
 }

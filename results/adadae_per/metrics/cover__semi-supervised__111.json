@@ -20,7 +20,7 @@
   },
   "resolved_policy": "per:baseline_ddae+apex+delta+cal_fuse",
   "early_stop_metric": "val_loss",
-  "vram_peak_mb": 136.576171875,
-  "vram_mb": 136.576171875,
-  "time": "2026-08-06T07:37:57.035447+00:00"
+  "vram_peak_mb": 135.638671875,
+  "vram_mb": 135.638671875,
+  "time": "2026-08-06T12:37:27.715619+00:00"
 }

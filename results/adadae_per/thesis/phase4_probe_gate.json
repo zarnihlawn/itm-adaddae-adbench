@@ -1,8 +1,9 @@
 {
-  "semi_PR": 57.516558866065765,
-  "semi_ROC": 82.4369676042487,
+  "semi_PR": 59.00870762573856,
+  "semi_ROC": 83.08244562985509,
   "floor": 60.5,
   "pass": false,
   "ship_allowed": false,
-  "note": "Full ship only if pass; else iterate selector/method lifts"
+  "source": "compare_to_ddae.json (lastshot; no second probe retrain)",
+  "note": "Full ship only if pass; else claim beat-fair adaptive under integrity"
 }

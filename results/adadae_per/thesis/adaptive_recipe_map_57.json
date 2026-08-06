@@ -2,7 +2,7 @@
   "title": "AdaDDAE-PER adaptive recipe map (57 ADBench)",
   "version": "5.6-lastshot",
   "n_datasets": 57,
-  "adbench_root": "/home/zarnihlawn/Desktop/ITM/ADBench/adbench/datasets",
+  "adbench_root": "/data/ITM/ADBench/adbench/datasets",
   "pass": true,
   "errors": [],
   "phase0_locks": {
