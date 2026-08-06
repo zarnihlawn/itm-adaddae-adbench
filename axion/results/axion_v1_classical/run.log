@@ -1,0 +1,21 @@
+breastw          unsupervised       seed=111 PR=83.00 ROC=95.89 vars=1 t=6.3s
+breastw          semi-supervised    seed=111 PR=94.69 ROC=97.89 vars=1 t=1.0s
+cardio           unsupervised       seed=111 PR=53.60 ROC=87.89 vars=1 t=6.7s
+cardio           semi-supervised    seed=111 PR=62.38 ROC=82.91 vars=1 t=3.2s
+glass            unsupervised       seed=111 PR=11.46 ROC=75.66 vars=1 t=0.9s
+glass            semi-supervised    seed=111 PR=19.84 ROC=77.13 vars=1 t=0.3s
+thyroid          unsupervised       seed=111 PR=44.62 ROC=97.84 vars=1 t=19.0s
+thyroid          semi-supervised    seed=111 PR=72.05 ROC=98.70 vars=1 t=22.7s
+satimage-2       unsupervised       seed=111 PR=87.32 ROC=99.84 vars=1 t=19.4s
+satimage-2       semi-supervised    seed=111 PR=97.05 ROC=99.89 vars=1 t=10.7s
+cover            unsupervised       seed=111 PR=6.45 ROC=89.24 vars=1 t=213.0s
+cover            semi-supervised    seed=111 PR=29.53 ROC=93.45 vars=1 t=121.0s
+fraud            unsupervised       seed=111 PR=17.66 ROC=94.60 vars=1 t=217.4s
+fraud            semi-supervised    seed=111 PR=29.79 ROC=95.21 vars=1 t=121.3s
+backdoor         unsupervised       seed=111 PR=24.45 ROC=71.86 vars=1 t=111.4s
+backdoor         semi-supervised    seed=111 PR=73.07 ROC=91.05 vars=1 t=90.9s
+
+Wrote /home/zarnihlawn/Desktop/ITM/axion/results/axion_v1_classical/probe_summary.json
+MACRO unsupervised [PASS]: PR=41.07 (paper 32.77, Δ=+8.30)  ROC=89.10 (paper 74.08, Δ=+15.02)
+MACRO semi-supervised [FAIL]: PR=59.80 (paper 61.36, Δ=-1.56)  ROC=92.03 (paper 83.17, Δ=+8.86)
+Appended /home/zarnihlawn/Desktop/ITM/axion/results/axion_v1_classical/probe_loop.jsonl

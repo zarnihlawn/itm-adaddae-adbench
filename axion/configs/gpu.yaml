@@ -1,0 +1,56 @@
+# AXION Phase 2 — GPU defaults (optional override)
+
+# Usage: python scripts/run_probe.py --config configs/gpu.yaml --all-probe ...
+
+seed: 111
+seeds: [111, 222, 333, 444, 555]
+
+paths:
+  adbench_root: ../../ADBench/adbench/datasets
+  results_dir: results
+  atlas_csv: data/atlas_57.csv
+
+protocol:
+  normalize: zscore
+  unsupervised: full_dataset_train_and_score
+  semi_supervised: train_50pct_normals_only
+  metrics: [PR-AUC, ROC-AUC]
+  embeddings:
+    cv: CV_by_ResNet18
+    nlp: NLP_by_BERT
+
+integrity:
+  val_fraction: 0.2
+  early_stop_metric: val_loss
+
+harness:
+  model: axion
+  max_train_samples: 50000
+  max_variants: 0
+
+axion:
+  epochs: 100
+  batch_size: 512
+  lr: 0.001
+  weight_decay: 0.00001
+  patience: 20
+  val_fraction: 0.15
+  latch_alpha: 0.55
+  mae_weight: 0.75
+  nll_weight: 0.25
+
+probe:
+  datasets:
+    - breastw
+    - cardio
+    - glass
+    - thyroid
+    - satimage-2
+    - cover
+    - fraud
+    - backdoor
+    - CIFAR10
+    - FashionMNIST
+    - Agnews
+    - Imdb
+  seeds: [111, 222, 333]

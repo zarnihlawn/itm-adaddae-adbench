@@ -6,3 +6,9 @@ results/logs/
 results/ckpts/
 *.pt
 .DS_Store
+
+# AXION local envs / caches (keep results/metrics tracked selectively)
+axion/.venv/
+axion/**/__pycache__/
+axion/.pytest_cache/
+axion/**/*.pyc

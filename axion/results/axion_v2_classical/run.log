@@ -1,0 +1,2 @@
+breastw          unsupervised       seed=111 PR=85.19 ROC=96.58 vars=1 t=7.9s
+breastw          semi-supervised    seed=111 PR=95.47 ROC=98.22 vars=1 t=5.1s

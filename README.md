@@ -1,5 +1,6 @@
 # AdaDDAE: Adaptive Diffusion-Scheduled Denoising Autoencoder 
 
+> **New greenfield track (AXION):** see [`axion/`](axion/) — orthogonal method under the same git repo. Archived DDAE-PAR lives outside at `ITM/archive/DDAE-PAR_2026-08-06/`.
 
 Master's thesis implementation for tabular anomaly detection on **ADBench** (57 datasets), designed to outperform **DDAE** (KDD 2025, [arXiv:2508.00758](https://arxiv.org/abs/2508.00758)).
 
