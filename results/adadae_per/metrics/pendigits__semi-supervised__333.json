@@ -4,9 +4,9 @@
   "seed": 333,
   "n_splits": 1,
   "metrics_mean": {
-    "AP": 0.9280292174099465,
-    "ROC-AUC": 0.9978861620952773,
-    "PR-AUC": 0.9262207825737822
+    "AP": 0.9288975334757257,
+    "ROC-AUC": 0.9978995287306279,
+    "PR-AUC": 0.9270867780998631
   },
   "noise": {
     "num_timesteps": 50,
@@ -20,7 +20,7 @@
   },
   "resolved_policy": "per:baseline_ddae+protect",
   "early_stop_metric": "val_loss",
-  "vram_peak_mb": 737.54541015625,
-  "vram_mb": 737.54541015625,
-  "time": "2026-08-05T09:09:48.410561+00:00"
+  "vram_peak_mb": 782.2001953125,
+  "vram_mb": 782.2001953125,
+  "time": "2026-08-06T08:12:37.799656+00:00"
 }

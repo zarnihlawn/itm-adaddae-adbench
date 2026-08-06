@@ -6,13 +6,10 @@ description: 'Classical protect + hard-tail specialists. Phase 0 lock (2026-08-0
 mce:
   cv: []
   nlp: []
-  classical:
-  - optdigits
-  - cover
+  classical: []
   block_semi_nlp: true
 smc:
-  semi:
-  - Waveform
+  semi: []
 gate:
   unsupervised:
   - speech
@@ -21,10 +18,7 @@ gate:
   semi-supervised: []
 a6:
   nautilus:
-    semi-supervised:
-    - glass
-    - Hepatitis
-    - vertebral
+    semi-supervised: []
     unsupervised: []
   apex:
     semi-supervised:
@@ -52,7 +46,8 @@ a6:
     semi-supervised: []
     unsupervised: []
   helix:
-    semi-supervised: []
+    semi-supervised:
+    - WPBC
     unsupervised: []
 protect_baseline_semi:
 - smtp

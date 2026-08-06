@@ -18,9 +18,9 @@
     "contamination_est": null,
     "contamination_mode": "label_free"
   },
-  "resolved_policy": "per:champion_semi+protect",
+  "resolved_policy": "per:baseline_ddae+protect",
   "early_stop_metric": "val_loss",
   "vram_peak_mb": 35.65576171875,
   "vram_mb": 35.65576171875,
-  "time": "2026-08-05T23:05:43.681919+00:00"
+  "time": "2026-08-06T09:45:17.495849+00:00"
 }

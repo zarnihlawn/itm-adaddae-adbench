@@ -1,154 +1,525 @@
 {
-  "timestamp": "2026-08-05T23:58:11.972074+00:00",
+  "timestamp": "2026-08-06T07:18:06.578997+00:00",
   "source": "results/adadae_per/thesis/phase1_hard_freeze.json",
-  "mode": "gpu_val_loss_select",
+  "mode": "gpu_val_loss_select_all_semi",
   "datasets": [
-    "speech",
     "ALOI",
+    "annthyroid",
+    "backdoor",
+    "breastw",
+    "campaign",
+    "cardio",
+    "Cardiotocography",
     "celeba",
-    "SVHN",
-    "CIFAR10",
-    "Wilt",
-    "Imdb",
-    "Amazon",
-    "Yelp",
-    "Agnews",
-    "20newsgroups",
     "census",
-    "smtp",
-    "satimage-2",
-    "Pima",
-    "Stamps",
+    "cover",
+    "donors",
+    "fault",
+    "fraud",
+    "glass",
+    "Hepatitis",
+    "http",
+    "InternetAds",
+    "Ionosphere",
+    "landsat",
     "letter",
-    "wine"
+    "Lymphography",
+    "magic.gamma",
+    "mammography",
+    "mnist",
+    "musk",
+    "optdigits",
+    "PageBlocks",
+    "pendigits",
+    "Pima",
+    "satellite",
+    "satimage-2",
+    "shuttle",
+    "skin",
+    "smtp",
+    "SpamBase",
+    "speech",
+    "Stamps",
+    "thyroid",
+    "vertebral",
+    "vowels",
+    "Waveform",
+    "WBC",
+    "WDBC",
+    "Wilt",
+    "wine",
+    "WPBC",
+    "yeast",
+    "CIFAR10",
+    "FashionMNIST",
+    "MNIST-C",
+    "MVTec-AD",
+    "SVHN",
+    "Agnews",
+    "Amazon",
+    "Imdb",
+    "Yelp",
+    "20newsgroups"
   ],
-  "n_applied": 18,
+  "n_applied": 57,
   "applied": {
-    "speech": {
-      "base": "semi_rdt_tail",
-      "overlays": [],
-      "policy_string": "semi_rdt_tail",
-      "strip_mce_gate": true,
-      "phase0_lock": false
-    },
     "ALOI": {
       "base": "baseline_ddae",
       "overlays": [],
       "policy_string": "baseline_ddae",
       "strip_mce_gate": true,
-      "phase0_lock": false
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "annthyroid": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "backdoor": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "breastw": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "campaign": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "cardio": {
+      "base": "champion_semi",
+      "overlays": [],
+      "policy_string": "champion_semi",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "Cardiotocography": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
     },
     "celeba": {
       "base": "baseline_ddae",
       "overlays": [],
       "policy_string": "baseline_ddae",
       "strip_mce_gate": true,
-      "phase0_lock": false
-    },
-    "SVHN": {
-      "base": "semi_rdt_tail",
-      "overlays": [],
-      "policy_string": "semi_rdt_tail",
-      "strip_mce_gate": true,
-      "phase0_lock": false
-    },
-    "CIFAR10": {
-      "base": "baseline_ddae",
-      "overlays": [],
-      "policy_string": "baseline_ddae",
-      "strip_mce_gate": true,
-      "phase0_lock": false
-    },
-    "Wilt": {
-      "base": "baseline_ddae",
-      "overlays": [],
-      "policy_string": "baseline_ddae",
-      "strip_mce_gate": true,
-      "phase0_lock": false
-    },
-    "Imdb": {
-      "base": "baseline_ddae",
-      "overlays": [],
-      "policy_string": "baseline_ddae",
-      "strip_mce_gate": true,
-      "phase0_lock": false
-    },
-    "Amazon": {
-      "base": "baseline_ddae",
-      "overlays": [],
-      "policy_string": "baseline_ddae",
-      "strip_mce_gate": true,
-      "phase0_lock": false
-    },
-    "Yelp": {
-      "base": "baseline_ddae",
-      "overlays": [],
-      "policy_string": "baseline_ddae",
-      "strip_mce_gate": true,
-      "phase0_lock": false
-    },
-    "Agnews": {
-      "base": "baseline_ddae",
-      "overlays": [],
-      "policy_string": "baseline_ddae",
-      "strip_mce_gate": true,
-      "phase0_lock": false
-    },
-    "20newsgroups": {
-      "base": "baseline_ddae",
-      "overlays": [],
-      "policy_string": "baseline_ddae",
-      "strip_mce_gate": true,
-      "phase0_lock": false
+      "phase0_lock": false,
+      "forced_protect": false
     },
     "census": {
       "base": "baseline_ddae",
       "overlays": [],
       "policy_string": "baseline_ddae",
       "strip_mce_gate": true,
-      "phase0_lock": true
+      "phase0_lock": true,
+      "forced_protect": true
     },
-    "smtp": {
+    "cover": {
       "base": "baseline_ddae",
       "overlays": [],
       "policy_string": "baseline_ddae",
       "strip_mce_gate": true,
-      "phase0_lock": false
+      "phase0_lock": false,
+      "forced_protect": false
     },
-    "satimage-2": {
+    "donors": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "fault": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "fraud": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "glass": {
+      "base": "champion_semi",
+      "overlays": [],
+      "policy_string": "champion_semi",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "Hepatitis": {
       "base": "semi_rdt_tail",
       "overlays": [],
       "policy_string": "semi_rdt_tail",
       "strip_mce_gate": true,
-      "phase0_lock": false
+      "phase0_lock": false,
+      "forced_protect": false
     },
-    "Pima": {
+    "http": {
       "base": "baseline_ddae",
       "overlays": [],
       "policy_string": "baseline_ddae",
       "strip_mce_gate": true,
-      "phase0_lock": false
+      "phase0_lock": false,
+      "forced_protect": true
     },
-    "Stamps": {
+    "InternetAds": {
+      "base": "semi_rdt_tail",
+      "overlays": [],
+      "policy_string": "semi_rdt_tail",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "Ionosphere": {
       "base": "baseline_ddae",
       "overlays": [],
       "policy_string": "baseline_ddae",
       "strip_mce_gate": true,
-      "phase0_lock": false
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "landsat": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
     },
     "letter": {
       "base": "baseline_ddae",
       "overlays": [],
       "policy_string": "baseline_ddae",
       "strip_mce_gate": true,
-      "phase0_lock": false
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "Lymphography": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "magic.gamma": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "mammography": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "mnist": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "musk": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "optdigits": {
+      "base": "semi_rdt_tail",
+      "overlays": [],
+      "policy_string": "semi_rdt_tail",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "PageBlocks": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "pendigits": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "Pima": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "satellite": {
+      "base": "semi_rdt_tail",
+      "overlays": [],
+      "policy_string": "semi_rdt_tail",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "satimage-2": {
+      "base": "semi_rdt_tail",
+      "overlays": [],
+      "policy_string": "semi_rdt_tail",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "shuttle": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "skin": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "smtp": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "SpamBase": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "speech": {
+      "base": "semi_rdt_tail",
+      "overlays": [],
+      "policy_string": "semi_rdt_tail",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "Stamps": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "thyroid": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "vertebral": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "vowels": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "Waveform": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "WBC": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "WDBC": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "Wilt": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
     },
     "wine": {
       "base": "baseline_ddae",
       "overlays": [],
       "policy_string": "baseline_ddae",
       "strip_mce_gate": true,
-      "phase0_lock": true
+      "phase0_lock": true,
+      "forced_protect": true
+    },
+    "WPBC": {
+      "base": "baseline_ddae",
+      "overlays": [
+        "helix"
+      ],
+      "policy_string": "baseline_ddae+helix",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "yeast": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "CIFAR10": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "FashionMNIST": {
+      "base": "semi_rdt_tail",
+      "overlays": [],
+      "policy_string": "semi_rdt_tail",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "MNIST-C": {
+      "base": "semi_rdt_tail",
+      "overlays": [],
+      "policy_string": "semi_rdt_tail",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "MVTec-AD": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "SVHN": {
+      "base": "semi_rdt_tail",
+      "overlays": [],
+      "policy_string": "semi_rdt_tail",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "Agnews": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "Amazon": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "Imdb": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "Yelp": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
+    },
+    "20newsgroups": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": false
     }
   },
   "skipped": [],
@@ -227,10 +598,10 @@
       "SVHN": "semi_rdt_tail",
       "Wilt": "baseline_ddae",
       "census": "baseline_ddae",
-      "glass": "baseline_ddae",
+      "glass": "champion_semi",
       "vertebral": "baseline_ddae",
-      "WPBC": "semi_speech_specialist",
-      "Waveform": "semi_rdt_tail",
+      "WPBC": "baseline_ddae",
+      "Waveform": "baseline_ddae",
       "smtp": "baseline_ddae",
       "donors": "baseline_ddae",
       "wine": "baseline_ddae",
@@ -254,27 +625,44 @@
       "Pima": "baseline_ddae",
       "Stamps": "baseline_ddae",
       "letter": "baseline_ddae",
-      "WBC": "baseline_ddae"
+      "WBC": "baseline_ddae",
+      "annthyroid": "baseline_ddae",
+      "backdoor": "baseline_ddae",
+      "campaign": "baseline_ddae",
+      "cardio": "champion_semi",
+      "Cardiotocography": "baseline_ddae",
+      "cover": "baseline_ddae",
+      "fault": "baseline_ddae",
+      "fraud": "baseline_ddae",
+      "Hepatitis": "semi_rdt_tail",
+      "InternetAds": "semi_rdt_tail",
+      "landsat": "baseline_ddae",
+      "mammography": "baseline_ddae",
+      "mnist": "baseline_ddae",
+      "optdigits": "semi_rdt_tail",
+      "satellite": "semi_rdt_tail",
+      "SpamBase": "baseline_ddae",
+      "thyroid": "baseline_ddae",
+      "WDBC": "baseline_ddae",
+      "yeast": "baseline_ddae",
+      "FashionMNIST": "semi_rdt_tail",
+      "MNIST-C": "semi_rdt_tail",
+      "MVTec-AD": "baseline_ddae"
     },
     "semi_nlp_baseline": [],
     "a6_semi": {
       "orbit": [],
       "locus": [],
       "spiral": [],
-      "helix": [],
-      "nautilus": [
-        "glass",
-        "Hepatitis",
-        "vertebral"
-      ]
+      "helix": [
+        "WPBC"
+      ],
+      "nautilus": []
     },
     "mce": {
       "cv": [],
       "nlp": [],
-      "classical": [
-        "optdigits",
-        "cover"
-      ]
+      "classical": []
     },
     "gate": {
       "semi-supervised": [],

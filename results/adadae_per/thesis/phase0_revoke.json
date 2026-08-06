@@ -69,12 +69,12 @@
     },
     {
       "dataset": "glass",
-      "resolved_policy": "per:baseline_ddae+nautilus+cal_fuse",
+      "resolved_policy": "per:champion_semi+cal_fuse",
       "use_apex": false,
-      "use_nautilus": true,
+      "use_nautilus": false,
       "use_mce": false,
       "use_rejection_training": false,
-      "use_ftp": false,
+      "use_ftp": true,
       "contrastive": false,
       "protected": false
     },

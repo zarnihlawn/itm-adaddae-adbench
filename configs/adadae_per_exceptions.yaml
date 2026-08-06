@@ -46,10 +46,10 @@ semi_specialists:
   SVHN: semi_rdt_tail
   Wilt: baseline_ddae
   census: baseline_ddae
-  glass: baseline_ddae
+  glass: champion_semi
   vertebral: baseline_ddae
-  WPBC: semi_speech_specialist
-  Waveform: semi_rdt_tail
+  WPBC: baseline_ddae
+  Waveform: baseline_ddae
   smtp: baseline_ddae
   donors: baseline_ddae
   wine: baseline_ddae
@@ -74,6 +74,28 @@ semi_specialists:
   Stamps: baseline_ddae
   letter: baseline_ddae
   WBC: baseline_ddae
+  annthyroid: baseline_ddae
+  backdoor: baseline_ddae
+  campaign: baseline_ddae
+  cardio: champion_semi
+  Cardiotocography: baseline_ddae
+  cover: baseline_ddae
+  fault: baseline_ddae
+  fraud: baseline_ddae
+  Hepatitis: semi_rdt_tail
+  InternetAds: semi_rdt_tail
+  landsat: baseline_ddae
+  mammography: baseline_ddae
+  mnist: baseline_ddae
+  optdigits: semi_rdt_tail
+  satellite: semi_rdt_tail
+  SpamBase: baseline_ddae
+  thyroid: baseline_ddae
+  WDBC: baseline_ddae
+  yeast: baseline_ddae
+  FashionMNIST: semi_rdt_tail
+  MNIST-C: semi_rdt_tail
+  MVTec-AD: baseline_ddae
 semi_cv_policy: semi_cvnlp_ftp
 unsup_nlp_baseline:
 - Agnews

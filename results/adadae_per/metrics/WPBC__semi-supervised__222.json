@@ -4,12 +4,12 @@
   "seed": 222,
   "n_splits": 1,
   "metrics_mean": {
-    "AP": 0.3784056329565683,
-    "ROC-AUC": 0.5145576707726763,
-    "PR-AUC": 0.36481255553910846
+    "AP": 0.37784840021404126,
+    "ROC-AUC": 0.498040313549832,
+    "PR-AUC": 0.36362642654695915
   },
   "noise": {
-    "num_timesteps": 80,
+    "num_timesteps": 50,
     "scheduler": "linear",
     "beta_start": 0.0001,
     "beta_end": 0.02,
@@ -18,9 +18,9 @@
     "contamination_est": null,
     "contamination_mode": "label_free"
   },
-  "resolved_policy": "per:semi_speech_specialist",
+  "resolved_policy": "per:baseline_ddae+helix",
   "early_stop_metric": "val_loss",
-  "vram_peak_mb": 63.9482421875,
-  "vram_mb": 63.9482421875,
-  "time": "2026-08-05T09:24:18.510679+00:00"
+  "vram_peak_mb": 49.69921875,
+  "vram_mb": 49.69921875,
+  "time": "2026-08-06T08:27:02.096112+00:00"
 }

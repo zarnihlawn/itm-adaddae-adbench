@@ -20,7 +20,7 @@
   },
   "resolved_policy": "per:baseline_ddae",
   "early_stop_metric": "val_loss",
-  "vram_peak_mb": 63.232421875,
-  "vram_mb": 63.232421875,
-  "time": "2026-08-05T09:22:41.499775+00:00"
+  "vram_peak_mb": 66.55615234375,
+  "vram_mb": 66.55615234375,
+  "time": "2026-08-06T08:25:35.287665+00:00"
 }

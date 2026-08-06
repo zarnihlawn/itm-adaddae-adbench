@@ -1,6 +1,6 @@
 {
-  "semi_PR": 59.09315919048331,
-  "semi_ROC": 82.97609273790489,
+  "semi_PR": 57.516558866065765,
+  "semi_ROC": 82.4369676042487,
   "floor": 60.5,
   "pass": false,
   "ship_allowed": false,
