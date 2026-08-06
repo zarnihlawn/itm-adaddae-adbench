@@ -1,5 +1,7 @@
 # Final run — AdaDDAE-PER (last-shot adaptive, one Vast command)
 
+**Achievement name:** **DDAE-PAR** (Policy-Adaptive Router). Full-project archive: [`../archive/DDAE-PAR_2026-08-06/`](../archive/DDAE-PAR_2026-08-06/) · [`ACHIEVED.md`](../archive/DDAE-PAR_2026-08-06/ACHIEVED.md).
+
 **Last updated:** 2026-08-06 — **Last-shot configs frozen.** Full-57 adaptive crashed semi to **57.52**. Integrity-safe ceiling ≈ **59.2** (match-fair + keep winners); paper **61.36** and probe **60.5** remain out of reach with catalogued lifts. **One Vast command:** `bash scripts/run_phase0_lock_retrain.sh lastshot 16gb`. Recipe map: [`results/adadae_per/thesis/adaptive_recipe_map_57.json`](results/adadae_per/thesis/adaptive_recipe_map_57.json).
 
 Canonical claim under integrity: **beat fair DDAE** on adaptive PER across all 57 ADBench datasets; unsup already passes paper. Paper gap = protocol/table tax (see loop3/phase4 paper-protocol diag ≈ fair).

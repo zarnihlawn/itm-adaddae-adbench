@@ -1,5 +1,20 @@
 # Baseline results backup
 
+## DDAE-PAR (full project archive)
+
+**DDAE-PAR** = Policy-Adaptive Router (internal run `adadae_per`, last-shot 2026-08-06).
+
+Full-tree achievement snapshot (no `.venv`):
+
+[`../../archive/DDAE-PAR_2026-08-06/`](../../archive/DDAE-PAR_2026-08-06/) · [`ACHIEVED.md`](../../archive/DDAE-PAR_2026-08-06/ACHIEVED.md)
+
+| Setting | PR / ROC | vs paper DDAE | vs fair DDAE |
+|---------|----------|---------------|--------------|
+| Unsupervised | 33.01 / 75.17 | +0.24 / +1.09 | +7.20 / +5.62 |
+| Semi-supervised | 59.01 / 83.08 | −2.35 / −0.09 | +0.31 / +0.14 |
+
+---
+
 Frozen copy of the **DDAE-faithful 570-job run** (`configs/baselines_ddae.yaml`, RTX 3060 12GB, Vast #44704345).
 
 ## Contents
