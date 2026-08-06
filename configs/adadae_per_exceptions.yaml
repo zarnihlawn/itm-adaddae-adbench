@@ -45,14 +45,14 @@ semi_specialists:
   CIFAR10: baseline_ddae
   SVHN: semi_rdt_tail
   Wilt: baseline_ddae
-  census: semi_rdt_tail
+  census: baseline_ddae
   glass: baseline_ddae
   vertebral: baseline_ddae
   WPBC: semi_speech_specialist
   Waveform: semi_rdt_tail
   smtp: baseline_ddae
   donors: baseline_ddae
-  wine: champion_semi
+  wine: baseline_ddae
   http: baseline_ddae
   musk: baseline_ddae
   breastw: baseline_ddae

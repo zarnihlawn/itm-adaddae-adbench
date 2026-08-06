@@ -2,11 +2,12 @@
 """Train-only multi-recipe arbitration (val_loss only — never test PR).
 
 Strip-first ablations for bleed-CV (plain bases + at most one A6 overlay).
-Presets: ship (hard-12 + bleed-classical), bleed-cv, bleed-classical, hard-12.
+Presets: ship, bleed-cv, bleed-classical, hard-12, all-semi (tiered 57), search.
 
 Usage:
   python scripts/train_only_recipe_select.py --dry-run
-  python scripts/train_only_recipe_select.py --preset ship --seeds 111 222 333 --hardware 16gb
+  python scripts/train_only_recipe_select.py --tier-plan-only
+  python scripts/train_only_recipe_select.py --preset all-semi --seeds 111 222 333 --hardware 16gb
   python scripts/train_only_recipe_select.py --apply-evidence-freeze
 """
 from __future__ import annotations
@@ -20,6 +21,8 @@ from typing import Any, Dict, List, Optional, Sequence
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(PROJECT_ROOT))
+
+from scripts.apply_hard_tail_freeze import PHASE0_LOCKS  # noqa: E402
 
 # Ship hard-tail set (12) — matches invalidate --hard-tails / apply freeze default
 HARD_TAIL_12 = [
@@ -326,6 +329,103 @@ def _category_for(name: str, registry_by_name: Optional[Dict[str, Any]] = None) 
     return "classical"
 
 
+# Protect-list datasets that keep RDT (proven vs fair) instead of forced baseline
+PROTECT_RDT_KEEP = {"satimage-2"}
+
+
+def _load_upgrades() -> Dict[str, Any]:
+    from src.config import load_yaml
+
+    return load_yaml(PROJECT_ROOT / "configs" / "adadae_per_upgrades.yaml")
+
+
+def _adbench_root() -> Path:
+    from src.config import load_yaml
+
+    cfg = load_yaml(PROJECT_ROOT / "configs" / "adadae_per.yaml")
+    root = cfg.get("paths", {}).get("adbench_root") or "../ADBench/adbench/datasets"
+    p = Path(root)
+    if not p.is_absolute():
+        p = (PROJECT_ROOT / p).resolve()
+    return p
+
+
+def list_all_semi_datasets() -> List[str]:
+    from src.data.datasets import list_dataset_names
+
+    return list(list_dataset_names(_adbench_root()))
+
+
+def build_all_semi_tiering(
+    all_names: Optional[List[str]] = None,
+) -> Dict[str, Any]:
+    """Tiered full-57 plan: PHASE0 locks + protect force vs GPU search set.
+
+    Integrity: never uses test-PR. Protect classical → baseline_ddae without
+    search (except PROTECT_RDT_KEEP ∩ rdt_promotion_semi → semi_rdt_tail).
+    """
+    names = list(all_names) if all_names is not None else list_all_semi_datasets()
+    upgrades = _load_upgrades()
+    protect = set(upgrades.get("protect_baseline_semi") or [])
+    rdt_ok = set((upgrades.get("method_lifts") or {}).get("rdt_promotion_semi") or [])
+
+    forced: Dict[str, Any] = {}
+    for ds, pol in PHASE0_LOCKS.items():
+        if ds not in names:
+            continue
+        forced[ds] = {
+            "policy": pol,
+            "overlays": [],
+            "strip_mce_gate": True,
+            "phase0_lock": True,
+            "forced": True,
+            "forced_protect": ds in protect,
+            "reason": "PHASE0_LOCK — never re-enable RDT/champion via val_loss",
+        }
+
+    for ds in sorted(protect):
+        if ds not in names or ds in forced:
+            continue
+        if ds in PROTECT_RDT_KEEP and ds in rdt_ok:
+            forced[ds] = {
+                "policy": "semi_rdt_tail",
+                "overlays": [],
+                "strip_mce_gate": True,
+                "forced": True,
+                "forced_protect": True,
+                "reason": "protect + rdt_promotion keep (proven vs fair)",
+            }
+        else:
+            forced[ds] = {
+                "policy": "baseline_ddae",
+                "overlays": [],
+                "strip_mce_gate": True,
+                "forced": True,
+                "forced_protect": True,
+                "reason": "protect_baseline_semi — force baseline (no GPU search)",
+            }
+
+    search = [d for d in names if d not in forced]
+    return {
+        "all_datasets": names,
+        "n_all": len(names),
+        "forced": forced,
+        "forced_datasets": sorted(forced.keys()),
+        "n_forced": len(forced),
+        "search_datasets": search,
+        "n_search": len(search),
+        "phase0_locks": dict(PHASE0_LOCKS),
+        "protect_baseline_semi": sorted(protect),
+        "protect_rdt_keep": sorted(PROTECT_RDT_KEEP & rdt_ok),
+        "selection_contract": {
+            "primary": "minimize val_loss",
+            "secondary": ["complexity_prior", "maximize synth_val_pr"],
+            "never": "test-PR selection",
+            "fairness": "integrity-safe adaptive per-dataset recipes vs fair/paper DDAE",
+        },
+    }
+
+
 def _preset_datasets(preset: str) -> List[str]:
     if preset == "ship":
         return list(SHIP_SELECT_DEFAULT)
@@ -337,6 +437,10 @@ def _preset_datasets(preset: str) -> List[str]:
         return list(BLEED_CLASSICAL)
     if preset == "legacy":
         return list(HARD_SEMI_DEFAULT)
+    if preset == "all-semi":
+        return list_all_semi_datasets()
+    if preset == "search":
+        return list(build_all_semi_tiering()["search_datasets"])
     raise ValueError(f"unknown preset {preset!r}")
 
 
@@ -354,6 +458,12 @@ def dry_run_resolve() -> Dict[str, Any]:
             registry_by_name = {e.name: e for e in build_registry(root)}
     except Exception:  # noqa: BLE001
         registry_by_name = {}
+
+    tiering: Optional[Dict[str, Any]] = None
+    try:
+        tiering = build_all_semi_tiering()
+    except Exception as exc:  # noqa: BLE001
+        tiering = {"error": f"{type(exc).__name__}: {exc}"}
 
     rows = []
     for ds in HARD_SEMI_DEFAULT:
@@ -390,7 +500,10 @@ def dry_run_resolve() -> Dict[str, Any]:
             "hard-12": HARD_TAIL_12,
             "bleed-cv": BLEED_CV,
             "bleed-classical": BLEED_CLASSICAL,
+            "all-semi": "registry_57",
+            "search": "all-semi minus PHASE0_LOCKS minus protect-forced",
         },
+        "all_semi_tiering": tiering,
         "current_per": rows,
     }
 
@@ -422,16 +535,19 @@ def evidence_freeze_report() -> Dict[str, Any]:
             "Stamps",
             "WBC",
             "census",
+            "Pima",
+            "letter",
         ],
         "revoked": {
             "smtp": "apex (−10.3 vs fair); helix stripped Phase0",
-            "wine": "nautilus (−5.0) + RDT Phase0 (−12.0 vs fair) → baseline_ddae",
-            "census": "RDT Phase0 (−4.0 vs fair) → baseline_ddae",
+            "wine": "nautilus (−5.0) + RDT Phase0 (−12.0 vs fair) → baseline_ddae (PHASE0_LOCK)",
+            "census": "RDT Phase0 (−4.0 vs fair) → baseline_ddae (PHASE0_LOCK)",
             "speech": "mce+smc+apex+orbit+delta kitchen-sink",
             "SVHN": "mce+orbit+helix kitchen-sink (−4.57 vs fair)",
             "ALOI": "mce+gate+orbit+locus kitchen-sink (−2.98 vs fair)",
             "celeba": "helix stripped Phase0",
         },
+        "phase0_locks": dict(PHASE0_LOCKS),
         "selection_contract": {
             "primary": "val_loss",
             "secondary": "eps_ball + complexity + synth_val_pr",
@@ -671,14 +787,77 @@ def run_selection(
             f"synth={means_synth.get(winner)} complexity={recipe_complexity(winner)} "
             f"vetoed={pick_meta.get('vetoed_risky')}"
         )
+
+    apply_phase0_locks_to_winners(results["winners"])
     return results
+
+
+def apply_phase0_locks_to_winners(winners: Dict[str, Any]) -> None:
+    """Force Phase0 emergency revoke policies (wine/census → baseline_ddae)."""
+    for ds, locked in PHASE0_LOCKS.items():
+        entry = winners.get(ds)
+        if entry is None:
+            winners[ds] = {
+                "policy": locked,
+                "overlays": [],
+                "strip_mce_gate": True,
+                "phase0_lock": True,
+                "reason": "Phase0 lock — dataset missing from select winners",
+            }
+            print(f"PHASE0_LOCK {ds}: inject {locked!r} (was missing)")
+            continue
+        if not isinstance(entry, dict):
+            winners[ds] = {
+                "policy": locked,
+                "overlays": [],
+                "strip_mce_gate": True,
+                "phase0_lock": True,
+            }
+            continue
+        old = entry.get("policy")
+        if old == locked and not entry.get("overlays"):
+            entry["phase0_lock"] = True
+            continue
+        entry["phase0_lock_overrode"] = old
+        entry["policy"] = locked
+        entry["overlays"] = []
+        entry["strip_mce_gate"] = True
+        entry["phase0_lock"] = True
+        entry["reason"] = (
+            "Phase0 lock: never re-enable RDT/champion via val_loss alone"
+        )
+        print(f"PHASE0_LOCK {ds}: override {old!r} → {locked!r}")
+
+
+def merge_forced_winners(
+    winners: Dict[str, Any], forced: Dict[str, Any]
+) -> None:
+    """Inject tiered forced recipes (protect / PHASE0) into winners map."""
+    for ds, entry in forced.items():
+        if ds in winners and not (isinstance(winners[ds], dict) and winners[ds].get("forced")):
+            # Prefer forced over any accidental search hit
+            old = winners[ds].get("policy") if isinstance(winners[ds], dict) else winners[ds]
+            winners[ds] = dict(entry)
+            winners[ds]["forced_overrode_search"] = old
+            print(f"FORCED {ds}: override search {old!r} → {entry.get('policy')!r}")
+        else:
+            winners[ds] = dict(entry)
+            print(f"FORCED {ds}: {entry.get('policy')} ({entry.get('reason')})")
 
 
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument(
         "--preset",
-        choices=["ship", "hard-12", "bleed-cv", "bleed-classical", "legacy"],
+        choices=[
+            "ship",
+            "hard-12",
+            "bleed-cv",
+            "bleed-classical",
+            "legacy",
+            "all-semi",
+            "search",
+        ],
         default=None,
         help="Dataset preset (default ship when --datasets omitted and not dry-run)",
     )
@@ -692,6 +871,11 @@ def main() -> int:
         help="Max NPZ splits per CV/NLP family (default 1 for speed; protocol uses all)",
     )
     p.add_argument("--dry-run", action="store_true")
+    p.add_argument(
+        "--tier-plan-only",
+        action="store_true",
+        help="Write all-semi tiering plan (forced vs search) without GPU select",
+    )
     p.add_argument("--apply-evidence-freeze", action="store_true")
     p.add_argument(
         "--candidates",
@@ -717,13 +901,39 @@ def main() -> int:
         report = dry_run_resolve()
         out = PROJECT_ROOT / "results/adadae_per/thesis/loop6_train_only_select.json"
         rc = 0
+    elif args.tier_plan_only:
+        tiering = build_all_semi_tiering()
+        report = {
+            "mode": "all_semi_tier_plan",
+            "status": "plan_only",
+            "selection_metric": "val_loss+eps_complexity+synth_val_pr",
+            "winners": dict(tiering["forced"]),
+            "tiering": tiering,
+            "datasets": tiering["all_datasets"],
+            "search_datasets": tiering["search_datasets"],
+            "forced_datasets": tiering["forced_datasets"],
+            "note": (
+                "Forced winners only. Run --preset all-semi --hardware 16gb "
+                "on Vast to search remaining datasets, then freeze."
+            ),
+        }
+        out = PROJECT_ROOT / "results/adadae_per/thesis/phase1_all_semi_tier_plan.json"
+        rc = 0
     elif args.apply_evidence_freeze:
         report = evidence_freeze_report()
         out = PROJECT_ROOT / "results/adadae_per/thesis/phase1_hard_freeze.json"
         rc = 0
     else:
+        tiering: Optional[Dict[str, Any]] = None
         if args.datasets:
             datasets = list(args.datasets)
+        elif args.preset == "all-semi":
+            tiering = build_all_semi_tiering()
+            datasets = list(tiering["search_datasets"])
+            print(
+                f"all-semi tiering: n_all={tiering['n_all']} "
+                f"n_forced={tiering['n_forced']} n_search={tiering['n_search']}"
+            )
         elif args.preset:
             datasets = _preset_datasets(args.preset)
         else:
@@ -737,6 +947,25 @@ def main() -> int:
             eps_rel=float(args.eps_rel),
             rdt_veto_margin=float(args.rdt_veto_margin),
         )
+        if tiering is not None:
+            merge_forced_winners(report["winners"], tiering["forced"])
+            report["tiering"] = {
+                k: tiering[k]
+                for k in (
+                    "n_all",
+                    "n_forced",
+                    "n_search",
+                    "forced_datasets",
+                    "search_datasets",
+                    "protect_rdt_keep",
+                    "selection_contract",
+                )
+            }
+            report["datasets"] = tiering["all_datasets"]
+            report["search_datasets"] = tiering["search_datasets"]
+            report["forced_datasets"] = tiering["forced_datasets"]
+            report["mode"] = "gpu_val_loss_select_all_semi"
+        apply_phase0_locks_to_winners(report["winners"])
         out = PROJECT_ROOT / "results/adadae_per/thesis/phase1_hard_freeze.json"
         n_winners = sum(
             1
@@ -774,15 +1003,19 @@ def main() -> int:
     out.write_text(json.dumps(_sanitize(report), indent=2), encoding="utf-8")
     printable = {k: report[k] for k in report if k != "jobs"}
     print(json.dumps(_sanitize(printable), indent=2)[:4000])
-    print(f"Wrote {out} status={report.get('status', 'ok')} n_ok={report.get('n_ok')} n_fail={report.get('n_fail')}")
-    if rc != 0:
+    print(
+        f"Wrote {out} status={report.get('status', 'ok')} "
+        f"n_ok={report.get('n_ok')} n_fail={report.get('n_fail')}"
+    )
+    if rc != 0 and not args.dry_run and not args.tier_plan_only:
         print(
             "ERROR: selection produced no usable winners (check FAIL lines / hardware / ADBench paths).",
             file=sys.stderr,
         )
         print(
             "Delete bogus Infinity freeze before apply_hard_tail_freeze; "
-            "fix then re-run: python scripts/train_only_recipe_select.py --preset ship --hardware 16gb",
+            "fix then re-run: python scripts/train_only_recipe_select.py "
+            "--preset all-semi --hardware 16gb",
             file=sys.stderr,
         )
     return rc

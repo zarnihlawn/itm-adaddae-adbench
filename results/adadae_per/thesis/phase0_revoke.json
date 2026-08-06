@@ -2,9 +2,15 @@
   "pass": true,
   "revoked": [
     "smtp:apex",
-    "wine:nautilus",
+    "wine:nautilus+champion/RDT\u2192baseline_ddae",
+    "census:RDT\u2192baseline_ddae",
+    "Agnews:taps stripped",
     "speech:mce+smc+apex kitchen-sink"
   ],
+  "phase0_locks": {
+    "wine": "baseline_ddae",
+    "census": "baseline_ddae"
+  },
   "checks": [
     {
       "dataset": "smtp",
@@ -12,6 +18,9 @@
       "use_apex": false,
       "use_nautilus": false,
       "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
       "protected": true
     },
     {
@@ -20,14 +29,31 @@
       "use_apex": false,
       "use_nautilus": false,
       "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
       "protected": true
     },
     {
       "dataset": "wine",
-      "resolved_policy": "per:champion_semi+protect",
+      "resolved_policy": "per:baseline_ddae+protect",
       "use_apex": false,
       "use_nautilus": false,
       "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "protected": true
+    },
+    {
+      "dataset": "census",
+      "resolved_policy": "per:baseline_ddae+protect+ftp_ov",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
       "protected": true
     },
     {
@@ -36,6 +62,9 @@
       "use_apex": false,
       "use_nautilus": false,
       "use_mce": false,
+      "use_rejection_training": true,
+      "use_ftp": true,
+      "contrastive": false,
       "protected": false
     },
     {
@@ -44,6 +73,9 @@
       "use_apex": false,
       "use_nautilus": true,
       "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
       "protected": false
     },
     {
@@ -52,6 +84,20 @@
       "use_apex": false,
       "use_nautilus": false,
       "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
+      "protected": false
+    },
+    {
+      "dataset": "Agnews",
+      "resolved_policy": "per:baseline_ddae+ftp_ov",
+      "use_apex": false,
+      "use_nautilus": false,
+      "use_mce": false,
+      "use_rejection_training": false,
+      "use_ftp": false,
+      "contrastive": false,
       "protected": false
     }
   ]

@@ -315,7 +315,7 @@
     {
       "dataset": "Agnews",
       "category": "nlp",
-      "resolved_policy": "per:baseline_ddae+ftp_ov+taps",
+      "resolved_policy": "per:baseline_ddae+ftp_ov",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,
@@ -367,7 +367,7 @@
     {
       "dataset": "census",
       "category": "classical",
-      "resolved_policy": "per:semi_rdt_tail+protect+ftp_ov",
+      "resolved_policy": "per:baseline_ddae+protect+ftp_ov",
       "use_scs": false,
       "use_mce": false,
       "use_orbit": false,

@@ -1,0 +1,25 @@
+{
+  "title": "Full-57 adaptive select — implementation status",
+  "timestamp": "2026-08-06",
+  "local_implementation": "complete",
+  "vast_gpu_execution": "pending",
+  "tier_plan": {
+    "n_all": 57,
+    "n_forced": 20,
+    "n_search": 37,
+    "artifact": "results/adadae_per/thesis/phase1_all_semi_tier_plan.json"
+  },
+  "gates": {
+    "top3_retrain": "FAIL on disk metrics (wine champion / census RDT / Agnews taps) — must run before select",
+    "probe_floor": 60.5,
+    "G_paper_both": "pending post-final"
+  },
+  "commands": {
+    "plan": "bash scripts/run_full57_adaptive_select.sh plan",
+    "top3": "bash scripts/run_phase0_lock_retrain.sh top3 16gb",
+    "check": "bash scripts/run_full57_adaptive_select.sh check-top3",
+    "all": "bash scripts/run_full57_adaptive_select.sh all 16gb",
+    "ship": "bash scripts/run_full57_adaptive_select.sh ship 16gb"
+  },
+  "fairness": "Integrity-safe adaptive: val_loss selection only; fair twin baselines_ddae_valstop; paper Table 1 ship target"
+}

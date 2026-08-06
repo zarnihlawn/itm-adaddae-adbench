@@ -1,7 +1,8 @@
-version: 5.3-phase0-revoke
-description: 'Classical protect + hard-tail specialists. Phase 0 (2026-08-06): wine/census
-  forced baseline_ddae (RDT −12/−4 vs fair); helix stripped from celeba/smtp. A6 only
-  on proven sets. speech uses RDT specialist base (not kitchen-sink).'
+version: 5.4-phase0-lock
+description: 'Classical protect + hard-tail specialists. Phase 0 lock (2026-08-06):
+  wine/census forced baseline_ddae (RDT/champion cannot be re-selected); helix stripped;
+  Agnews TAPS removed (−3.2 vs fair). A6 only on proven sets. Mid-tier calibrated
+  fusion expanded on Waveform-class winners.'
 mce:
   cv: []
   nlp: []
@@ -72,10 +73,11 @@ protect_baseline_semi:
 - Stamps
 - WBC
 - census
+- Pima
+- letter
 method_lifts:
   contrastive_alpha: 0.2
   contrastive_taps_semi:
-  - Agnews
   - Amazon
   - Imdb
   - Yelp
@@ -89,6 +91,9 @@ method_lifts:
   - thyroid
   - glass
   - vertebral
+  - backdoor
+  - Hepatitis
+  - cover
   rdt_promotion_semi:
   - Waveform
   - Wilt

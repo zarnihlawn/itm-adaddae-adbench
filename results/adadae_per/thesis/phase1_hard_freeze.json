@@ -636,7 +636,7 @@
       }
     },
     "census": {
-      "policy": "semi_rdt_tail",
+      "policy": "baseline_ddae",
       "mean_val_loss": {
         "baseline_ddae": 0.15084841738000174,
         "baseline_ddae+full_sum": 0.15084841738000174,
@@ -688,7 +688,11 @@
         "best_baseline_synth_pr": 0.9999200187538295,
         "winner_complexity": 4,
         "winner_synth_val_pr": 1.0
-      }
+      },
+      "overlays": [],
+      "phase0_lock": true,
+      "phase0_lock_overrode": "semi_rdt_tail",
+      "reason": "Phase0 lock: never re-enable RDT/champion via val_loss alone"
     },
     "smtp": {
       "policy": "baseline_ddae",
@@ -986,7 +990,7 @@
       }
     },
     "wine": {
-      "policy": "champion_semi",
+      "policy": "baseline_ddae",
       "mean_val_loss": {
         "baseline_ddae": 0.2135233680407206,
         "baseline_ddae+full_sum": 0.2135233680407206,
@@ -1041,7 +1045,11 @@
         "best_baseline_synth_pr": 1.0,
         "winner_complexity": 1,
         "winner_synth_val_pr": 1.0
-      }
+      },
+      "overlays": [],
+      "phase0_lock": true,
+      "phase0_lock_overrode": "champion_semi",
+      "reason": "Phase0 lock: never re-enable RDT/champion via val_loss alone"
     }
   },
   "jobs": [
@@ -9822,5 +9830,9 @@
   },
   "n_winners": 18,
   "n_failed_datasets": 0,
-  "status": "ok"
+  "status": "ok",
+  "phase0_locks": {
+    "wine": "baseline_ddae",
+    "census": "baseline_ddae"
+  }
 }

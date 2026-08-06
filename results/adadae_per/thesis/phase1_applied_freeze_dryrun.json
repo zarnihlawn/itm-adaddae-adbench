@@ -1,171 +1,276 @@
 {
-  "timestamp": "2026-08-05T11:06:53.525150+00:00",
-  "source": "results/adadae_per/thesis/phase1_hard_freeze.json",
-  "mode": "evidence_freeze",
+  "timestamp": "2026-08-06T00:05:47.647574+00:00",
+  "source": "results/adadae_per/thesis/phase1_all_semi_tier_plan.json",
+  "mode": "all_semi_tier_plan",
   "datasets": [
-    "speech",
     "ALOI",
+    "annthyroid",
+    "backdoor",
+    "breastw",
+    "campaign",
+    "cardio",
+    "Cardiotocography",
     "celeba",
-    "SVHN",
-    "CIFAR10",
-    "Wilt",
-    "Imdb",
-    "Amazon",
-    "Yelp",
-    "Agnews",
-    "20newsgroups",
     "census",
-    "smtp",
-    "satimage-2",
-    "Pima",
-    "Stamps",
+    "cover",
+    "donors",
+    "fault",
+    "fraud",
+    "glass",
+    "Hepatitis",
+    "http",
+    "InternetAds",
+    "Ionosphere",
+    "landsat",
     "letter",
-    "wine"
+    "Lymphography",
+    "magic.gamma",
+    "mammography",
+    "mnist",
+    "musk",
+    "optdigits",
+    "PageBlocks",
+    "pendigits",
+    "Pima",
+    "satellite",
+    "satimage-2",
+    "shuttle",
+    "skin",
+    "smtp",
+    "SpamBase",
+    "speech",
+    "Stamps",
+    "thyroid",
+    "vertebral",
+    "vowels",
+    "Waveform",
+    "WBC",
+    "WDBC",
+    "Wilt",
+    "wine",
+    "WPBC",
+    "yeast",
+    "CIFAR10",
+    "FashionMNIST",
+    "MNIST-C",
+    "MVTec-AD",
+    "SVHN",
+    "Agnews",
+    "Amazon",
+    "Imdb",
+    "Yelp",
+    "20newsgroups"
   ],
-  "n_applied": 18,
+  "n_applied": 20,
   "applied": {
-    "speech": {
-      "base": "semi_rdt_tail",
-      "overlays": [
-        "locus"
-      ],
-      "policy_string": "semi_rdt_tail+locus",
-      "strip_mce_gate": true
-    },
-    "ALOI": {
-      "base": "semi_rdt_tail",
-      "overlays": [
-        "orbit"
-      ],
-      "policy_string": "semi_rdt_tail+orbit",
-      "strip_mce_gate": true
-    },
-    "celeba": {
-      "base": "semi_cvnlp_ftp",
-      "overlays": [
-        "orbit"
-      ],
-      "policy_string": "semi_cvnlp_ftp+orbit",
-      "strip_mce_gate": true
-    },
-    "SVHN": {
-      "base": "semi_cvnlp_ftp",
+    "breastw": {
+      "base": "baseline_ddae",
       "overlays": [],
-      "policy_string": "semi_cvnlp_ftp",
-      "strip_mce_gate": true
-    },
-    "CIFAR10": {
-      "base": "semi_cvnlp_ftp",
-      "overlays": [
-        "orbit"
-      ],
-      "policy_string": "semi_cvnlp_ftp+orbit",
-      "strip_mce_gate": true
-    },
-    "Wilt": {
-      "base": "semi_rdt_tail",
-      "overlays": [
-        "orbit",
-        "locus",
-        "spiral"
-      ],
-      "policy_string": "semi_rdt_tail+orbit+locus+spiral",
-      "strip_mce_gate": true
-    },
-    "Imdb": {
-      "base": "semi_nlp_frozen",
-      "overlays": [
-        "orbit"
-      ],
-      "policy_string": "semi_nlp_frozen+orbit",
-      "strip_mce_gate": true
-    },
-    "Amazon": {
-      "base": "semi_nlp_frozen",
-      "overlays": [
-        "orbit"
-      ],
-      "policy_string": "semi_nlp_frozen+orbit",
-      "strip_mce_gate": true
-    },
-    "Yelp": {
-      "base": "semi_nlp_frozen",
-      "overlays": [
-        "orbit"
-      ],
-      "policy_string": "semi_nlp_frozen+orbit",
-      "strip_mce_gate": true
-    },
-    "Agnews": {
-      "base": "semi_nlp_frozen",
-      "overlays": [
-        "orbit"
-      ],
-      "policy_string": "semi_nlp_frozen+orbit",
-      "strip_mce_gate": true
-    },
-    "20newsgroups": {
-      "base": "semi_nlp_frozen",
-      "overlays": [
-        "orbit"
-      ],
-      "policy_string": "semi_nlp_frozen+orbit",
-      "strip_mce_gate": true
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
     },
     "census": {
       "base": "baseline_ddae",
-      "overlays": [
-        "locus"
-      ],
-      "policy_string": "baseline_ddae+locus",
-      "strip_mce_gate": true
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": true,
+      "forced_protect": true
     },
-    "smtp": {
+    "donors": {
       "base": "baseline_ddae",
       "overlays": [],
       "policy_string": "baseline_ddae",
-      "strip_mce_gate": true
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
     },
-    "satimage-2": {
+    "http": {
       "base": "baseline_ddae",
       "overlays": [],
       "policy_string": "baseline_ddae",
-      "strip_mce_gate": true
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
     },
-    "Pima": {
+    "Ionosphere": {
       "base": "baseline_ddae",
       "overlays": [],
       "policy_string": "baseline_ddae",
-      "strip_mce_gate": true
-    },
-    "Stamps": {
-      "base": "baseline_ddae",
-      "overlays": [],
-      "policy_string": "baseline_ddae",
-      "strip_mce_gate": true
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
     },
     "letter": {
       "base": "baseline_ddae",
       "overlays": [],
       "policy_string": "baseline_ddae",
-      "strip_mce_gate": true
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "Lymphography": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "magic.gamma": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "musk": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "PageBlocks": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "pendigits": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "Pima": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "satimage-2": {
+      "base": "semi_rdt_tail",
+      "overlays": [],
+      "policy_string": "semi_rdt_tail",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "shuttle": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "skin": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "smtp": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "Stamps": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "vowels": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
+    },
+    "WBC": {
+      "base": "baseline_ddae",
+      "overlays": [],
+      "policy_string": "baseline_ddae",
+      "strip_mce_gate": true,
+      "phase0_lock": false,
+      "forced_protect": true
     },
     "wine": {
       "base": "baseline_ddae",
       "overlays": [],
       "policy_string": "baseline_ddae",
-      "strip_mce_gate": true
+      "strip_mce_gate": true,
+      "phase0_lock": true,
+      "forced_protect": true
     }
   },
-  "skipped": [],
+  "skipped": [
+    "ALOI",
+    "annthyroid",
+    "backdoor",
+    "campaign",
+    "cardio",
+    "Cardiotocography",
+    "celeba",
+    "cover",
+    "fault",
+    "fraud",
+    "glass",
+    "Hepatitis",
+    "InternetAds",
+    "landsat",
+    "mammography",
+    "mnist",
+    "optdigits",
+    "satellite",
+    "SpamBase",
+    "speech",
+    "thyroid",
+    "vertebral",
+    "Waveform",
+    "WDBC",
+    "Wilt",
+    "WPBC",
+    "yeast",
+    "CIFAR10",
+    "FashionMNIST",
+    "MNIST-C",
+    "MVTec-AD",
+    "SVHN",
+    "Agnews",
+    "Amazon",
+    "Imdb",
+    "Yelp",
+    "20newsgroups"
+  ],
   "pre": {
     "semi_specialists": {
       "speech": "semi_rdt_tail",
-      "ALOI": "semi_rdt_tail",
-      "celeba": "semi_cvnlp_ftp",
-      "CIFAR10": "semi_cvnlp_ftp",
-      "SVHN": "semi_cvnlp_ftp",
-      "Wilt": "semi_rdt_tail",
+      "ALOI": "baseline_ddae",
+      "celeba": "baseline_ddae",
+      "CIFAR10": "baseline_ddae",
+      "SVHN": "semi_rdt_tail",
+      "Wilt": "baseline_ddae",
       "census": "baseline_ddae",
       "glass": "baseline_ddae",
       "vertebral": "baseline_ddae",
@@ -182,39 +287,25 @@
       "Lymphography": "baseline_ddae",
       "pendigits": "baseline_ddae",
       "magic.gamma": "baseline_ddae",
-      "satimage-2": "baseline_ddae",
+      "satimage-2": "semi_rdt_tail",
       "vowels": "baseline_ddae",
       "skin": "baseline_ddae",
-      "PageBlocks": "baseline_ddae"
+      "PageBlocks": "baseline_ddae",
+      "Imdb": "baseline_ddae",
+      "Amazon": "baseline_ddae",
+      "Yelp": "baseline_ddae",
+      "Agnews": "baseline_ddae",
+      "20newsgroups": "baseline_ddae",
+      "Pima": "baseline_ddae",
+      "Stamps": "baseline_ddae",
+      "letter": "baseline_ddae",
+      "WBC": "baseline_ddae"
     },
     "a6_semi": {
-      "orbit": [
-        "SVHN",
-        "CIFAR10",
-        "ALOI",
-        "celeba",
-        "Agnews",
-        "Amazon",
-        "Imdb",
-        "Yelp",
-        "20newsgroups",
-        "Wilt"
-      ],
-      "locus": [
-        "speech",
-        "Wilt",
-        "census",
-        "ALOI"
-      ],
-      "spiral": [
-        "speech",
-        "Wilt"
-      ],
-      "helix": [
-        "speech",
-        "CIFAR10",
-        "SVHN"
-      ],
+      "orbit": [],
+      "locus": [],
+      "spiral": [],
+      "helix": [],
       "nautilus": [
         "glass",
         "Hepatitis",
@@ -222,29 +313,15 @@
       ]
     },
     "mce": {
-      "cv": [
-        "ALOI",
-        "celeba",
-        "SVHN"
-      ],
-      "nlp": [
-        "Imdb",
-        "Agnews",
-        "Amazon",
-        "Yelp",
-        "20newsgroups"
-      ],
+      "cv": [],
+      "nlp": [],
       "classical": [
         "optdigits",
         "cover"
       ]
     },
     "gate": {
-      "semi-supervised": [
-        "speech",
-        "ALOI",
-        "CIFAR10"
-      ],
+      "semi-supervised": [],
       "unsupervised": [
         "speech",
         "ALOI",
@@ -255,11 +332,11 @@
   "post": {
     "semi_specialists": {
       "speech": "semi_rdt_tail",
-      "ALOI": "semi_rdt_tail",
-      "celeba": "semi_cvnlp_ftp",
-      "CIFAR10": "semi_cvnlp_ftp",
-      "SVHN": "semi_cvnlp_ftp",
-      "Wilt": "semi_rdt_tail",
+      "ALOI": "baseline_ddae",
+      "celeba": "baseline_ddae",
+      "CIFAR10": "baseline_ddae",
+      "SVHN": "semi_rdt_tail",
+      "Wilt": "baseline_ddae",
       "census": "baseline_ddae",
       "glass": "baseline_ddae",
       "vertebral": "baseline_ddae",
@@ -276,41 +353,25 @@
       "Lymphography": "baseline_ddae",
       "pendigits": "baseline_ddae",
       "magic.gamma": "baseline_ddae",
-      "satimage-2": "baseline_ddae",
+      "satimage-2": "semi_rdt_tail",
       "vowels": "baseline_ddae",
       "skin": "baseline_ddae",
       "PageBlocks": "baseline_ddae",
+      "Imdb": "baseline_ddae",
+      "Amazon": "baseline_ddae",
+      "Yelp": "baseline_ddae",
+      "Agnews": "baseline_ddae",
+      "20newsgroups": "baseline_ddae",
       "Pima": "baseline_ddae",
       "Stamps": "baseline_ddae",
-      "letter": "baseline_ddae"
+      "letter": "baseline_ddae",
+      "WBC": "baseline_ddae"
     },
-    "semi_nlp_baseline": [
-      "Agnews",
-      "20newsgroups",
-      "Amazon",
-      "Imdb",
-      "Yelp"
-    ],
+    "semi_nlp_baseline": [],
     "a6_semi": {
-      "orbit": [
-        "CIFAR10",
-        "ALOI",
-        "celeba",
-        "Agnews",
-        "Amazon",
-        "Imdb",
-        "Yelp",
-        "20newsgroups",
-        "Wilt"
-      ],
-      "locus": [
-        "speech",
-        "Wilt",
-        "census"
-      ],
-      "spiral": [
-        "Wilt"
-      ],
+      "orbit": [],
+      "locus": [],
+      "spiral": [],
       "helix": [],
       "nautilus": [
         "glass",

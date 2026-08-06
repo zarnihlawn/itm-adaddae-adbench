@@ -1,34 +1,58 @@
 {
-  "title": "AdaDDAE-PER weakness catalog vs published AnoDDAE (ultimate plan 2026-08-06)",
+  "title": "AdaDDAE-PER weakness catalog vs published AnoDDAE (Full-57 adaptive 2026-08-06)",
   "generated": "2026-08-06",
   "ship_status": {
-    "semi_PR": 59.18149662278054,
-    "semi_ROC": 83.03665471992059,
+    "semi_PR": 59.09315919048331,
+    "semi_ROC": 82.97609273790489,
     "unsup_PR": 33.00873799402033,
     "unsup_ROC": 75.16711181593037,
     "paper_semi_PR": 61.36,
     "paper_semi_ROC": 83.17,
     "fair_semi_PR": 58.69953928485906,
-    "delta_semi_PR_vs_paper": -2.1785033772194566,
-    "delta_semi_PR_vs_fair": 0.4819573379214859,
-    "match_fair_on_losses_ceiling_macro": 59.73,
-    "still_short_of_paper_after_match_fair": 1.63,
-    "hard12_mean_ada": 13.91,
-    "hard12_mean_fair": 14.35,
-    "hard12_mean_needed_for_paper_if_classical_flat": 24.54,
+    "delta_semi_PR_vs_paper": -2.2668408095166868,
+    "delta_semi_PR_vs_fair": 0.39361990562425575,
+    "match_fair_on_losses_ceiling_macro": 59.72,
+    "still_short_of_paper_after_match_fair": 1.64,
     "probe_ship_floor": 60.5,
     "gates": {
       "G-I1_complete_570": true,
       "G_AP_PR_consistency": true,
       "G_paper_both": false,
       "all_pass": false
-    }
+    },
+    "note": "Macros PRE-retrain. Configs locked; run top3 then full-57 adaptive on Vast."
+  },
+  "full57_adaptive": {
+    "fairness": "per-dataset recipes via val_loss only — never test-PR; fair twin = baselines_ddae_valstop",
+    "orchestrator": "scripts/run_full57_adaptive_select.sh",
+    "tier_plan": "results/adadae_per/thesis/phase1_all_semi_tier_plan.json",
+    "n_all": 57,
+    "n_forced": 20,
+    "n_search": 37,
+    "require_top3_first": true,
+    "vast": "bash scripts/run_phase0_lock_retrain.sh top3 16gb && bash scripts/run_full57_adaptive_select.sh all 16gb"
+  },
+  "phase0_lock_finding": {
+    "summary": "Emergency revoke was undone by select→freeze: wine→champion_semi (FTP), census→semi_rdt_tail. Metrics still reflected those policies (wine −4.26, census −4.02). Code now hard-locks both to baseline_ddae.",
+    "live_policies_after_lock": {
+      "wine": "per:baseline_ddae+protect",
+      "census": "per:baseline_ddae+protect+ftp_ov",
+      "Agnews": "per:baseline_ddae+ftp_ov (TAPS stripped)"
+    },
+    "locks_in": [
+      "scripts/apply_hard_tail_freeze.py PHASE0_LOCKS",
+      "scripts/train_only_recipe_select.py apply_phase0_locks_to_winners",
+      "configs/adadae_per_exceptions.yaml",
+      "scripts/phase0_revoke_audit.py"
+    ],
+    "retrain": "bash scripts/run_phase0_lock_retrain.sh top3 16gb"
   },
   "phase0_emergency_revoke": {
-    "wine": "semi_rdt_tail → baseline_ddae (−12.0 PR vs fair was smoking gun)",
-    "census": "semi_rdt_tail → baseline_ddae (−4.0 vs fair)",
+    "wine": "semi_rdt_tail → baseline_ddae (−12.0 PR vs fair was smoking gun); lock prevents champion_semi undo",
+    "census": "semi_rdt_tail → baseline_ddae (−4.0 vs fair); lock prevents RDT re-select",
     "celeba_smtp": "helix stripped",
     "Stamps_WBC": "protect_baseline_semi",
+    "Agnews": "removed from contrastive_taps_semi (−3.2 vs fair under TAPS)",
     "artifact": "results/adadae_per/thesis/phase0_emergency_revoke.json"
   },
   "selection_contract": {
@@ -36,6 +60,7 @@
     "epsilon_ball_rel": 0.05,
     "secondary": ["complexity_prior", "synth_val_pr"],
     "hard_veto": "RDT/MCE/GATE if synth_val_pr << baseline",
+    "hard_locks": {"wine": "baseline_ddae", "census": "baseline_ddae"},
     "never": "test-PR selection",
     "script": "scripts/train_only_recipe_select.py"
   },
@@ -50,42 +75,47 @@
     "protect_baseline_semi": [
       "smtp", "donors", "wine", "http", "musk", "breastw", "shuttle",
       "Ionosphere", "Lymphography", "pendigits", "magic.gamma", "satimage-2",
-      "vowels", "skin", "PageBlocks", "Stamps", "WBC", "census"
+      "vowels", "skin", "PageBlocks", "Stamps", "WBC", "census", "Pima", "letter"
+    ],
+    "calibrated_fusion_expanded": [
+      "Waveform", "optdigits", "thyroid", "glass", "vertebral",
+      "backdoor", "Hepatitis", "cover"
     ]
   },
-  "worst_semi_vs_fair_post_probe": [
-    {"dataset": "wine", "delta": -12.02, "note": "Phase0 force baseline_ddae"},
-    {"dataset": "census", "delta": -4.02, "note": "Phase0 force baseline_ddae"},
-    {"dataset": "smtp", "delta": -3.36},
-    {"dataset": "Stamps", "delta": -2.76},
-    {"dataset": "celeba", "delta": -1.83, "note": "helix stripped Phase0"},
-    {"dataset": "WBC", "delta": -1.45},
-    {"dataset": "SVHN", "delta": -1.08}
-  ],
-  "best_semi_vs_fair": [
-    {"dataset": "Waveform", "delta": 17.81},
-    {"dataset": "optdigits", "delta": 5.62},
-    {"dataset": "thyroid", "delta": 5.49},
-    {"dataset": "backdoor", "delta": 5.38}
+  "worst_semi_vs_fair_pre_lock_retrain": [
+    {"dataset": "wine", "delta": -4.26, "note": "was champion_semi+protect; now locked baseline_ddae — NEEDS RETRAIN"},
+    {"dataset": "census", "delta": -4.02, "note": "was RDT; now locked baseline_ddae — NEEDS RETRAIN"},
+    {"dataset": "Agnews", "delta": -3.19, "note": "TAPS stripped — NEEDS RETRAIN"},
+    {"dataset": "Stamps", "delta": -2.92},
+    {"dataset": "smtp", "delta": -2.80},
+    {"dataset": "Pima", "delta": -2.75, "note": "added to protect"},
+    {"dataset": "letter", "delta": -2.39, "note": "added to protect"},
+    {"dataset": "WBC", "delta": -1.74}
   ],
   "loops": [
     {
       "id": 1,
-      "finding": "Semi macro shortfall −2.18 PR vs paper; unsup clears",
+      "finding": "Semi macro shortfall −2.27 PR vs paper; unsup clears",
       "severity": "critical",
-      "mitigation": "Phase0 revoke + Phase1 selector + Phase2–3 method lifts + probe floor"
+      "mitigation": "Phase0 lock + top3 retrain + mid-tier cal_fuse + probe floor"
     },
     {
       "id": 21,
-      "finding": "wine RDT −12 PR vs fair — val_loss select anti-pattern",
+      "finding": "wine RDT −12 then champion −4.3 — val_loss select undid Phase0",
       "severity": "critical",
-      "mitigation": "Force baseline_ddae; synth-val veto for RDT; never re-enable without clear"
+      "mitigation": "PHASE0_LOCKS in freeze+select; audit fails if RDT/FTP on wine"
     },
     {
       "id": 22,
-      "finding": "Match-fair-on-losers only ~59.73 — still −1.63 vs paper",
+      "finding": "Match-fair-on-losers only ~59.72 — still −1.64 vs paper",
       "severity": "critical",
-      "mitigation": "Beat fair on mid-tier (Waveform-class); TAPS + calibrated fusion gated lifts"
+      "mitigation": "Beat fair on mid-tier; cal_fuse on backdoor/Hepatitis/cover"
+    },
+    {
+      "id": 25,
+      "finding": "Agnews baseline+TAPS −3.19 vs fair",
+      "severity": "high",
+      "mitigation": "Strip Agnews from contrastive_taps_semi; retrain"
     },
     {
       "id": 23,
@@ -97,7 +127,7 @@
       "id": 24,
       "finding": "Probe failed G_paper_both; full-ship would waste GPU",
       "severity": "high",
-      "mitigation": "PROBE_SEMI_FLOOR=60.5 gate in run_hard_tail_ship_path.sh"
+      "mitigation": "PROBE_SEMI_FLOOR=60.5; run_phase0_lock_retrain.sh before ship"
     }
   ],
   "protocol_differences": {
@@ -128,8 +158,9 @@
     "integrity_gates": "results/adadae_per/thesis/integrity_gates.json",
     "compare": "results/adadae_per/thesis/compare_to_ddae.csv",
     "phase0": "results/adadae_per/thesis/phase0_emergency_revoke.json",
+    "phase0_audit": "results/adadae_per/thesis/phase0_revoke.json",
+    "retrain_script": "scripts/run_phase0_lock_retrain.sh",
     "phase4_campaign": "results/adadae_per/thesis/phase4_campaign.json",
-    "scoring_parity": "results/adadae_per/thesis/loop5_scoring_parity.json",
     "this_catalog": "results/adadae_per/thesis/weakness_catalog_20.json"
   }
 }

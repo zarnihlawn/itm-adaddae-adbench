@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply hard-tail / bleed recipe winners into PER exceptions + upgrades.
+"""Apply hard-tail / bleed / all-semi recipe winners into PER exceptions + upgrades.
 
 Patches:
   - configs/adadae_per_exceptions.yaml  → semi_specialists (+ NLP list)
@@ -7,13 +7,13 @@ Patches:
 
 Winners from val_loss selector (never test-PR). Strip-first: applied datasets
 are removed from MCE/GATE/SMC lists unless winner sets strip_mce_gate=false
-or overlays include mce/gate.
+or overlays include mce/gate. PHASE0_LOCKS + forced_protect override winners.
 
 Usage:
   python scripts/apply_hard_tail_freeze.py \\
     --from results/adadae_per/thesis/phase1_hard_freeze.json
 
-  python scripts/apply_hard_tail_freeze.py --from ... --datasets-preset ship --dry-run
+  python scripts/apply_hard_tail_freeze.py --from ... --datasets-preset all-semi --dry-run
 """
 from __future__ import annotations
 
@@ -47,6 +47,9 @@ BLEED_CLASSICAL = ["smtp", "satimage-2", "Pima", "Stamps", "letter", "wine"]
 
 SHIP_SELECT_DEFAULT = list(dict.fromkeys(HARD_TAIL_DEFAULT + BLEED_CLASSICAL))
 
+# Protect-list RDT keep (must match train_only_recipe_select.PROTECT_RDT_KEEP)
+PROTECT_RDT_KEEP = {"satimage-2"}
+
 NLP_DATASETS = {"Agnews", "Amazon", "Imdb", "Yelp", "20newsgroups"}
 
 A6_OVERLAYS = ("orbit", "locus", "spiral", "helix", "nautilus")
@@ -60,6 +63,13 @@ KNOWN_BASES = {
     "semi_speech_specialist",
     "semi_nlp_frozen",
     "semi_nlp_baseline",
+}
+
+# Phase0 emergency revoke — never let val_loss select undo these (wine/census RDT
+# anti-correlated with test PR). Overlays cleared; protect list keeps A6/MCE off.
+PHASE0_LOCKS = {
+    "wine": "baseline_ddae",
+    "census": "baseline_ddae",
 }
 
 
@@ -182,12 +192,58 @@ def apply_freeze(
     nlp_set = set(nlp_list)
 
     a6 = dict(upgrades.get("a6") or {})
+    rdt_ok = set(
+        ((upgrades.get("method_lifts") or {}).get("rdt_promotion_semi") or [])
+    )
     applied: Dict[str, Any] = {}
 
     for ds in target_ds:
-        if ds not in winners:
+        entry = winners.get(ds)
+        if entry is None and ds not in PHASE0_LOCKS:
             continue
-        base, overlays, strip_mce_gate = parse_winner(winners[ds])
+
+        forced_protect = bool(
+            isinstance(entry, dict)
+            and (entry.get("forced_protect") or entry.get("forced"))
+        )
+        phase0 = ds in PHASE0_LOCKS
+
+        if phase0:
+            base = PHASE0_LOCKS[ds]
+            overlays: List[str] = []
+            strip_mce_gate = True
+            old_pol = None
+            if entry is not None:
+                try:
+                    old_pol, _, _ = parse_winner(entry)
+                except ValueError:
+                    old_pol = None
+            if old_pol and old_pol != base:
+                print(
+                    f"PHASE0_LOCK {ds}: override {old_pol!r} → {base!r} "
+                    "(never re-enable RDT/champion via val_loss select)"
+                )
+        elif forced_protect and isinstance(entry, dict):
+            # Protect-forced baseline (or satimage-2 RDT keep)
+            base, overlays, strip_mce_gate = parse_winner(entry)
+            if (
+                ds in PROTECT_RDT_KEEP
+                and ds in rdt_ok
+                and base == "semi_rdt_tail"
+            ):
+                print(f"PROTECT_RDT_KEEP {ds}: freeze {base}")
+            elif base != "baseline_ddae" and ds not in PROTECT_RDT_KEEP:
+                print(
+                    f"PROTECT_FORCE {ds}: coerce {base!r} → baseline_ddae"
+                )
+                base = "baseline_ddae"
+                overlays = []
+                strip_mce_gate = True
+        else:
+            if entry is None:
+                continue
+            base, overlays, strip_mce_gate = parse_winner(entry)
+
         if base == "semi_nlp_baseline":
             base = "semi_nlp_frozen"
         if base not in KNOWN_BASES:
@@ -199,6 +255,10 @@ def apply_freeze(
         ]
         if unknown_ov:
             print(f"WARN: ignoring unknown overlays for {ds}: {unknown_ov}")
+
+        # Never apply A6 overlays on PHASE0 / protect-forced baselines
+        if phase0 or (forced_protect and base == "baseline_ddae"):
+            ov_clean = []
 
         if ds in NLP_DATASETS:
             if base == "semi_nlp_frozen":
@@ -231,6 +291,8 @@ def apply_freeze(
             "overlays": ov_clean,
             "policy_string": "+".join([base] + ov_clean),
             "strip_mce_gate": strip_mce_gate,
+            "phase0_lock": phase0,
+            "forced_protect": forced_protect,
         }
 
     new_nlp = [x for x in nlp_list if x in nlp_set]
@@ -244,8 +306,13 @@ def apply_freeze(
 
     return {
         "applied": applied,
-        "skipped": [d for d in target_ds if d not in winners],
+        "skipped": [
+            d
+            for d in target_ds
+            if d not in winners and d not in PHASE0_LOCKS
+        ],
         "n_applied": len(applied),
+        "phase0_locks": dict(PHASE0_LOCKS),
     }
 
 
@@ -273,9 +340,9 @@ def main() -> int:
     )
     p.add_argument(
         "--datasets-preset",
-        choices=["hard-12", "ship"],
+        choices=["hard-12", "ship", "all-semi"],
         default=None,
-        help="hard-12 (default) or ship (hard-12 + bleed-classical)",
+        help="hard-12 (default), ship (hard-12 + bleed-classical), or all-semi (all winners)",
     )
     p.add_argument(
         "--audit",
@@ -330,6 +397,19 @@ def main() -> int:
         datasets = list(args.datasets)
     elif args.datasets_preset == "ship":
         datasets = list(SHIP_SELECT_DEFAULT)
+    elif args.datasets_preset == "all-semi":
+        # Prefer explicit list from selector payload; else all winner keys
+        payload_ds = payload.get("datasets")
+        if isinstance(payload_ds, list) and payload_ds:
+            datasets = list(payload_ds)
+        else:
+            datasets = sorted(winners.keys())
+        # Ensure PHASE0 / forced keys are included even if missing from winners filter
+        for ds in list(PHASE0_LOCKS) + list(
+            (payload.get("forced_datasets") or [])
+        ):
+            if ds not in datasets:
+                datasets.append(ds)
     else:
         datasets = list(HARD_TAIL_DEFAULT)
 

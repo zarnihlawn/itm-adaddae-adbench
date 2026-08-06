@@ -1,0 +1,12 @@
+{
+  "pass": false,
+  "errors": [
+    "wine: resolved_policy='per:champion_semi+protect' (need baseline_ddae)",
+    "wine: still champion_semi \u2014 run top3 retrain",
+    "census: resolved_policy='per:semi_rdt_tail+protect+ftp_ov' (need baseline_ddae)",
+    "census: still RDT \u2014 run top3 retrain",
+    "Agnews: TAPS still on \u2014 run top3 retrain"
+  ],
+  "fix": "bash scripts/run_phase0_lock_retrain.sh top3 16gb",
+  "override": "SKIP_TOP3_CHECK=1 to bypass (not recommended)"
+}
