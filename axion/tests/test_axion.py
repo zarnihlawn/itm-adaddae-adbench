@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from axion.models import build_model
-from axion.models.mcb import sample_masks, scale_hparams
+from axion.models.mcb import sample_masks, scale_hparams, soften_mask_rates
 from axion.train.experiment import run_one_array
 
 
@@ -25,6 +25,14 @@ def test_scale_hparams_branches():
     assert big_d["dropout"] <= 0.05
 
 
+def test_scale_hparams_semi_softer():
+    base = scale_hparams(1000, 20, semi=False)
+    semi = scale_hparams(1000, 20, semi=True)
+    assert max(semi["mask_rates"]) <= max(base["mask_rates"])
+    assert semi["score_k"] >= base["score_k"]
+    assert soften_mask_rates((0.2, 0.4))[0] < 0.2
+
+
 def test_sample_masks_shape():
     m = sample_masks(8, 16, rates=(0.2, 0.4))
     assert m.shape == (8, 16)
@@ -36,16 +44,15 @@ def test_axion_fit_score_toy():
     X = rng.randn(120, 8).astype(np.float32)
     y = np.zeros(120, dtype=np.int64)
     y[-15:] = 1
-    # anomalies = shift
     X[-15:] += 3.0
     model = build_model("axion", epochs=15, patience=5, batch_size=32, seed=0)
-    model.fit(X[:100])  # mostly normals
+    model.fit(X[:100])
     s = model.score(X)
     assert s.shape == (120,)
     assert np.all(np.isfinite(s))
 
 
-def test_train_anchored_score_and_semi_latch():
+def test_train_anchored_score_and_semi_mcs_primary():
     rng = np.random.RandomState(2)
     Xn = rng.randn(80, 8).astype(np.float32)
     Xa = rng.randn(20, 8).astype(np.float32) + 3.0
@@ -59,17 +66,19 @@ def test_train_anchored_score_and_semi_latch():
         batch_size=32,
         seed=3,
         latch_alpha=0.4,
-        latch_alpha_semi=0.25,
+        latch_alpha_semi=0.0,
+        mae_weight_semi=0.8,
+        nll_weight_semi=0.2,
     )
     model.fit(Xn, y_all_normal)
+    assert model.is_semi_ is True
     assert model.mcs_mean_ is not None
     assert model.mcs_std_ is not None and model.mcs_std_ > 0
-    assert model.latch_score_mean_ is not None
-    assert abs(model.active_latch_alpha_ - 0.25) < 1e-9
+    assert abs(model.active_latch_alpha_) < 1e-9
+    assert abs(model.active_mae_weight_ - 0.8) < 1e-6
 
     s = model.score(X)
     assert s.shape == (100,)
-    # Anomalies should rank higher on average under train-anchored scores
     assert float(s[80:].mean()) > float(s[:80].mean())
 
     # Unsupervised-like train (mixed labels) keeps full latch_alpha
@@ -82,9 +91,10 @@ def test_train_anchored_score_and_semi_latch():
         batch_size=32,
         seed=4,
         latch_alpha=0.4,
-        latch_alpha_semi=0.25,
+        latch_alpha_semi=0.0,
     )
     model2.fit(X, y_mixed)
+    assert model2.is_semi_ is False
     assert abs(model2.active_latch_alpha_ - 0.4) < 1e-9
 
 

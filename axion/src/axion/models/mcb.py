@@ -50,37 +50,53 @@ def sample_masks(
     return mask.to(out_device)
 
 
-def scale_hparams(n: int, d: int) -> dict:
-    """SCALE: train-only size/d routing for architecture knobs."""
+def soften_mask_rates(rates: Sequence[float], factor: float = 0.7) -> tuple[float, ...]:
+    """Lower mask rates for all-normal (semi) training — sharper normal recon."""
+    return tuple(float(max(0.05, min(0.55, r * factor))) for r in rates)
+
+
+def scale_hparams(n: int, d: int, *, semi: bool = False) -> dict:
+    """SCALE: train-only size/d routing for architecture knobs.
+
+    Phase 4: stronger high-d (CV/NLP) path; semi gets softer rates + more score_k.
+    """
     if d >= 400:
-        # Embedding / high-d: more score passes, softer high-mask bank, lighter dropout
-        hidden, latent, depth = 384, 96, 3
-        mask_rates = (0.1, 0.2, 0.35)
-        score_k = 16
+        # Embedding / high-d: capacity + many light-mask score passes (G2/G3 killers)
+        hidden, latent, depth = 512, 128, 3
+        mask_rates = (0.08, 0.15, 0.28)
+        score_k = 24
         dropout = 0.05
-        high_mask_delta = 0.15
-        high_mask_cap = 0.6
+        high_mask_delta = 0.12
+        high_mask_cap = 0.45
     elif d >= 64:
-        hidden, latent, depth = 256, 64, 3
-        mask_rates = (0.15, 0.3, 0.5)
-        score_k = 16
-        dropout = 0.1 if n >= 500 else 0.05
-        high_mask_delta = 0.25
-        high_mask_cap = 0.85
+        hidden, latent, depth = 320, 80, 3
+        mask_rates = (0.12, 0.25, 0.4)
+        score_k = 18
+        dropout = 0.08 if n >= 500 else 0.05
+        high_mask_delta = 0.2
+        high_mask_cap = 0.7
     else:
-        hidden, latent, depth = 128, 32, 2
-        mask_rates = (0.2, 0.35, 0.5)
+        hidden, latent, depth = 160, 40, 2
+        mask_rates = (0.15, 0.3, 0.45)
         score_k = 20
-        dropout = 0.1 if n >= 500 else 0.05
-        high_mask_delta = 0.25
-        high_mask_cap = 0.85
+        dropout = 0.08 if n >= 500 else 0.05
+        high_mask_delta = 0.2
+        high_mask_cap = 0.75
 
     if n < 200:
+        # Tiny tables (glass): keep depth modest but do not starve score_k
         depth = max(1, depth - 1)
-        hidden = min(hidden, 128)
-        score_k = min(score_k, 8)
+        hidden = min(hidden, 160)
+        score_k = max(12, min(score_k, 16))
     elif n > 10000:
-        score_k = max(6, score_k - 2)
+        # Huge tables (cover/fraud): still enough MCS passes
+        score_k = max(12, score_k - 2)
+
+    if semi:
+        mask_rates = soften_mask_rates(mask_rates, factor=0.75)
+        score_k = int(min(32, round(score_k * 1.25)))
+        high_mask_delta = float(min(high_mask_delta, 0.15))
+        high_mask_cap = float(min(high_mask_cap, 0.55))
 
     return {
         "hidden": hidden,
@@ -91,4 +107,5 @@ def scale_hparams(n: int, d: int) -> dict:
         "dropout": dropout,
         "high_mask_delta": high_mask_delta,
         "high_mask_cap": high_mask_cap,
+        "semi": bool(semi),
     }

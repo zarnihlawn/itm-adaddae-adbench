@@ -20,31 +20,23 @@ cd axion
 bash scripts/vast_setup.sh
 ```
 
-## Runs (GPU)
+## Runs (GPU) — Phase 4
 
 ```bash
 cd /workspace/ITM/project/axion
 source .venv/bin/activate
 export PYTHONPATH=src PYTHONUNBUFFERED=1
 
-bash scripts/vast_probe.sh smoke
-bash scripts/vast_probe.sh classical
-bash scripts/vast_probe.sh g2
+# Preferred: classical → hard gate → full (stops if semi PR < 60)
+bash scripts/vast_probe.sh g4-auto configs/gpu.yaml
 
-# Phase-3 close-the-gate (after G2 fail):
-bash scripts/vast_probe.sh g3-classical configs/gpu.yaml
-bash scripts/vast_probe.sh g3 configs/gpu.yaml
-
-# Optional:
-bash scripts/vast_probe.sh g2-fast
-bash scripts/vast_probe.sh g2 configs/gpu.yaml
+# Or step-by-step:
+bash scripts/vast_probe.sh g4-classical configs/gpu.yaml
+# read MACRO; only if semi ≥ 60:
+bash scripts/vast_probe.sh g4 configs/gpu.yaml   # refuses to start without gate
 ```
 
-Or raw:
-
-```bash
-python scripts/run_probe.py --all-probe --model axion --loop-log --run-id axion_g3
-```
+Do **not** use bare `g3-classical && g3` — that only skips on crash, not on bad MACRO.
 
 ## Sync results back (laptop)
 
@@ -54,13 +46,15 @@ rsync -avz -e "ssh -p PORT" \
   /home/zarnihlawn/Desktop/ITM/project/axion/results/
 ```
 
-## G2 / G3 pass rule
+## Pass rule
 
 Both settings: PR ≥ paper+2 and ROC ≥ paper+1  
 Paper: unsup **32.77 / 74.08**, semi **61.36 / 83.17**
 
-Check: `results/axion_g3/probe_summary.json` → `probe_macro.*.pass_probe_margin`  
-(Do **not** run `full57` until both settings pass.)
+Classical glance gate (before full probe): semi PR **≥ 60**  
+Check: `results/axion_g4/probe_summary.json` → `probe_macro.*.pass_probe_margin`  
+
+Do **not** run `full57` until both settings pass (script also checks).
 
 ## Local note
 

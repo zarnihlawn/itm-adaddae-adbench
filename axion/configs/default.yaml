@@ -1,4 +1,4 @@
-# AXION Phase 1 — protocol + harness defaults
+# AXION Phase 4 — protocol + harness defaults
 seed: 111
 seeds: [111, 222, 333, 444, 555]
 
@@ -29,21 +29,24 @@ harness:
   max_variants: 0  # 0 = all NPZ variants; set 2–3 for fast design loops
 
 axion:
-  epochs: 70
+  epochs: 100
   batch_size: 256
   lr: 0.001
   weight_decay: 0.00001
-  patience: 15
+  patience: 20
   val_fraction: 0.15
-  # v1-balanced defaults (G2 latch=0.55/mae=0.75 hurt semi)
+  # Phase 4: unsup keeps LATCH; semi = MCS-primary (G3 latch_semi=0.25 lost to v1)
   latch_alpha: 0.40
-  latch_alpha_semi: 0.25
+  latch_alpha_semi: 0.0
   mae_weight: 0.60
   nll_weight: 0.40
+  mae_weight_semi: 0.80
+  nll_weight_semi: 0.20
+  semi_epoch_boost: 1.25
   # hidden/latent/depth/mask_rates/score_k: null → SCALE auto
 
 probe:
-  # Locked diversity set for G2 (Phase 2+)
+  # Locked diversity set for G2+
   datasets:
     - breastw
     - cardio

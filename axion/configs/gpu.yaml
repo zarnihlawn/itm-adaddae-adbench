@@ -1,4 +1,4 @@
-# AXION Phase 2 — GPU defaults (optional override)
+# AXION Phase 4 — GPU defaults (optional override)
 
 # Usage: python scripts/run_probe.py --config configs/gpu.yaml --all-probe ...
 
@@ -36,9 +36,12 @@ axion:
   patience: 20
   val_fraction: 0.15
   latch_alpha: 0.40
-  latch_alpha_semi: 0.25
+  latch_alpha_semi: 0.0
   mae_weight: 0.60
   nll_weight: 0.40
+  mae_weight_semi: 0.80
+  nll_weight_semi: 0.20
+  semi_epoch_boost: 1.25
 
 probe:
   datasets:

@@ -1,6 +1,9 @@
 """AXION — Adaptive cross-feature Interaction Observation Network.
 
 Components: MCB + FX-Enc + HPD + LATCH + MCS (+ SCALE).
+
+Phase 4: semi = MCS-primary (latch≈0) + softer train masks + MAE-heavy hybrid;
+high-d SCALE upgraded for CV/NLP embeddings.
 """
 from __future__ import annotations
 
@@ -27,16 +30,19 @@ class AxionModel:
         mask_rates: Optional[Sequence[float]] = None,
         score_k: Optional[int] = None,
         dropout: Optional[float] = None,
-        epochs: int = 80,
+        epochs: int = 100,
         batch_size: int = 256,
         lr: float = 1e-3,
         weight_decay: float = 1e-5,
-        patience: int = 12,
+        patience: int = 20,
         val_fraction: float = 0.15,
         latch_alpha: float = 0.4,
-        latch_alpha_semi: Optional[float] = 0.25,
+        latch_alpha_semi: Optional[float] = 0.0,
         mae_weight: float = 0.6,
         nll_weight: float = 0.4,
+        mae_weight_semi: Optional[float] = 0.8,
+        nll_weight_semi: Optional[float] = 0.2,
+        semi_epoch_boost: float = 1.25,
         device: Optional[str] = None,
         seed: int = 111,
         max_train_samples: int = 0,
@@ -57,6 +63,9 @@ class AxionModel:
         self.latch_alpha_semi = latch_alpha_semi
         self.mae_weight = mae_weight
         self.nll_weight = nll_weight
+        self.mae_weight_semi = mae_weight_semi
+        self.nll_weight_semi = nll_weight_semi
+        self.semi_epoch_boost = semi_epoch_boost
         self.seed = seed
         self.max_train_samples = max_train_samples
 
@@ -71,6 +80,9 @@ class AxionModel:
         self.resolved_: Dict[str, Any] = {}
         self.best_val_loss_: float = float("inf")
         self.active_latch_alpha_: float = float(latch_alpha)
+        self.active_mae_weight_: float = float(mae_weight)
+        self.active_nll_weight_: float = float(nll_weight)
+        self.is_semi_: bool = False
         self.mcs_mean_: Optional[float] = None
         self.mcs_std_: Optional[float] = None
         self.latch_score_mean_: Optional[float] = None
@@ -88,22 +100,34 @@ class AxionModel:
             "active_latch_alpha": self.active_latch_alpha_,
             "mae_weight": self.mae_weight,
             "nll_weight": self.nll_weight,
+            "active_mae_weight": self.active_mae_weight_,
+            "active_nll_weight": self.active_nll_weight_,
+            "is_semi": self.is_semi_,
             "device": str(self.device),
             "best_val_loss": self.best_val_loss_,
             "train_anchored": self.mcs_mean_ is not None,
         }
 
-    def _resolve_scale(self, n: int, d: int) -> Dict[str, Any]:
-        base = scale_hparams(n, d)
+    def _detect_semi(self, y_train: Optional[np.ndarray]) -> bool:
+        if y_train is None:
+            return False
+        y = np.asarray(y_train).reshape(-1)
+        return bool(y.size > 0 and np.all(y == 0))
+
+    def _resolve_scale(self, n: int, d: int, *, semi: bool) -> Dict[str, Any]:
+        base = scale_hparams(n, d, semi=semi)
         return {
             "hidden": int(self.hidden if self.hidden is not None else base["hidden"]),
             "latent": int(self.latent if self.latent is not None else base["latent"]),
             "depth": int(self.depth if self.depth is not None else base["depth"]),
-            "mask_rates": tuple(self.mask_rates if self.mask_rates is not None else base["mask_rates"]),
+            "mask_rates": tuple(
+                self.mask_rates if self.mask_rates is not None else base["mask_rates"]
+            ),
             "score_k": int(self.score_k if self.score_k is not None else base["score_k"]),
             "dropout": float(self.dropout if self.dropout is not None else base["dropout"]),
             "high_mask_delta": float(base.get("high_mask_delta", 0.25)),
             "high_mask_cap": float(base.get("high_mask_cap", 0.85)),
+            "semi": bool(semi),
         }
 
     def _torch_gen(self) -> torch.Generator:
@@ -116,16 +140,32 @@ class AxionModel:
         delta = float(self.resolved_.get("high_mask_delta", 0.25))
         cap = float(self.resolved_.get("high_mask_cap", 0.85))
         high = float(min(cap, max(rates) + delta))
-        return [rates, (high,)]
+        banks: List[Tuple[float, ...]] = [rates, (high,)]
+        # Light-mask bank: anomalies under all-normal models often fail light recon
+        light = float(max(0.05, min(rates) * 0.6))
+        if light + 1e-6 < min(rates):
+            banks.append((light,))
+        return banks
 
-    def _resolve_active_latch(self, y_train: Optional[np.ndarray]) -> None:
-        """Use lower LATCH weight when train is all-normal (paper semi split)."""
+    def _resolve_setting_knobs(self, y_train: Optional[np.ndarray]) -> None:
+        """Semi = MCS-primary + MAE-heavy hybrid; unsup keeps full LATCH."""
+        self.is_semi_ = self._detect_semi(y_train)
         self.active_latch_alpha_ = float(self.latch_alpha)
-        if self.latch_alpha_semi is None or y_train is None:
+        self.active_mae_weight_ = float(self.mae_weight)
+        self.active_nll_weight_ = float(self.nll_weight)
+        if not self.is_semi_:
             return
-        y = np.asarray(y_train).reshape(-1)
-        if y.size > 0 and np.all(y == 0):
+        if self.latch_alpha_semi is not None:
             self.active_latch_alpha_ = float(self.latch_alpha_semi)
+        if self.mae_weight_semi is not None:
+            self.active_mae_weight_ = float(self.mae_weight_semi)
+        if self.nll_weight_semi is not None:
+            self.active_nll_weight_ = float(self.nll_weight_semi)
+        # Renormalize hybrid weights
+        w = self.active_mae_weight_ + self.active_nll_weight_
+        if w > 1e-8:
+            self.active_mae_weight_ /= w
+            self.active_nll_weight_ /= w
 
     def fit(self, X_train: np.ndarray, y_train: Optional[np.ndarray] = None) -> "AxionModel":
         torch.manual_seed(self.seed)
@@ -139,11 +179,15 @@ class AxionModel:
             if y_train is not None:
                 y_train = np.asarray(y_train)[idx]
 
+        self._resolve_setting_knobs(y_train)
         n, d = X.shape
-        hp = self._resolve_scale(n, d)
+        hp = self._resolve_scale(n, d, semi=self.is_semi_)
         self.resolved_ = dict(hp)
         self.resolved_["n"] = n
         self.resolved_["d"] = d
+        self.resolved_["active_latch_alpha"] = self.active_latch_alpha_
+        self.resolved_["active_mae_weight"] = self.active_mae_weight_
+        self.resolved_["active_nll_weight"] = self.active_nll_weight_
 
         # Train/val carve for early stop (never uses test)
         rng = np.random.RandomState(self.seed)
@@ -169,7 +213,6 @@ class AxionModel:
         )
 
         fit_ds = TensorDataset(torch.from_numpy(X_fit))
-        # GPU: allow larger batches for throughput
         req_bs = self.batch_size
         if self.device.type == "cuda":
             req_bs = max(req_bs, 512)
@@ -193,7 +236,13 @@ class AxionModel:
         except (TypeError, AttributeError):
             scaler = torch.cuda.amp.GradScaler(enabled=use_amp)
 
-        for epoch in range(self.epochs):
+        max_epochs = int(self.epochs)
+        patience = int(self.patience)
+        if self.is_semi_ and self.semi_epoch_boost > 1.0:
+            max_epochs = int(round(max_epochs * float(self.semi_epoch_boost)))
+            patience = int(round(patience * float(self.semi_epoch_boost)))
+
+        for epoch in range(max_epochs):
             self.net.train()
             last_loss = 0.0
             for (xb,) in loader:
@@ -223,7 +272,6 @@ class AxionModel:
                     opt.step()
                 last_loss = float(loss.detach().cpu().item())
 
-            # Val loss on fixed random masks (reproducible via seed+epoch)
             if len(X_val) > 0:
                 val_loss = self._eval_nll(X_val, hp["mask_rates"], seed_offset=epoch)
             else:
@@ -235,16 +283,14 @@ class AxionModel:
                 stale = 0
             else:
                 stale += 1
-                if stale >= self.patience:
+                if stale >= patience:
                     break
 
         if best_state is not None:
             self.net.load_state_dict(best_state)
         self.best_val_loss_ = float(best_val)
 
-        # LATCH: fit diagonal Mahalanobis on unmasked (mask=0) latents of train
         self._fit_latch(X_fit)
-        self._resolve_active_latch(y_train)
         self._fit_score_anchors(X_fit)
         return self
 
@@ -269,7 +315,6 @@ class AxionModel:
         assert self.net is not None
         self.net.eval()
         xb = torch.from_numpy(np.asarray(X, dtype=np.float32)).to(self.device)
-        # Fully visible: mask = 0
         mask = torch.zeros_like(xb)
         zs = []
         bs = min(512, len(X))
@@ -293,7 +338,7 @@ class AxionModel:
 
     @torch.no_grad()
     def _mcs_scores(self, X: np.ndarray) -> np.ndarray:
-        """Raw MCS: hybrid MAE+NLL over K masks × dual rate banks."""
+        """Raw MCS: hybrid MAE+NLL over K masks × rate banks."""
         assert self.net is not None
         self.net.eval()
         X = np.asarray(X, dtype=np.float32)
@@ -308,6 +353,8 @@ class AxionModel:
 
         bs = min(512, n)
         n_passes = 0
+        mae_w = float(self.active_mae_weight_)
+        nll_w = float(self.active_nll_weight_)
         for bank in rate_banks:
             for _ in range(k):
                 n_passes += 1
@@ -319,7 +366,7 @@ class AxionModel:
                     mu, log_var, _ = self.net(chunk, mask)
                     nll = gaussian_nll(chunk, mu, log_var, mask)
                     mae = ((chunk - mu).abs() * mask).sum(dim=-1) / mask.sum(dim=-1).clamp_min(1.0)
-                    hybrid = self.mae_weight * mae + self.nll_weight * nll
+                    hybrid = mae_w * mae + nll_w * nll
                     acc[i : i + chunk.shape[0]] += hybrid.cpu().numpy()
 
         return acc / float(max(1, n_passes))
@@ -328,7 +375,6 @@ class AxionModel:
         """Train-only mean/std for MCS and LATCH (avoid test-batch z-norm)."""
         X = np.asarray(X, dtype=np.float32)
         n = X.shape[0]
-        # Cap anchor compute on huge tables
         if n > 8000:
             rng = np.random.RandomState(self.seed + 7)
             idx = rng.choice(n, size=8000, replace=False)
@@ -352,12 +398,15 @@ class AxionModel:
 
         if self.mcs_mean_ is not None and self.mcs_std_ is not None:
             mcs_n = (mcs - self.mcs_mean_) / (self.mcs_std_ + 1e-8)
+            if abs(alpha) < 1e-12:
+                return mcs_n.astype(np.float64)
             latch_n = (latch - float(self.latch_score_mean_ or 0.0)) / (
                 float(self.latch_score_std_ or 1.0) + 1e-8
             )
             return (mcs_n + alpha * latch_n).astype(np.float64)
 
-        # Fallback: batch z-norm (legacy; should not run after fit)
+        if abs(alpha) < 1e-12:
+            return mcs.astype(np.float64)
         if latch.std() > 1e-8 and mcs.std() > 1e-8:
             latch_n = (latch - latch.mean()) / (latch.std() + 1e-8)
             mcs_n = (mcs - mcs.mean()) / (mcs.std() + 1e-8)
